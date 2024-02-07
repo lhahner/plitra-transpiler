@@ -30,7 +30,7 @@ public class Main {
 		try {
 		//default "src/pl1transpiler/input/code.pli"
 		File pl1File = new File(inputFile);
-		File throughputFile = new File(prefixUrl + "/src/pl1transpiler/var/code_tp.pli");
+		File throughputFile = new File(prefixUrl + "/pl1transpiler/var/code_tp.pli");
 		FileInputStream inputStream = new FileInputStream(pl1File);
 		FileWriter writer = new FileWriter(throughputFile);
 		Scanner sc = new Scanner(inputStream);
@@ -69,7 +69,7 @@ public class Main {
 		writer.close();
 		/**
 		 * TODO: Tokens aus Lexer werden in neue Datei geschrieben. InputStream
-		 * der neuen Datei wird dann an Parser übergeben.
+		 * der neuen Datei wird dann an Parser Ã¼bergeben.
 		 */
 		FileInputStream parseInputStream = new FileInputStream(throughputFile);
 		
@@ -85,7 +85,7 @@ public class Main {
 		jP.createExpression(root);
 		
 		System.out.println(jP.concatExpression());
-		File javaFile = new File(prefixUrl + "/src/pl1transpiler/output/Main.java");
+		File javaFile = new File(prefixUrl + "/pl1transpiler/output/Main.java");
 		FileWriter writeFile = new FileWriter(javaFile);
 		writeFile.write(jP.concatExpression());	
 		writeFile.close();
