@@ -32,7 +32,7 @@ public class Main {
 
 		try {
 			File pl1File = new File(inputFile);
-			File throughputFile = new File(prefixUrl + "/src/pl1transpiler/var/code_tp.pli");
+			File throughputFile = new File(prefixUrl + "/pl1transpiler/var/code_tp.pli");
 			FileInputStream inputStream = new FileInputStream(pl1File);
 			FileWriter writer = new FileWriter(throughputFile);
 			Scanner sc = new Scanner(inputStream);
@@ -71,7 +71,7 @@ public class Main {
 			jP.createExpression(root);
 
 			System.out.println(jP.concatExpression());
-			File javaFile = new File(prefixUrl + "/src/pl1transpiler/output/Main.java");
+			File javaFile = new File(prefixUrl + "/pl1transpiler/output/Main.java");
 			FileWriter writeFile = new FileWriter(javaFile);
 			writeFile.write(jP.concatExpression());
 			writeFile.close();
