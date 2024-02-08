@@ -12,7 +12,7 @@ Run:
 to compile the project.
 Afterwards run:
 
-`java pl1transpiler/Main "${pwd}/pl1transpiler/input/code.pli"`
+`java pl1transpiler/Main "./pl1transpiler/input/code.pli"`
 
 to transpile your code. Your Java Code is written in /pl1transpiler/output/Main.java. Also the console log shows the translated code with the symboltable and the parsetree.
 ## What is possible?
