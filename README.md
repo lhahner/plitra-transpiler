@@ -20,21 +20,21 @@ Currently only declarations (Copybooks) can be translated.
 
 ### Reference Table 
 
-| PL/I Expression    | Implemented |
-| -------- | ------- |
-| DECLARE/DCL  | yes, complete    |
-| Levels | yes, not nested     |
-| DECIMAL    | yes, complete    |
-| FIXED DECIMAL    | yes, complete    |
-| FLOAT DECIMAL    | yes, complete    |
+| PL/I Expression    | Implemented      |
+| ------------------ | ---------------- |
+| DECLARE/DCL        | yes, complete    |
+| Levels             | yes, not nested  |
+| DECIMAL            | yes, complete    |
+| FIXED DECIMAL      | yes, complete    |
+| FLOAT DECIMAL      | yes, complete    |
 | COMPLEX DECIMAL    | yes, complete    |
-| REAL DECIMAL    | yes, complete    |
-| CHAR    | yes, complete    |
-| WIDECHAR    | yes, complete    |
-| GRAPHIC    | yes, complete    |
-| BIT    | yes, complete    |
-| BINARY    | yes, complete    |
-| PICTURE/PIC    | yes, complete    |
+| REAL DECIMAL       | yes, complete    |
+| CHAR               | yes, complete    |
+| WIDECHAR           | yes, complete    |
+| GRAPHIC            | yes, complete    |
+| BIT                | yes, complete    |
+| BINARY             | yes, complete    |
+| PICTURE/PIC        | yes, complete    |
 
 ### Known Issues
 - If you recieve an error while running the program in Eclipse you need to specify run configurations. Go to "Run > Run Configurations > Arguments > paste the file path in the textbox". Also you need to maintain the throughtputFile directory in class Main.
