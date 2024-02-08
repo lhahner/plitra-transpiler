@@ -36,6 +36,12 @@ Currently only declarations (Copybooks) can be translated.
 | BINARY             | yes, complete    |
 | PICTURE/PIC        | yes, complete    |
 
+### Regarding Comments
+Please be aware that alle the comments provided will be excluded in the transpiled java code.
+Also currently large lines of comments will cause an error an make the program fail.
+If you have large amount of comments in your copybook I recommend to remove them. Anyways,
+small amounts of comments like `/*Example Text*/` Will be removed.
+
 ### Known Issues
 - Please be aware that you that your folder is not inside a cloud like OneDrive. This can lead to problems.
 - If you recieve an error while running the program in Eclipse you need to specify run configurations. Go to "Run > Run Configurations > Arguments > paste './src/pl1transpiler/input/code.pli'". Also you need to maintain the throughtputFile directory in class Main.
