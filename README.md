@@ -55,7 +55,7 @@ Currently only declarations (Copybooks) can be translated.
 
 ### Regarding Comments
 Please be aware that all the comments provided will be excluded in the transpiled java code.
-Also currently large lines of comments will cause an error an make the program fail.
+Also currently large lines of comments will cause an error and make the program fail.
 If you have large amount of comments in your copybook I recommend to remove them. Anyways,
 small amounts of comments like `/*Example Text*/` Will be removed.
 
