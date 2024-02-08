@@ -37,6 +37,7 @@ Currently only declarations (Copybooks) can be translated.
 | PICTURE/PIC        | yes, complete    |
 
 ### Known Issues
-- If you recieve an error while running the program in Eclipse you need to specify run configurations. Go to "Run > Run Configurations > Arguments > paste the file path in the textbox". Also you need to maintain the throughtputFile directory in class Main.
+- Please be aware that you that your folder is not inside a cloud like OneDrive. This can lead to problems.
+- If you recieve an error while running the program in Eclipse you need to specify run configurations. Go to "Run > Run Configurations > Arguments > paste './src/pl1transpiler/input/code.pli'". Also you need to maintain the throughtputFile directory in class Main.
 - If you recieve an error while running it in a specific folder. Maybe try another folder, sometimes the pwd statement is not correct.
 - It's not possible to transform nested declarations that have a higher depth than level 2. Also if you want to transpile multiple nested declaration be aware that you need to maintain the result. In the current version the output Code got some logical errors you need to check.
