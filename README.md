@@ -3,6 +3,7 @@
 ### Requirements
 At least Java 8 and JavaCC is required. Please make sure to always compile the project in Java 8. If you don't the program will not work.
 ## How to transpile PL/I Code to Java?
+### CLI
 First check the pl1transpiler/input folder. There should be your PL/I code. I do not recommend to transpile code from outside of the project structure.
 Simply navigate into the src folder of the project structure.
 Run:
@@ -15,6 +16,18 @@ Afterwards run:
 `java pl1transpiler/Main "./pl1transpiler/input/code.pli"`
 
 to transpile your code. Your Java Code is written in /pl1transpiler/output/Main.java. Also the console log shows the translated code with the symboltable and the parsetree.
+
+### Eclipse
+If you want to run the Application in Eclipse please follow these steps.
+1. Open Project: File > Open Projects from File Systems > Choose the Repo Directory
+2. Go to Main.java
+3. Change the path of throughputFile to "./src/pl1transpiler/var/code_tp.pli"
+4. Change the path of javaFile to "./src/pl1transpiler/output/Main.java"
+5. Go to Run > Run Configurations > Arguments > paste in Program arguments: "./src/pl1transpiler/input/code.pli"
+6. Run the program
+
+This is due the fact that eclipse needs to open the project from one folder above the "src" folder.
+
 ## What is possible?
 Currently only declarations (Copybooks) can be translated.
 
