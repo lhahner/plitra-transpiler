@@ -23,7 +23,11 @@ public class JavaGenerator {
 	Pl1Parser pl1Parser;
 	String Major;
 	Template javaWords;
-
+	
+	public JavaGenerator() {
+		
+	}
+	
 	public JavaGenerator(Pl1Parser pp) {
 		this.pl1Parser = pp;
 	}

@@ -60,13 +60,11 @@ public class SymbolTable {
 	public static String getBySymbol(String symbol) {
 
 		for (int i = 1; i <= hashtable.size(); i++) {
-
 			if (getById(i)[0].equals(symbol)) {
 				return getById(i)[0];
 			} else {
 				continue;
 			}
-
 		}
 		return null;
 	}

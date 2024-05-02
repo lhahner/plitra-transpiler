@@ -1,8 +1,11 @@
 package org.bachelor.transpiler.pl1transpiler.tools.pli;
 
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.management.AttributeNotFoundException;
 
 
 public class PictureMapper {
@@ -19,7 +22,7 @@ public class PictureMapper {
 	public static void initMap() {
 		picRegex.put('X', "[A-Za-z]");
 		picRegex.put('A', "[A-Za-z ]");
-		picRegex.put('9', "[0-9]");
+		picRegex.put('9', "[0-9 ]");
 		picRegex.put('(', "{");
 		picRegex.put(')', "}");
 		picRegex.put('V', "\\.");
@@ -29,7 +32,9 @@ public class PictureMapper {
 	 * @param regex the PL/I Length Expression that should be parsed. Ex.: (4)A
 	 * @return the translated regular Expression.
 	 */
-	public String translateLengthExpression(String regex) {
+	public String translateLengthExpression(String regex) throws UnsupportedCharsetException{
+		if(Character.isDigit(regex.charAt(regex.indexOf('(') + 1))) {
+
 		String length = regex.substring(1, regex.indexOf(')'));
 		String exp = regex.substring(regex.indexOf(')') + 1, regex.length());
 		String regExpression = "";
@@ -52,6 +57,11 @@ public class PictureMapper {
 			}
 		}
 		return regExpression + "{" + length + "}";
+	 }
+		else {
+			throw new UnsupportedCharsetException("Alphnumeric Character not allowed for lenght limitations");
+		}
+		
 	}
 
 	/**
@@ -59,15 +69,19 @@ public class PictureMapper {
 	 *                      Expression.
 	 * @return the equivalent regular Expression from the HashMap.
 	 */
-	public static String getCharacterRegex(char picExpression) {
+	public static String getCharacterRegex(char picExpression){
 		return picRegex.get(picExpression);
 	}
 	
 	/**
-	 * @param regex the PL/I expression.
-	 * @return the regex.
+	 * @param The PL/I Picture limitation.
+	 * @return the equivalent Regex.
 	 */
-	public String getRegex(String regex) {
+	public String getRegex(String regex) throws UnsupportedCharsetException{
+		
+		if(picRegex.isEmpty()) {
+			initMap();
+		}
 		
 		String regExpression = "";
 		if(regex.contains("(")) {
