@@ -1,5 +1,6 @@
 package org.bachelor.transpiler.pl1transpiler.tools.pli;
 
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList; 
 
 public enum Pl1Symbols{
@@ -120,12 +121,12 @@ public enum Pl1Symbols{
 	     * @param symbol that should be found in the Enmus.
 	     * @return the Enum that should be found.
 	     */
-	    public static Pl1Symbols findBySymbol(String symbol) {
-	        for (Pl1Symbols s : Pl1Symbols.values()) {
+	    public static Pl1Symbols findBySymbol(String symbol) throws UnsupportedCharsetException{
+	    	for (Pl1Symbols s : Pl1Symbols.values()) {
 	            if (s.getSymbol().equalsIgnoreCase(symbol)) {
 	                return s;
 	            }
 	        }
-	        return null; // oder werfen Sie eine Ausnahme, wenn das Symbol nicht gefunden wurde
+	    	return null;
 	    }
 }

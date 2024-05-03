@@ -470,7 +470,7 @@ public class Lexer {
 
 			String tmp[] = { id, Integer.toString(scope), "id" };
 			try {
-				st.insert(tmp);
+				st.insertId(tmp);
 			} catch (Exception e) {
 				System.out.println(e);
 			}

@@ -2,8 +2,6 @@ package org.bachelor.transpiler.pl1transpiler.tools.pli;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.nio.charset.UnsupportedCharsetException;
-import javax.management.AttributeNotFoundException;
-import org.bachelor.transpiler.pl1transpiler.JavaGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
