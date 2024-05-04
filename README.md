@@ -50,7 +50,7 @@ Currently only declarations (Copybooks) can be translated.
 | GRAPHIC            | yes, complete    |
 | BIT                | yes, complete    |
 | BINARY             | yes, complete    |
-| PICTURE/PIC        | yes, complete    |
+| PICTURE/PIC        | yes, just `(N), A, 9, X`    |
 | Comments           | yes, just small  |
 
 ### Regarding Comments
