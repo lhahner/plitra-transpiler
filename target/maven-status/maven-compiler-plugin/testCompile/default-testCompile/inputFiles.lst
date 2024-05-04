@@ -1,6 +1,9 @@
-C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\JavaGeneratorTests.java
-C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\tools\pli\SymbolTableTests.java
-C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\LexerTests.java
-C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\tools\pli\PictureMapperTests.java
-C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\AppTests.java
-C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\tools\pli\Pl1SymbolsTest.java
+C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\lexer\InputFormatterTests.java
+C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\parser\JJTPl1ParserStateTests.java
+C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\symboltable\PictureMapperTests.java
+C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\app\AppTests.java
+C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\symboltable\TemplateTests.java
+C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\symboltable\Pl1SymbolsTests.java
+C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\lexer\LexerTests.java
+C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\symboltable\SymbolTableTests.java
+C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\synthesizer\JavaGeneratorTests.java
