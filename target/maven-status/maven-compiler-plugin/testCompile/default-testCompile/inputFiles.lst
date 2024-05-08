@@ -1,4 +1,5 @@
 C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\lexer\InputFormatterTests.java
+C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\mapper\JavaGeneratorTests.java
 C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\parser\JJTPl1ParserStateTests.java
 C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\symboltable\PictureMapperTests.java
 C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\app\AppTests.java
@@ -6,4 +7,3 @@ C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\
 C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\symboltable\Pl1SymbolsTests.java
 C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\lexer\LexerTests.java
 C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\symboltable\SymbolTableTests.java
-C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\src\test\java\org\bachelor\transpiler\pl1transpiler\synthesizer\JavaGeneratorTests.java

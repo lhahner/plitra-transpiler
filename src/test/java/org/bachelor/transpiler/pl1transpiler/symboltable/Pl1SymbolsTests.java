@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.nio.charset.UnsupportedCharsetException;
 import javax.management.AttributeNotFoundException;
 
+import org.bachelor.transpiler.pl1transpiler.mapper.JavaGenerator;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Pl1Symbols;
-import org.bachelor.transpiler.pl1transpiler.synthesizer.JavaGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

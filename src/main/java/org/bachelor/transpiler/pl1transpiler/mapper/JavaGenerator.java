@@ -1,15 +1,17 @@
-package org.bachelor.transpiler.pl1transpiler.synthesizer;
+package org.bachelor.transpiler.pl1transpiler.mapper;
 //Api imports
 import java.io.File;
 import java.io.FileInputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.swing.JRootPane;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
 import org.bachelor.transpiler.pl1transpiler.parser.*;
 import org.bachelor.transpiler.pl1transpiler.symboltable.PictureMapper;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
@@ -135,8 +137,10 @@ public class JavaGenerator {
 	/**
 	 * Called when the the Picture translation should be added to the Expression
 	 * Array.
+	 * @throws LexicalErrorException 
+	 * @throws UnsupportedCharsetException 
 	 */
-	public void addPictureExpression() {
+	public void addPictureExpression() throws UnsupportedCharsetException, LexicalErrorException {
 		PictureMapper picmap = new PictureMapper();
 		String picRegex = pl1Parser.getPictureAttirbute().replaceAll("\'", "");
 

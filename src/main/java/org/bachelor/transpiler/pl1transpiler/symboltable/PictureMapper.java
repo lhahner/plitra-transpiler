@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 
 import javax.management.AttributeNotFoundException;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
+
 
 public class PictureMapper {
 
@@ -22,10 +24,31 @@ public class PictureMapper {
 	public static void initMap() {
 		picRegex.put('X', "[A-Za-z]");
 		picRegex.put('A', "[A-Za-z ]");
-		picRegex.put('9', "[0-9 ]");
+		picRegex.put('9', "[0-9]");
 		picRegex.put('(', "{");
 		picRegex.put(')', "}");
-		picRegex.put('V', "\\.");
+		picRegex.put('V', "[\\.\\*]");
+		picRegex.put('.', "[\\.\\*]");
+		picRegex.put('Z', "[0-9 ]");
+		picRegex.put('*', "[0-9\\*]");
+		picRegex.put('$', "\\$");
+		//Not tested yet
+		picRegex.put('B', " ");
+		picRegex.put(',', "[\\,\\*]");
+		picRegex.put('/', "[\\/\\*]");
+		picRegex.put('<', "\\<");
+		picRegex.put('>', "\\>");
+		picRegex.put('D', "D");
+		picRegex.put('M', "M");
+		picRegex.put('K', "K");
+		picRegex.put('€', "\\€");
+		picRegex.put('S', "[\\+\\- ]");
+		picRegex.put('+', "\\+");
+		picRegex.put('-', "\\-");
+		picRegex.put('R', "R");
+		picRegex.put('C', "C");
+		picRegex.put('E', "E");
+		picRegex.put('K', "");
 	}
 
 	/**
@@ -74,11 +97,12 @@ public class PictureMapper {
 	}
 	
 	/**
+	 * UPDATE NOT TESTED YET
 	 * @param The PL/I Picture limitation.
 	 * @return the equivalent Regex.
 	 */
-	public String getRegex(String regex) throws UnsupportedCharsetException{
-		
+	public String getRegex(String regex) throws UnsupportedCharsetException, LexicalErrorException{
+		int decimalPointCounter = 0;
 		if(picRegex.isEmpty()) {
 			initMap();
 		}
@@ -87,12 +111,36 @@ public class PictureMapper {
 		if(regex.contains("(")) {
 			regExpression = this.translateLengthExpression(regex);
 		}
+		
 		else {
-			for(int i = 0; i<regex.length();i++) {	
+			for(int i = 0; i<regex.length();i++) {
+				if(regex.charAt(i) == 'V' || regex.charAt(i) == '.') {
+					if(decimalPointCounter > 1) {
+						throw new LexicalErrorException("Decimalpoint is only allowed once. For Example DCL X PIC(9VV9) is not allowed.");
+					}
+					else {
+					decimalPointCounter++;
+					}
+				}
+				else if(regex.charAt(i) == 'B' && regex.charAt(i-1) == 'D') {
+					regExpression = regExpression + this.getDebitKey();
+					continue;
+				}
 				regExpression = regExpression + this.getCharacterRegex(regex.charAt(i));
 			}
 		}
 		return regExpression;
+	}
+	
+	/**
+	 * NOT TESTED YET
+	 * This Method should translate the occured DEBTI Type,
+	 * since B is also used for BLANKs.
+	 * @param regex
+	 * @return Just the String DB
+	 */
+	public String getDebitKey() {
+		return "DB";
 	}
 
 }

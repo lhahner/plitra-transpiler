@@ -10,7 +10,7 @@ public class InputFormatter {
 	public FileInputStream formatInputFile(String inputFile) throws IOException{
 	 try {
 		final File pl1File = new File(inputFile);
-		final File throughputFile = new File("./src/main/java/resources/var/code_tp.pli");
+		final File throughputFile = new File("./src/main/java/res/var/code_tp.pli");
 		Lexer lex = new Lexer();
 		String content = "";
 		String token = "";

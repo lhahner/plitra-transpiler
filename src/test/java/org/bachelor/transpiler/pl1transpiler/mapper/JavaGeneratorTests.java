@@ -1,7 +1,7 @@
-package org.bachelor.transpiler.pl1transpiler.synthesizer;
+package org.bachelor.transpiler.pl1transpiler.mapper;
 //Api imports
 import org.junit.jupiter.api.Test;
-import org.bachelor.transpiler.pl1transpiler.synthesizer.JavaGenerator;
+import org.bachelor.transpiler.pl1transpiler.mapper.JavaGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 

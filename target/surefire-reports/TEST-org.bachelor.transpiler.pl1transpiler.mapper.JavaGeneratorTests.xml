@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.bachelor.transpiler.pl1transpiler.lexer.InputFormatterTests" time="0.002" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.078" tests="21" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,5 +58,25 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="formatInputFile_removeWhiteSpacesOfFile" classname="org.bachelor.transpiler.pl1transpiler.lexer.InputFormatterTests" time="0"/>
+  <testcase name="addFloat_addFloatToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.005"/>
+  <testcase name="addSetter_addSetterToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.003"/>
+  <testcase name="addArithmetic_addsAnArithmeticToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
+  <testcase name="addReturnvalue_addReturnvalueToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
+  <testcase name="createStrucuture_shouldCreateStructureBasedOneExpressions_StrucutreString" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
+  <testcase name="addMethod_addMethodToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.001"/>
+  <testcase name="addIdentifier_addsIdentifierToSymbolTable_IdentifierText" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.001"/>
+  <testcase name="addPictureExpression_shouldProvidePictureType_PictureString" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.004"/>
+  <testcase name="addType_useTreeNodeToDefineType_TypeString" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
+  <testcase name="concatExpression_returnProgramAsAString_ProgramString" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
+  <testcase name="getScope_returnScopeFromSymbolTable_numberRepresentingTheScope" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
+  <testcase name="createExpression_shouldCreateExpressionInStrucuture_ExpressionString" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.004"/>
+  <testcase name="addObject_addsAnObjectToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.003"/>
+  <testcase name="addComplex_addsAnComplexDecimalToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
+  <testcase name="addGetter_addGetterToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.003"/>
+  <testcase name="addClass_addClassToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
+  <testcase name="getNextScope_returnNextScopeFromSymbolTable_numberRepresentingTheScope" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.001"/>
+  <testcase name="addBigDecimal_addsBigDecimalToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.001"/>
+  <testcase name="getId_returnIdentifierFromSymbolTable_IdentifierText" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.001"/>
+  <testcase name="addBinary_addsAnBinaryToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.003"/>
+  <testcase name="addPrefixDecimal_addsAnPrefixDecimalToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.001"/>
 </testsuite>

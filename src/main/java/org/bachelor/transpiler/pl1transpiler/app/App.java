@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException;
 import org.bachelor.transpiler.pl1transpiler.lexer.*;
+import org.bachelor.transpiler.pl1transpiler.mapper.JavaGenerator;
 import org.bachelor.transpiler.pl1transpiler.parser.*;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
-import org.bachelor.transpiler.pl1transpiler.synthesizer.JavaGenerator;
 
 public class App {
 	static String inputFile;
@@ -24,12 +24,14 @@ public class App {
 	 * @param args[0] holds the path to the input file.
 	 * @throws IncorrectInputFileException
 	 */
-	public static void main(String[] args) throws IncorrectInputFileException {
+	public static void main(String[] args) throws IncorrectInputFileException, IOException, ParseException {
 		SymbolTable st = new SymbolTable();
 		InputFormatter inputFormatter = new InputFormatter();
 		inputFile = args[0];
 		if (inputFile.toString().contains(".pli")) {
+
 			try {
+
 				pl1Parser = new Pl1Parser(inputFormatter.formatInputFile(inputFile));
 				SimpleNode root = pl1Parser.program();
 				st.printAll();
@@ -39,12 +41,13 @@ public class App {
 				// create expression with Parsetree
 				jP.createExpression(root);
 				System.out.println(jP.concatExpression());
-				final File javaFile = new File("./src/main/java/resources/java/Main.java");
+				final File javaFile = new File("./target/transpiled-sources/Main.java");
 				FileWriter writeFile = new FileWriter(javaFile);
 				writeFile.write(jP.concatExpression());
 				writeFile.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			} catch (IOException e) {
+				throw new IOException(e);
 			}
 		} else {
 			throw new IncorrectInputFileException();

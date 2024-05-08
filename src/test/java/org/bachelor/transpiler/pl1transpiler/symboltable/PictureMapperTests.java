@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.nio.charset.UnsupportedCharsetException;
 import org.junit.jupiter.api.Test;
+import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
 import org.bachelor.transpiler.pl1transpiler.symboltable.PictureMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -42,9 +43,8 @@ public class PictureMapperTests {
 	@DisplayName("getCharacterRegex")
 	void getCharacterRegex_tranlatedCharacterAsRegularExpression_regexCharacterString() {
 		//Testing cases which should work
-		char[] shouldWork = { '(',')','A','9', 'V', 'X'};
-		String[] ExpectedResults = {"{", "}", "[A-Za-z ]", "[0-9 ]", "\\.", "[A-Za-z]"};
-	
+		char[] shouldWork = { '(',')','A','9', 'V', 'X', 'Z'};
+		String[] ExpectedResults = {"{", "}", "[A-Za-z ]", "[0-9]", "[\\.\\*]", "[A-Za-z]", "[0-9 ]"};
 		for(int i = 0; i<shouldWork.length;i++) 
 			assertEquals(ExpectedResults[i], picture_mapper.getCharacterRegex(shouldWork[i]));
 	    
@@ -56,14 +56,15 @@ public class PictureMapperTests {
 	
 	@Test
 	@DisplayName("getRegex")
-	void getRegex_translateSingleCharectes_regexString() {
+	void getRegex_translateSingleCharectes_regexString() throws UnsupportedCharsetException, LexicalErrorException {
 		//Testing cases which should work
-		String[] shouldWork = { "(5)","X","A","9", "V"};
-		String[] ExpectedResults = {"{5}", "[A-Za-z]", "[A-Za-z ]", "[0-9 ]", "\\."};
+		String[] shouldWork = { "(5)","X","A","9", "V", "$", ".", "Z"};
+		String[] ExpectedResults = {"{5}", "[A-Za-z]", "[A-Za-z ]", "[0-9]", "[\\.\\*]", "\\$", "[\\.\\*]", "[0-9 ]"};
 		
 		for(int i = 0; i<shouldWork.length;i++) 
+			
 			assertEquals(ExpectedResults[i], picture_mapper.getRegex(shouldWork[i]));
-	    
+			
 		//Testing cases which should not work
 	    String[] shouldNotWork = {"(A)","XO","0"};
 	    assertThrows(UnsupportedCharsetException.class, () -> {
@@ -72,7 +73,7 @@ public class PictureMapperTests {
 	    });
 	}
 	
-	void getRegex_translateRegexString_regexString() {
+	void getRegex_translateRegexString_regexString() throws UnsupportedCharsetException, LexicalErrorException {
 		String[] shouldWork = { 
 				"(3)9",
 				"9999",
@@ -86,20 +87,64 @@ public class PictureMapperTests {
 				"V99"
 				};
 		String[] ExpectedResults = { 
-				"[0-9 ]{3}",
-				"[0-9 ][0-9 ][0-9 ][0-9 ]",
-				"[0-9 ][0-9 ][0-9].[0-9 ][0-9 ]", 
-				"[0-9 ]{3}\\.[0-9]{2}", 
-				"[A-Za-z ][A-Za-z ][A-Za-z ][0-9 ][0-9 ][A-Za-z]", 
-				"[0-9 ][0-9 ][A-Za-z][0-9 ][0-9 ]", 
-				"[A-Za-z ][0-9][0-9 ][A-Za-z][0-9 ]", 
+				"[0-9]{3}",
+				"[0-9][0-9][0-9][0-9]",
+				"[0-9][0-9][0-9].[0-9][0-9]", 
+				"[0-9]{3}[\\.\\*][0-9]{2}", 
+				"[A-Za-z ][A-Za-z ][A-Za-z ][0-9][0-9][A-Za-z]", 
+				"[0-9][0-9][A-Za-z][0-9][0-9]", 
+				"[A-Za-z ][0-9][0-9][A-Za-z][0-9]", 
 				"[A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z]", 
 				"[A-Za-z ]{10}", 
-				".[0-9 ][0-9 ]"
+				".[0-9][0-9]"
 				};
-		
+		//Testing 
 		for(int i = 0;i<shouldWork.length;i++) 
-			assertEquals(ExpectedResults[i], shouldWork[i]);
+			assertEquals(ExpectedResults[i], picture_mapper.getRegex(shouldWork[i]));
 
 	}
+	
+	@Test
+	@DisplayName("getRegex Zero token Test")
+	void getRegex_zeroTokenInput_zeroASz() throws UnsupportedCharsetException, LexicalErrorException {
+	String[] shouldWork = {"ZZZ99", "ZZZZZ", "ZZZV99", "ZZZVZZ"};
+	String[] expected = {"[0-9 ][0-9 ][0-9 ][0-9][0-9]", 
+						 "[0-9 ][0-9 ][0-9 ][0-9 ][0-9 ]", 
+						 "[0-9 ][0-9 ][0-9 ][\\.\\*][0-9][0-9]", 
+						 "[0-9 ][0-9 ][0-9 ][\\.\\*][0-9 ][0-9 ]"};	
+	//Z can be empty
+	for(int i = 0; i<shouldWork.length; i++)
+		assertEquals(expected[i], picture_mapper.getRegex(shouldWork[i]));
 	}
+	
+	@Test
+	@DisplayName("getRegex * token Test")
+	void getRegex_starTokenInput_starASstar() throws UnsupportedCharsetException, LexicalErrorException {
+	String[] shouldWork = {"*****", "***V**"};
+	String[] expected = {"[0-9\\*][0-9\\*][0-9\\*][0-9\\*][0-9\\*]",
+						 "[0-9\\*][0-9\\*][0-9\\*][\\.\\*][0-9\\*][0-9\\*]"
+	};	
+	//* can be empty
+	for(int i = 0; i<shouldWork.length; i++)
+		assertEquals(expected[i], picture_mapper.getRegex(shouldWork[i]));
+	}
+	
+	@Test
+	@DisplayName("getRegex $ Format")
+	void getRegex_dollarSign_dollarAsDollar() throws UnsupportedCharsetException, LexicalErrorException {
+		String[] shouldWork = {
+				"$**9.99"
+		};
+		String[] expected = {
+				"\\$[0-9\\*][0-9\\*][0-9][\\.\\*][0-9][0-9]",
+				"$**9.99"
+		};
+		//$ Expression
+		for(int i = 0; i<shouldWork.length; i++)
+			assertEquals(expected[i], picture_mapper.getRegex(shouldWork[i]));
+		}
+	}
+
+
+
+

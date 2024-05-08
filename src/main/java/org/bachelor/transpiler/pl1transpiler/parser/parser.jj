@@ -6,13 +6,13 @@ options {
   LOOKAHEAD = 3;
   //DEBUG_PARSER = true;
   //DEBUG_LOOKAHEAD = true;
-  OUTPUT_DIRECTORY = "../generated";
+  OUTPUT_DIRECTORY = "../../org/bachelor/transpiler/pl1transpiler/parser/";
   STATIC = false;
 }
 
 
 PARSER_BEGIN(Pl1Parser)
-package org.bachelor.transpiler.pl1transpiler.generated;
+package org.bachelor.transpiler.pl1transpiler.parser;
 
 import java.util.ArrayList;
 
