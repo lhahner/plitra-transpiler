@@ -21,8 +21,9 @@ public class Lexer {
 	/**
 	 * @param remainingInput holds the remaining content of the input file.
 	 * @return the identified token from the input file as a string.
+	 * @deprecated 
 	 */
-	public String getToken(String remainingInput) {
+	public String DgetToken(String remainingInput) {
 
 		charBuffer.clear();
 		state = 0;
@@ -455,6 +456,31 @@ public class Lexer {
 		this.state = 99;
 
 	}
+	
+	/**
+	 * @param Input Token from Input Stream
+	 * @return Token for temporary file
+	 */
+	public String getToken(String token) {
+		
+		if(st.getBySymbol(token) != null) {
+			return token;
+		}else if(token.charAt(0) == '\'') {
+			return token;
+		}else if(token.charAt(0) == '(') {
+			return token;
+		}else if(Character.isDigit(token.charAt(0))) {
+			this.scope = Integer.parseInt(token);
+			return token;
+		}else if(token.charAt(token.length()-1) == ',') {
+			this.install_id(token.substring(0, token.length()-1), this.scope);
+			return token;
+		}else {
+			this.install_id(token, scope);
+			return token;
+		}
+	}	
+	
 
 	/**
 	 * @param id    the String of the identfier that should be added to the

@@ -203,31 +203,31 @@ public interface Pl1ParserConstants {
   /** RegularExpression Id. */
   int BIT = 96;
   /** RegularExpression Id. */
-  int X = 97;
+  int COMMA_SEPARATOR = 97;
   /** RegularExpression Id. */
-  int A = 98;
+  int X = 98;
   /** RegularExpression Id. */
-  int V = 99;
+  int A = 99;
   /** RegularExpression Id. */
-  int INTEGER = 100;
+  int V = 100;
   /** RegularExpression Id. */
-  int PL1_WORD = 101;
+  int INTEGER = 101;
   /** RegularExpression Id. */
-  int EOL = 102;
+  int PL1_WORD = 102;
   /** RegularExpression Id. */
-  int SPACE_SEPARATOR = 103;
+  int EOL = 103;
   /** RegularExpression Id. */
-  int SPACECHAR = 104;
+  int SPACE_SEPARATOR = 104;
   /** RegularExpression Id. */
-  int SCOPE = 105;
+  int SPACECHAR = 105;
   /** RegularExpression Id. */
-  int MINUSCHAR = 106;
+  int SCOPE = 106;
   /** RegularExpression Id. */
-  int PREPROC_COMMENT = 107;
+  int MINUSCHAR = 107;
   /** RegularExpression Id. */
-  int SCOL = 108;
+  int PREPROC_COMMENT = 108;
   /** RegularExpression Id. */
-  int COMMA_SEPARATOR = 109;
+  int SCOL = 109;
   /** RegularExpression Id. */
   int COMMENT = 110;
 
@@ -333,6 +333,7 @@ public interface Pl1ParserConstants {
     "\"XMLATTR\"",
     "\"XMLOMIT\"",
     "\"BIT\"",
+    "<COMMA_SEPARATOR>",
     "<X>",
     "<A>",
     "<V>",
@@ -345,7 +346,6 @@ public interface Pl1ParserConstants {
     "\"-\"",
     "<PREPROC_COMMENT>",
     "\";\"",
-    "<COMMA_SEPARATOR>",
     "<COMMENT>",
     "\"\\\'\"",
     "\"(\"",

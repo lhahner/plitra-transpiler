@@ -110,7 +110,7 @@
               <goal>jtb-javacc</goal>
             </goals>
             <configuration>
-              <!-- options for JTB and JavaCC go here -->
+              <outputDirectory>${project.basedir}/src/main/java/org/bachelor/transpiler/pl1transpiler/parser</outputDirectory>
             </configuration>
           </execution>
         </executions>

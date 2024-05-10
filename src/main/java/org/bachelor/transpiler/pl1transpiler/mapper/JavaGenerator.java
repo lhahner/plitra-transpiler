@@ -232,7 +232,6 @@ public class JavaGenerator {
 					addFloat();
 					break;
 				case "size":
-
 					break;
 				default:
 					System.out.println("Error in addPrefixDecimal Methode");

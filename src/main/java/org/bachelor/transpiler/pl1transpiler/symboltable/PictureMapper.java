@@ -32,12 +32,11 @@ public class PictureMapper {
 		picRegex.put('Z', "[0-9 ]");
 		picRegex.put('*', "[0-9\\*]");
 		picRegex.put('$', "\\$");
-		//Not tested yet
 		picRegex.put('B', " ");
 		picRegex.put(',', "[\\,\\*]");
 		picRegex.put('/', "[\\/\\*]");
-		picRegex.put('<', "\\<");
-		picRegex.put('>', "\\>");
+		picRegex.put('<', "");
+		picRegex.put('>', "[ 0-9]");
 		picRegex.put('D', "D");
 		picRegex.put('M', "M");
 		picRegex.put('K', "K");
@@ -97,7 +96,6 @@ public class PictureMapper {
 	}
 	
 	/**
-	 * UPDATE NOT TESTED YET
 	 * @param The PL/I Picture limitation.
 	 * @return the equivalent Regex.
 	 */
@@ -122,7 +120,7 @@ public class PictureMapper {
 					decimalPointCounter++;
 					}
 				}
-				else if(regex.charAt(i) == 'B' && regex.charAt(i-1) == 'D') {
+				else if(regex.charAt(i) == 'D' && regex.charAt(i+1) == 'B') {
 					regExpression = regExpression + this.getDebitKey();
 					continue;
 				}
@@ -133,7 +131,6 @@ public class PictureMapper {
 	}
 	
 	/**
-	 * NOT TESTED YET
 	 * This Method should translate the occured DEBTI Type,
 	 * since B is also used for BLANKs.
 	 * @param regex

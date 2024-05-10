@@ -18,20 +18,9 @@ public class InputFormatter {
 		FileWriter writer = new FileWriter(throughputFile);
 		Scanner sc = new Scanner(inputStream);
 		while (sc.hasNext()) {
-			content = sc.useDelimiter(("[.:?!\"]+")).next();
-			content = content.replaceAll("\\/\\*[\\s\\S]*?\\*\\/\r\n", "");
-			content = content.replaceAll(";", " \n");
-			content = content.replaceAll("\\),", "), ");
-			content = content.replaceAll(",\n", ", ");
+			content = content + lex.getToken(sc.next()) + " ";
 		}
-		while (content.length() > 0) {
-			if (lex.getToken(content) == "failed") {
-				break;
-			}
-			token = lex.getToken(content);
-			writer.write(token + " ");
-			content = content.substring(token.length()).trim();
-		}
+		writer.write(content + " ");
 		sc.close();
 		writer.close();
 		FileInputStream parseInputStream = new FileInputStream(throughputFile);

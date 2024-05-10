@@ -1,8 +1,4 @@
 /org/
-/resources/
-/parser/
-/.gitignore
-/pl1transpiler/
-/transpiler/
 /res/
-/config/
+/pl1transpiler/
+/.gitignore
