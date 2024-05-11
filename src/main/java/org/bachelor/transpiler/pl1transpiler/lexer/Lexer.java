@@ -3,10 +3,17 @@ package org.bachelor.transpiler.pl1transpiler.lexer;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 
+/**
+ * @deprecated This Class should not be used since it development will not be continued.
+ * @author lennart.hahner
+ *
+ */
 public class Lexer {
 
 	public static SymbolTable st = new SymbolTable();
@@ -23,7 +30,7 @@ public class Lexer {
 	 * @return the identified token from the input file as a string.
 	 * @deprecated 
 	 */
-	public String DgetToken(String remainingInput) {
+	public String getToken(String remainingInput) {
 
 		charBuffer.clear();
 		state = 0;
@@ -456,30 +463,6 @@ public class Lexer {
 		this.state = 99;
 
 	}
-	
-	/**
-	 * @param Input Token from Input Stream
-	 * @return Token for temporary file
-	 */
-	public String getToken(String token) {
-		
-		if(st.getBySymbol(token) != null) {
-			return token;
-		}else if(token.charAt(0) == '\'') {
-			return token;
-		}else if(token.charAt(0) == '(') {
-			return token;
-		}else if(Character.isDigit(token.charAt(0))) {
-			this.scope = Integer.parseInt(token);
-			return token;
-		}else if(token.charAt(token.length()-1) == ',') {
-			this.install_id(token.substring(0, token.length()-1), this.scope);
-			return token;
-		}else {
-			this.install_id(token, scope);
-			return token;
-		}
-	}	
 	
 
 	/**

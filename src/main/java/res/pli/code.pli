@@ -1,1 +1,1 @@
-DCL 1 X1 PIC 'X';
+DCL 1 test_17 PICTURE '*****V**' 

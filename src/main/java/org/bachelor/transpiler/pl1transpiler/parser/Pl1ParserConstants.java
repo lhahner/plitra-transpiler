@@ -226,10 +226,6 @@ public interface Pl1ParserConstants {
   int MINUSCHAR = 107;
   /** RegularExpression Id. */
   int PREPROC_COMMENT = 108;
-  /** RegularExpression Id. */
-  int SCOL = 109;
-  /** RegularExpression Id. */
-  int COMMENT = 110;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -345,8 +341,8 @@ public interface Pl1ParserConstants {
     "<SCOPE>",
     "\"-\"",
     "<PREPROC_COMMENT>",
+    "<token of kind 109>",
     "\";\"",
-    "<COMMENT>",
     "\"\\\'\"",
     "\"(\"",
     "\")\"",

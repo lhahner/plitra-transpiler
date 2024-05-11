@@ -15,10 +15,10 @@ import org.junit.jupiter.api.Test;
 
 public class InputFormatterTests {
 
-	InputFormatter inputformatter;
+	InputReader inputformatter;
 	@BeforeEach
 	void init() {
-		inputformatter = new InputFormatter();
+		inputformatter = new InputReader();
 	}
 	
 	@Test
@@ -30,7 +30,7 @@ public class InputFormatterTests {
 	try {
 	//Cast InputStream to String to Test it
 	String testData = new BufferedReader(
-			new InputStreamReader(inputformatter.formatInputFile("./src/test/java/resources/pli/tests.pli")))
+			new InputStreamReader(inputformatter.getInputFile("./src/test/java/resources/pli/tests.pli")))
 			.lines().collect(Collectors.joining("\n"));
 	
 	assertEquals(shouldBe, testData);
@@ -42,7 +42,7 @@ public class InputFormatterTests {
 	
 	void formatInputFile_throwIOException() {
 		assertThrows(IOException.class, () -> {
-			inputformatter.formatInputFile("./src/test/java/resources/pli/test.pli");
+			inputformatter.getInputFile("./src/test/java/resources/pli/test.pli");
 		});
 	}
 }

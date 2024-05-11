@@ -26,16 +26,17 @@ public class App {
 	 */
 	public static void main(String[] args) throws IncorrectInputFileException, IOException, ParseException {
 		SymbolTable st = new SymbolTable();
-		InputFormatter inputFormatter = new InputFormatter();
+		InputReader inputReader = new InputReader();
 		inputFile = args[0];
 		if (inputFile.toString().contains(".pli")) {
 
 			try {
-
-				pl1Parser = new Pl1Parser(inputFormatter.formatInputFile(inputFile));
+				pl1Parser = new Pl1Parser(inputReader.getInputFile(inputFile));
 				SimpleNode root = pl1Parser.program();
+				pl1Parser.installIds();
 				st.printAll();
 				root.dump(" ");
+				
 				// load Java Parser and give Pl1parser
 				JavaGenerator jP = new JavaGenerator(pl1Parser);
 				// create expression with Parsetree

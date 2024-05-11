@@ -1,1 +1,1 @@
-DCL 1 X1 PIC 'X';  
+ TYPE Declaration*/ DCL test_17 PICTURE '*****V**';  
