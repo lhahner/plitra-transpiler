@@ -30,7 +30,7 @@ public class InputFormatterTests {
 	try {
 	//Cast InputStream to String to Test it
 	String testData = new BufferedReader(
-			new InputStreamReader(inputformatter.getInputFile("./src/test/java/resources/pli/tests.pli")))
+			new InputStreamReader(inputformatter.getInputFile("./src/test/java/res/pli/tests.pli")))
 			.lines().collect(Collectors.joining("\n"));
 	
 	assertEquals(shouldBe, testData);
@@ -42,7 +42,23 @@ public class InputFormatterTests {
 	
 	void formatInputFile_throwIOException() {
 		assertThrows(IOException.class, () -> {
-			inputformatter.getInputFile("./src/test/java/resources/pli/test.pli");
+			inputformatter.getInputFile("./src/test/java/res/pli/test.pli");
 		});
 	}
+	
+	@Test
+	@DisplayName("Config File Reader")
+	void getInputFilePath_readsInputFilePathFromConfig() throws IOException{
+		File test_config = new File("./src/test/java/res/config/input-config");
+		String shouldBe = "../pli/code.pli";
+		assertEquals(shouldBe, inputformatter.getInputFilePath(test_config));
+	}
+	
+	void getInputFilePath_throwsIOExceptionFromConfig() {
+		File shouldNotwork = new File("./src/test/java/res/config/input-confi");
+		String shouldBe = "../pli/code.pli";
+		assertThrows(IOException.class, () -> {
+			inputformatter.getInputFilePath(shouldNotwork);
+			});
+		}
 }

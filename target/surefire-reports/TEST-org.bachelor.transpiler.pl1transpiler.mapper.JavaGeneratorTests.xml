@@ -1,82 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.026" tests="21" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.013" tests="21" errors="0" skipped="0" failures="0">
   <properties>
-    <property name="java.specification.version" value="17"/>
-    <property name="sun.cpu.isalist" value="amd64"/>
-    <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\target\test-classes;C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\target\classes;C:\Users\lennart.hahner\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.1\junit-jupiter-engine-5.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\platform\junit-platform-engine\1.9.1\junit-platform-engine-1.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\platform\junit-platform-commons\1.9.1\junit-platform-commons-1.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.1\junit-jupiter-api-5.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.0-M1\junit-jupiter-params-5.9.0-M1.jar;"/>
-    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.desktop" value="gnome"/>
+    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value=""/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/test-classes:/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/classes:/home/lennart/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.1/junit-jupiter-engine-5.9.1.jar:/home/lennart/.m2/repository/org/junit/platform/junit-platform-engine/1.9.1/junit-platform-engine-1.9.1.jar:/home/lennart/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/lennart/.m2/repository/org/junit/platform/junit-platform-commons/1.9.1/junit-platform-commons-1.9.1.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.1/junit-jupiter-api-5.9.1.jar:/home/lennart/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.9.0-M1/junit-jupiter-params-5.9.0-M1.jar:"/>
+    <property name="java.vm.vendor" value="Ubuntu"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="user.variant" value=""/>
-    <property name="java.vendor.url" value="https://java.oracle.com/"/>
-    <property name="user.timezone" value="Europe/Berlin"/>
-    <property name="user.country.format" value="DE"/>
-    <property name="os.name" value="Windows 11"/>
-    <property name="java.vm.specification.version" value="17"/>
+    <property name="java.vendor.url" value="https://ubuntu.com/"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Linux"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="user.country" value="US"/>
-    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
-    <property name="sun.java.command" value="C:\Users\LENNAR~1.HAH\AppData\Local\Temp\surefire9723201534193593629\surefirebooter3765142502691175103.jar C:\Users\lennart.hahner\AppData\Local\Temp\surefire9723201534193593629 2024-05-10T13-15-58_636-jvmRun1 surefire4579730139155910821tmp surefire_06986640027157155146tmp"/>
+    <property name="user.country" value="DE"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk-amd64/lib"/>
+    <property name="sun.java.command" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/surefire/surefirebooter12542679239337355524.jar /home/lennart/Nextcloud/dev/pl1-code-transpiler/target/surefire 2024-05-13T22-39-33_309-jvmRun1 surefire1335655619597424400tmp surefire_011724280755594866587tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\target\test-classes;C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\target\classes;C:\Users\lennart.hahner\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.1\junit-jupiter-engine-5.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\platform\junit-platform-engine\1.9.1\junit-platform-engine-1.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\platform\junit-platform-commons\1.9.1\junit-platform-commons-1.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.1\junit-jupiter-api-5.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.0-M1\junit-jupiter-params-5.9.0-M1.jar;"/>
+    <property name="surefire.test.class.path" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/test-classes:/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/classes:/home/lennart/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.1/junit-jupiter-engine-5.9.1.jar:/home/lennart/.m2/repository/org/junit/platform/junit-platform-engine/1.9.1/junit-platform-engine-1.9.1.jar:/home/lennart/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/lennart/.m2/repository/org/junit/platform/junit-platform-commons/1.9.1/junit-platform-commons-1.9.1.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.1/junit-jupiter-api-5.9.1.jar:/home/lennart/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.9.0-M1/junit-jupiter-params-5.9.0-M1.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="C:\Users\lennart.hahner"/>
-    <property name="user.language" value="en"/>
+    <property name="user.home" value="/home/lennart"/>
+    <property name="user.language" value="de"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.version.date" value="2024-01-16"/>
-    <property name="java.home" value="C:\Program Files\Java\jdk-17"/>
-    <property name="file.separator" value="\"/>
-    <property name="basedir" value="C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler"/>
-    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="java.home" value="/usr/lib/jvm/java-11-openjdk-amd64"/>
+    <property name="file.separator" value="/"/>
+    <property name="style.color" value="always"/>
+    <property name="basedir" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
-    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\LENNAR~1.HAH\AppData\Local\Temp\surefire9723201534193593629\surefirebooter3765142502691175103.jar"/>
-    <property name="user.script" value=""/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/surefire/surefirebooter12542679239337355524.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="17.0.10+11-LTS-240"/>
-    <property name="user.name" value="lennart.hahner"/>
-    <property name="path.separator" value=";"/>
-    <property name="os.version" value="10.0"/>
-    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="file.encoding" value="Cp1252"/>
-    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="localRepository" value="C:\Users\lennart.hahner\.m2\repository"/>
-    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="C:\Users\LENNAR~1.HAH\AppData\Local\Temp\"/>
-    <property name="java.version" value="17.0.10"/>
-    <property name="user.dir" value="C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler"/>
+    <property name="java.runtime.version" value="11.0.22+7-post-Ubuntu-0ubuntu220.04.1"/>
+    <property name="user.name" value="lennart"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="5.15.0-105-generic"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="/home/lennart/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-lts"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="11.0.22"/>
+    <property name="user.dir" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.language.format" value="de"/>
-    <property name="sun.os.patch.level" value=""/>
-    <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Pulse Secure\VC142.CRT\X64\;C:\Program Files (x86)\Pulse Secure\VC142.CRT\X86\;C:\Program Files (x86)\Common Files\Pulse Secure\VC142.CRT\X64\;C:\Program Files (x86)\Common Files\Pulse Secure\VC142.CRT\X86\;C:\Program Files (x86)\Symantec\VIP Access Client\;C:\Java\maven\apache-maven-3.8.3\bin;C:\Java\jdk-17_windows-x64_bin\jdk-17\bin;C:\Users\lennart.hahner\OneDrive - Accenture\Documents\Dev\MongoDb\mongosh-1.2.2-win32-x64\bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Common Files\Pulse Secure\TNC Client Plugin\;C:\Program Files\Git\cmd;C:\Users\lennart.hahner\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs\;C:\Users\lennart.hahner\Downloads\javacc-javacc-7.0.12\scripts;C:\Users\lennart.hahner\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\lennart.hahner\AppData\Local\Programs\Python\Python310\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\lennart.hahner\AppData\Local\Microsoft\WindowsApps;C:\Users\lennart.hahner\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\CodeBlocks\MinGW\bin;C:\Users\lennart.hahner\AppData\Local\Pandoc\;C:\Users\lennart.hahner\AppData\Local\Programs\oh-my-posh\bin;C:\Users\lennart.hahner\AppData\Local\Programs\MiKTeX\miktex\bin\x64\;C:\Program Files\Azure Data Studio\bin;C:\Users\lennart.hahner\AppData\Local\Programs\Hyper\resources\bin;C:\Users\lennart.hahner\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\lennart.hahner\AppData\Roaming\npm;C:\Users\lennart.hahner\Downloads\javacc-javacc-7.0.12\scripts;C:\Users\lennart.hahner\.azure-kubectl;C:\Users\lennart.hahner\.azure-kubelogin;;."/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
-    <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.version" value="17.0.10+11-LTS-240"/>
+    <property name="java.vendor" value="Ubuntu"/>
+    <property name="java.vm.version" value="11.0.22+7-post-Ubuntu-0ubuntu220.04.1"/>
+    <property name="java.specification.maintenance.version" value="2"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="java.class.version" value="61.0"/>
+    <property name="java.class.version" value="55.0"/>
   </properties>
   <testcase name="addFloat_addFloatToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
   <testcase name="addSetter_addSetterToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
   <testcase name="addArithmetic_addsAnArithmeticToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
-  <testcase name="addReturnvalue_addReturnvalueToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.001"/>
+  <testcase name="addReturnvalue_addReturnvalueToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
   <testcase name="createStrucuture_shouldCreateStructureBasedOneExpressions_StrucutreString" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
   <testcase name="addMethod_addMethodToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
   <testcase name="addIdentifier_addsIdentifierToSymbolTable_IdentifierText" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
   <testcase name="addPictureExpression_shouldProvidePictureType_PictureString" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
   <testcase name="addType_useTreeNodeToDefineType_TypeString" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
-  <testcase name="concatExpression_returnProgramAsAString_ProgramString" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
+  <testcase name="concatExpression_returnProgramAsAString_ProgramString" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.001"/>
   <testcase name="getScope_returnScopeFromSymbolTable_numberRepresentingTheScope" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
   <testcase name="createExpression_shouldCreateExpressionInStrucuture_ExpressionString" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
   <testcase name="addObject_addsAnObjectToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
   <testcase name="addComplex_addsAnComplexDecimalToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
   <testcase name="addGetter_addGetterToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
-  <testcase name="addClass_addClassToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
-  <testcase name="getNextScope_returnNextScopeFromSymbolTable_numberRepresentingTheScope" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
-  <testcase name="addBigDecimal_addsBigDecimalToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
-  <testcase name="getId_returnIdentifierFromSymbolTable_IdentifierText" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.006"/>
-  <testcase name="addBinary_addsAnBinaryToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.001"/>
-  <testcase name="addPrefixDecimal_addsAnPrefixDecimalToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0.002"/>
+  <testcase name="addClass_addClassToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
+  <testcase name="getNextScope_returnNextScopeFromSymbolTable_numberRepresentingTheScope" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
+  <testcase name="addBigDecimal_addsBigDecimalToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
+  <testcase name="getId_returnIdentifierFromSymbolTable_IdentifierText" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
+  <testcase name="addBinary_addsAnBinaryToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
+  <testcase name="addPrefixDecimal_addsAnPrefixDecimalToExpressionArray_javaExpressionIndex" classname="org.bachelor.transpiler.pl1transpiler.mapper.JavaGeneratorTests" time="0"/>
 </testsuite>

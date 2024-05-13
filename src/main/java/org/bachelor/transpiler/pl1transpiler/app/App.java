@@ -17,9 +17,10 @@ import org.bachelor.transpiler.pl1transpiler.parser.*;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 
 public class App {
-	static String inputFile;
+	
+	static final File CONFIG = new File("./src/main/java/res/config/input-config");
 	static Pl1Parser pl1Parser;
-
+	
 	/**
 	 * @param args[0] holds the path to the input file.
 	 * @throws IncorrectInputFileException
@@ -27,7 +28,8 @@ public class App {
 	public static void main(String[] args) throws IncorrectInputFileException, IOException, ParseException {
 		SymbolTable st = new SymbolTable();
 		InputReader inputReader = new InputReader();
-		inputFile = args[0];
+		String inputFile = inputReader.getInputFilePath(CONFIG);
+		
 		if (inputFile.toString().contains(".pli")) {
 
 			try {
