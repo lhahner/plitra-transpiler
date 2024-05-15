@@ -17,7 +17,7 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.PictureMapper;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
-public class JavaGenerator {
+public class MainMapper {
 
 	static int iterationCounter = 0;
 	static int lengthCounter = 0;
@@ -27,11 +27,11 @@ public class JavaGenerator {
 	String Major;
 	Template javaWords;
 	
-	public JavaGenerator() {
+	public MainMapper() {
 		
 	}
 	
-	public JavaGenerator(Pl1Parser pp) {
+	public MainMapper(Pl1Parser pp) {
 		this.pl1Parser = pp;
 	}
 
@@ -40,7 +40,6 @@ public class JavaGenerator {
 	 */
 	public String concatExpression() {
 		try {
-
 			if (java_expression.size() != 0) {
 				String listString = java_expression.stream().map(Object::toString).collect(Collectors.joining(""));
 				listString = javaWords.PACKAGE.getValue() + "\n" + javaWords.IMPORTS.getValue() + "\n"

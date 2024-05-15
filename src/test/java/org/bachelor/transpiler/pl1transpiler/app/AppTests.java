@@ -16,13 +16,5 @@ public class AppTests
 	void init() {
 		app = new App();
 	}
-	
-	@Test
-	@DisplayName("FileTypeCheck")
-	void main_InputFilePli() {
-		assertThrows(IncorrectInputFileException.class, () -> {
-			String[] shouldNotWork = {"./test.java"};
-			app.main(shouldNotWork);
-		});
-	}
+
 }

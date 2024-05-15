@@ -1,16 +1,16 @@
 package org.bachelor.transpiler.pl1transpiler.mapper;
 //Api imports
 import org.junit.jupiter.api.Test;
-import org.bachelor.transpiler.pl1transpiler.mapper.JavaGenerator;
+import org.bachelor.transpiler.pl1transpiler.mapper.MainMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
-public class JavaGeneratorTests {
+public class MainMapperTests {
 	
-	JavaGenerator java_generator;
+	MainMapper java_generator;
 	@BeforeEach
 	void init() {
-		java_generator = new JavaGenerator();
+		java_generator = new MainMapper();
 	}
 	
 	@Test

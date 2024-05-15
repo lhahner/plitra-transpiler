@@ -5,7 +5,7 @@ import java.nio.charset.UnsupportedCharsetException;
 import javax.management.AttributeNotFoundException;
 
 import org.junit.jupiter.api.Test;
-import org.bachelor.transpiler.pl1transpiler.mapper.JavaGenerator;
+import org.bachelor.transpiler.pl1transpiler.mapper.MainMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 

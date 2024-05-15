@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException;
 import org.bachelor.transpiler.pl1transpiler.lexer.*;
-import org.bachelor.transpiler.pl1transpiler.mapper.JavaGenerator;
+import org.bachelor.transpiler.pl1transpiler.mapper.MainMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.*;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 
@@ -40,7 +40,7 @@ public class App {
 				root.dump(" ");
 				
 				// load Java Parser and give Pl1parser
-				JavaGenerator jP = new JavaGenerator(pl1Parser);
+				MainMapper jP = new MainMapper(pl1Parser);
 				// create expression with Parsetree
 				jP.createExpression(root);
 				System.out.println(jP.concatExpression());

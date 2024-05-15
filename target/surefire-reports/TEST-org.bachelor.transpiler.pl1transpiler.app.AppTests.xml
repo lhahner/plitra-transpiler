@@ -1,63 +1,223 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.bachelor.transpiler.pl1transpiler.app.AppTests" time="0.016" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.bachelor.transpiler.pl1transpiler.app.AppTests" time="0.183" tests="1" errors="0" skipped="0" failures="1">
   <properties>
-    <property name="sun.desktop" value="gnome"/>
-    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
-    <property name="java.specification.version" value="11"/>
-    <property name="sun.cpu.isalist" value=""/>
-    <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/test-classes:/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/classes:/home/lennart/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.1/junit-jupiter-engine-5.9.1.jar:/home/lennart/.m2/repository/org/junit/platform/junit-platform-engine/1.9.1/junit-platform-engine-1.9.1.jar:/home/lennart/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/lennart/.m2/repository/org/junit/platform/junit-platform-commons/1.9.1/junit-platform-commons-1.9.1.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.1/junit-jupiter-api-5.9.1.jar:/home/lennart/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.9.0-M1/junit-jupiter-params-5.9.0-M1.jar:"/>
-    <property name="java.vm.vendor" value="Ubuntu"/>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\target\test-classes;C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\target\classes;C:\Users\lennart.hahner\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.1\junit-jupiter-engine-5.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\platform\junit-platform-engine\1.9.1\junit-platform-engine-1.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\platform\junit-platform-commons\1.9.1\junit-platform-commons-1.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.1\junit-jupiter-api-5.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.0-M1\junit-jupiter-params-5.9.0-M1.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="java.vendor.url" value="https://ubuntu.com/"/>
-    <property name="user.timezone" value=""/>
-    <property name="java.vm.specification.version" value="11"/>
-    <property name="os.name" value="Linux"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Berlin"/>
+    <property name="user.country.format" value="DE"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="17"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="user.country" value="DE"/>
-    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/surefire/surefirebooter12542679239337355524.jar /home/lennart/Nextcloud/dev/pl1-code-transpiler/target/surefire 2024-05-13T22-39-33_309-jvmRun1 surefire1335655619597424400tmp surefire_011724280755594866587tmp"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
+    <property name="sun.java.command" value="C:\Users\LENNAR~1.HAH\AppData\Local\Temp\surefire12995789135357206196\surefirebooter67678225665454851.jar C:\Users\lennart.hahner\AppData\Local\Temp\surefire12995789135357206196 2024-05-15T14-39-23_495-jvmRun1 surefire4862803036882834307tmp surefire_012422187791206649416tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/test-classes:/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/classes:/home/lennart/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.1/junit-jupiter-engine-5.9.1.jar:/home/lennart/.m2/repository/org/junit/platform/junit-platform-engine/1.9.1/junit-platform-engine-1.9.1.jar:/home/lennart/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/lennart/.m2/repository/org/junit/platform/junit-platform-commons/1.9.1/junit-platform-commons-1.9.1.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.1/junit-jupiter-api-5.9.1.jar:/home/lennart/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/lennart/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.9.0-M1/junit-jupiter-params-5.9.0-M1.jar:"/>
+    <property name="surefire.test.class.path" value="C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\target\test-classes;C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\target\classes;C:\Users\lennart.hahner\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.1\junit-jupiter-engine-5.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\platform\junit-platform-engine\1.9.1\junit-platform-engine-1.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\platform\junit-platform-commons\1.9.1\junit-platform-commons-1.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.1\junit-jupiter-api-5.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.0-M1\junit-jupiter-params-5.9.0-M1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="/home/lennart"/>
-    <property name="user.language" value="de"/>
+    <property name="user.home" value="C:\Users\lennart.hahner"/>
+    <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.version.date" value="2024-01-16"/>
-    <property name="java.home" value="/usr/lib/jvm/java-11-openjdk-amd64"/>
-    <property name="file.separator" value="/"/>
-    <property name="style.color" value="always"/>
-    <property name="basedir" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler"/>
-    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-17"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
     <property name="line.separator" value="&#10;"/>
-    <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler/target/surefire/surefirebooter12542679239337355524.jar"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\LENNAR~1.HAH\AppData\Local\Temp\surefire12995789135357206196\surefirebooter67678225665454851.jar"/>
+    <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="11.0.22+7-post-Ubuntu-0ubuntu220.04.1"/>
-    <property name="user.name" value="lennart"/>
-    <property name="path.separator" value=":"/>
-    <property name="os.version" value="5.15.0-105-generic"/>
-    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="file.encoding" value="UTF-8"/>
-    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="localRepository" value="/home/lennart/.m2/repository"/>
-    <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-lts"/>
-    <property name="java.io.tmpdir" value="/tmp"/>
-    <property name="java.version" value="11.0.22"/>
-    <property name="user.dir" value="/home/lennart/Nextcloud/dev/pl1-code-transpiler"/>
+    <property name="java.runtime.version" value="17.0.10+11-LTS-240"/>
+    <property name="user.name" value="lennart.hahner"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\lennart.hahner\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\LENNAR~1.HAH\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.10"/>
+    <property name="user.dir" value="C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
-    <property name="sun.os.patch.level" value="unknown"/>
-    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+    <property name="user.language.format" value="de"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Pulse Secure\VC142.CRT\X64\;C:\Program Files (x86)\Pulse Secure\VC142.CRT\X86\;C:\Program Files (x86)\Common Files\Pulse Secure\VC142.CRT\X64\;C:\Program Files (x86)\Common Files\Pulse Secure\VC142.CRT\X86\;C:\Program Files (x86)\Symantec\VIP Access Client\;C:\Java\maven\apache-maven-3.8.3\bin;C:\Java\jdk-17_windows-x64_bin\jdk-17\bin;C:\Users\lennart.hahner\OneDrive - Accenture\Documents\Dev\MongoDb\mongosh-1.2.2-win32-x64\bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Common Files\Pulse Secure\TNC Client Plugin\;C:\Program Files\Git\cmd;C:\Users\lennart.hahner\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs\;C:\Users\lennart.hahner\Downloads\javacc-javacc-7.0.12\scripts;C:\Users\lennart.hahner\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\lennart.hahner\AppData\Local\Programs\Python\Python310\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\lennart.hahner\AppData\Local\Microsoft\WindowsApps;C:\Users\lennart.hahner\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\CodeBlocks\MinGW\bin;C:\Users\lennart.hahner\AppData\Local\Pandoc\;C:\Users\lennart.hahner\AppData\Local\Programs\oh-my-posh\bin;C:\Users\lennart.hahner\AppData\Local\Programs\MiKTeX\miktex\bin\x64\;C:\Program Files\Azure Data Studio\bin;C:\Users\lennart.hahner\AppData\Local\Programs\Hyper\resources\bin;C:\Users\lennart.hahner\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\lennart.hahner\AppData\Roaming\npm;C:\Users\lennart.hahner\Downloads\javacc-javacc-7.0.12\scripts;C:\Users\lennart.hahner\.azure-kubectl;C:\Users\lennart.hahner\.azure-kubelogin;;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
-    <property name="java.vendor" value="Ubuntu"/>
-    <property name="java.vm.version" value="11.0.22+7-post-Ubuntu-0ubuntu220.04.1"/>
-    <property name="java.specification.maintenance.version" value="2"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="17.0.10+11-LTS-240"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="java.class.version" value="55.0"/>
+    <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="main_InputFilePli" classname="org.bachelor.transpiler.pl1transpiler.app.AppTests" time="0.01"/>
+  <testcase name="main_InputFilePli" classname="org.bachelor.transpiler.pl1transpiler.app.AppTests" time="0.163">
+    <failure message="Expected org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException to be thrown, but nothing was thrown." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Expected org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException to be thrown, but nothing was thrown.
+	at org.bachelor.transpiler.pl1transpiler.app.AppTests.main_InputFilePli(AppTests.java:23)
+</failure>
+    <system-out><![CDATA[
+1 : DCL, word, 
+2 : DECLARE, word, 
+3 : BINARY, word, 
+4 : BIN, word, 
+5 : FIXED, word, 
+6 : FLOAT, word, 
+7 : CHARACTER, word, 
+8 : CHAR, word, 
+9 : VARYING, word, 
+10 : VAR, word, 
+11 : PIC, word, 
+12 : PICTURE, word, 
+13 : INIT, word, 
+14 : PTR, word, 
+15 : DECIMAL, word, 
+16 : DEC, word, 
+17 : REAL, word, 
+18 : COMPLEX, word, 
+19 : UNSIGNED, word, 
+20 : SIGNED, word, 
+21 : AREA, word, 
+22 : DIMENSION, word, 
+23 : ENTRY, word, 
+24 : FILE, word, 
+25 : FORMAT, word, 
+26 : GRAPHIC, word, 
+27 : HANDLE, word, 
+28 : LABEL, word, 
+29 : LOCATES, word, 
+30 : NONVARYING, word, 
+31 : OFFSET, word, 
+32 : ORDINAL, word, 
+33 : POINTER, word, 
+34 : PRECISION, word, 
+35 : RETURNS, word, 
+36 : STRUCTURE, word, 
+37 : TASK, word, 
+38 : TYPE, word, 
+39 : UNION, word, 
+40 : VARYING4, word, 
+41 : VARYINGZ, word, 
+42 : WIDECHAR, word, 
+43 : WIDEPIC, word, 
+44 : ABNORMAL, word, 
+45 : ALIGNED, word, 
+46 : ASSIGNABLE, word, 
+47 : AUTOMATIC, word, 
+48 : BASED, word, 
+49 : BIGENDIAN, word, 
+50 : BUFFERED, word, 
+51 : BUILTIN, word, 
+52 : BYADDR, word, 
+53 : BYVALUE, word, 
+54 : CONDITION, word, 
+55 : CONNECTED, word, 
+56 : CONTROLLED, word, 
+57 : DEFINED, word, 
+58 : DIMACROSS, word, 
+59 : DIRECT, word, 
+60 : ENVIRONMENT, word, 
+61 : EXCLUSIVE, word, 
+62 : EXTERNAL, word, 
+63 : GENERIC, word, 
+64 : HEXADEC, word, 
+65 : IEEE, word, 
+66 : INDFOR, word, 
+67 : INITIAL, word, 
+68 : INONLY, word, 
+69 : INOUT, word, 
+70 : INPUT, word, 
+71 : INTERMAL, word, 
+72 : KEYED, word, 
+73 : LIKE, word, 
+74 : LIST, word, 
+75 : LITTLEENDIAN, word, 
+76 : NONASSIGNABLE, word, 
+77 : NONCONNECTED, word, 
+78 : NORMAL, word, 
+79 : OPTIONAL, word, 
+80 : OPTIONS, word, 
+81 : OUTONLY, word, 
+82 : OUTPUT, word, 
+83 : PARAMETER, word, 
+84 : POSITION, word, 
+85 : PRINT, word, 
+86 : RECORD, word, 
+87 : SEQUENTIAL, word, 
+88 : STATIC, word, 
+89 : STREAM, word, 
+90 : UNALIGNED, word, 
+91 : UNBUFFERED, word, 
+92 : UPDATE, word, 
+93 : VALUE, word, 
+94 : VARIABLE, word, 
+95 : XMLATTR, word, 
+96 : XMLOMIT, word, 
+97 : test_17, 1, id,  PROGRAM
+  VAR
+   SCOPE
+   Id
+   TYPE
+    PictureExpression
+     Picture
+     PictureAttribute
+      PictureLetter
+package resources.java; 
+import java.math.BigDecimal; import java.util.HashMap; 
+ import java.util.HashMap; 
+ import java.util.regex.Matcher; 
+ import java.util.regex.Pattern; 
+public class Main { 
+public static void main(String[] args) { }; PICTURE  test_17 = new  PICTURE  ("[0-9\*][0-9\*][0-9\*][0-9\*][0-9\*][\.\*][0-9\*][0-9\*]");
+} 
+interface Datatype { 
+public void init(String content); 
+}; 
+ 
+class PICTURE {
+	Pattern pattern;
+	String content;
+
+	public PICTURE(String regex) {
+		pattern = Pattern.compile(regex);
+	}
+
+	public void init(String content) {
+		Matcher matcher = pattern.matcher(content);
+		if (matcher.matches()) {
+			this.content = content;
+		}
+	}
+} 
+class PL1_CHAR implements Datatype{ char[] varname; public PL1_CHAR(int limit) { 
+varname =  new char[limit]; } 
+@Override public String toString() { 
+ String string = new String(varname); 
+return string; } 
+public void init(String varname) { 
+for(int i = 0; i<this.varname.length; i++) { 
+this.varname[i] = varname.charAt(i); }}} 
+ 
+class BINARY implements Datatype {
+	byte[] content;
+	
+	public BINARY(int limit) {
+		content = new byte[limit];
+	}
+	
+	public void init(String content) {
+		for(int i = 0; i<this.content.length;i++) {
+			this.content[i] = (byte)content.charAt(i);
+		}
+	}
+} 
+
+]]></system-out>
+  </testcase>
 </testsuite>
