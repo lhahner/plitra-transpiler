@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTableTests" time="0.001" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTableTests" time="0.002" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
-    <property name="sun.java.command" value="C:\Users\LENNAR~1.HAH\AppData\Local\Temp\surefire12422699967334409863\surefirebooter720271897464671385.jar C:\Users\lennart.hahner\AppData\Local\Temp\surefire12422699967334409863 2024-05-15T17-44-23_836-jvmRun1 surefire4561092616455145155tmp surefire_06951841582382036714tmp"/>
+    <property name="sun.java.command" value="C:\Users\LENNAR~1.HAH\AppData\Local\Temp\surefire4131636480245475197\surefirebooter13289750365744231628.jar C:\Users\lennart.hahner\AppData\Local\Temp\surefire4131636480245475197 2024-05-16T10-09-06_447-jvmRun1 surefire13549760678499725207tmp surefire_017347421048621933506tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\target\test-classes;C:\Users\lennart.hahner\eclipse-workspace\pl1-code-transpiler\target\classes;C:\Users\lennart.hahner\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.1\junit-jupiter-engine-5.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\platform\junit-platform-engine\1.9.1\junit-platform-engine-1.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\platform\junit-platform-commons\1.9.1\junit-platform-commons-1.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.1\junit-jupiter-api-5.9.1.jar;C:\Users\lennart.hahner\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\lennart.hahner\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.0-M1\junit-jupiter-params-5.9.0-M1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\LENNAR~1.HAH\AppData\Local\Temp\surefire12422699967334409863\surefirebooter720271897464671385.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\LENNAR~1.HAH\AppData\Local\Temp\surefire4131636480245475197\surefirebooter13289750365744231628.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.10+11-LTS-240"/>
@@ -59,5 +59,5 @@
     <property name="java.class.version" value="61.0"/>
   </properties>
   <testcase name="getBySymbol_symbolReturned" classname="org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTableTests" time="0"/>
-  <testcase name="insertId_checkIfIsAlreadyInserted" classname="org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTableTests" time="0"/>
+  <testcase name="insertId_checkIfIsAlreadyInserted" classname="org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTableTests" time="0.001"/>
 </testsuite>

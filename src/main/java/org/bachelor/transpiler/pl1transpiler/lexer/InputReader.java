@@ -9,8 +9,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class InputReader {
-	
-	
+	public static String program = "";
 	
 	public FileInputStream getInputFile(String inputFile) throws IOException{
 	 try {
@@ -37,6 +36,7 @@ public class InputReader {
 			if(line.substring(0, 4).equals("PATH")) {
 				inputFilePath = line.substring(5, line.indexOf(';'));
 				config_sc.close();
+				printProgramname(inputFilePath);
 				return inputFilePath;
 			}
 			else {
@@ -46,5 +46,12 @@ public class InputReader {
 		}
 		config_sc.close();
 		return inputFilePath;
+	}
+	public String getProgramname() {
+		return this.program;
+	}
+	
+	public void printProgramname(String path) {
+		this.program = path.substring(path.lastIndexOf('/')+1, path.indexOf(".pli"));
 	}
 }

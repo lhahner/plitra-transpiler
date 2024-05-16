@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.bachelor.transpiler.pl1transpiler.symboltable.Pl1SymbolsTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s - in org.bachelor.transpiler.pl1transpiler.symboltable.Pl1SymbolsTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s - in org.bachelor.transpiler.pl1transpiler.symboltable.Pl1SymbolsTests

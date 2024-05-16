@@ -1,28 +1,31 @@
 package org.bachelor.transpiler.pl1transpiler.symboltable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.bachelor.transpiler.pl1transpiler.lexer.*;
 
 public enum Template {
+	
 	//Static Code
 	PACKAGE("package resources.java;"),
 	
-	IMPORTS("import java.math.BigDecimal; "
-			+ "import java.util.HashMap; \n "
-			+ "import java.util.HashMap; \n "
-			+ "import java.util.regex.Matcher; \n "
+	PICTURE_IMPORTS("import java.util.regex.Matcher; \n "
 			+ "import java.util.regex.Pattern;"),
+	BINARY_IMPORTS("import java.math.BigDecimal; "),
+	IMPORTS( "import java.util.HashMap; \n "
+			+ "import java.util.HashMap; \n "
+			+ "import transpiled-sources.PLI Dependencies;"),
 	
 	DATATYPE_INTERFACE("interface Datatype { \n"
 			+ "public void init(String content); \n"
 			+ "}; \n"),
 	
-	MAIN_CLASS("public class Main {"),
+	MAIN_CLASS("public class "),
 
 	MAIN_METHOD("public static void main(String[] args) { };"),
 	
-	PL1_CHAR_CLASS("class PL1_CHAR implements Datatype{ "
+	PL1_CHAR_CLASS("class CHAR implements Datatype{ "
 			+ "char[] varname; "
-			+ "public PL1_CHAR(int limit) { \n"
+			+ "public CHAR(int limit) { \n"
 			+ "varname =  new char[limit]; } \n"
 			+ "@Override public String toString() { \n"
 			+ " String string = new String(varname); \n"
@@ -31,7 +34,7 @@ public enum Template {
 			+ "for(int i = 0; i<this.varname.length; i++) { \n"
 			+ "this.varname[i] = varname.charAt(i); }}} \n"),
 
-	PICTURE_CLASS("class PICTURE {\r\n"
+	PICTURE_CLASS("class PICTURE implements Datatype{\r\n"
 			+ "	Pattern pattern;\r\n"
 			+ "	String content;\r\n"
 			+ "\r\n"
@@ -78,7 +81,7 @@ public enum Template {
 	BINARY("BINARY");
 
 	private final String symbol;
-    
+	
 	Template(String symbol) {
         this.symbol = symbol;
     }
