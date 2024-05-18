@@ -74,6 +74,8 @@ TOKEN :
   	
  	 < DCL : "DCL" >
 	| < DECLARE : "DECLARE" >
+	| < PROCEDURE: "PROCEDURE" >
+	| < PROC : "PROC" >
 	| < DECIMAL : "DECIMAL" >
 	| < BINARY : "BINARY" >
 	| < DEC : "DEC" >
@@ -167,7 +169,40 @@ TOKEN :
 	| < VARIABLE : "VARIABLE" >
 	| < XMLATTR : "XMLATTR" >
 	| < XMLOMIT : "XMLOMIT" >
+	| < END: "END" >
 	| < BIT : "BIT" >
+	| < ASSEMBLER : "ASSEMBLER" >
+	| < COBOL : "COBOL" >
+	| < FORTRAN : "FORTRAN" >
+	| < MAIN : "MAIN" >
+	| < NOEXECOPS : "NOEXECOPS" >
+	| < NOCHARGRAPHIC : "NONCHARGRAPHIC" >
+	| < CHARGRAPHIC : "CHARGRAPHIC" >
+	| < NOCMPAT : "NOCMPAT" >
+	| < CMPAT : "CMPAT" >
+	| < DESCRIPTOR : "DESCRIPTOR" >
+	| < NODESCRIPTOR : "NODESCRIPTOR" >
+	| < FORMALIEN : "FORMALIEN" >
+	| < LINKAGE : "LINKAGE" >
+	| < NOINLINE : "NOINLINE" >
+	| < INLINE : "INLINE" >
+	| < ORDER : "ORDER" >
+	| < REORDER : "REORDER" >
+	| < IRREDUCIBLE : "IRREDUCIBLE" >
+	| < REDUCABLE : "REDUCABLE" >
+	| < REETRANT : "REETRANT" >
+	| < RETCODE : "RETCODE" >
+	| < WINMAIN : "WINMAIN" >
+	| < RECURSIVE : "RECURSIVE" >
+	| < CALL : "CALL" >
+	| < RETURN : "RETURN" >
+	| < GOTO : "GO TO" >
+	| < STOP : "STOP" >
+	| < EXIT : "EXIT" >
+	| < SET : "SET" >
+	| < TITLE : "TITLE" >
+	| < FETCH: "FETCH" >
+	| < RELEASE : "RELEASE" >
 	| < COMMA_SEPARATOR : "," <SPACE_SEPARATOR> >
 	| < X : ("X"|"A"|"9"|"Z"|"V"|"*"|"B"|"<"|">"|"-"|"+"|"E"|"K"|","|"$"|"€"|"/"|"CR"|"DB"|"S")+ >
 	| < A : ("A")+ >
@@ -175,8 +210,6 @@ TOKEN :
 	| < INTEGER : (["0"-"9"])+ >
  	| < PL1_WORD: (["a"-"z","A"-"Z","0"-"9"])+ ((<MINUSCHAR> | "_" )+ (["a"-"z","0"-"9"])+ )* >
 	| < EOL: "\n" >
-	| < SPACE_SEPARATOR : ( <SPACECHAR> | <EOL> )+ >
-	| < SPACECHAR: ( " " | "\t" | "\f" | "\r" | "&" )+ >
 	| < SCOPE : (["1"-"9"]) >
 	| < MINUSCHAR: "-" >
 	| < PREPROC_COMMENT: "*|" (~["\n","\r"])* >
@@ -186,6 +219,8 @@ SKIP :
 {
 	< "/*" (~["*"])* "*" (~["/"])* "*/" >
 	| < ";" >
+	| < SPACE_SEPARATOR : ( <SPACECHAR> | <EOL> )+ >
+	| < SPACECHAR: ( " " | "\t" | "\f" | "\r" | "&" )+ >
 }
 
 
@@ -195,7 +230,97 @@ SKIP :
 SimpleNode program() #PROGRAM :
 {}
 {
-  (([< SPACE_SEPARATOR >])var_declaration()< SPACE_SEPARATOR > )*  {return jjtThis;}
+  (var_declaration()|procedure())* (var_declaration()|procedure())*  {return jjtThis;}
+}
+
+void procedure() #PROC :
+{}
+{
+  < PL1_WORD >":"(< PROCEDURE >|< PROC >)("(" parameterlist() ")")? (returns())?
+  (options())? (< RECURSIVE >)?
+  	proc_body()
+  < END >< PL1_WORD >
+}
+
+void proc_body() #BODY :
+{}
+{    (
+    var_declaration()
+    |entry_statement()
+    |call()
+    |termination()
+    |fetch()
+    |release()
+    )*
+}
+
+void entry_statement() #ENTRY :
+{}
+{
+  < PL1_WORD >":"< ENTRY >("("parameterlist()")")? (returns())? (options())?
+}
+
+void parameterlist() #PARA :
+{}
+{
+  < PL1_WORD >(< COMMA_SEPARATOR >parameterlist())?
+}
+
+void returns() #RETURNS:
+{}
+{
+	< RETURNS >"(" type() ")"
+}
+
+void options() #OPTIONS:
+{}
+{
+   < OPTIONS >"("((< MAIN >(< NOEXECOPS >)?)
+   | (< ASSEMBLER >|< COBOL >|< FORTRAN >)
+   | (< BYADDR >|< BYVALUE > )
+   | (< NOCHARGRAPHIC >|< CHARGRAPHIC >)
+   | (< NOCMPAT >|< CMPAT >)
+   | (< DESCRIPTOR >|< NODESCRIPTOR >)
+   | < FORMALIEN >
+   | < LINKAGE >
+   | (< NOINLINE >|< INLINE >)
+   | (< ORDER >|< REORDER >)
+   | (< IRREDUCIBLE >| < REDUCABLE >)
+   | < REETRANT >
+   | < RETCODE >
+   | < WINMAIN >)")"
+}
+
+void call() #CALLS:
+{}
+{
+  < CALL >< PL1_WORD >
+}
+
+void fetch() #FETCH:
+{}
+{(< FETCH >< PL1_WORD >)fetch_statement()
+	
+}
+
+void fetch_statement() #STATEMENT:
+{}
+{    [< SET >"("< PL1_WORD >")"][< TITLE >"(""'"< PL1_WORD >"'"")"][< COMMA_SEPARATOR > fetch_statement()]
+}
+
+void release() #RELEASE:
+{}
+{
+  < RELEASE >(< PL1_WORD >[< COMMA_SEPARATOR >])*
+}
+
+void termination() #TERMINATE:
+{}
+{
+  (< RETURN >[< PL1_WORD >]
+  |< GOTO >< PL1_WORD >
+  |< STOP >
+  |< EXIT >)
 }
 
 /**
@@ -204,10 +329,9 @@ SimpleNode program() #PROGRAM :
 void var_declaration() #VAR :
 {int scope = 0; Token t;}
 {	  ( < DCL > | < DECLARE > ) 
-	  ( < SPACE_SEPARATOR > scope = scope() 
-	  | < SPACE_SEPARATOR > )
- 	   id() (< SPACE_SEPARATOR > type()| 
- 	   < SPACE_SEPARATOR > type() < COMMA_SEPARATOR > |
+	  ( scope = scope() )
+ 	   id() ( type()| 
+ 	    type() < COMMA_SEPARATOR > |
       ( < COMMA_SEPARATOR > minor(scope))*) | minor(scope)
 }
 
@@ -217,10 +341,9 @@ void var_declaration() #VAR :
 void minor(int parentScope) #MINOR :
 {int scope = 0;}
 {
- 
-		   ( scope = scope() | < SPACE_SEPARATOR > )
+		   ( scope = scope())
 		      
-  id() ( < SPACE_SEPARATOR > type() | < SPACE_SEPARATOR > type() < COMMA_SEPARATOR > |
+  id() (  type() |  type() < COMMA_SEPARATOR > |
       ( < COMMA_SEPARATOR > minor(scope))* ) 
 
       
@@ -232,8 +355,9 @@ void minor(int parentScope) #MINOR :
 int scope() #SCOPE:
 {Token t; }
 {
-	t = < INTEGER > < SPACE_SEPARATOR >
+	t = < INTEGER >
 	{ tmp_idsAndScopes[1] = Integer.parseInt(t.image) + "";
+	if(t == null) t.image = "0";
 	  return Integer.parseInt(t.image); }
 }
 
@@ -243,7 +367,7 @@ int scope() #SCOPE:
 void type() #TYPE :
 {}
 {
-	(	  codedArithmetic() | String() | Locator() | Picture() | File() | Entry()
+	(	  codedArithmetic() | String() | Locator() | Picture() | File() | Entry()
 	) 
 }
 
@@ -262,63 +386,63 @@ void Entry() #Entry :
 void File() #File :
 {}
 {
-  < FILE > < SPACE_SEPARATOR > < ENVIRONMENT > < SPACE_SEPARATOR >
+  < FILE > < ENVIRONMENT >
   ( Stream() | Record()) (Input() | Output() | Update())
-  (Sequential() | Direct()) (Buffered() | Unbuffered()) < SPACE_SEPARATOR > < KEYED > < SPACE_SEPARATOR > < PRINT >
+  (Sequential() | Direct()) (Buffered() | Unbuffered()) < KEYED >< PRINT >
 }
 
 void Stream() #Stream :
 {}
 {
-  < SPACE_SEPARATOR > < STREAM >
+  < STREAM >
 }
 
 void Record() #Record :
 {}
 {
-  < SPACE_SEPARATOR > < RECORD >
+  < RECORD >
 }
 
 void Input() #Input :
 {}
 {
-  < SPACE_SEPARATOR > < INPUT >
+  < INPUT >
 }
 
 void Output() #Output :
 {}
 {
-  < SPACE_SEPARATOR > < OUTPUT >
+  < OUTPUT >
 }
 
 void Update() #Update :
 {}
 {
-  < SPACE_SEPARATOR > <UPDATE >
+  <UPDATE >
 }
 
 void Sequential() #Sequential :
 {}
 {
-  < SPACE_SEPARATOR > <SEQUENTIAL >
+  <SEQUENTIAL >
 }
 
 void Direct() #Direct :
 {}
 {
-  < SPACE_SEPARATOR > < DIRECT >
+  < DIRECT >
 }
 
 void Buffered() #Buffered :
 {}
 {
-  < SPACE_SEPARATOR > < BUFFERED >
+  < BUFFERED >
 }
 
 void Unbuffered() #Unbuffered :
 {}
 {
-  < SPACE_SEPARATOR > < UNBUFFERED >
+  < UNBUFFERED >
 }
 
 /**
@@ -327,7 +451,7 @@ void Unbuffered() #Unbuffered :
 String Picture() #PictureExpression :
 { String t; }
 {
-  (Pic() | Widepic()) [Real() | Complex() ] t = PictureAttribute() [< SPACE_SEPARATOR > < VALUE > ]
+  (Pic() | Widepic()) [Real() | Complex() ] t = PictureAttribute() [< VALUE > ]
   { return pictureAttribiute = t; }
 }
 
@@ -363,7 +487,6 @@ String PictureAttribute() #PictureAttribute:
  String t55 = "";
  }
 {
-  < SPACE_SEPARATOR >
   "'" (
 	t1 = LengthPicture() (t11 = LetterPicture() | t11 = NumberPicture() ) |
 	t2 = LetterPicture() ( t22 = NumberPicture() ( t222 = NumberPicture())*)? t2222 = LetterPicture()
@@ -411,25 +534,25 @@ String LengthPicture() #PictureLength:
 void Locator() #Locator:
 {}
 {
-	(Pointer() | Offset() | Handle()) < SPACE_SEPARATOR > < VALUE > < SPACE_SEPARATOR > < LOCATES >
+	(Pointer() | Offset() | Handle()) < VALUE >< LOCATES >
 }
 
 void Pointer() #Pointer:
 {}
 {
-  < SPACE_SEPARATOR > < POINTER >
+  < POINTER >
 }
 
 void Offset() #Offset:
 {}
 {
-  < SPACE_SEPARATOR > < OFFSET >
+  < OFFSET >
 }
 
 void Handle() #Handle:
 {}
 {
-  < SPACE_SEPARATOR > < HANDLE >
+  < HANDLE >
 }
 
 /**
@@ -438,7 +561,7 @@ void Handle() #Handle:
 void String() #String:
 {}
 {
-  ( Char() | Bit() | Graphic() | Widechar()) (StringAttribute() | < SPACE_SEPARATOR > StringAttribute() ) [< SPACE_SEPARATOR > < NONVARYING >] [< SPACE_SEPARATOR > < VALUE >]
+  ( Char() | Bit() | Graphic() | Widechar()) (StringAttribute() | StringAttribute() ) [< NONVARYING >] [< VALUE >]
 }
 
 void Widechar() #Widechar:
@@ -471,21 +594,21 @@ void Bit() #Bit:
 void codedArithmetic() #Arithmetic:
 {}
 {
-  [ Real()  < SPACE_SEPARATOR >| Complex()  < SPACE_SEPARATOR >]
-  [ Float()  < SPACE_SEPARATOR >| Fixed()  < SPACE_SEPARATOR >]
+  [ Real()  | Complex()  ]
+  [ Float() | Fixed()  ]
   ( Binary() | Decimal() ) (size()) [Signed() | Unsigned() ]
 }
 
 void Signed() #Signed:
 {}
 {
-  < SPACE_SEPARATOR > < SIGNED >
+  < SIGNED >
 }
 
 void Unsigned() #Unsigned:
 {}
 {
-  < SPACE_SEPARATOR > < UNSIGNED >
+  < UNSIGNED >
 }
 
 void Decimal() #Decimal:
@@ -516,7 +639,7 @@ void Binary() #Binary:
 void size():
 {}
 {
-  [< PRECISION >] < SPACE_SEPARATOR > (attributes() | attribute())
+  [< PRECISION >](attributes() | attribute())
 }
 
 void StringAttribute() #Length:

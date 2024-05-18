@@ -40,14 +40,14 @@ public class App {
 				root.dump(" ");
 				
 				// load Java Parser and give Pl1parser
-				MainMapper jP = new MainMapper(pl1Parser);
+				//MainMapper jP = new MainMapper(pl1Parser);
 				// create expression with Parsetree
-				jP.createExpression(root);
-				System.out.println(jP.concatExpression());
-				final File javaFile = new File("./target/transpiled-sources/" + inputReader.getProgramname() + ".java");
-				FileWriter writeFile = new FileWriter(javaFile);
-				writeFile.write(jP.concatExpression());
-				writeFile.close();
+				//jP.createExpression(root);
+				//System.out.println(jP.concatExpression());
+				//final File javaFile = new File("./target/transpiled-sources/" + inputReader.getProgramname() + ".java");
+				//FileWriter writeFile = new FileWriter(javaFile);
+				//writeFile.write(jP.concatExpression());
+				//writeFile.close();
 
 			} catch (IOException e) {
 				throw new IOException(e);

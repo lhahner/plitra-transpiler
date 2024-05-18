@@ -15,217 +15,287 @@ public interface Pl1ParserConstants {
   /** RegularExpression Id. */
   int DECLARE = 2;
   /** RegularExpression Id. */
-  int DECIMAL = 3;
+  int PROCEDURE = 3;
   /** RegularExpression Id. */
-  int BINARY = 4;
+  int PROC = 4;
   /** RegularExpression Id. */
-  int DEC = 5;
+  int DECIMAL = 5;
   /** RegularExpression Id. */
-  int BIN = 6;
+  int BINARY = 6;
   /** RegularExpression Id. */
-  int FIXED = 7;
+  int DEC = 7;
   /** RegularExpression Id. */
-  int FLOAT = 8;
+  int BIN = 8;
   /** RegularExpression Id. */
-  int CHARACTER = 9;
+  int FIXED = 9;
   /** RegularExpression Id. */
-  int CHAR = 10;
+  int FLOAT = 10;
   /** RegularExpression Id. */
-  int STATIC = 11;
+  int CHARACTER = 11;
   /** RegularExpression Id. */
-  int INIT = 12;
+  int CHAR = 12;
   /** RegularExpression Id. */
-  int PTR = 13;
+  int STATIC = 13;
   /** RegularExpression Id. */
-  int REAL = 14;
+  int INIT = 14;
   /** RegularExpression Id. */
-  int VARYING = 15;
+  int PTR = 15;
   /** RegularExpression Id. */
-  int PIC = 16;
+  int REAL = 16;
   /** RegularExpression Id. */
-  int PICTURE = 17;
+  int VARYING = 17;
   /** RegularExpression Id. */
-  int COMPLEX = 18;
+  int PIC = 18;
   /** RegularExpression Id. */
-  int UNSIGNED = 19;
+  int PICTURE = 19;
   /** RegularExpression Id. */
-  int SIGNED = 20;
+  int COMPLEX = 20;
   /** RegularExpression Id. */
-  int AREA = 21;
+  int UNSIGNED = 21;
   /** RegularExpression Id. */
-  int DIMENSION = 22;
+  int SIGNED = 22;
   /** RegularExpression Id. */
-  int ENTRY = 23;
+  int AREA = 23;
   /** RegularExpression Id. */
-  int FILE = 24;
+  int DIMENSION = 24;
   /** RegularExpression Id. */
-  int FORMAT = 25;
+  int ENTRY = 25;
   /** RegularExpression Id. */
-  int GRAPHIC = 26;
+  int FILE = 26;
   /** RegularExpression Id. */
-  int HANDLE = 27;
+  int FORMAT = 27;
   /** RegularExpression Id. */
-  int LABEL = 28;
+  int GRAPHIC = 28;
   /** RegularExpression Id. */
-  int LOCATES = 29;
+  int HANDLE = 29;
   /** RegularExpression Id. */
-  int NONVARYING = 30;
+  int LABEL = 30;
   /** RegularExpression Id. */
-  int OFFSET = 31;
+  int LOCATES = 31;
   /** RegularExpression Id. */
-  int ORDINAL = 32;
+  int NONVARYING = 32;
   /** RegularExpression Id. */
-  int POINTER = 33;
+  int OFFSET = 33;
   /** RegularExpression Id. */
-  int PRECISION = 34;
+  int ORDINAL = 34;
   /** RegularExpression Id. */
-  int RETURNS = 35;
+  int POINTER = 35;
   /** RegularExpression Id. */
-  int STRUCTURE = 36;
+  int PRECISION = 36;
   /** RegularExpression Id. */
-  int TASK = 37;
+  int RETURNS = 37;
   /** RegularExpression Id. */
-  int TYPE = 38;
+  int STRUCTURE = 38;
   /** RegularExpression Id. */
-  int UNION = 39;
+  int TASK = 39;
   /** RegularExpression Id. */
-  int VARYING4 = 40;
+  int TYPE = 40;
   /** RegularExpression Id. */
-  int VARYINGZ = 41;
+  int UNION = 41;
   /** RegularExpression Id. */
-  int WIDECHAR = 42;
+  int VARYING4 = 42;
   /** RegularExpression Id. */
-  int WIDEPIC = 43;
+  int VARYINGZ = 43;
   /** RegularExpression Id. */
-  int ABNORMAL = 44;
+  int WIDECHAR = 44;
   /** RegularExpression Id. */
-  int ALIGNED = 45;
+  int WIDEPIC = 45;
   /** RegularExpression Id. */
-  int ASSIGNABLE = 46;
+  int ABNORMAL = 46;
   /** RegularExpression Id. */
-  int AUTOMATIC = 47;
+  int ALIGNED = 47;
   /** RegularExpression Id. */
-  int BASED = 48;
+  int ASSIGNABLE = 48;
   /** RegularExpression Id. */
-  int BIGENDIAN = 49;
+  int AUTOMATIC = 49;
   /** RegularExpression Id. */
-  int BUFFERED = 50;
+  int BASED = 50;
   /** RegularExpression Id. */
-  int BUILTIN = 51;
+  int BIGENDIAN = 51;
   /** RegularExpression Id. */
-  int BYADDR = 52;
+  int BUFFERED = 52;
   /** RegularExpression Id. */
-  int BYVALUE = 53;
+  int BUILTIN = 53;
   /** RegularExpression Id. */
-  int CONDITION = 54;
+  int BYADDR = 54;
   /** RegularExpression Id. */
-  int CONNECTED = 55;
+  int BYVALUE = 55;
   /** RegularExpression Id. */
-  int CONTROLLED = 56;
+  int CONDITION = 56;
   /** RegularExpression Id. */
-  int DEFINED = 57;
+  int CONNECTED = 57;
   /** RegularExpression Id. */
-  int DIMACROSS = 58;
+  int CONTROLLED = 58;
   /** RegularExpression Id. */
-  int DIRECT = 59;
+  int DEFINED = 59;
   /** RegularExpression Id. */
-  int ENVIRONMENT = 60;
+  int DIMACROSS = 60;
   /** RegularExpression Id. */
-  int EXCLUSIVE = 61;
+  int DIRECT = 61;
   /** RegularExpression Id. */
-  int EXTERNAL = 62;
+  int ENVIRONMENT = 62;
   /** RegularExpression Id. */
-  int GENERIC = 63;
+  int EXCLUSIVE = 63;
   /** RegularExpression Id. */
-  int HEXADEC = 64;
+  int EXTERNAL = 64;
   /** RegularExpression Id. */
-  int IEEE = 65;
+  int GENERIC = 65;
   /** RegularExpression Id. */
-  int INDFOR = 66;
+  int HEXADEC = 66;
   /** RegularExpression Id. */
-  int INITIAL = 67;
+  int IEEE = 67;
   /** RegularExpression Id. */
-  int INONLY = 68;
+  int INDFOR = 68;
   /** RegularExpression Id. */
-  int INOUT = 69;
+  int INITIAL = 69;
   /** RegularExpression Id. */
-  int INPUT = 70;
+  int INONLY = 70;
   /** RegularExpression Id. */
-  int INTERMAL = 71;
+  int INOUT = 71;
   /** RegularExpression Id. */
-  int KEYED = 72;
+  int INPUT = 72;
   /** RegularExpression Id. */
-  int LIKE = 73;
+  int INTERMAL = 73;
   /** RegularExpression Id. */
-  int LIST = 74;
+  int KEYED = 74;
   /** RegularExpression Id. */
-  int LITTLEENDIAN = 75;
+  int LIKE = 75;
   /** RegularExpression Id. */
-  int NONASSIGNABLE = 76;
+  int LIST = 76;
   /** RegularExpression Id. */
-  int NONCONNECTED = 77;
+  int LITTLEENDIAN = 77;
   /** RegularExpression Id. */
-  int NORMAL = 78;
+  int NONASSIGNABLE = 78;
   /** RegularExpression Id. */
-  int OPTIONAL = 79;
+  int NONCONNECTED = 79;
   /** RegularExpression Id. */
-  int OPTIONS = 80;
+  int NORMAL = 80;
   /** RegularExpression Id. */
-  int OUTONLY = 81;
+  int OPTIONAL = 81;
   /** RegularExpression Id. */
-  int OUTPUT = 82;
+  int OPTIONS = 82;
   /** RegularExpression Id. */
-  int PARAMETER = 83;
+  int OUTONLY = 83;
   /** RegularExpression Id. */
-  int POSITION = 84;
+  int OUTPUT = 84;
   /** RegularExpression Id. */
-  int PRINT = 85;
+  int PARAMETER = 85;
   /** RegularExpression Id. */
-  int RECORD = 86;
+  int POSITION = 86;
   /** RegularExpression Id. */
-  int SEQUENTIAL = 87;
+  int PRINT = 87;
   /** RegularExpression Id. */
-  int STREAM = 88;
+  int RECORD = 88;
   /** RegularExpression Id. */
-  int UNALIGNED = 89;
+  int SEQUENTIAL = 89;
   /** RegularExpression Id. */
-  int UNBUFFERED = 90;
+  int STREAM = 90;
   /** RegularExpression Id. */
-  int UPDATE = 91;
+  int UNALIGNED = 91;
   /** RegularExpression Id. */
-  int VALUE = 92;
+  int UNBUFFERED = 92;
   /** RegularExpression Id. */
-  int VARIABLE = 93;
+  int UPDATE = 93;
   /** RegularExpression Id. */
-  int XMLATTR = 94;
+  int VALUE = 94;
   /** RegularExpression Id. */
-  int XMLOMIT = 95;
+  int VARIABLE = 95;
   /** RegularExpression Id. */
-  int BIT = 96;
+  int XMLATTR = 96;
   /** RegularExpression Id. */
-  int COMMA_SEPARATOR = 97;
+  int XMLOMIT = 97;
   /** RegularExpression Id. */
-  int X = 98;
+  int END = 98;
   /** RegularExpression Id. */
-  int A = 99;
+  int BIT = 99;
   /** RegularExpression Id. */
-  int V = 100;
+  int ASSEMBLER = 100;
   /** RegularExpression Id. */
-  int INTEGER = 101;
+  int COBOL = 101;
   /** RegularExpression Id. */
-  int PL1_WORD = 102;
+  int FORTRAN = 102;
   /** RegularExpression Id. */
-  int EOL = 103;
+  int MAIN = 103;
   /** RegularExpression Id. */
-  int SPACE_SEPARATOR = 104;
+  int NOEXECOPS = 104;
   /** RegularExpression Id. */
-  int SPACECHAR = 105;
+  int NOCHARGRAPHIC = 105;
   /** RegularExpression Id. */
-  int SCOPE = 106;
+  int CHARGRAPHIC = 106;
   /** RegularExpression Id. */
-  int MINUSCHAR = 107;
+  int NOCMPAT = 107;
   /** RegularExpression Id. */
-  int PREPROC_COMMENT = 108;
+  int CMPAT = 108;
+  /** RegularExpression Id. */
+  int DESCRIPTOR = 109;
+  /** RegularExpression Id. */
+  int NODESCRIPTOR = 110;
+  /** RegularExpression Id. */
+  int FORMALIEN = 111;
+  /** RegularExpression Id. */
+  int LINKAGE = 112;
+  /** RegularExpression Id. */
+  int NOINLINE = 113;
+  /** RegularExpression Id. */
+  int INLINE = 114;
+  /** RegularExpression Id. */
+  int ORDER = 115;
+  /** RegularExpression Id. */
+  int REORDER = 116;
+  /** RegularExpression Id. */
+  int IRREDUCIBLE = 117;
+  /** RegularExpression Id. */
+  int REDUCABLE = 118;
+  /** RegularExpression Id. */
+  int REETRANT = 119;
+  /** RegularExpression Id. */
+  int RETCODE = 120;
+  /** RegularExpression Id. */
+  int WINMAIN = 121;
+  /** RegularExpression Id. */
+  int RECURSIVE = 122;
+  /** RegularExpression Id. */
+  int CALL = 123;
+  /** RegularExpression Id. */
+  int RETURN = 124;
+  /** RegularExpression Id. */
+  int GOTO = 125;
+  /** RegularExpression Id. */
+  int STOP = 126;
+  /** RegularExpression Id. */
+  int EXIT = 127;
+  /** RegularExpression Id. */
+  int SET = 128;
+  /** RegularExpression Id. */
+  int TITLE = 129;
+  /** RegularExpression Id. */
+  int FETCH = 130;
+  /** RegularExpression Id. */
+  int RELEASE = 131;
+  /** RegularExpression Id. */
+  int COMMA_SEPARATOR = 132;
+  /** RegularExpression Id. */
+  int X = 133;
+  /** RegularExpression Id. */
+  int A = 134;
+  /** RegularExpression Id. */
+  int V = 135;
+  /** RegularExpression Id. */
+  int INTEGER = 136;
+  /** RegularExpression Id. */
+  int PL1_WORD = 137;
+  /** RegularExpression Id. */
+  int EOL = 138;
+  /** RegularExpression Id. */
+  int SCOPE = 139;
+  /** RegularExpression Id. */
+  int MINUSCHAR = 140;
+  /** RegularExpression Id. */
+  int PREPROC_COMMENT = 141;
+  /** RegularExpression Id. */
+  int SPACE_SEPARATOR = 144;
+  /** RegularExpression Id. */
+  int SPACECHAR = 145;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -235,6 +305,8 @@ public interface Pl1ParserConstants {
     "<EOF>",
     "\"DCL\"",
     "\"DECLARE\"",
+    "\"PROCEDURE\"",
+    "\"PROC\"",
     "\"DECIMAL\"",
     "\"BINARY\"",
     "\"DEC\"",
@@ -328,7 +400,40 @@ public interface Pl1ParserConstants {
     "\"VARIABLE\"",
     "\"XMLATTR\"",
     "\"XMLOMIT\"",
+    "\"END\"",
     "\"BIT\"",
+    "\"ASSEMBLER\"",
+    "\"COBOL\"",
+    "\"FORTRAN\"",
+    "\"MAIN\"",
+    "\"NOEXECOPS\"",
+    "\"NONCHARGRAPHIC\"",
+    "\"CHARGRAPHIC\"",
+    "\"NOCMPAT\"",
+    "\"CMPAT\"",
+    "\"DESCRIPTOR\"",
+    "\"NODESCRIPTOR\"",
+    "\"FORMALIEN\"",
+    "\"LINKAGE\"",
+    "\"NOINLINE\"",
+    "\"INLINE\"",
+    "\"ORDER\"",
+    "\"REORDER\"",
+    "\"IRREDUCIBLE\"",
+    "\"REDUCABLE\"",
+    "\"REETRANT\"",
+    "\"RETCODE\"",
+    "\"WINMAIN\"",
+    "\"RECURSIVE\"",
+    "\"CALL\"",
+    "\"RETURN\"",
+    "\"GO TO\"",
+    "\"STOP\"",
+    "\"EXIT\"",
+    "\"SET\"",
+    "\"TITLE\"",
+    "\"FETCH\"",
+    "\"RELEASE\"",
     "<COMMA_SEPARATOR>",
     "<X>",
     "<A>",
@@ -336,16 +441,17 @@ public interface Pl1ParserConstants {
     "<INTEGER>",
     "<PL1_WORD>",
     "\"\\n\"",
-    "<SPACE_SEPARATOR>",
-    "<SPACECHAR>",
     "<SCOPE>",
     "\"-\"",
     "<PREPROC_COMMENT>",
-    "<token of kind 109>",
+    "<token of kind 142>",
     "\";\"",
-    "\"\\\'\"",
+    "<SPACE_SEPARATOR>",
+    "<SPACECHAR>",
+    "\":\"",
     "\"(\"",
     "\")\"",
+    "\"\\\'\"",
     "\",\"",
   };
 
