@@ -1,13 +1,12 @@
- DCL 1 test_17 PICTURE '*****V**';
- DCL 1 test_12 PICTURE '*****V**';
-
-Mainer: PROC OPTIONS(MAIN);
-	DCL 1 Ordernr CHAR(10);
-	proc-1: ENTRY(para_1) RETURNS(CHAR (10));
-END Mainer;
-
-startProgram: PROC;
-	FETCH ptr_1 SET(test_13) TITLE('test_14');
-	RELEASE ptr_1, ptr_3, ptr_4;
-END stratProgram;
-  
+orgbachelorpli: PACKAGE;
+	DCL 1 test_1 CHAR(1);
+	
+	test_2: PROC;
+		DCL test_1 CHAR(3);
+		DCL test_1 CHAR(2);
+	END test_2;
+	
+	test_5: PROC;
+		DCL test_4 CHAR(3);
+	END test_5;
+END orgbachelorpli;

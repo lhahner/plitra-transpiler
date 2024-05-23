@@ -273,29 +273,37 @@ public interface Pl1ParserConstants {
   /** RegularExpression Id. */
   int RELEASE = 131;
   /** RegularExpression Id. */
-  int COMMA_SEPARATOR = 132;
+  int RESERVES = 132;
   /** RegularExpression Id. */
-  int X = 133;
+  int PACKAGE = 133;
   /** RegularExpression Id. */
-  int A = 134;
+  int EXPORTS = 134;
   /** RegularExpression Id. */
-  int V = 135;
+  int BEGIN = 135;
   /** RegularExpression Id. */
-  int INTEGER = 136;
+  int COMMA_SEPARATOR = 136;
   /** RegularExpression Id. */
-  int PL1_WORD = 137;
+  int X = 137;
   /** RegularExpression Id. */
-  int EOL = 138;
+  int A = 138;
   /** RegularExpression Id. */
-  int SCOPE = 139;
+  int V = 139;
   /** RegularExpression Id. */
-  int MINUSCHAR = 140;
+  int INTEGER = 140;
   /** RegularExpression Id. */
-  int PREPROC_COMMENT = 141;
+  int PL1_WORD = 141;
   /** RegularExpression Id. */
-  int SPACE_SEPARATOR = 144;
+  int EOL = 142;
   /** RegularExpression Id. */
-  int SPACECHAR = 145;
+  int SCOPE = 143;
+  /** RegularExpression Id. */
+  int MINUSCHAR = 144;
+  /** RegularExpression Id. */
+  int PREPROC_COMMENT = 145;
+  /** RegularExpression Id. */
+  int SPACE_SEPARATOR = 148;
+  /** RegularExpression Id. */
+  int SPACECHAR = 149;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -434,6 +442,10 @@ public interface Pl1ParserConstants {
     "\"TITLE\"",
     "\"FETCH\"",
     "\"RELEASE\"",
+    "\"RESERVES\"",
+    "\"PACKAGE\"",
+    "\"EXPORTS\"",
+    "\"BEGIN\"",
     "<COMMA_SEPARATOR>",
     "<X>",
     "<A>",
@@ -444,7 +456,7 @@ public interface Pl1ParserConstants {
     "<SCOPE>",
     "\"-\"",
     "<PREPROC_COMMENT>",
-    "<token of kind 142>",
+    "<token of kind 146>",
     "\";\"",
     "<SPACE_SEPARATOR>",
     "<SPACECHAR>",

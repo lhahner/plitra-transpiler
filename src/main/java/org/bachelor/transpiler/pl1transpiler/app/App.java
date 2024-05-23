@@ -35,7 +35,6 @@ public class App {
 			try {
 				pl1Parser = new Pl1Parser(inputReader.getInputFile(inputFile));
 				SimpleNode root = pl1Parser.program();
-				pl1Parser.installIds();
 				st.printAll();
 				root.dump(" ");
 				

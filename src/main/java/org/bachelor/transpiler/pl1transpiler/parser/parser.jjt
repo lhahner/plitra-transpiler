@@ -19,7 +19,14 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.*;
 import org.bachelor.transpiler.pl1transpiler.lexer.*;
 
 public class Pl1Parser extends Lexer{
+  	private static final int DEFAULT = 0;
+  	
+	//Defines variable level 0...9
+	private int hierachie = 0;
 
+	//Defines the scope	
+	private int scope = 0;
+	
 	private String value;
 	private String letter;
 	private ArrayList<String> length = new ArrayList<String>();
@@ -32,34 +39,57 @@ public class Pl1Parser extends Lexer{
 	private String stringLength;
 	private String pictureAttribiute;
 
-
-	public String getValue() {
-		return this.value;
+	public Pl1Parser() {
 	}
-
+	/**
+	* @returns The Picture-Expressions from the users input.
+	*/
 	public String getPictureAttirbute() {
 		return this.pictureAttribiute;
 	}
 
+	/**
+	* @returns Number that specifies the length of the datatype-expression.
+	* @param Index of Array required
+	*/
 	public String getLength(int i) {
-	return length.get(i);
+		return length.get(i);
 	}
 
-	public void installIds() {
-	  this.tmp_idsAndScopes[2] = "id";
-	  if(this.tmp_idsAndScopes[1] == null) {
-		this.tmp_idsAndScopes[1] = "0";
+	/**
+	*@param Number that defines the hierachie of a variable.
+	*/
+	public void setHierachie(int hierachie) {
+		this.hierachie = hierachie;
+	}
+
+	/**
+	* @returns Number that defines the hierachie of a variable.
+	*/
+	public int getHierachie() {
+		return hierachie;
+	}
+
+	/**
+	* @param Identifier scope, is one if global and 2 if local.
+	*/
+	public void setScope(int scope) {
+		this.scope = scope;
+	}
+
+	/**
+	* Inserts Identifier into Symboltable.
+	*/
+	public void installIds(String[] symbols_tmp) throws ParseException{
+	  if(symbols.getBySymbol(symbols_tmp[0]) != null
+	  && symbols.getSymbolScope(symbols_tmp[0]) == Integer.parseInt(symbols_tmp[2])) {
+	    	throw new ParseException("Identifier already defined.");
 	  }
-	  for(int i = 0; i<this.idsAndScopes.size();i++) {
-	    symbols.insertId(this.idsAndScopes.get(i));
+	  else if( Integer.parseInt(symbols_tmp[2]) == DEFAULT) {
+	    throw new ParseException("Scope is Default value. Internal Error.");
+	  }
+	  symbols.insertId(symbols_tmp);
 	}
-	}
-
-	
-	
-	public Pl1Parser() {
-	}
-
 }
 
 PARSER_END(Pl1Parser)
@@ -203,6 +233,10 @@ TOKEN :
 	| < TITLE : "TITLE" >
 	| < FETCH: "FETCH" >
 	| < RELEASE : "RELEASE" >
+	| < RESERVES : "RESERVES" >
+	| < PACKAGE : "PACKAGE" >
+	| < EXPORTS : "EXPORTS" >
+	| < BEGIN : "BEGIN" >
 	| < COMMA_SEPARATOR : "," <SPACE_SEPARATOR> >
 	| < X : ("X"|"A"|"9"|"Z"|"V"|"*"|"B"|"<"|">"|"-"|"+"|"E"|"K"|","|"$"|"€"|"/"|"CR"|"DB"|"S")+ >
 	| < A : ("A")+ >
@@ -229,23 +263,54 @@ SKIP :
 **/
 SimpleNode program() #PROGRAM :
 {}
+{  package_()
+  {return jjtThis;}
+}
+
+void package_() #PACKAGE :
 {
-  (var_declaration()|procedure())* (var_declaration()|procedure())*  {return jjtThis;}
+  Token t;
+  
+  }
+{
+  ([condition_prefix()":"]< PL1_WORD >":"< PACKAGE >[exports()][< RESERVES >"("< PL1_WORD >")"][options()])
+  (var_declaration(1)|procedure())*
+  (< END >< PL1_WORD >)
+}
+
+void exports() #GLOBAL :
+{}
+{
+  < EXPORTS >("(" parameterlist() ")")?
+}
+
+/**
+* @todo Implement Chapter 17 for condition prefix
+**/
+void condition_prefix() #CONDITION :
+{}
+{
+  [< AREA >]
 }
 
 void procedure() #PROC :
 {}
 {
-  < PL1_WORD >":"(< PROCEDURE >|< PROC >)("(" parameterlist() ")")? (returns())?
+    proc_head()
+    proc_body()
+  	< END >< PL1_WORD >
+}
+
+void proc_head() #HEAD :
+{}
+{    < PL1_WORD >":"(< PROCEDURE >|< PROC >|< BEGIN >)("(" parameterlist() ")")? (returns())?
   (options())? (< RECURSIVE >)?
-  	proc_body()
-  < END >< PL1_WORD >
 }
 
 void proc_body() #BODY :
 {}
 {    (
-    var_declaration()
+    var_declaration(2)
     |entry_statement()
     |call()
     |termination()
@@ -258,12 +323,6 @@ void entry_statement() #ENTRY :
 {}
 {
   < PL1_WORD >":"< ENTRY >("("parameterlist()")")? (returns())? (options())?
-}
-
-void parameterlist() #PARA :
-{}
-{
-  < PL1_WORD >(< COMMA_SEPARATOR >parameterlist())?
 }
 
 void returns() #RETURNS:
@@ -282,7 +341,7 @@ void options() #OPTIONS:
    | (< NOCMPAT >|< CMPAT >)
    | (< DESCRIPTOR >|< NODESCRIPTOR >)
    | < FORMALIEN >
-   | < LINKAGE >
+   | (< LINKAGE >parameterlist())
    | (< NOINLINE >|< INLINE >)
    | (< ORDER >|< REORDER >)
    | (< IRREDUCIBLE >| < REDUCABLE >)
@@ -294,7 +353,7 @@ void options() #OPTIONS:
 void call() #CALLS:
 {}
 {
-  < CALL >< PL1_WORD >
+  < CALL >(< PL1_WORD >|< PL1_WORD >< BUILTIN >)("("parameterlist()")")?
 }
 
 void fetch() #FETCH:
@@ -317,48 +376,55 @@ void release() #RELEASE:
 void termination() #TERMINATE:
 {}
 {
-  (< RETURN >[< PL1_WORD >]
+  (
+  return_val()
   |< GOTO >< PL1_WORD >
   |< STOP >
   |< EXIT >)
 }
 
+void return_val():
+{}
+{
+  (< RETURN >[< PL1_WORD >|("("parameterlist()")")|"'"< PL1_WORD >"'"])
+}
+
+void parameterlist() #PARA :
+{}
+{
+  < PL1_WORD >(< COMMA_SEPARATOR >parameterlist())?
+}
+
+
 /**
 * Grammar Expression for a Variable declaration.
 **/
-void var_declaration() #VAR :
-{int scope = 0; Token t;}
+void var_declaration(int scope) #VAR :
+{this.scope = scope;}
 {	  ( < DCL > | < DECLARE > ) 
-	  ( scope = scope() )
- 	   id() ( type()| 
- 	    type() < COMMA_SEPARATOR > |
-      ( < COMMA_SEPARATOR > minor(scope))*) | minor(scope)
+	  (this.hierachie = hierachie())?
+ 	   id() ( type()| type() < COMMA_SEPARATOR > |
+      (< COMMA_SEPARATOR > minor(this.getHierachie(), scope))*) | minor(this.getHierachie(), scope)
 }
 
 /**
 * Grammar Expression for a nested Variable Declaration.
 **/
-void minor(int parentScope) #MINOR :
-{int scope = 0;}
+void minor(int parentHierachie, int scope) #MINOR :
+{this.scope = scope;}
 {
-		   ( scope = scope())
-		      
-  id() (  type() |  type() < COMMA_SEPARATOR > |
-      ( < COMMA_SEPARATOR > minor(scope))* ) 
-
-      
+	this.hierachie = hierachie() id()
+	(type() |  type() < COMMA_SEPARATOR > | ( < COMMA_SEPARATOR > minor(this.getHierachie(), scope))*) 
 }
 
 /**
-* @return scope of the Variable
+* @return hierachie of the Variable
 **/
-int scope() #SCOPE:
+int hierachie() #HIERACHIE:
 {Token t; }
 {
 	t = < INTEGER >
-	{ tmp_idsAndScopes[1] = Integer.parseInt(t.image) + "";
-	if(t == null) t.image = "0";
-	  return Integer.parseInt(t.image); }
+	{ return Integer.parseInt(t.image); }
 }
 
 /**
@@ -679,15 +745,19 @@ void Complex() #Complex:
 }
   
 /**
-* Grammar Expression for a  Identifer.
+* Grammar Expression for a  Identifier.
 **/
 void id() #Id :
 {Token t;}
 {
   t=<PL1_WORD>
   {
-    this.tmp_idsAndScopes[0] = t.toString();
-	this.idsAndScopes.add(tmp_idsAndScopes);
+    String[] tmp = {t.image, this.getHierachie() + "", this.scope + "","id"};
+	this.installIds(tmp);
+	
+	//Reset Hierachie and Scope
+	setHierachie(DEFAULT);
+	setScope(DEFAULT);
   }
 }
 

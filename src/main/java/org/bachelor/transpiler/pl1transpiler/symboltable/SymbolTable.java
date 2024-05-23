@@ -36,7 +36,8 @@ public class SymbolTable {
 	 * @throws Exception Error
 	 */
 	public static String[] insertId(String[] symbol) throws DuplicateRequestException {
-			if (getBySymbol(symbol[0]) != null) {
+			if (getBySymbol(symbol[0]) != null 
+				&& getSymbolScope(symbol[0]) == Integer.parseInt(symbol[2])) {
 				return null;
 			}
 			int id = hashtable.size() + 1;
@@ -68,6 +69,17 @@ public class SymbolTable {
 			}
 		}
 		return null;
+	}
+	
+	public static int getSymbolScope(String symbol) {
+		for (int i = 1; i <= hashtable.size(); i++) {
+			if (getById(i)[0].equals(symbol)) {
+				return Integer.parseInt(getById(i)[2]);
+			} else {
+				continue;
+			}
+		}
+		return 0;
 	}
 
 	/**

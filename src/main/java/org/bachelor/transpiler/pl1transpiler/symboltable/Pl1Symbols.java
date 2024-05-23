@@ -131,6 +131,10 @@ public enum Pl1Symbols{
 			RETURN("RETURN", "operator"),
 			GOTO("GO TO", "invoke"),
 			STOP("STOP", "operator"),
+			RESERVES("RESERVES", "operator"),
+			PACKAGE("PACKAGE", "type"),
+			EXPORTS("EXPORTS", "operator"),
+			BEGIN("BEGIN", "operator"),
 			EXIT("EXIT", "operator");
 	
 	 	private final String symbol;

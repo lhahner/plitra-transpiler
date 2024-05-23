@@ -4,69 +4,77 @@ package org.bachelor.transpiler.pl1transpiler.parser;
 public interface Pl1ParserTreeConstants
 {
   public int JJTPROGRAM = 0;
-  public int JJTPROC = 1;
-  public int JJTBODY = 2;
-  public int JJTENTRY = 3;
-  public int JJTPARA = 4;
-  public int JJTRETURNS = 5;
-  public int JJTOPTIONS = 6;
-  public int JJTCALLS = 7;
-  public int JJTFETCH = 8;
-  public int JJTSTATEMENT = 9;
-  public int JJTRELEASE = 10;
-  public int JJTTERMINATE = 11;
-  public int JJTVAR = 12;
-  public int JJTMINOR = 13;
-  public int JJTSCOPE = 14;
-  public int JJTTYPE = 15;
-  public int JJTFILE = 16;
-  public int JJTSTREAM = 17;
-  public int JJTRECORD = 18;
-  public int JJTINPUT = 19;
-  public int JJTOUTPUT = 20;
-  public int JJTUPDATE = 21;
-  public int JJTSEQUENTIAL = 22;
-  public int JJTDIRECT = 23;
-  public int JJTBUFFERED = 24;
-  public int JJTUNBUFFERED = 25;
-  public int JJTPICTUREEXPRESSION = 26;
-  public int JJTPICTURE = 27;
-  public int JJTWIDEPIC = 28;
-  public int JJTPICTUREATTRIBUTE = 29;
-  public int JJTPICTURELETTER = 30;
-  public int JJTNUMBER = 31;
-  public int JJTPICTURELENGTH = 32;
-  public int JJTLOCATOR = 33;
-  public int JJTPOINTER = 34;
-  public int JJTOFFSET = 35;
-  public int JJTHANDLE = 36;
-  public int JJTSTRING = 37;
-  public int JJTWIDECHAR = 38;
-  public int JJTGRAPHIC = 39;
-  public int JJTCHAR = 40;
-  public int JJTBIT = 41;
-  public int JJTARITHMETIC = 42;
-  public int JJTSIGNED = 43;
-  public int JJTUNSIGNED = 44;
-  public int JJTDECIMAL = 45;
-  public int JJTFIXED = 46;
-  public int JJTFLOAT = 47;
-  public int JJTBINARY = 48;
-  public int JJTSIZE = 49;
-  public int JJTLENGTH = 50;
-  public int JJTINT = 51;
-  public int JJTDOUBLE = 52;
-  public int JJTREAL = 53;
-  public int JJTCOMPLEX = 54;
-  public int JJTID = 55;
+  public int JJTPACKAGE = 1;
+  public int JJTGLOBAL = 2;
+  public int JJTCONDITION = 3;
+  public int JJTPROC = 4;
+  public int JJTHEAD = 5;
+  public int JJTBODY = 6;
+  public int JJTENTRY = 7;
+  public int JJTRETURNS = 8;
+  public int JJTOPTIONS = 9;
+  public int JJTCALLS = 10;
+  public int JJTFETCH = 11;
+  public int JJTSTATEMENT = 12;
+  public int JJTRELEASE = 13;
+  public int JJTTERMINATE = 14;
+  public int JJTRETURN_VAL = 15;
+  public int JJTPARA = 16;
+  public int JJTVAR = 17;
+  public int JJTMINOR = 18;
+  public int JJTHIERACHIE = 19;
+  public int JJTTYPE = 20;
+  public int JJTFILE = 21;
+  public int JJTSTREAM = 22;
+  public int JJTRECORD = 23;
+  public int JJTINPUT = 24;
+  public int JJTOUTPUT = 25;
+  public int JJTUPDATE = 26;
+  public int JJTSEQUENTIAL = 27;
+  public int JJTDIRECT = 28;
+  public int JJTBUFFERED = 29;
+  public int JJTUNBUFFERED = 30;
+  public int JJTPICTUREEXPRESSION = 31;
+  public int JJTPICTURE = 32;
+  public int JJTWIDEPIC = 33;
+  public int JJTPICTUREATTRIBUTE = 34;
+  public int JJTPICTURELETTER = 35;
+  public int JJTNUMBER = 36;
+  public int JJTPICTURELENGTH = 37;
+  public int JJTLOCATOR = 38;
+  public int JJTPOINTER = 39;
+  public int JJTOFFSET = 40;
+  public int JJTHANDLE = 41;
+  public int JJTSTRING = 42;
+  public int JJTWIDECHAR = 43;
+  public int JJTGRAPHIC = 44;
+  public int JJTCHAR = 45;
+  public int JJTBIT = 46;
+  public int JJTARITHMETIC = 47;
+  public int JJTSIGNED = 48;
+  public int JJTUNSIGNED = 49;
+  public int JJTDECIMAL = 50;
+  public int JJTFIXED = 51;
+  public int JJTFLOAT = 52;
+  public int JJTBINARY = 53;
+  public int JJTSIZE = 54;
+  public int JJTLENGTH = 55;
+  public int JJTINT = 56;
+  public int JJTDOUBLE = 57;
+  public int JJTREAL = 58;
+  public int JJTCOMPLEX = 59;
+  public int JJTID = 60;
 
 
   public String[] jjtNodeName = {
     "PROGRAM",
+    "PACKAGE",
+    "GLOBAL",
+    "CONDITION",
     "PROC",
+    "HEAD",
     "BODY",
     "ENTRY",
-    "PARA",
     "RETURNS",
     "OPTIONS",
     "CALLS",
@@ -74,9 +82,11 @@ public interface Pl1ParserTreeConstants
     "STATEMENT",
     "RELEASE",
     "TERMINATE",
+    "return_val",
+    "PARA",
     "VAR",
     "MINOR",
-    "SCOPE",
+    "HIERACHIE",
     "TYPE",
     "File",
     "Stream",
@@ -120,4 +130,4 @@ public interface Pl1ParserTreeConstants
     "Id",
   };
 }
-/* JavaCC - OriginalChecksum=25bf373fb26857cc481077cc14d85ab3 (do not edit this line) */
+/* JavaCC - OriginalChecksum=2f35b93db02f2082f7920cba4091d37a (do not edit this line) */
