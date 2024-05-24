@@ -281,29 +281,73 @@ public interface Pl1ParserConstants {
   /** RegularExpression Id. */
   int BEGIN = 135;
   /** RegularExpression Id. */
-  int COMMA_SEPARATOR = 136;
+  int IF = 136;
   /** RegularExpression Id. */
-  int X = 137;
+  int ELSE = 137;
   /** RegularExpression Id. */
-  int A = 138;
+  int THEN = 138;
   /** RegularExpression Id. */
-  int V = 139;
+  int TO = 139;
   /** RegularExpression Id. */
-  int INTEGER = 140;
+  int BY = 140;
   /** RegularExpression Id. */
-  int PL1_WORD = 141;
+  int REPEAT = 141;
   /** RegularExpression Id. */
-  int EOL = 142;
+  int UPTHRU = 142;
   /** RegularExpression Id. */
-  int SCOPE = 143;
+  int DOWNTHRU = 143;
   /** RegularExpression Id. */
-  int MINUSCHAR = 144;
+  int DO = 144;
   /** RegularExpression Id. */
-  int PREPROC_COMMENT = 145;
+  int LOOP = 145;
   /** RegularExpression Id. */
-  int SPACE_SEPARATOR = 148;
+  int WHILE = 146;
   /** RegularExpression Id. */
-  int SPACECHAR = 149;
+  int UNTIL = 147;
+  /** RegularExpression Id. */
+  int MINUSCHAR = 148;
+  /** RegularExpression Id. */
+  int GT = 149;
+  /** RegularExpression Id. */
+  int LT = 150;
+  /** RegularExpression Id. */
+  int PLUS = 151;
+  /** RegularExpression Id. */
+  int COMPLT = 152;
+  /** RegularExpression Id. */
+  int LTEQ = 153;
+  /** RegularExpression Id. */
+  int EQ = 154;
+  /** RegularExpression Id. */
+  int COMPEQ = 155;
+  /** RegularExpression Id. */
+  int COMPGT = 156;
+  /** RegularExpression Id. */
+  int AND = 157;
+  /** RegularExpression Id. */
+  int OR = 158;
+  /** RegularExpression Id. */
+  int COMMA_SEPARATOR = 159;
+  /** RegularExpression Id. */
+  int X = 160;
+  /** RegularExpression Id. */
+  int A = 161;
+  /** RegularExpression Id. */
+  int V = 162;
+  /** RegularExpression Id. */
+  int INTEGER = 163;
+  /** RegularExpression Id. */
+  int PL1_WORD = 164;
+  /** RegularExpression Id. */
+  int EOL = 165;
+  /** RegularExpression Id. */
+  int SCOPE = 166;
+  /** RegularExpression Id. */
+  int PREPROC_COMMENT = 167;
+  /** RegularExpression Id. */
+  int SPACE_SEPARATOR = 170;
+  /** RegularExpression Id. */
+  int SPACECHAR = 171;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -446,6 +490,29 @@ public interface Pl1ParserConstants {
     "\"PACKAGE\"",
     "\"EXPORTS\"",
     "\"BEGIN\"",
+    "\"IF\"",
+    "\"ELSE\"",
+    "\"THEN\"",
+    "\"TO\"",
+    "\"BY\"",
+    "\"REPEAT\"",
+    "\"UPTHRU\"",
+    "\"DOWNTHRU\"",
+    "\"DO\"",
+    "\"LOOP\"",
+    "\"WHILE\"",
+    "\"UNTIL\"",
+    "\"-\"",
+    "\">\"",
+    "\"<\"",
+    "\"+\"",
+    "<COMPLT>",
+    "<LTEQ>",
+    "\"=\"",
+    "\"\\u00c2\\u00ac=\"",
+    "<COMPGT>",
+    "\"&\"",
+    "\"||\"",
     "<COMMA_SEPARATOR>",
     "<X>",
     "<A>",
@@ -454,9 +521,8 @@ public interface Pl1ParserConstants {
     "<PL1_WORD>",
     "\"\\n\"",
     "<SCOPE>",
-    "\"-\"",
     "<PREPROC_COMMENT>",
-    "<token of kind 146>",
+    "<token of kind 168>",
     "\";\"",
     "<SPACE_SEPARATOR>",
     "<SPACECHAR>",

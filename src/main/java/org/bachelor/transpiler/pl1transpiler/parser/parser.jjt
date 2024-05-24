@@ -237,15 +237,37 @@ TOKEN :
 	| < PACKAGE : "PACKAGE" >
 	| < EXPORTS : "EXPORTS" >
 	| < BEGIN : "BEGIN" >
+	| < IF : "IF" >
+	| < ELSE : "ELSE" >
+	| < THEN : "THEN" >
+	| < TO : "TO" >
+	| < BY : "BY" >
+	| < REPEAT : "REPEAT" >
+	| < UPTHRU : "UPTHRU" >
+	| < DOWNTHRU : "DOWNTHRU" >
+	| < DO : "DO" >
+	| < LOOP : "LOOP" >
+	| < WHILE : "WHILE" >
+	| < UNTIL : "UNTIL" >
+	| < MINUSCHAR: "-" >
+	| < GT : ">" >
+	| < LT : "<" >
+	| < PLUS : "+" >
+	| < COMPLT : "¬"< LT > >
+	| < LTEQ : < LT >"=" >
+	| < EQ : "=" >
+	| < COMPEQ: "¬=" >
+	| < COMPGT: "¬"< GT > >
+	| < AND : "&" >
+	| < OR : "||" >
 	| < COMMA_SEPARATOR : "," <SPACE_SEPARATOR> >
-	| < X : ("X"|"A"|"9"|"Z"|"V"|"*"|"B"|"<"|">"|"-"|"+"|"E"|"K"|","|"$"|"€"|"/"|"CR"|"DB"|"S")+ >
+	| < X : ("X"|"A"|"9"|"Z"|"V"|"*"|"B"|< LT >|< GT >|< MINUSCHAR >|< PLUS >|"E"|"K"|","|"$"|"€"|"/"|"CR"|"DB"|"S")+ >
 	| < A : ("A")+ >
 	| < V : ("V")+ >
 	| < INTEGER : (["0"-"9"])+ >
  	| < PL1_WORD: (["a"-"z","A"-"Z","0"-"9"])+ ((<MINUSCHAR> | "_" )+ (["a"-"z","0"-"9"])+ )* >
 	| < EOL: "\n" >
 	| < SCOPE : (["1"-"9"]) >
-	| < MINUSCHAR: "-" >
 	| < PREPROC_COMMENT: "*|" (~["\n","\r"])* >
 }
 
@@ -254,7 +276,7 @@ SKIP :
 	< "/*" (~["*"])* "*" (~["/"])* "*/" >
 	| < ";" >
 	| < SPACE_SEPARATOR : ( <SPACECHAR> | <EOL> )+ >
-	| < SPACECHAR: ( " " | "\t" | "\f" | "\r" | "&" )+ >
+	| < SPACECHAR: ( " " | "\t" | "\f" | "\r" )+ >
 }
 
 
@@ -316,7 +338,93 @@ void proc_body() #BODY :
     |termination()
     |fetch()
     |release()
+    |if_statement()< END >
+    |do_statement()< END >
     )*
+}
+
+void if_statement() #IF :
+{}
+{
+  < IF >bool_expression()(bool_operation()bool_expression())*
+  < THEN >proc_body()
+  [< ELSE >
+  	proc_body()]
+  	
+}
+
+void do_statement() #LOOP :
+{}
+{
+  	  < DO >
+	(
+	  do_type_2()
+	| do_type_3() //Not working
+	| do_type_4()
+	)
+}
+
+void do_type_2() #DO :
+{}
+{
+   (< WHILE > bool_expression() [< UNTIL > bool_expression()]proc_body())
+ | (< UNTIL >  bool_expression() [< WHILE > bool_expression()]proc_body())
+ 	
+}
+
+/**
+* @todo Check again might be wrong
+*/
+void do_type_3() :
+{}
+{
+  (    (<PL1_WORD > "=" specification())
+  | < WHILE > bool_expression() [< UNTIL > bool_expression()]
+  | < UNTIL >  bool_expression() [< WHILE > bool_expression()]
+    )
+}
+
+void do_type_4() :
+{}
+{
+  (< LOOP >)
+}
+
+/**
+* @todo Check again might be wrong.
+*/
+void specification() :
+{}
+{
+  bool_expression()
+  (    (< TO >bool_expression()[< BY >bool_expression()])
+  | (< BY >bool_expression()[< TO >bool_expression()])
+  | (< REPEAT >bool_expression())
+  | (< UPTHRU >bool_expression())
+  | (< DOWNTHRU >bool_expression())
+  )
+}
+
+void bool_expression() #BOOL :
+{}
+{
+  (("(")*< PL1_WORD >(bool_operation() (< PL1_WORD >(")")* (bool_operation() < PL1_WORD >(")")*)*))*)
+}
+
+void bool_operation() #OP :
+{}
+{
+  (    < MINUSCHAR >
+	| < GT >
+	| < LT >
+	| < PLUS >
+	| < COMPLT >
+	| < LTEQ >
+	| < EQ >
+	| < COMPEQ >
+	| < COMPGT >
+	| < AND >
+	| < OR >)*
 }
 
 void entry_statement() #ENTRY :
@@ -386,7 +494,7 @@ void termination() #TERMINATE:
 void return_val():
 {}
 {
-  (< RETURN >[< PL1_WORD >|("("parameterlist()")")|"'"< PL1_WORD >"'"])
+  (< RETURN >[< PL1_WORD >|("("parameterlist()")"|< INTEGER >)|"'"< PL1_WORD >"'"])
 }
 
 void parameterlist() #PARA :

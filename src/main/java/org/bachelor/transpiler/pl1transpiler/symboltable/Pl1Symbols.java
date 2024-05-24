@@ -135,6 +135,18 @@ public enum Pl1Symbols{
 			PACKAGE("PACKAGE", "type"),
 			EXPORTS("EXPORTS", "operator"),
 			BEGIN("BEGIN", "operator"),
+			IF("IF", "operator"),
+			THEN("THEN", "operator"),
+			ELSE("ELSE", "operator"),
+			TO("TO", "operator"),
+			BY("BY", "operator"),
+			REPEAT("REPEAT", "operator"),
+			UPTHRU("UPTHRU", "operator"),
+			DOWNTHRU("DOWNTHRU", "operator"),
+			DO("DO", "operator"),
+			LOOP("LOOP", "operator"),
+			WHILE("WHILE", "operator"),
+			UNTIL("UNTIL", "operator"),
 			EXIT("EXIT", "operator");
 	
 	 	private final String symbol;

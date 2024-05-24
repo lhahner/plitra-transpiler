@@ -10,60 +10,68 @@ public interface Pl1ParserTreeConstants
   public int JJTPROC = 4;
   public int JJTHEAD = 5;
   public int JJTBODY = 6;
-  public int JJTENTRY = 7;
-  public int JJTRETURNS = 8;
-  public int JJTOPTIONS = 9;
-  public int JJTCALLS = 10;
-  public int JJTFETCH = 11;
-  public int JJTSTATEMENT = 12;
-  public int JJTRELEASE = 13;
-  public int JJTTERMINATE = 14;
-  public int JJTRETURN_VAL = 15;
-  public int JJTPARA = 16;
-  public int JJTVAR = 17;
-  public int JJTMINOR = 18;
-  public int JJTHIERACHIE = 19;
-  public int JJTTYPE = 20;
-  public int JJTFILE = 21;
-  public int JJTSTREAM = 22;
-  public int JJTRECORD = 23;
-  public int JJTINPUT = 24;
-  public int JJTOUTPUT = 25;
-  public int JJTUPDATE = 26;
-  public int JJTSEQUENTIAL = 27;
-  public int JJTDIRECT = 28;
-  public int JJTBUFFERED = 29;
-  public int JJTUNBUFFERED = 30;
-  public int JJTPICTUREEXPRESSION = 31;
-  public int JJTPICTURE = 32;
-  public int JJTWIDEPIC = 33;
-  public int JJTPICTUREATTRIBUTE = 34;
-  public int JJTPICTURELETTER = 35;
-  public int JJTNUMBER = 36;
-  public int JJTPICTURELENGTH = 37;
-  public int JJTLOCATOR = 38;
-  public int JJTPOINTER = 39;
-  public int JJTOFFSET = 40;
-  public int JJTHANDLE = 41;
-  public int JJTSTRING = 42;
-  public int JJTWIDECHAR = 43;
-  public int JJTGRAPHIC = 44;
-  public int JJTCHAR = 45;
-  public int JJTBIT = 46;
-  public int JJTARITHMETIC = 47;
-  public int JJTSIGNED = 48;
-  public int JJTUNSIGNED = 49;
-  public int JJTDECIMAL = 50;
-  public int JJTFIXED = 51;
-  public int JJTFLOAT = 52;
-  public int JJTBINARY = 53;
-  public int JJTSIZE = 54;
-  public int JJTLENGTH = 55;
-  public int JJTINT = 56;
-  public int JJTDOUBLE = 57;
-  public int JJTREAL = 58;
-  public int JJTCOMPLEX = 59;
-  public int JJTID = 60;
+  public int JJTIF = 7;
+  public int JJTLOOP = 8;
+  public int JJTDO = 9;
+  public int JJTDO_TYPE_3 = 10;
+  public int JJTDO_TYPE_4 = 11;
+  public int JJTSPECIFICATION = 12;
+  public int JJTBOOL = 13;
+  public int JJTOP = 14;
+  public int JJTENTRY = 15;
+  public int JJTRETURNS = 16;
+  public int JJTOPTIONS = 17;
+  public int JJTCALLS = 18;
+  public int JJTFETCH = 19;
+  public int JJTSTATEMENT = 20;
+  public int JJTRELEASE = 21;
+  public int JJTTERMINATE = 22;
+  public int JJTRETURN_VAL = 23;
+  public int JJTPARA = 24;
+  public int JJTVAR = 25;
+  public int JJTMINOR = 26;
+  public int JJTHIERACHIE = 27;
+  public int JJTTYPE = 28;
+  public int JJTFILE = 29;
+  public int JJTSTREAM = 30;
+  public int JJTRECORD = 31;
+  public int JJTINPUT = 32;
+  public int JJTOUTPUT = 33;
+  public int JJTUPDATE = 34;
+  public int JJTSEQUENTIAL = 35;
+  public int JJTDIRECT = 36;
+  public int JJTBUFFERED = 37;
+  public int JJTUNBUFFERED = 38;
+  public int JJTPICTUREEXPRESSION = 39;
+  public int JJTPICTURE = 40;
+  public int JJTWIDEPIC = 41;
+  public int JJTPICTUREATTRIBUTE = 42;
+  public int JJTPICTURELETTER = 43;
+  public int JJTNUMBER = 44;
+  public int JJTPICTURELENGTH = 45;
+  public int JJTLOCATOR = 46;
+  public int JJTPOINTER = 47;
+  public int JJTOFFSET = 48;
+  public int JJTHANDLE = 49;
+  public int JJTSTRING = 50;
+  public int JJTWIDECHAR = 51;
+  public int JJTGRAPHIC = 52;
+  public int JJTCHAR = 53;
+  public int JJTBIT = 54;
+  public int JJTARITHMETIC = 55;
+  public int JJTSIGNED = 56;
+  public int JJTUNSIGNED = 57;
+  public int JJTDECIMAL = 58;
+  public int JJTFIXED = 59;
+  public int JJTFLOAT = 60;
+  public int JJTBINARY = 61;
+  public int JJTSIZE = 62;
+  public int JJTLENGTH = 63;
+  public int JJTINT = 64;
+  public int JJTDOUBLE = 65;
+  public int JJTREAL = 66;
+  public int JJTCOMPLEX = 67;
+  public int JJTID = 68;
 
 
   public String[] jjtNodeName = {
@@ -74,6 +82,14 @@ public interface Pl1ParserTreeConstants
     "PROC",
     "HEAD",
     "BODY",
+    "IF",
+    "LOOP",
+    "DO",
+    "do_type_3",
+    "do_type_4",
+    "specification",
+    "BOOL",
+    "OP",
     "ENTRY",
     "RETURNS",
     "OPTIONS",
@@ -130,4 +146,4 @@ public interface Pl1ParserTreeConstants
     "Id",
   };
 }
-/* JavaCC - OriginalChecksum=2f35b93db02f2082f7920cba4091d37a (do not edit this line) */
+/* JavaCC - OriginalChecksum=c5772df6fe5c7d85f9c1fe11d00f0ea3 (do not edit this line) */
