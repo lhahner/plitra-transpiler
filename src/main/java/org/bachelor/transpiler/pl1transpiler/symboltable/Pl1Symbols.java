@@ -147,7 +147,9 @@ public enum Pl1Symbols{
 			LOOP("LOOP", "operator"),
 			WHILE("WHILE", "operator"),
 			UNTIL("UNTIL", "operator"),
-			EXIT("EXIT", "operator");
+			EXIT("EXIT", "operator"),
+			DISPLAY("DISPLAY", "operator"),
+			REPLAY("REPLAY", "operator");
 	
 	 	private final String symbol;
 	    private final String category;

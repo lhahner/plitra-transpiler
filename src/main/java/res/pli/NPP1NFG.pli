@@ -1,12 +1,7 @@
 orgbachelorpli: PACKAGE;
 DCL MESSAGE_1 DECIMAL(10);
 	App: PROC OPTIONS(MAIN);
-		IF (I<P) THEN;
-			DO WHILE(I=P) UNTIL(I>P);
-				CALL Procer;
-			END;
-		ELSE 
-			CALL Procer_1;
-		END;
+		MESSAGE_1 = 123456789;
+		DISPLAY ('Hallo Welt');
 	END App;
 END orgbachelorpli;

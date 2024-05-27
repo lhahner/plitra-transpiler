@@ -249,6 +249,8 @@ TOKEN :
 	| < LOOP : "LOOP" >
 	| < WHILE : "WHILE" >
 	| < UNTIL : "UNTIL" >
+	| < DISPLAY : "DISPLAY" >
+	| < REPLAY : "REPLAY" >
 	| < MINUSCHAR: "-" >
 	| < GT : ">" >
 	| < LT : "<" >
@@ -265,10 +267,12 @@ TOKEN :
 	| < A : ("A")+ >
 	| < V : ("V")+ >
 	| < INTEGER : (["0"-"9"])+ >
+	| < STRING : "'"((["a"-"z","A"-"Z","0"-"9","_"," ","!"])+)*"'" >
  	| < PL1_WORD: (["a"-"z","A"-"Z","0"-"9"])+ ((<MINUSCHAR> | "_" )+ (["a"-"z","0"-"9"])+ )* >
 	| < EOL: "\n" >
 	| < SCOPE : (["1"-"9"]) >
 	| < PREPROC_COMMENT: "*|" (~["\n","\r"])* >
+	
 }
 
 SKIP :
@@ -340,6 +344,8 @@ void proc_body() #BODY :
     |release()
     |if_statement()< END >
     |do_statement()< END >
+    |display_statement()
+    |init_statement()
     )*
 }
 
@@ -431,6 +437,18 @@ void entry_statement() #ENTRY :
 {}
 {
   < PL1_WORD >":"< ENTRY >("("parameterlist()")")? (returns())? (options())?
+}
+
+void display_statement() #DISPLAY:
+{}
+{
+  < DISPLAY >"("((< STRING >|< PL1_WORD >)*)")"[< REPLAY >"("")"]
+}
+
+void init_statement() #INIT:
+{}
+{
+  < PL1_WORD >"="(< STRING >|< INTEGER >)*
 }
 
 void returns() #RETURNS:
