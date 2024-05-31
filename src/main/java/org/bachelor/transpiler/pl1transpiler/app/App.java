@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import org.bachelor.transpiler.pl1transpiler.checker.TraverseParseTree;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException;
 import org.bachelor.transpiler.pl1transpiler.lexer.*;
 import org.bachelor.transpiler.pl1transpiler.mapper.MainMapper;
@@ -37,6 +39,8 @@ public class App {
 				SimpleNode root = pl1Parser.program();
 				st.printAll();
 				root.dump(" ");
+				TraverseParseTree traverser = new TraverseParseTree();
+				traverser.readDepthFirst(root);
 				
 				// load Java Parser and give Pl1parser
 				//MainMapper jP = new MainMapper(pl1Parser);

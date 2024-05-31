@@ -1,0 +1,55 @@
+    PACKAGE
+   VAR
+    HIERACHIE 1
+    Id
+    MINOR 2
+     HIERACHIE 2
+     Id
+     MINOR 3
+      HIERACHIE 3
+      Id
+      TYPE 
+       String
+        Char
+        Length
+     MINOR 3
+      HIERACHIE 3
+      Id
+      TYPE 
+       String
+        Char
+        Length
+    MINOR 2
+      HIERACHIE 2
+      Id
+      MINOR 
+       HIERACHIE 3
+       Id
+       TYPE
+        Arithmetic
+         Decimal
+         size
+          Int
+      MINOR
+       HIERACHIE 3
+       Id
+       TYPE
+        Arithmetic
+         Decimal
+         size
+          Int
+      MINOR 
+       HIERACHIE 3
+       Id
+       TYPE
+        Arithmetic
+         Decimal
+         size
+          Int
+       HIERACHIE 1
+       Id
+       TYPE
+        Arithmetic
+         Decimal
+         size
+          Int 

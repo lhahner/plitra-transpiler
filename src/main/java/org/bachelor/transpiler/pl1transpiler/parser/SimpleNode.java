@@ -6,7 +6,7 @@ public
 class SimpleNode implements Node {
 
   protected Node parent;
-  protected Node[] children;
+  public Node[] children;
   protected int id;
   protected Object value;
   protected Pl1Parser parser;

@@ -1,7 +1,6 @@
 orgbachelorpli: PACKAGE;
-DCL MESSAGE_1 DECIMAL(10);
-	App: PROC OPTIONS(MAIN);
-		MESSAGE_1 = 123456789;
-		DISPLAY ('Hallo Welt');
-	END App;
+DCL 1 var_1 DECIMAL(4);
+	proc_1: PROC;
+		RETURN;
+	END proc_1;
 END orgbachelorpli;
