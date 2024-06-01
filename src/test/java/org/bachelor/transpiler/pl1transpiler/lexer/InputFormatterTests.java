@@ -50,7 +50,7 @@ public class InputFormatterTests {
 	@DisplayName("Config File Reader")
 	void getInputFilePath_readsInputFilePathFromConfig() throws IOException{
 		File test_config = new File("./src/test/java/res/config/input-config");
-		String shouldBe = "/src/main/java/res/pli/code.pli";
+		String shouldBe = "/src/main/java/res/pli/NPP1NFG.pli";
 		assertEquals(shouldBe, inputformatter.getInputFilePath(test_config));
 	}
 	

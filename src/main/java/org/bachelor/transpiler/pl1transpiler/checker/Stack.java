@@ -7,40 +7,44 @@ package org.bachelor.transpiler.pl1transpiler.checker;
 public class Stack <T>{
 	int top = -1;
 	int size = 0;
-	Object content[];
+	T[] content;
 	
 	/**
 	 * @param size of Stack.
 	 */
 	public Stack(int size){
-		content = new Object[size];
+		content = (T[]) new Object[size];
 		this.size = size;
-		top++;
 	}
+	
 	
 	/**
 	 * @param c content that should be pushed on the Stack.
 	 * @throws StackOverflowError
 	 */
-	public void push(T c) throws StackOverflowError{
+	public T push(T c) throws ArrayIndexOutOfBoundsException{
 		if(this.size < this.content.length) {
-			throw new StackOverflowError("Size exeded");
+			throw new ArrayIndexOutOfBoundsException("Size exeded");
 		}
-		content[top] = c;
 		top++;
-		
+		content[top] = c;
+		T current = content[top];
+		return current;
 	}
 	
 	/**
 	 * Removes last pushed content from Stack.
 	 * @throws StackOverflowError
 	 */
-	public void pop() throws StackOverflowError{
-		if(size == 0) {
+	public T pop() throws StackOverflowError{
+		if(top == -1) {
 			throw new StackOverflowError("Size exeeded");
 		}
-		content[top] = 0;
+		content[top] = null;
 		top--;
+		if(top == -1)
+			return null;
+		return content[top];
 	}
 	
 	/**
@@ -59,18 +63,29 @@ public class Stack <T>{
 	 * @return true if stack has length 0 else return false.
 	 */
 	public boolean isEmpty() {
-		if(content.length == 0) {
-			return true;
+		for(int i = 0;i<content.length;i++) {
+			if(content[i] != null) {
+				return false;
+			}
 		}
-		else {
-			return false;
-		}
+		return true;
 	}
 	
 	/**
 	 * @return get last element from Stack.
 	 */
 	public Object getLast() {
+		if(top == -1)
+			return null;
 		return content[top];
+	}
+	
+	public void free() {
+		if(content == null) {
+			return;
+		}
+		while(top >= 0) {
+			this.pop();
+		}
 	}
 }

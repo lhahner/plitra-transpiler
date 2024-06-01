@@ -23,16 +23,16 @@ public class SymbolTableTests {
 	void insertId_checkIfIsAlreadyInserted() {
 		
 		String[][] shouldWork = {
-				{"id_1", "id"},
-				{"id_2", "id"}
+				{"id_1", "id", "1"},
+				{"id_2", "id", "2"}
 		};
 		for(int i = 0;i<shouldWork.length;i++) {
 				assertEquals(shouldWork[i], symbol_table.insertId(shouldWork[i]));
 		}
 		String[][] shouldNotWork = {
-			{"id_1", "id"},
-			{"DCL", "word"},
-			{"DCL", "id"}
+			{"id_1", "id", "1"},
+			{"DCL", "word", "2"},
+			{"DCL", "id", "1"}
 		};
 		for(String[] items: shouldNotWork)
 			assertEquals(null, symbol_table.insertId(items));

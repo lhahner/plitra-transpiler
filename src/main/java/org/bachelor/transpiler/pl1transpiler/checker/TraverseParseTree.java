@@ -2,6 +2,8 @@ package org.bachelor.transpiler.pl1transpiler.checker;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bachelor.transpiler.pl1transpiler.lexer.InputReader;
 import org.bachelor.transpiler.pl1transpiler.parser.Node;
@@ -12,9 +14,10 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 public class TraverseParseTree{
 	
 	/**
-	 * Stack of type String.
+	 * Stack of type String. 
 	 */
 	Stack<String> stack = new Stack<String>(256);
+	Map<Integer, String> resultMap = new HashMap();
 	
 	/**
 	 * @param root
@@ -38,14 +41,18 @@ public class TraverseParseTree{
 			
 			//Maybe root has children
 			if(this.hasChildren(root)) {
-				stack.pop();
-				stack.printStack();
 				
 				for(int i=0; i<root.jjtGetNumChildren();i++) {
 					stack.push(root.jjtGetChild(i).toString());
 					stack.printStack();
 					readDepthFirst((SimpleNode)root.jjtGetChild(i));
+					stack.printStack();
+					stack.pop();
+					stack.printStack();
 				}
+				/**
+				 * @todo: free the last remaining items of stack. 
+				 */
 			}
 			//If not its just One-Level
 			else {
@@ -68,9 +75,11 @@ public class TraverseParseTree{
 				
 				//Might have children.
 				if(this.hasChildren(root.jjtGetChild(i))) {
+					
+					readDepthFirst((SimpleNode)root.jjtGetChild(i));
+					stack.printStack();
 					stack.pop();
 					stack.printStack();
-					readDepthFirst((SimpleNode)root.jjtGetChild(i));
 				}
 				
 				//Maybe not than, visited and pop
