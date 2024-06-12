@@ -1,6 +1,6 @@
-target/
+target
 .classpath
 .project
-.settings/
+.settings
 transpiled-sources/
-test/java/target/
+test/java/target
