@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: org.bachelor.transpiler.pl1transpiler.app.AppTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.183 s <<< FAILURE! - in org.bachelor.transpiler.pl1transpiler.app.AppTests
-main_InputFilePli  Time elapsed: 0.163 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: Expected org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException to be thrown, but nothing was thrown.
-	at org.bachelor.transpiler.pl1transpiler.app.AppTests.main_InputFilePli(AppTests.java:23)
-
