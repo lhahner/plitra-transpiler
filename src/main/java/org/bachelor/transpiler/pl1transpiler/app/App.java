@@ -47,7 +47,7 @@ public class App {
 				// create expression with Parsetree
 				//jP.createExpression(root);
 				//System.out.println(jP.concatExpression());
-				//final File javaFile = new File("./target/transpiled-sources/" + inputReader.getProgramname() + ".java");
+				//final File javaFile = new File("./transpiled-sources/" + inputReader.getProgramname() + ".java");
 				//FileWriter writeFile = new FileWriter(javaFile);
 				//writeFile.write(jP.concatExpression());
 				//writeFile.close();

@@ -17,11 +17,11 @@ public class ProjectMapperTests {
 	@DisplayName("Test Projectmapper init")
 	void init_shouldCreateWorkingDir() throws IOException{
 		projectmapper = new ProjectMapper();
-		File shouldBeCreated =  new File("./target/transpiled-sources/PLI Dependencies/");
-		File datatypeFile = new File("./target/transpiled-sources/PLI Dependencies/DATATYPE_INTERFACE.java");
-		File picFile = new File("./target/transpiled-sources/PLI Dependencies/PICTURE.java");
-		File charFile = new File("./target/transpiled-sources/PLI Dependencies/CHAR.java");
-		File binFile = new File("./target/transpiled-sources/PLI Dependencies/BINARY.java");
+		File shouldBeCreated =  new File("./transpiled-sources/PLI Dependencies/");
+		File datatypeFile = new File("./transpiled-sources/PLI Dependencies/DATATYPE_INTERFACE.java");
+		File picFile = new File("./transpiled-sources/PLI Dependencies/PICTURE.java");
+		File charFile = new File("./transpiled-sources/PLI Dependencies/CHAR.java");
+		File binFile = new File("./transpiled-sources/PLI Dependencies/BINARY.java");
 	
 		assertTrue(shouldBeCreated.exists());
 		assertTrue(datatypeFile.exists());

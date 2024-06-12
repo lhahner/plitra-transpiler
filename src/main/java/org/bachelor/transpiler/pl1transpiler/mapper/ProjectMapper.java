@@ -10,7 +10,7 @@ public class ProjectMapper implements Mapper{
 	/**
 	 * @todo should be read from Configfile
 	 */
-	private final static String WORKINGDIR = "./target/transpiled-sources/";
+	private final static String WORKINGDIR = "./transpiled-sources/";
 	private String dependencyPath;
 	Template javaWords;
 	
