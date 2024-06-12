@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTableTests
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.015 s <<< FAILURE! - in org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTableTests
-insertId_checkIfIsAlreadyInserted  Time elapsed: 0.015 s  <<< ERROR!
+Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.038 s <<< FAILURE! - in org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTableTests
+insertId_checkIfIsAlreadyInserted  Time elapsed: 0.033 s  <<< ERROR!
 java.lang.ArrayIndexOutOfBoundsException: Index 2 out of bounds for length 2
-	at org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTableTests.insertId_checkIfIsAlreadyInserted(SymbolTableTests.java:38)
+	at org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTableTests.insertId_checkIfIsAlreadyInserted(SymbolTableTests.java:40)
 

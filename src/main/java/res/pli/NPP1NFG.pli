@@ -1,5 +1,9 @@
 orgbachelorpli: PACKAGE;
-DCL 1 var_1 DECIMAL(4);
+DCL 1 var_1,
+	2 var_2 DECIMAL(1),
+	2 var_3,
+		3 var_4 DECIMAL(3);
+		
 	proc_1: PROC;
 		RETURN;
 	END proc_1;

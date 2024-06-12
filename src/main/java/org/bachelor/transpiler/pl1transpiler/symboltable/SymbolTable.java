@@ -71,6 +71,29 @@ public class SymbolTable {
 		return null;
 	}
 	
+	/**
+	 * @todo Testing
+	 * @param Type of the symbol
+	 * @return Type of Identifier
+	 */
+	public static ArrayList<String []> getByType(String type) {
+		ArrayList<String []> tmp = new ArrayList<String []>();
+		
+		for (int i = 1; i <= hashtable.size(); i++) {
+			if (getById(i)[getById(i).length-1].equals(type)) {
+				tmp.add(getById(i));
+			} else {
+				continue;
+			}
+		}
+		if(tmp.size() != 0) {
+			return tmp;
+		}
+		else {
+			return null;
+		}
+	}
+	
 	public static int getSymbolScope(String symbol) {
 		for (int i = 1; i <= hashtable.size(); i++) {
 			if (getById(i)[0].equals(symbol)) {

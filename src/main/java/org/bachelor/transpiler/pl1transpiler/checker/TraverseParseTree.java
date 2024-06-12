@@ -18,7 +18,7 @@ public class TraverseParseTree{
 	 */
 	Stack<String> stack = new Stack<String>(256);
 	Map<Integer, String> resultMap = new HashMap();
-	
+	SymbolTable st = new SymbolTable();
 	/**
 	 * @param root
 	 */
@@ -31,13 +31,16 @@ public class TraverseParseTree{
 	 * It Utilizes the In-Depth-First Search Algorhitem.
 	 * Each visited Node will be pushed to Stack.
 	 */
-	public void readDepthFirst(SimpleNode root) {
-		
+	public void checkHierachie(SimpleNode root) {
+		 
 		//Special case its root of tree
 		if(root.jjtGetParent() == null) {
 			//Push root to stack
 			stack.push(root.toString());
 			stack.printStack();
+			if(isHierachieError(root)) {
+				System.out.println("hierachical error");
+			}
 			
 			//Maybe root has children
 			if(this.hasChildren(root)) {
@@ -45,10 +48,16 @@ public class TraverseParseTree{
 				for(int i=0; i<root.jjtGetNumChildren();i++) {
 					stack.push(root.jjtGetChild(i).toString());
 					stack.printStack();
-					readDepthFirst((SimpleNode)root.jjtGetChild(i));
+					if(isHierachieError((SimpleNode)root.jjtGetChild(i))) {
+						System.out.println("hierachical error");
+					}
+						
+					checkHierachie((SimpleNode)root.jjtGetChild(i));
 					stack.printStack();
+						
 					stack.pop();
 					stack.printStack();
+					
 				}
 				/**
 				 * @todo: free the last remaining items of stack. 
@@ -65,6 +74,7 @@ public class TraverseParseTree{
 			if(root.jjtGetChild(0) == null && stack.getLast() == root.toString()) {
 				stack.pop();
 				stack.printStack();
+				
 				return;
 			}
 			
@@ -72,23 +82,64 @@ public class TraverseParseTree{
 			for(int i=0;i<root.jjtGetNumChildren();i++) {
 				stack.push(root.jjtGetChild(i).toString());
 				stack.printStack();
+				if(isHierachieError((SimpleNode)root.jjtGetChild(i))) {
+					System.out.println("hierachical error");
+				}
 				
 				//Might have children.
 				if(this.hasChildren(root.jjtGetChild(i))) {
 					
-					readDepthFirst((SimpleNode)root.jjtGetChild(i));
+					checkHierachie((SimpleNode)root.jjtGetChild(i));
 					stack.printStack();
+					
 					stack.pop();
 					stack.printStack();
+
 				}
 				
 				//Maybe not than, visited and pop
 				else {
 					stack.pop();
 					stack.printStack();
+					
 				}
 			}
 		}
+	}
+	
+	/**
+	 * @param Node which is Sibling of Id Node.
+	 * @return Id Node to get Values from.
+	 */
+	public SimpleNode getIdSibiling(SimpleNode root) {
+		root = (SimpleNode)root.jjtGetParent();
+		for(int i = 0; i<root.jjtGetNumChildren();i++) {
+			if(root.jjtGetChild(i).toString() == "id") {
+				return (SimpleNode)root.jjtGetChild(i);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * @param Id Node of Parse-Tree
+	 * @return True if hierachy of parent identifier is larger than child identifier
+	 */
+	public boolean isHierachieError(SimpleNode root) {
+		if(root.toString() == "id" && root.jjtGetParent() != null) {
+			SimpleNode idParent = this.getIdSibiling((SimpleNode)root.jjtGetParent());
+			String[] idValuesParent = (String [])idParent.jjtGetValue();
+			String[] idValuesRoot = (String [])root.jjtGetValue();
+			
+			int hierachieParent = Integer.parseInt(idValuesParent[1]);
+			int hierachieRoot = Integer.parseInt(idValuesRoot[1]);
+			
+			if(hierachieParent > hierachieRoot) {
+				return true;
+			}
+			
+		}
+		return false;
 	}
 	
 	/**

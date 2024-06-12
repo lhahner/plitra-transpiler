@@ -2451,6 +2451,7 @@ String[] tmp = {t.image, this.getHierachie() + "", this.scope + "","id"};
         //Reset Hierachie and Scope
         setHierachie(DEFAULT);
         setScope(DEFAULT);
+        jjtn000.value = tmp;
     } finally {
 if (jjtc000) {
       jjtree.closeNodeScope(jjtn000, true);

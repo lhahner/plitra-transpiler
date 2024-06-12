@@ -884,6 +884,7 @@ void id() #Id :
 	//Reset Hierachie and Scope
 	setHierachie(DEFAULT);
 	setScope(DEFAULT);
+	jjtThis.value = tmp;
   }
 }
 

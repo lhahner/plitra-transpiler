@@ -40,7 +40,7 @@ public class App {
 				st.printAll();
 				root.dump(" ");
 				TraverseParseTree traverser = new TraverseParseTree();
-				traverser.readDepthFirst(root);
+				traverser.checkHierachie(root);
 				
 				// load Java Parser and give Pl1parser
 				//MainMapper jP = new MainMapper(pl1Parser);

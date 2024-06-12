@@ -2,6 +2,8 @@ package org.bachelor.transpiler.pl1transpiler.symboltable;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.ArrayList;
+
 import javax.management.AttributeNotFoundException;
 
 import org.bachelor.transpiler.pl1transpiler.mapper.MainMapper;
@@ -44,4 +46,18 @@ public class SymbolTableTests {
 		assertEquals("DCL", symbol_table.getBySymbol("DCL"));
 		assertEquals(null, symbol_table.getBySymbol("x"));
 	}
+	
+	@Test
+	@DisplayName("getByType")
+	void getByType_typeReturned() {
+		String[] arr = {"var_1", "1", "1", "id"};
+		symbol_table.insertId(arr);
+		
+		ArrayList<String []> expected = new ArrayList<String []>();
+		expected.add(arr);
+		
+		assertEquals(expected.get(0), symbol_table.getByType("id").get(0));
+		
+	}
+	
 }
