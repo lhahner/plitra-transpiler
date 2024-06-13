@@ -21,7 +21,7 @@ public class ReferenceChecker extends Checker {
 		for (String[] identifiers : procIdentifiers) {
 
 			// Search if there is an end node with the required identifier
-			super.searchParseTree(root, identifiers[0], "END");
+			super.searchValue(root, identifiers[0], "END");
 			
 			if(super.foundValue == null) {
 				throw new IdentifierReferenceException("Semantic Error: No END for PROC " + identifiers[0]);

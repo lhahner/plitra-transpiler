@@ -39,6 +39,8 @@ public class Pl1Parser extends Lexer{
 	private String stringLength;
 	private String pictureAttribiute;
 
+	
+
 	public Pl1Parser() {
 	}
 	/**
@@ -454,9 +456,22 @@ void display_statement() #DISPLAY:
 }
 
 void init_statement() #INIT:
-{}
+{Token t;}
 {
-  < PL1_WORD >"="(< STRING >|< INTEGER >)*
+  t=< PL1_WORD >"="value_of_init()
+
+  {jjtThis.value = t.image;}
+}
+
+/**
+* @todo Complete, only arithmetic and string are possible.
+*/
+void value_of_init() #VALUES:
+{Token t = null;}
+{
+  
+  (t=< STRING >|t=< INTEGER >)*
+  {jjtThis.value = t.image;}
 }
 
 void returns() #RETURNS:

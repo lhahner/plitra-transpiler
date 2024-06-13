@@ -14,7 +14,9 @@ import java.util.Scanner;
 import org.bachelor.transpiler.pl1transpiler.checker.Checker;
 import org.bachelor.transpiler.pl1transpiler.checker.HierachieChecker;
 import org.bachelor.transpiler.pl1transpiler.checker.ReferenceChecker;
+import org.bachelor.transpiler.pl1transpiler.checker.TypeChecker;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IdentifierReferenceException;
+import org.bachelor.transpiler.pl1transpiler.errorhandling.IncompatibleTypeException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException;
 import org.bachelor.transpiler.pl1transpiler.lexer.*;
 import org.bachelor.transpiler.pl1transpiler.mapper.MainMapper;
@@ -34,6 +36,7 @@ public class App {
 		SymbolTable st = new SymbolTable();
 		InputReader inputReader = new InputReader();
 		String inputFile = inputReader.getInputFilePath(CONFIG);
+		TypeChecker typechecker = new TypeChecker();
 		
 		if (inputFile.toString().contains(".pli")) {
 
@@ -42,12 +45,12 @@ public class App {
 				SimpleNode root = pl1Parser.program();
 				st.printAll();
 				root.dump(" ");
-				ReferenceChecker refCheck = new ReferenceChecker();
+				
 				
 				try {
-					refCheck.checkProcHeadAndFootReference(root, st.getByType("proc"));
+					typechecker.checkIdType(root);
 				} 
-				catch(IdentifierReferenceException IRE) {
+				catch(IncompatibleTypeException IRE) {
 					IRE.printStackTrace();
 				}
 				

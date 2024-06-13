@@ -1,5 +1,6 @@
 package org.bachelor.transpiler.pl1transpiler.checker;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,19 +9,25 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 
 public class Checker {
+	
+	//Saves value found by searchValue
+	public SimpleNode foundValue;
+	
+	//Saves all Nodes found by searchNode
+	public ArrayList<SimpleNode> foundNodes = new ArrayList<SimpleNode>();
+	
 	/**
 	 * Stack of type String.
 	 */
 	Stack<String> stack = new Stack<String>(256);
 	SymbolTable st = new SymbolTable();
-	public SimpleNode foundValue;
-
+	
 	/**
-	 * Method Searches parse tree for value and save node globally in found.
+	 * Method Searches parse tree for value & node, saves node globally in found.
 	 * @param root Node of parse-tree.
 	 * @param String value to search for in parse tree.
 	 */
-	protected void searchParseTree(SimpleNode root, String value, String expectedNode) {
+	protected void searchValue(SimpleNode root, String value, String expectedNode) {
 		// Special case its root of tree
 		if (root.jjtGetParent() == null) {
 			// Push root to stack
@@ -39,7 +46,7 @@ public class Checker {
 					if(isNodeValue((SimpleNode)root.jjtGetChild(i), value, expectedNode)) {
 						this.foundValue = (SimpleNode)root.jjtGetChild(i);
 					}		
-					searchParseTree((SimpleNode) root.jjtGetChild(i), value, expectedNode);
+					searchValue((SimpleNode) root.jjtGetChild(i), value, expectedNode);
 					stack.pop();
 					stack.printStack();
 				}
@@ -72,7 +79,78 @@ public class Checker {
 				
 				// Might have children.
 				if (this.hasChildren(root.jjtGetChild(i))) {
-					searchParseTree((SimpleNode) root.jjtGetChild(i), value, expectedNode);
+					searchValue((SimpleNode) root.jjtGetChild(i), value, expectedNode);
+					stack.pop();
+					stack.printStack();
+
+				}
+				// Maybe not than, visited and pop
+				else {
+					stack.pop();
+					stack.printStack();
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Method Searches parse tree for node, saves node globally in found.
+	 * @param root Node of parse-tree.
+	 * @param Node as String to search for in parse tree.
+	 */
+	protected void searchNode(SimpleNode root, String expectedNode) {
+		// Special case its root of tree
+		if (root.jjtGetParent() == null) {
+			// Push root to stack
+			stack.push(root.toString());
+			stack.printStack();
+			if(isNode((SimpleNode)root, expectedNode)) {
+				this.foundNodes.add(root);
+			}
+			
+			// Maybe root has children
+			if (this.hasChildren(root)) {
+				for (int i = 0; i < root.jjtGetNumChildren(); i++) {
+					stack.push(root.jjtGetChild(i).toString());
+					stack.printStack();
+					
+					if(isNode((SimpleNode)root.jjtGetChild(i), expectedNode)) {
+						this.foundNodes.add((SimpleNode)root.jjtGetChild(i));
+					}		
+					searchNode((SimpleNode) root.jjtGetChild(i), expectedNode);
+					stack.pop();
+					stack.printStack();
+				}
+				/**
+				 * @todo: free the last remaining items of stack.
+				 */
+			}
+			// If not its just One-Level
+			else {
+				return;
+			}
+		}
+		// Usual Case, Checking children from root.
+		else {
+			// Only happens whenever Node-root has no children and was lastly visited.
+			if (root.jjtGetChild(0) == null && stack.getLast() == root.toString()) {
+				stack.pop();
+				stack.printStack();
+				return;
+			}
+
+			// Iteration over the Childelements of root.
+			for (int i = 0; i < root.jjtGetNumChildren(); i++) {
+				stack.push(root.jjtGetChild(i).toString());
+				stack.printStack();
+				
+				if(isNode((SimpleNode)root.jjtGetChild(i), expectedNode)) {
+					this.foundNodes.add((SimpleNode)root.jjtGetChild(i));
+				}
+				
+				// Might have children.
+				if (this.hasChildren(root.jjtGetChild(i))) {
+					searchNode((SimpleNode) root.jjtGetChild(i), expectedNode);
 					stack.pop();
 					stack.printStack();
 
@@ -143,5 +221,26 @@ public class Checker {
 		else {
 			return false;
 		}
+	}
+	
+	/**
+	 * @param Node that should be checked
+	 * @return true if it has the value and false if not
+	 */
+	public boolean isNode(SimpleNode root, String expectedNode) {
+		if(root != null && root.toString().equals(expectedNode)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Frees all Values from LinkList of Class.
+	 */
+	public void free() {
+		this.foundNodes.clear();
+		this.foundValue = null;
 	}
 }

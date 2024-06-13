@@ -22,59 +22,60 @@ public interface Pl1ParserTreeConstants
   public int JJTENTRY = 16;
   public int JJTDISPLAY = 17;
   public int JJTINIT = 18;
-  public int JJTRETURNS = 19;
-  public int JJTOPTIONS = 20;
-  public int JJTCALLS = 21;
-  public int JJTFETCH = 22;
-  public int JJTSTATEMENT = 23;
-  public int JJTRELEASE = 24;
-  public int JJTTERMINATE = 25;
-  public int JJTRETURN_VAL = 26;
-  public int JJTPARA = 27;
-  public int JJTVAR = 28;
-  public int JJTMINOR = 29;
-  public int JJTHIERACHIE = 30;
-  public int JJTTYPE = 31;
-  public int JJTFILE = 32;
-  public int JJTSTREAM = 33;
-  public int JJTRECORD = 34;
-  public int JJTINPUT = 35;
-  public int JJTOUTPUT = 36;
-  public int JJTUPDATE = 37;
-  public int JJTSEQUENTIAL = 38;
-  public int JJTDIRECT = 39;
-  public int JJTBUFFERED = 40;
-  public int JJTUNBUFFERED = 41;
-  public int JJTPICTUREEXPRESSION = 42;
-  public int JJTPICTURE = 43;
-  public int JJTWIDEPIC = 44;
-  public int JJTPICTUREATTRIBUTE = 45;
-  public int JJTPICTURELETTER = 46;
-  public int JJTNUMBER = 47;
-  public int JJTPICTURELENGTH = 48;
-  public int JJTLOCATOR = 49;
-  public int JJTPOINTER = 50;
-  public int JJTOFFSET = 51;
-  public int JJTHANDLE = 52;
-  public int JJTSTRING = 53;
-  public int JJTWIDECHAR = 54;
-  public int JJTGRAPHIC = 55;
-  public int JJTCHAR = 56;
-  public int JJTBIT = 57;
-  public int JJTARITHMETIC = 58;
-  public int JJTSIGNED = 59;
-  public int JJTUNSIGNED = 60;
-  public int JJTDECIMAL = 61;
-  public int JJTFIXED = 62;
-  public int JJTFLOAT = 63;
-  public int JJTBINARY = 64;
-  public int JJTSIZE = 65;
-  public int JJTLENGTH = 66;
-  public int JJTINT = 67;
-  public int JJTDOUBLE = 68;
-  public int JJTREAL = 69;
-  public int JJTCOMPLEX = 70;
-  public int JJTID = 71;
+  public int JJTVALUES = 19;
+  public int JJTRETURNS = 20;
+  public int JJTOPTIONS = 21;
+  public int JJTCALLS = 22;
+  public int JJTFETCH = 23;
+  public int JJTSTATEMENT = 24;
+  public int JJTRELEASE = 25;
+  public int JJTTERMINATE = 26;
+  public int JJTRETURN_VAL = 27;
+  public int JJTPARA = 28;
+  public int JJTVAR = 29;
+  public int JJTMINOR = 30;
+  public int JJTHIERACHIE = 31;
+  public int JJTTYPE = 32;
+  public int JJTFILE = 33;
+  public int JJTSTREAM = 34;
+  public int JJTRECORD = 35;
+  public int JJTINPUT = 36;
+  public int JJTOUTPUT = 37;
+  public int JJTUPDATE = 38;
+  public int JJTSEQUENTIAL = 39;
+  public int JJTDIRECT = 40;
+  public int JJTBUFFERED = 41;
+  public int JJTUNBUFFERED = 42;
+  public int JJTPICTUREEXPRESSION = 43;
+  public int JJTPICTURE = 44;
+  public int JJTWIDEPIC = 45;
+  public int JJTPICTUREATTRIBUTE = 46;
+  public int JJTPICTURELETTER = 47;
+  public int JJTNUMBER = 48;
+  public int JJTPICTURELENGTH = 49;
+  public int JJTLOCATOR = 50;
+  public int JJTPOINTER = 51;
+  public int JJTOFFSET = 52;
+  public int JJTHANDLE = 53;
+  public int JJTSTRING = 54;
+  public int JJTWIDECHAR = 55;
+  public int JJTGRAPHIC = 56;
+  public int JJTCHAR = 57;
+  public int JJTBIT = 58;
+  public int JJTARITHMETIC = 59;
+  public int JJTSIGNED = 60;
+  public int JJTUNSIGNED = 61;
+  public int JJTDECIMAL = 62;
+  public int JJTFIXED = 63;
+  public int JJTFLOAT = 64;
+  public int JJTBINARY = 65;
+  public int JJTSIZE = 66;
+  public int JJTLENGTH = 67;
+  public int JJTINT = 68;
+  public int JJTDOUBLE = 69;
+  public int JJTREAL = 70;
+  public int JJTCOMPLEX = 71;
+  public int JJTID = 72;
 
 
   public String[] jjtNodeName = {
@@ -97,6 +98,7 @@ public interface Pl1ParserTreeConstants
     "ENTRY",
     "DISPLAY",
     "INIT",
+    "VALUES",
     "RETURNS",
     "OPTIONS",
     "CALLS",
@@ -152,4 +154,4 @@ public interface Pl1ParserTreeConstants
     "Id",
   };
 }
-/* JavaCC - OriginalChecksum=b28b9b69c6589d5f4c121905bb10a7ae (do not edit this line) */
+/* JavaCC - OriginalChecksum=143fac217124ca8ea30270df95a4ae3c (do not edit this line) */
