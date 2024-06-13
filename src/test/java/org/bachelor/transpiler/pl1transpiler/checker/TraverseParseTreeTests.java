@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class TraverseParseTreeTests {
-	TraverseParseTree traverser;
+	HierachieChecker traverser;
 	SimpleNode root;
 	
 	SimpleNode child1;
@@ -17,7 +17,7 @@ public class TraverseParseTreeTests {
 	
 	@BeforeEach
 	void init() {
-		traverser = new TraverseParseTree();
+		traverser = new HierachieChecker();
 		//Setup of the tree.
 //		root.jjtSetValue("root");
 //		

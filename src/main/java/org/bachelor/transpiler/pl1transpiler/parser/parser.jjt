@@ -301,8 +301,16 @@ void package_() #PACKAGE :
 {
   ([condition_prefix()":"]< PL1_WORD >":"< PACKAGE >[exports()][< RESERVES >"("< PL1_WORD >")"][options()])
   (var_declaration(1)|procedure())*
-  (< END >< PL1_WORD >)
+  (footer())
 }
+
+void footer() #END :
+{Token t;}
+{
+  < END >t = < PL1_WORD >
+  {jjtThis.value = t.image;}
+}
+
 
 void exports() #GLOBAL :
 {}
@@ -320,16 +328,16 @@ void condition_prefix() #CONDITION :
 }
 
 void procedure() #PROC :
-{}
+{this.scope = 1;}
 {
     proc_head()
     proc_body()
-  	< END >< PL1_WORD >
+  	footer()
 }
 
 void proc_head() #HEAD :
 {}
-{    < PL1_WORD >":"(< PROCEDURE >|< PROC >|< BEGIN >)("(" parameterlist() ")")? (returns())?
+{    id("PROC")":"(< PROCEDURE >|< PROC >|< BEGIN >)("(" parameterlist() ")")? (returns())?
   (options())? (< RECURSIVE >)?
 }
 
@@ -529,7 +537,7 @@ void var_declaration(int scope) #VAR :
 {this.scope = scope;}
 {	  ( < DCL > | < DECLARE > ) 
 	  (this.hierachie = hierachie())?
- 	   id() ( type()| type() < COMMA_SEPARATOR > |
+ 	   id("VAR") ( type()| type() < COMMA_SEPARATOR > |
       (< COMMA_SEPARATOR > minor(this.getHierachie(), scope))*) | minor(this.getHierachie(), scope)
 }
 
@@ -539,7 +547,7 @@ void var_declaration(int scope) #VAR :
 void minor(int parentHierachie, int scope) #MINOR :
 {this.scope = scope;}
 {
-	this.hierachie = hierachie() id()
+	this.hierachie = hierachie() id("VAR")
 	(type() |  type() < COMMA_SEPARATOR > | ( < COMMA_SEPARATOR > minor(this.getHierachie(), scope))*) 
 }
 
@@ -873,12 +881,30 @@ void Complex() #Complex:
 /**
 * Grammar Expression for a  Identifier.
 **/
-void id() #Id :
+void id(String type) #Id :
 {Token t;}
 {
   t=<PL1_WORD>
   {
-    String[] tmp = {t.image, this.getHierachie() + "", this.scope + "","id"};
+    String[] tmp = new String[4];
+    switch(type) {
+		case "VAR":
+			tmp[0] = t.image;
+			tmp[1] = this.getHierachie() + "";
+			tmp[2] = this.scope + "";
+			tmp[3] = "id";
+			break;
+		case "PROC":
+			tmp[0] = t.image;
+			tmp[1] = this.getHierachie() + "";
+			tmp[2] = this.scope + "";
+			tmp[3] = "proc";
+			break;
+		default:
+			tmp = null;
+			break;
+    }
+    
 	this.installIds(tmp);
 	
 	//Reset Hierachie and Scope

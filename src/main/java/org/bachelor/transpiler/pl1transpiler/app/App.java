@@ -11,7 +11,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.bachelor.transpiler.pl1transpiler.checker.TraverseParseTree;
+import org.bachelor.transpiler.pl1transpiler.checker.Checker;
+import org.bachelor.transpiler.pl1transpiler.checker.HierachieChecker;
+import org.bachelor.transpiler.pl1transpiler.checker.ReferenceChecker;
+import org.bachelor.transpiler.pl1transpiler.errorhandling.IdentifierReferenceException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException;
 import org.bachelor.transpiler.pl1transpiler.lexer.*;
 import org.bachelor.transpiler.pl1transpiler.mapper.MainMapper;
@@ -39,8 +42,14 @@ public class App {
 				SimpleNode root = pl1Parser.program();
 				st.printAll();
 				root.dump(" ");
-				TraverseParseTree traverser = new TraverseParseTree();
-				traverser.checkHierachie(root);
+				ReferenceChecker refCheck = new ReferenceChecker();
+				
+				try {
+					refCheck.checkProcHeadAndFootReference(root, st.getByType("proc"));
+				} 
+				catch(IdentifierReferenceException IRE) {
+					IRE.printStackTrace();
+				}
 				
 				// load Java Parser and give Pl1parser
 				//MainMapper jP = new MainMapper(pl1Parser);
