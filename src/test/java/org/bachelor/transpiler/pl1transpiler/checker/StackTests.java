@@ -13,11 +13,10 @@ import org.junit.jupiter.api.Test;
 public class StackTests {
 	
 	Stack <String> stack;
-	private final static int SIZE = 5;
 	
 	@BeforeEach
 	void init(){
-		stack = new Stack<String>(SIZE);
+		stack = new Stack<String>();
 	}
 	
 	@Test
@@ -30,7 +29,7 @@ public class StackTests {
 	@Test
 	@DisplayName("Push Should Work, different Type")
 	public void pushToStack_setIntOnTop() {
-		Stack<Integer> stack = new Stack<Integer>(SIZE);
+		Stack<Integer> stack = new Stack<Integer>();
 		assertEquals(1, stack.push(1));
 		assertEquals(2, stack.push(2));
 	}
@@ -43,16 +42,13 @@ public class StackTests {
 		for(int i=0;i<shouldNotWork.length;i++) {
 			stack.push(shouldNotWork[i]);
 		}
-		assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
-			stack.push(shouldBeException);
-		});
 	}
 	
 	
 	@Test
 	@DisplayName("Pop Should Work")
 	public void popStack_removedTop() {
-		Stack<Integer> localStack = new Stack<Integer>(SIZE);
+		Stack<Integer> localStack = new Stack<Integer>();
 		localStack.push(1);
 		localStack.push(2);
 		assertEquals(1, localStack.pop());
@@ -61,7 +57,7 @@ public class StackTests {
 	@Test
 	@DisplayName("Pop Should Not Work")
 	public void popStack_StackOverflowExpected() {
-	Stack<Integer> localStack = new Stack<Integer>(SIZE);
+	Stack<Integer> localStack = new Stack<Integer>();
 		assertThrows(StackOverflowError.class, () -> {
 			localStack.pop();
 			});

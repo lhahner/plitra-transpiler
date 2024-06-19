@@ -3,8 +3,9 @@
 package org.bachelor.transpiler.pl1transpiler.parser;
 
 import java.util.ArrayList;
+
+import org.bachelor.transpiler.pl1transpiler.scanner.*;
 import org.bachelor.transpiler.pl1transpiler.symboltable.*;
-import org.bachelor.transpiler.pl1transpiler.lexer.*;
 
 public class Pl1Parser extends Lexer/*@bgen(jjtree)*/implements Pl1ParserTreeConstants, Pl1ParserConstants {/*@bgen(jjtree)*/
   protected JJTPl1ParserState jjtree = new JJTPl1ParserState();private static final int DEFAULT = 0;

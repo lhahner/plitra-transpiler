@@ -6,14 +6,24 @@ import org.bachelor.transpiler.pl1transpiler.errorhandling.IdentifierReferenceEx
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReferenceChecker.
+ */
 public class ReferenceChecker extends Checker {
 
+	/** The check. */
 	Checker check;
+	
+	/** The symbols. */
 	SymbolTable symbols;
 
 	/**
-	 * @param Root Node for Parse-Tree
-	 * @throws IdentifierReferenceException
+	 * Check proc head and foot reference.
+	 *
+	 * @param root the root
+	 * @param procIdentifiers the proc identifiers
+	 * @throws IdentifierReferenceException the identifier reference exception
 	 */
 	public void checkProcHeadAndFootReference(SimpleNode root, ArrayList<String[]> procIdentifiers)
 			throws IdentifierReferenceException {

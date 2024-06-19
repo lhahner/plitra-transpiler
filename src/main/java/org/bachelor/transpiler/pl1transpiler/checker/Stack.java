@@ -1,70 +1,89 @@
 package org.bachelor.transpiler.pl1transpiler.checker;
 
+import java.util.ArrayList;
+
 /**
+ * The Class Stack should only be used in the
+ * Checker Module and also only for tracking purposes while searching the
+ * parse Tree. This should not be utilized for any other needs. 
+ *
  * @author lennart.hahner
- * @param <T> Stack uses generics to define Stack type.
+ * @param <T> Defines Type of Stack.
  */
 public class Stack <T>{
+	
+	/** The top. */
 	int top = -1;
-	int size = 0;
-	T[] content;
+	
+	/** The content. */
+	ArrayList<T> list;
 	
 	/**
+	 * Instantiates a new stack.
+	 *
 	 * @param size of Stack.
 	 */
-	public Stack(int size){
-		content = (T[]) new Object[size];
-		this.size = size;
+	public Stack(){
+		list = new ArrayList<T>();
 	}
 	
 	
 	/**
-	 * @param c content that should be pushed on the Stack.
-	 * @throws StackOverflowError
+	 * This method pushes the value provided
+	 * as parameter on top of the ArrayList.
+	 * Also the pointer, which always points on the
+	 * top of the list will increase.
+	 *
+	 * @param value		The Value defined by the Type of the Stack
+	 * 					that should be put on top of the stack.
+	 * 
+	 * @return The current element that is on top of the stack.
 	 */
-	public T push(T c) throws ArrayIndexOutOfBoundsException{
-		if(this.size < this.content.length) {
-			throw new ArrayIndexOutOfBoundsException("Size exeded");
-		}
+	public T push(T value) {
 		top++;
-		content[top] = c;
-		T current = content[top];
+		list.add(top, value);
+		T current = list.get(top);
 		return current;
 	}
 	
 	/**
 	 * Removes last pushed content from Stack.
-	 * @throws StackOverflowError
+	 * Also decreases the pointer that points to the last element.
+	 *
+	 * @return the element that is currently on top of the stack.
+	 * @throws StackOverflowError Only when trying to pop from an empty Stack
 	 */
 	public T pop() throws StackOverflowError{
 		if(top == -1) {
 			throw new StackOverflowError("Size exeeded");
 		}
-		content[top] = null;
+		list.remove(top);
 		top--;
 		if(top == -1)
 			return null;
-		return content[top];
+		return list.get(top);
 	}
 	
 	/**
-	 * prints Stack content;
+	 * Prints the content thats currently in Stack.
 	 */
 	public void printStack() {
-		for(int i=0;i<content.length;i++) {
-			if(content[i] == null)
+		for(T i : list) {
+			if(i == null)
 				continue;
-			System.out.println(content[i]);
+			System.out.println(i);
 		}
 		System.out.println("----------------------");
 	}
 	
 	/**
+	 * Checks if is empty.
+	 *
 	 * @return true if stack has length 0 else return false.
 	 */
 	public boolean isEmpty() {
-		for(int i = 0;i<content.length;i++) {
-			if(content[i] != null) {
+		for(T i : list) {
+			if(i != null) {
 				return false;
 			}
 		}
@@ -72,16 +91,22 @@ public class Stack <T>{
 	}
 	
 	/**
+	 * Will give the last element pushed on stack.
+	 *
 	 * @return get last element from Stack.
 	 */
 	public Object getLast() {
 		if(top == -1)
 			return null;
-		return content[top];
+		return list.get(top);
 	}
 	
+	/**
+	 * this removes all elements from Stack
+	 * until the Stack is empty.
+	 */
 	public void free() {
-		if(content == null) {
+		if(list == null) {
 			return;
 		}
 		while(top >= 0) {

@@ -1,7 +1,8 @@
 package org.bachelor.transpiler.pl1transpiler.symboltable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.bachelor.transpiler.pl1transpiler.lexer.*;
+
+import org.bachelor.transpiler.pl1transpiler.scanner.*;
 
 public enum Template {
 	
@@ -78,7 +79,13 @@ public enum Template {
 	CHAR("char"),
 	STRING("String"),
 	PICTURE("PICTURE"),
-	BINARY("BINARY");
+	BINARY("BINARY"),
+	IF("if"),
+	ELSE("else"),
+	ELSE_IF("else if"),
+	WHILE("while"),
+	FOR("for"),
+	DO("do");
 
 	private final String symbol;
 	

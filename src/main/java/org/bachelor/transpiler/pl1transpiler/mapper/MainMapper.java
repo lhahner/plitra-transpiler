@@ -12,9 +12,8 @@ import java.util.stream.Collectors;
 import javax.swing.JRootPane;
 
 import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
-import org.bachelor.transpiler.pl1transpiler.lexer.InputReader;
 import org.bachelor.transpiler.pl1transpiler.parser.*;
-import org.bachelor.transpiler.pl1transpiler.symboltable.PictureMapper;
+import org.bachelor.transpiler.pl1transpiler.scanner.InputReader;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 

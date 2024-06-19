@@ -5,21 +5,32 @@ import java.util.ArrayList;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncompatibleTypeException;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TypeChecker.
+ */
 public class TypeChecker extends Checker{
 	
+	/** The declarations. */
 	private ArrayList<String []> declarations = new ArrayList<String []>();
+	
+	/** The initalisations. */
 	private ArrayList<String []> initalisations = new ArrayList<String []>();
 	
 	/**
-	 * @todo
+	 * Check procedure type.
+	 *
+	 * @todo 
 	 */
 	public void checkProcedureType() {
 		
 	}
 	
 	/**
-	 * @param root
-	 * @throws IncompatibleTypeException
+	 * Check id type.
+	 *
+	 * @param root the root
+	 * @throws IncompatibleTypeException the incompatible type exception
 	 */
 	public void checkIdType(SimpleNode root) throws IncompatibleTypeException{
 		setDeclarationIds(root);
@@ -43,7 +54,9 @@ public class TypeChecker extends Checker{
 	}
 	
 	/**
-	 * @param root
+	 * Sets the declaration ids.
+	 *
+	 * @param root the new declaration ids
 	 */
 	public void setDeclarationIds(SimpleNode root) {
 		super.searchNode(root, "TYPE");
@@ -61,6 +74,11 @@ public class TypeChecker extends Checker{
 		super.free();
 	}
 	
+	/**
+	 * Sets the initalisation value.
+	 *
+	 * @param root the new initalisation value
+	 */
 	public void setInitalisationValue(SimpleNode root) {
 		super.searchNode(root, "INIT");
 		for(SimpleNode node : super.foundNodes) {
@@ -76,7 +94,9 @@ public class TypeChecker extends Checker{
 	}
 	
 	/**
-	 * @param Initalisation String to be checked
+	 * Checks if is number.
+	 *
+	 * @param str the str
 	 * @return True if has no ALphabetic value
 	 */
 	private boolean isNumber(String str) {

@@ -257,15 +257,15 @@ TOKEN :
 	| < GT : ">" >
 	| < LT : "<" >
 	| < PLUS : "+" >
-	| < COMPLT : "Â¬"< LT > >
+	| < COMPLT : "¬"< LT > >
 	| < LTEQ : < LT >"=" >
 	| < EQ : "=" >
-	| < COMPEQ: "Â¬=" >
-	| < COMPGT: "Â¬"< GT > >
+	| < COMPEQ: "¬=" >
+	| < COMPGT: "¬"< GT > >
 	| < AND : "&" >
 	| < OR : "||" >
 	| < COMMA_SEPARATOR : "," <SPACE_SEPARATOR> >
-	| < X : ("X"|"A"|"9"|"Z"|"V"|"*"|"B"|< LT >|< GT >|< MINUSCHAR >|< PLUS >|"E"|"K"|","|"$"|"â‚¬"|"/"|"CR"|"DB"|"S")+ >
+	| < X : ("X"|"A"|"9"|"Z"|"V"|"*"|"B"|< LT >|< GT >|< MINUSCHAR >|< PLUS >|"E"|"K"|","|"$"|"€"|"/"|"CR"|"DB"|"S")+ >
 	| < A : ("A")+ >
 	| < V : ("V")+ >
 	| < INTEGER : (["0"-"9"])+ >

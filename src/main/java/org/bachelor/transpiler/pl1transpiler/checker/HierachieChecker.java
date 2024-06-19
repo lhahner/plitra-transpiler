@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.bachelor.transpiler.pl1transpiler.lexer.InputReader;
 import org.bachelor.transpiler.pl1transpiler.parser.Node;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1Parser;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+import org.bachelor.transpiler.pl1transpiler.scanner.InputReader;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 
 public class HierachieChecker extends Checker{
@@ -24,8 +24,8 @@ public class HierachieChecker extends Checker{
 		//Special case its root of tree
 		if(root.jjtGetParent() == null) {
 			//Push root to stack
-			stack.push(root.toString());
-			stack.printStack();
+			tracker.push(root.toString());
+			tracker.printStack();
 			if(isHierachieError(root)) {
 				System.out.println("hierachical error");
 			}
@@ -34,17 +34,17 @@ public class HierachieChecker extends Checker{
 			if(this.hasChildren(root)) {
 				
 				for(int i=0; i<root.jjtGetNumChildren();i++) {
-					stack.push(root.jjtGetChild(i).toString());
-					stack.printStack();
+					tracker.push(root.jjtGetChild(i).toString());
+					tracker.printStack();
 					if(isHierachieError((SimpleNode)root.jjtGetChild(i))) {
 						System.out.println("hierachical error");
 					}
 						
 					searchHiericalError((SimpleNode)root.jjtGetChild(i));
-					stack.printStack();
+					tracker.printStack();
 						
-					stack.pop();
-					stack.printStack();
+					tracker.pop();
+					tracker.printStack();
 					
 				}
 				/**
@@ -59,17 +59,17 @@ public class HierachieChecker extends Checker{
 		//Usual Case, Checking children from root.
 		else {
 			//Only happens whenever Node-root has no children and was lastly visited.
-			if(root.jjtGetChild(0) == null && stack.getLast() == root.toString()) {
-				stack.pop();
-				stack.printStack();
+			if(root.jjtGetChild(0) == null && tracker.getLast() == root.toString()) {
+				tracker.pop();
+				tracker.printStack();
 				
 				return;
 			}
 			
 			//Iteration over the Childelements of root.
 			for(int i=0;i<root.jjtGetNumChildren();i++) {
-				stack.push(root.jjtGetChild(i).toString());
-				stack.printStack();
+				tracker.push(root.jjtGetChild(i).toString());
+				tracker.printStack();
 				if(isHierachieError((SimpleNode)root.jjtGetChild(i))) {
 					System.out.println("hierachical error");
 				}
@@ -78,17 +78,17 @@ public class HierachieChecker extends Checker{
 				if(this.hasChildren(root.jjtGetChild(i))) {
 					
 					searchHiericalError((SimpleNode)root.jjtGetChild(i));
-					stack.printStack();
+					tracker.printStack();
 					
-					stack.pop();
-					stack.printStack();
+					tracker.pop();
+					tracker.printStack();
 
 				}
 				
 				//Maybe not than, visited and pop
 				else {
-					stack.pop();
-					stack.printStack();
+					tracker.pop();
+					tracker.printStack();
 					
 				}
 			}
