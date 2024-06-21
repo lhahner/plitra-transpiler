@@ -16,9 +16,8 @@ package org.bachelor.transpiler.pl1transpiler.parser;
 
 import java.util.ArrayList;
 import org.bachelor.transpiler.pl1transpiler.symboltable.*;
-import org.bachelor.transpiler.pl1transpiler.lexer.*;
 
-public class Pl1Parser extends Lexer{
+public class Pl1Parser{
   	private static final int DEFAULT = 0;
   	
 	//Defines variable level 0...9
@@ -33,6 +32,7 @@ public class Pl1Parser extends Lexer{
 	private SymbolTable symbols = new SymbolTable();
 	private ArrayList<String [] > idsAndScopes = new ArrayList<String []>();
 	private String[] tmp_idsAndScopes = new String[3];
+	ArrayList<String > paralist = new ArrayList<String >();
 	
 	private int charLength;
 	private String number;
@@ -301,10 +301,11 @@ void package_() #PACKAGE :
   
   }
 {
-  ([condition_prefix()":"]< PL1_WORD >":"< PACKAGE >[exports()][< RESERVES >"("< PL1_WORD >")"][options()])
+  ([condition_prefix()":"]id("PACKAGE")":"< PACKAGE >[exports()][< RESERVES >"("< PL1_WORD >")"][options()])
   (var_declaration(1)|procedure())*
   (footer())
 }
+
 
 void footer() #END :
 {Token t;}
@@ -366,6 +367,7 @@ void if_statement() #IF :
   < THEN >proc_body()
   [< ELSE >
   	proc_body()]
+
   	
 }
 
@@ -425,22 +427,30 @@ void bool_expression() #BOOL :
 {}
 {
   (("(")*< PL1_WORD >(bool_operation() (< PL1_WORD >(")")* (bool_operation() < PL1_WORD >(")")*)*))*)
+
+  {
+   
+  }
 }
 
-void bool_operation() #OP :
-{}
+String bool_operation() #OP :
+{Token t = null;}
 {
-  (    < MINUSCHAR >
-	| < GT >
-	| < LT >
-	| < PLUS >
-	| < COMPLT >
-	| < LTEQ >
-	| < EQ >
-	| < COMPEQ >
-	| < COMPGT >
-	| < AND >
-	| < OR >)*
+  (    t = < MINUSCHAR >
+	| t = < GT >
+	| t = < LT >
+	| t = < PLUS >
+	| t = < COMPLT >
+	| t = < LTEQ >
+	| t = < EQ >
+	| t = < COMPEQ >
+	| t = < COMPGT >
+	| t = < AND >
+	| t = < OR >)*
+
+	{
+	  return t.image;
+	}
 }
 
 void entry_statement() #ENTRY :
@@ -539,9 +549,15 @@ void return_val():
 }
 
 void parameterlist() #PARA :
-{}
 {
-  < PL1_WORD >(< COMMA_SEPARATOR >parameterlist())?
+  Token t;
+  }
+{
+  t=< PL1_WORD >(< COMMA_SEPARATOR >parameterlist())?
+
+  {
+    jjtThis.value = t.image;
+  }
 }
 
 
@@ -861,14 +877,17 @@ void StringAttribute() #Length:
 {Token t;}
 {
 	("(" t = < INTEGER > ")")
-	{this.length.add(t.toString());}
+	{this.length.add(t.toString());
+	 jjtThis.value = t.image;
+	}
 }
 
 void attribute() #Int:
 { Token p;}
 {
 	("(" p = < INTEGER > ")")
-	{this.length.add(p.toString());}
+	{this.length.add(p.toString());
+	jjtThis.value = p.image;}
 }
 
 void attributes () #Double:
@@ -876,7 +895,9 @@ void attributes () #Double:
 Token q;}
 {
 	("(" p = < INTEGER > "," q = <  INTEGER > ")")
-	{this.length.add(p + "," + q);}
+	{this.length.add(p + "," + q);
+	jjtThis.value = p.image + "," + q.image;
+	}
 
 }
 
@@ -909,11 +930,19 @@ void id(String type) #Id :
 			tmp[2] = this.scope + "";
 			tmp[3] = "id";
 			break;
+			
 		case "PROC":
 			tmp[0] = t.image;
 			tmp[1] = this.getHierachie() + "";
 			tmp[2] = this.scope + "";
 			tmp[3] = "proc";
+			break;
+			
+		case "PACKAGE":
+			tmp[0] = t.image;
+			tmp[1] = this.getHierachie() + "";
+			tmp[2] = "1";
+			tmp[3] = "pack";
 			break;
 		default:
 			tmp = null;

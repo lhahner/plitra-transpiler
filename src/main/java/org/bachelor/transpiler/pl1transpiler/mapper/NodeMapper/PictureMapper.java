@@ -1,4 +1,4 @@
-package org.bachelor.transpiler.pl1transpiler.mapper;
+package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.HashMap;

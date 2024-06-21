@@ -60,6 +60,7 @@ public class TypeChecker extends Checker{
 	 */
 	public void setDeclarationIds(SimpleNode root) {
 		super.searchNode(root, "TYPE");
+		super.searchNode(root, "MINOR");
 		for(SimpleNode node : super.foundNodes) {
 			SimpleNode identifier = (SimpleNode)node.jjtGetParent().jjtGetChild(0);
 			String[] identifierPropreties = (String[])identifier.jjtGetValue();

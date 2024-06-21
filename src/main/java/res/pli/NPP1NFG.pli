@@ -1,10 +1,20 @@
 orgbachelorpli: PACKAGE;
 	DCL var_1 DECIMAL(1);
-	DCL var_2 CHAR(5);
+	DCL var_2 DECIMAL(1);
+	DCL var_3 DECIMAL(1);
+	DCL var_4 DECIMAL(1);
+	DCL var_5 WIDECHAR(2);
 	
-	proc_1: PROC;
-		var_1 = 1;
-		var_2 = 'Hello World';	
+	
+	proc_1: PROC(para_1, para_2, para_3) RETURNS (DECIMAL(2));
+		DCL var_4 DECIMAL(4);
+		var_4 = 2002;
 		RETURN;
 	END proc_1;
+	
+	proc_2: PROC(para_1, para_2, para_3) RETURNS (DECIMAL(2));
+		DISPLAY('Hello World');	
+		RETURN;
+	END proc_1;
+	
 END orgbachelorpli;

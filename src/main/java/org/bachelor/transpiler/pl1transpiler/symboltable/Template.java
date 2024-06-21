@@ -7,7 +7,7 @@ import org.bachelor.transpiler.pl1transpiler.scanner.*;
 public enum Template {
 	
 	//Static Code
-	PACKAGE("package resources.java;"),
+	PACKAGE("package "),
 	
 	PICTURE_IMPORTS("import java.util.regex.Matcher; \n "
 			+ "import java.util.regex.Pattern;"),
@@ -64,8 +64,18 @@ public enum Template {
 			+ "		}\r\n"
 			+ "	}\r\n"
 			+ "}"),
-	
+	COMPLEX_CLASS(""
+			+ "public class COMPLEX {\n"
+			+ "double real;\n"
+			+ "double imagnary;\n"
+			+ "	public COMPLEX() {\n"
+			+ "	}\n"
+			+ "}\n"),
 	//Words
+	COMPLEX("COMPLEX"),
+	CHAR_OBJECT("CHAR"),
+	OBJECT("Object"),
+	FILE("File"),
 	PUBLIC("public"),
 	PRIVATE("private"),
 	DOUBLE("double"),

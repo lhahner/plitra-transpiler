@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.nio.charset.UnsupportedCharsetException;
 import org.junit.jupiter.api.Test;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
-import org.bachelor.transpiler.pl1transpiler.mapper.PictureMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.PictureMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 

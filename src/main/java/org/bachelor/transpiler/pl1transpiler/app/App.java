@@ -40,6 +40,7 @@ import org.bachelor.transpiler.pl1transpiler.errorhandling.IdentifierReferenceEx
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncompatibleTypeException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException;
 import org.bachelor.transpiler.pl1transpiler.mapper.MainMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ProgramMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.*;
 import org.bachelor.transpiler.pl1transpiler.scanner.*;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
@@ -69,6 +70,8 @@ public class App {
 	/** Loads the TypeChecker Class, which is the entry for the Checker module. */
 	static TypeChecker typechecker;
 	
+	static ProgramMapper mapper;
+	
 	/**
 	 * The main method.
 	 *
@@ -89,6 +92,7 @@ public class App {
 		String inputFile = inputReader.getInputFilePath(CONFIG);
 		typechecker = new TypeChecker();
 		
+		
 		if (inputFile.toString().contains(".pli")) {
 
 			try {
@@ -96,13 +100,13 @@ public class App {
 				SimpleNode root = pl1Parser.program();
 				symboltable.printAll();
 				root.dump(" ");
-				try {
-					typechecker.checkIdType(root);
-				} 
-				catch(IncompatibleTypeException IRE) {
-					IRE.printStackTrace();
-				}
-				
+//				try {
+//					typechecker.checkIdType(root);
+//				} 
+//				catch(IncompatibleTypeException IRE) {
+//					IRE.printStackTrace();
+//				}
+			    mapper = new ProgramMapper(root);
 				// load Java Parser and give Pl1parser
 				//MainMapper jP = new MainMapper(pl1Parser);
 				// create expression with Parsetree

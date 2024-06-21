@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 import javax.swing.JRootPane;
 
 import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.PictureMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ProgramMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.*;
 import org.bachelor.transpiler.pl1transpiler.scanner.InputReader;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
@@ -26,7 +28,7 @@ public class MainMapper {
 	Pl1Parser pl1Parser;
 	String Major;
 	Template javaWords;
-	ProjectMapper projectmapper;
+	ProgramMapper projectmapper;
 	
 	public MainMapper() {
 		
@@ -41,7 +43,7 @@ public class MainMapper {
 	 */
 	public String concatExpression() {
 		try {
-			projectmapper = new ProjectMapper();
+			projectmapper = new ProgramMapper();
 			if (java_expression.size() != 0) {
 				String listString = java_expression.stream().map(Object::toString).collect(Collectors.joining(""));
 				return javaWords.PACKAGE.getValue() + "\n" + javaWords.IMPORTS.getValue() + "\n"

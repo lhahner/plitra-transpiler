@@ -96,14 +96,12 @@ public class Checker {
 			if (this.hasChildren(startNode)) {
 				for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
 					tracker.push(startNode.jjtGetChild(i).toString());
-					tracker.printStack();
 					
 					if(hasTargetNodeAttribute((SimpleNode)startNode.jjtGetChild(i), nodeAttribute, targetNode)) {
 						this.foundValue = (SimpleNode)startNode.jjtGetChild(i);
 					}		
 					searchValue((SimpleNode) startNode.jjtGetChild(i), nodeAttribute, targetNode);
 					tracker.pop();
-					tracker.printStack();
 				}
 			}
 			else {
@@ -113,12 +111,10 @@ public class Checker {
 		else {
 			if (startNode.jjtGetChild(0) == null && tracker.getLast() == startNode.toString()) {
 				tracker.pop();
-				tracker.printStack();
 				return;
 			}
 			for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
 				tracker.push(startNode.jjtGetChild(i).toString());
-				tracker.printStack();
 				
 				if(hasTargetNodeAttribute((SimpleNode)startNode.jjtGetChild(i), nodeAttribute, targetNode)) {
 					this.foundValue = (SimpleNode)startNode.jjtGetChild(i);
@@ -127,12 +123,9 @@ public class Checker {
 				if (this.hasChildren(startNode.jjtGetChild(i))) {
 					searchValue((SimpleNode) startNode.jjtGetChild(i), nodeAttribute, targetNode);
 					tracker.pop();
-					tracker.printStack();
-
 				}
 				else {
 					tracker.pop();
-					tracker.printStack();
 				}
 			}
 		}
@@ -159,7 +152,6 @@ public class Checker {
 	public void searchNode(SimpleNode startNode, String targetNode) {
 		if (startNode.jjtGetParent() == null) {
 			tracker.push(startNode.toString());
-			tracker.printStack();
 			if(isTargetNode((SimpleNode)startNode, targetNode)) {
 				this.foundNodes.add(startNode);
 			}
@@ -167,14 +159,12 @@ public class Checker {
 			if (this.hasChildren(startNode)) {
 				for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
 					tracker.push(startNode.jjtGetChild(i).toString());
-					tracker.printStack();
 					
 					if(isTargetNode((SimpleNode)startNode.jjtGetChild(i), targetNode)) {
 						this.foundNodes.add((SimpleNode)startNode.jjtGetChild(i));
 					}		
 					searchNode((SimpleNode) startNode.jjtGetChild(i), targetNode);
 					tracker.pop();
-					tracker.printStack();
 				}
 			}
 			else {
@@ -183,29 +173,19 @@ public class Checker {
 			tracker.pop();
 		}
 		else {
-			if (startNode.jjtGetChild(0) == null && tracker.getLast() == startNode.toString()) {
-				tracker.pop();
-				tracker.printStack();
-				return;
-			}
-
 			for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
 				tracker.push(startNode.jjtGetChild(i).toString());
-				tracker.printStack();
 				
 				if(isTargetNode((SimpleNode)startNode.jjtGetChild(i), targetNode)) {
 					this.foundNodes.add((SimpleNode)startNode.jjtGetChild(i));
 				}
-				
+	
 				if (this.hasChildren(startNode.jjtGetChild(i))) {
 					searchNode((SimpleNode) startNode.jjtGetChild(i), targetNode);
 					tracker.pop();
-					tracker.printStack();
-
 				}
 				else {
 					tracker.pop();
-					tracker.printStack();
 				}
 			}
 		}
