@@ -81,7 +81,7 @@ public class TypeChecker extends Checker{
 	 * @param root the new initalisation value
 	 */
 	public void setInitalisationValue(SimpleNode root) {
-		super.searchNode(root, "INIT");
+		super.searchNode(root, "ASSIGN");
 		for(SimpleNode node : super.foundNodes) {
 			SimpleNode identifier = (SimpleNode)node;
 			SimpleNode value = (SimpleNode)node.jjtGetChild(0);

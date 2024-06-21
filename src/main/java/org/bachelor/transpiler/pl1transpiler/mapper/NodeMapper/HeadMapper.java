@@ -12,7 +12,7 @@ public class HeadMapper extends ProcMapper {
 	String identifier;
 	String type = super.javaWords.VOID.getValue();
 	String parameter = "()";
-	ArrayList<String> parameterList = new ArrayList<String>();
+	ArrayList<String> parameterIdentifierList = new ArrayList<String>();
 
 	public String mapHeadNode(SimpleNode procNode) {
 
@@ -26,8 +26,8 @@ public class HeadMapper extends ProcMapper {
 					this.identifier = tmp[0];
 					break;
 				case "PARA":
-					this.setParameterList(childNode);
-					this.parameter = mapParameterlist(parameterList);
+					this.setParameterDefinitionList(childNode);
+					this.parameter = mapParameterDefinitionlist(parameterIdentifierList);
 					break;
 				case "RETURNS":
 					try {
@@ -48,7 +48,7 @@ public class HeadMapper extends ProcMapper {
 		return scope + type + identifier + parameter;
 	}
 
-	public String mapParameterlist(ArrayList<String> identifiers) {
+	public String mapParameterDefinitionlist(ArrayList<String> identifiers) {
 		String parameterlist = "(";
 		if (identifiers.size() > 1) {
 			for (String identifier : identifiers) {
@@ -60,7 +60,7 @@ public class HeadMapper extends ProcMapper {
 			}
 			return parameterlist + ")";
 		} else {
-			this.parameterList.clear();
+			this.parameterIdentifierList.clear();
 			return "(" + super.javaWords.OBJECT.getValue() + " " + identifiers.get(0) + ")";
 		}
 	}
@@ -74,10 +74,10 @@ public class HeadMapper extends ProcMapper {
 		}
 	}
 	
-	public void setParameterList(SimpleNode paraNode) {
-		parameterList.add((String)paraNode.jjtGetValue());
+	public void setParameterDefinitionList(SimpleNode paraNode) {
+		this.parameterIdentifierList.add((String)paraNode.jjtGetValue());
 		if(super.hasChildren(paraNode)) {
-			setParameterList((SimpleNode)paraNode.jjtGetChild(0));
+			setParameterDefinitionList((SimpleNode)paraNode.jjtGetChild(0));
 		}
 		return;
 	}

@@ -11,7 +11,7 @@ public interface Pl1ParserTreeConstants
   public int JJTPROC = 5;
   public int JJTHEAD = 6;
   public int JJTBODY = 7;
-  public int JJTIF = 8;
+  public int JJTBRANCH = 8;
   public int JJTLOOP = 9;
   public int JJTDO = 10;
   public int JJTDO_TYPE_3 = 11;
@@ -21,61 +21,62 @@ public interface Pl1ParserTreeConstants
   public int JJTOP = 15;
   public int JJTENTRY = 16;
   public int JJTDISPLAY = 17;
-  public int JJTINIT = 18;
+  public int JJTASSIGN = 18;
   public int JJTVALUES = 19;
   public int JJTRETURNS = 20;
   public int JJTOPTIONS = 21;
   public int JJTCALLS = 22;
-  public int JJTFETCH = 23;
-  public int JJTSTATEMENT = 24;
-  public int JJTRELEASE = 25;
-  public int JJTTERMINATE = 26;
-  public int JJTRETURN_VAL = 27;
-  public int JJTPARA = 28;
-  public int JJTVAR = 29;
-  public int JJTMINOR = 30;
-  public int JJTHIERACHIE = 31;
-  public int JJTTYPE = 32;
-  public int JJTFILE = 33;
-  public int JJTSTREAM = 34;
-  public int JJTRECORD = 35;
-  public int JJTINPUT = 36;
-  public int JJTOUTPUT = 37;
-  public int JJTUPDATE = 38;
-  public int JJTSEQUENTIAL = 39;
-  public int JJTDIRECT = 40;
-  public int JJTBUFFERED = 41;
-  public int JJTUNBUFFERED = 42;
-  public int JJTPICTUREEXPRESSION = 43;
-  public int JJTPICTURE = 44;
-  public int JJTWIDEPIC = 45;
-  public int JJTPICTUREATTRIBUTE = 46;
-  public int JJTPICTURELETTER = 47;
-  public int JJTNUMBER = 48;
-  public int JJTPICTURELENGTH = 49;
-  public int JJTLOCATOR = 50;
-  public int JJTPOINTER = 51;
-  public int JJTOFFSET = 52;
-  public int JJTHANDLE = 53;
-  public int JJTSTRING = 54;
-  public int JJTWIDECHAR = 55;
-  public int JJTGRAPHIC = 56;
-  public int JJTCHAR = 57;
-  public int JJTBIT = 58;
-  public int JJTARITHMETIC = 59;
-  public int JJTSIGNED = 60;
-  public int JJTUNSIGNED = 61;
-  public int JJTDECIMAL = 62;
-  public int JJTFIXED = 63;
-  public int JJTFLOAT = 64;
-  public int JJTBINARY = 65;
-  public int JJTSIZE = 66;
-  public int JJTLENGTH = 67;
-  public int JJTINT = 68;
-  public int JJTDOUBLE = 69;
-  public int JJTREAL = 70;
-  public int JJTCOMPLEX = 71;
-  public int JJTID = 72;
+  public int JJTSTRINGLIST = 23;
+  public int JJTFETCH = 24;
+  public int JJTSTATEMENT = 25;
+  public int JJTRELEASE = 26;
+  public int JJTTERMINATE = 27;
+  public int JJTRETURN_VAL = 28;
+  public int JJTPARA = 29;
+  public int JJTVAR = 30;
+  public int JJTMINOR = 31;
+  public int JJTHIERACHIE = 32;
+  public int JJTTYPE = 33;
+  public int JJTFILE = 34;
+  public int JJTSTREAM = 35;
+  public int JJTRECORD = 36;
+  public int JJTINPUT = 37;
+  public int JJTOUTPUT = 38;
+  public int JJTUPDATE = 39;
+  public int JJTSEQUENTIAL = 40;
+  public int JJTDIRECT = 41;
+  public int JJTBUFFERED = 42;
+  public int JJTUNBUFFERED = 43;
+  public int JJTPICTUREEXPRESSION = 44;
+  public int JJTPICTURE = 45;
+  public int JJTWIDEPIC = 46;
+  public int JJTPICTUREATTRIBUTE = 47;
+  public int JJTPICTURELETTER = 48;
+  public int JJTNUMBER = 49;
+  public int JJTPICTURELENGTH = 50;
+  public int JJTLOCATOR = 51;
+  public int JJTPOINTER = 52;
+  public int JJTOFFSET = 53;
+  public int JJTHANDLE = 54;
+  public int JJTSTRING = 55;
+  public int JJTWIDECHAR = 56;
+  public int JJTGRAPHIC = 57;
+  public int JJTCHAR = 58;
+  public int JJTBIT = 59;
+  public int JJTARITHMETIC = 60;
+  public int JJTSIGNED = 61;
+  public int JJTUNSIGNED = 62;
+  public int JJTDECIMAL = 63;
+  public int JJTFIXED = 64;
+  public int JJTFLOAT = 65;
+  public int JJTBINARY = 66;
+  public int JJTSIZE = 67;
+  public int JJTLENGTH = 68;
+  public int JJTINT = 69;
+  public int JJTDOUBLE = 70;
+  public int JJTREAL = 71;
+  public int JJTCOMPLEX = 72;
+  public int JJTID = 73;
 
 
   public String[] jjtNodeName = {
@@ -87,7 +88,7 @@ public interface Pl1ParserTreeConstants
     "PROC",
     "HEAD",
     "BODY",
-    "IF",
+    "BRANCH",
     "LOOP",
     "DO",
     "do_type_3",
@@ -97,11 +98,12 @@ public interface Pl1ParserTreeConstants
     "OP",
     "ENTRY",
     "DISPLAY",
-    "INIT",
+    "ASSIGN",
     "VALUES",
     "RETURNS",
     "OPTIONS",
     "CALLS",
+    "STRINGLIST",
     "FETCH",
     "STATEMENT",
     "RELEASE",
@@ -154,4 +156,4 @@ public interface Pl1ParserTreeConstants
     "Id",
   };
 }
-/* JavaCC - OriginalChecksum=143fac217124ca8ea30270df95a4ae3c (do not edit this line) */
+/* JavaCC - OriginalChecksum=a0fb554ea0aa1efae7d174a442ba20d8 (do not edit this line) */

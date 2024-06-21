@@ -17,11 +17,13 @@ public class ProcMapper extends PackageMapper{
 				switch (childNode.toString()) {
 				case "HEAD":
 					procJavaExpression.add(
-							new HeadMapper().mapHeadNode(childNode) + " {"
+							new HeadMapper().mapHeadNode(childNode) + " { \n"
 					);
 					break;
 				case "BODY":
-					procJavaExpression.add(" }");
+					procJavaExpression.add(
+							new BodyMapper().mapBodyNode(childNode) + " \n }"
+					);
 					break;
 				default:
 					break;

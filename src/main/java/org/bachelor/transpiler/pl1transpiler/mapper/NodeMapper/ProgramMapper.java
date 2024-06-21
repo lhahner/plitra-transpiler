@@ -6,13 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.bachelor.transpiler.pl1transpiler.errorhandling.PackageMappingException;
-import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.DeprecatedMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.PackageMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+import org.bachelor.transpiler.pl1transpiler.scanner.InputReader;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 // TODO: Auto-generated Javadoc
 /**
+ * @deprecated
  * The Class ProgramMapper which inherits from Mapper. @see Mapper. This Class
  * is the Mapper for the root element of a Program. From this class all other
  * Mapper Classes will extend, it defines the dependencies needed by the main
@@ -22,13 +25,13 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
  * or Picutre type. Afters wards it checks the Parse-tree and then calls the
  * child class to map the child Node of the Program-Node.
  */
-public class ProgramMapper extends Mapper {
+public class ProgramMapper extends DeprecatedMapper {
 
 	/**
 	 * The Symbol-Table is used by all child Classes to Map the equivalent
 	 * Identifier for the required structure.
 	 */
-	SymbolTable symbols = new SymbolTable();
+	public SymbolTable symbols = new SymbolTable();
 
 	/**
 	 * Contains the folder where the transpiled project should be placed.
@@ -178,6 +181,12 @@ public class ProgramMapper extends Mapper {
 					PackageMapper packageMapper = new PackageMapper();
 					try {
 					java_expression.add(packageMapper.mapPackageNode(packageNode));
+					java_expression.add(
+							this.javaWords.PUBLIC.getValue() + " "
+						 + this.javaWords.CLASS.getValue() + " "
+						 + new InputReader().getProgramname() + " "
+						 + "{ \n"
+							);
 					}
 					catch(PackageMappingException pme) {
 						pme.printStackTrace();

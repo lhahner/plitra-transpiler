@@ -6,19 +6,34 @@ import org.bachelor.transpiler.pl1transpiler.errorhandling.TypeMappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.SingleNodeMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
+// TODO: Auto-generated Javadoc
+/**
+ * @deprecated
+ * The Class VarMapper.
+ */
 public class VarMapper extends PackageMapper implements SingleNodeMapper {
 
+	/** The translated java expression. */
 	String translatedJavaExpression = "";
 	
+	/** The identifier. */
 	private String identifier;
 
+	/**
+	 * Map var node.
+	 *
+	 * @param packageNode the package node
+	 * @return the string
+	 */
 	public String mapVarNode(SimpleNode packageNode) {
 		mapChildNodes(packageNode);
 		return translatedJavaExpression;
 	}
 
 	/**
-	 * @param programNode
+	 * Map child nodes.
+	 *
+	 * @param packageNode the package node
 	 */
 	public void mapChildNodes(SimpleNode packageNode) {
 		String identifier = "";
@@ -48,6 +63,11 @@ public class VarMapper extends PackageMapper implements SingleNodeMapper {
 		}
 	}
 
+	/**
+	 * Sets the identifier.
+	 *
+	 * @param identifier the new identifier
+	 */
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
 	}

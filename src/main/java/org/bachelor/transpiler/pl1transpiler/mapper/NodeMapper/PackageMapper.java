@@ -3,11 +3,11 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 import java.util.ArrayList;
 
 import org.bachelor.transpiler.pl1transpiler.errorhandling.PackageMappingException;
+import org.bachelor.transpiler.pl1transpiler.mapper.MapperStrategy.ProgramMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
 public class PackageMapper extends ProgramMapper {
 
-	String translatedJavaExpression;
 
 	public PackageMapper() {
 
@@ -16,6 +16,7 @@ public class PackageMapper extends ProgramMapper {
 	public String mapPackageNode(SimpleNode packageNode) throws PackageMappingException{
 		if(super.hasChildren(packageNode)) {
 			SimpleNode child = (SimpleNode)packageNode.jjtGetChild(0);
+			// {id, scope, hierachie, typ}
 			String[] id = (String[] )child.jjtGetValue();
 			return 
 					super.javaWords.PACKAGE.getValue()

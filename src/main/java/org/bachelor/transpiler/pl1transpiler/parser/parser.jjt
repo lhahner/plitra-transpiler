@@ -279,7 +279,7 @@ TOKEN :
 
 SKIP :
 {
-	< "/*" (~["*"])* "*" (~["/"])* "*/" >
+	< "/*" (~["*"])* "*" < STRING > (~["/"])* "*/" >
 	| < ";" >
 	| < SPACE_SEPARATOR : ( <SPACECHAR> | <EOL> )+ >
 	| < SPACECHAR: ( " " | "\t" | "\f" | "\r" )+ >
@@ -360,15 +360,13 @@ void proc_body() #BODY :
     )*
 }
 
-void if_statement() #IF :
+void if_statement() #BRANCH :
 {}
 {
   < IF >bool_expression()(bool_operation()bool_expression())*
   < THEN >proc_body()
   [< ELSE >
   	proc_body()]
-
-  	
 }
 
 void do_statement() #LOOP :
@@ -460,12 +458,16 @@ void entry_statement() #ENTRY :
 }
 
 void display_statement() #DISPLAY:
-{}
+{Token t = null;}
 {
-  < DISPLAY >"("((< STRING >|< PL1_WORD >)*)")"[< REPLAY >"("")"]
+  < DISPLAY >"("((t=< STRING >|t=< PL1_WORD >)*)")"[< REPLAY >"("")"]
+
+  {
+    jjtThis.value = t.image;
+  }
 }
 
-void init_statement() #INIT:
+void init_statement() #ASSIGN:
 {Token t;}
 {
   t=< PL1_WORD >"="value_of_init()
@@ -510,9 +512,21 @@ void options() #OPTIONS:
 }
 
 void call() #CALLS:
-{}
+{Token t = null;}
 {
-  < CALL >(< PL1_WORD >|< PL1_WORD >< BUILTIN >)("("parameterlist()")")?
+  < CALL >(t=< PL1_WORD >|< PL1_WORD >< BUILTIN >)("("(string_list()|parameterlist())")")?
+	{
+	  jjtThis.value = t.image;
+	}
+}
+
+void string_list() #STRINGLIST:
+{Token t = null;}
+{
+  t=< STRING >(< COMMA_SEPARATOR >(string_list()|parameterlist()))?
+  {
+    jjtThis.value = t.image;
+  }
 }
 
 void fetch() #FETCH:
@@ -553,7 +567,7 @@ void parameterlist() #PARA :
   Token t;
   }
 {
-  t=< PL1_WORD >(< COMMA_SEPARATOR >parameterlist())?
+  t=< PL1_WORD >(< COMMA_SEPARATOR >(parameterlist()|string_list()))?
 
   {
     jjtThis.value = t.image;

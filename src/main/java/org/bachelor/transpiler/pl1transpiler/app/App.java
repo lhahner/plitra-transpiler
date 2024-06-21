@@ -40,7 +40,8 @@ import org.bachelor.transpiler.pl1transpiler.errorhandling.IdentifierReferenceEx
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncompatibleTypeException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException;
 import org.bachelor.transpiler.pl1transpiler.mapper.MainMapper;
-import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ProgramMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.MapperStrategy.Mapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.MapperStrategy.ProgramMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.*;
 import org.bachelor.transpiler.pl1transpiler.scanner.*;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
@@ -91,7 +92,7 @@ public class App {
 		inputReader = new InputReader();
 		String inputFile = inputReader.getInputFilePath(CONFIG);
 		typechecker = new TypeChecker();
-		
+		Mapper mapper;
 		
 		if (inputFile.toString().contains(".pli")) {
 
@@ -106,7 +107,7 @@ public class App {
 //				catch(IncompatibleTypeException IRE) {
 //					IRE.printStackTrace();
 //				}
-			    mapper = new ProgramMapper(root);
+			    mapper = new Mapper(root);
 				// load Java Parser and give Pl1parser
 				//MainMapper jP = new MainMapper(pl1Parser);
 				// create expression with Parsetree

@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 import javax.swing.JRootPane;
 
 import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
+import org.bachelor.transpiler.pl1transpiler.mapper.MapperStrategy.ProgramMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.PictureMapper;
-import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ProgramMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.*;
 import org.bachelor.transpiler.pl1transpiler.scanner.InputReader;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
