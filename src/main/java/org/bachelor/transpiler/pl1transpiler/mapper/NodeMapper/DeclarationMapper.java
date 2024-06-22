@@ -1,7 +1,10 @@
-package org.bachelor.transpiler.pl1transpiler.mapper.MapperStrategy;
+package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
+
+import java.util.ArrayList;
 
 import org.bachelor.transpiler.pl1transpiler.errorhandling.TypeMappingException;
-import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.TypeMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
+import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Node;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
@@ -86,7 +89,9 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public String translate(SimpleNode simpleNode) {
 		this.mapChildNodes(simpleNode);
-		return this.scope + " " + this.type + " " + this.identifier + " " + ";";
+		return this.getScope() + " " 
+		     + this.getType() + " " 
+		     + this.getIdentifier() + ";";
 	}
 
 	/**
@@ -104,14 +109,14 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 				if (childNode.getId() == TreeSymbols.JJTTYPE) {
 					try {
 						this.setType(this.mapType(childNode));
-						this.setIdentifier(identifier);
 					} catch (TypeMappingException tme) {
 						tme.printStackTrace();
 					}
 				} else if (childNode.getId() == TreeSymbols.JJTID) {
 					String[] tmp = (String[]) childNode.jjtGetValue();
 					identifier = tmp[0];
-				} // no action needed for default case
+					this.setIdentifier(identifier);
+				}
 			}
 		}
 	}
@@ -157,22 +162,25 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * @param simpleNode the arithmetic node
 	 * @return the Java Expression
 	 */
-	public String mapArithmetic(SimpleNode simpleNode) {
-		for (int i = 0; i < simpleNode.jjtGetNumChildren(); i++) {
-			SimpleNode childNode = (SimpleNode) simpleNode.jjtGetChild(i);
-			if (childNode.toString().equals("Complex")) {
-				return super.javaWords.COMPLEX.getValue();
-			} else if (childNode.toString().equals("Float")) {
-				return super.javaWords.FLOAT.getValue();
-			} else if (childNode.toString().equals("Fixed")) {
-				return super.javaWords.BIGDECIMAL.getValue();
-			} else if (childNode.toString().equals("Binary")) {
-				return super.javaWords.BINARY.getValue();
-			} else if (childNode.toString().equals("Decimal")) {
-				return super.javaWords.DOUBLE.getValue();
-			} // no action needed for default case
+	public String mapArithmetic(SimpleNode simpleNode) throws TypeMappingException{
+		ArrayList<String> typeAttributes = (ArrayList<String>)simpleNode.jjtGetValue();
+		if (typeAttributes != null) {
+			for (String typeAttribute : typeAttributes) {
+				if (typeAttribute.equals("COMPLEX")) {
+					return super.javaWords.COMPLEX.getValue();
+				} else if (typeAttribute.equals("FIXED")) {
+					return super.javaWords.BIGDECIMAL.getValue();
+				} else if (typeAttribute.equals("BINARY")) {
+					return super.javaWords.BINARY.getValue();
+				} else if (typeAttribute.equals("DECIMAL")) {
+					return super.javaWords.DOUBLE.getValue();
+				}
+			}
+			throw new TypeMappingException("Arithmetic type without translateable propreteis.");
 		}
-		return null;
+		else {
+			throw new TypeMappingException("Arithmetic type without translateable propreteis.");
+		}
 	}
 
 	/**
@@ -182,18 +190,7 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * @return the Java Expression
 	 */
 	public String mapString(SimpleNode simpleNode) {
-		for (int i = 0; i < simpleNode.jjtGetNumChildren(); i++) {
-			SimpleNode childNode = (SimpleNode) simpleNode.jjtGetChild(i);
-			if (childNode.toString().equals("Char")) {
-				return super.javaWords.CHAR_OBJECT.getValue();
-			} else if (childNode.toString().equals("Bit")) {
-				return super.javaWords.CHAR.getValue();
-			} else if (childNode.toString().equals("Graphic")) {
-				return super.javaWords.CHAR_OBJECT.getValue();
-			} else if (childNode.toString().equals("Widechar")) {
-				return super.javaWords.CHAR_OBJECT.getValue();
-			} // no action needed for default case
-		}
+
 		return null;
 	}
 

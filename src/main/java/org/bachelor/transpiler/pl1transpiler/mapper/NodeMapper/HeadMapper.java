@@ -1,58 +1,115 @@
 package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import org.bachelor.transpiler.pl1transpiler.errorhandling.TypeMappingException;
+import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
+import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
-public class HeadMapper extends ProcMapper {
+/**
+ * The Class HeadMapper.
+ * This Class Maps the Head Node with a Java equivalent method head.
+ * The type of the method is not mapped here. For this @see TypeMapper.
+ */
+public class HeadMapper extends Mapper implements ITranslationBehavior {
 
-	String scope = "public ";
-	String identifier;
-	String type = super.javaWords.VOID.getValue();
-	String parameter = "()";
-	ArrayList<String> parameterIdentifierList = new ArrayList<String>();
+	/** The scope. */
+	private final String SCOPE = super.javaWords.PUBLIC.getValue();
 
-	public String mapHeadNode(SimpleNode procNode) {
+	/** The type. */
+	private String type = super.javaWords.VOID.getValue();
+	
+	/** The identifier. */
+	private String identifier = "";
+	
+	/** The parameter. */
+	private String parameter = "()";
+	
+	/** The parameter declaration list. */
+	private ArrayList<String> parameterDeclarationList = new ArrayList<String>();
+	
+	public String getSCOPE() {
+		return SCOPE;
+	}
+	
+	public String getType() {
+		return type;
+	}
 
-		if (super.hasChildren(procNode)) {
-			for (int i = 0; i < procNode.jjtGetNumChildren(); i++) {
+	public String getIdentifier() {
+		return identifier;
+	}
 
-				SimpleNode childNode = (SimpleNode) procNode.jjtGetChild(i);
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getParameter() {
+		return parameter;
+	}
+
+	public void setParameter(String parameter) {
+		this.parameter = parameter;
+	}
+
+	/**
+	 * Translate.
+	 *
+	 * @param simpleNode the simple node
+	 * @return the string
+	 */
+	public String translate(SimpleNode simpleNode) {
+		mapHeadNode(simpleNode);
+		return this.getSCOPE() + " "
+			+  this.getType() + " "
+			+  this.getIdentifier() + " "
+			+  this.getParameter() + "{ \n";
+	}
+
+	/**
+	 * Map head node.
+	 *
+	 * @param simpleNode the simple node
+	 * @return the string
+	 */
+	public void mapHeadNode(SimpleNode simpleNode) {
+		if (super.hasChildren(simpleNode)) {
+			for (int i = 0; i < simpleNode.jjtGetNumChildren(); i++) {
+				SimpleNode childNode = (SimpleNode) simpleNode.jjtGetChild(i);
 				switch (childNode.toString()) {
 				case "Id":
 					String[] tmp = (String[]) childNode.jjtGetValue();
-					this.identifier = tmp[0];
+					this.setIdentifier(tmp[0]);
 					break;
 				case "PARA":
 					this.setParameterDefinitionList(childNode);
-					this.parameter = mapParameterDefinitionlist(parameterIdentifierList);
-					break;
-				case "RETURNS":
-					try {
-						this.type = this.mapReturnType(childNode);
-					} catch (TypeMappingException tme) {
-						tme.printStackTrace();
-					}
+					this.parameter = mapParameterDefinitionlist(parameterDeclarationList);
 					break;
 				case "OPTIONS":
 					break;
 				default:
-					return null;
+					return; //@todo throw Exception
 				}
 			}
-		} else {
-			return null;
 		}
-		return scope + type + identifier + parameter;
 	}
 
+	/**
+	 * Map parameter definitionlist.
+	 *
+	 * @param identifiers the identifiers
+	 * @return the string
+	 */
 	public String mapParameterDefinitionlist(ArrayList<String> identifiers) {
 		String parameterlist = "(";
 		if (identifiers.size() > 1) {
 			for (String identifier : identifiers) {
-				if(identifier.equals(identifiers.get(identifiers.size()-1))) {
+				if (identifier.equals(identifiers.get(identifiers.size() - 1))) {
 					parameterlist = parameterlist + super.javaWords.OBJECT.getValue() + " " + identifier;
 					return parameterlist + ")";
 				}
@@ -60,24 +117,20 @@ public class HeadMapper extends ProcMapper {
 			}
 			return parameterlist + ")";
 		} else {
-			this.parameterIdentifierList.clear();
+			this.parameterDeclarationList.clear();
 			return "(" + super.javaWords.OBJECT.getValue() + " " + identifiers.get(0) + ")";
 		}
 	}
 
-	public String mapReturnType(SimpleNode headNode) throws TypeMappingException {
-		if (super.hasChildren(headNode)) {
-			SimpleNode typeNode = (SimpleNode) headNode.jjtGetChild(0);
-			return new TypeMapper().mapType(typeNode);
-		} else {
-			throw new TypeMappingException();
-		}
-	}
-	
+	/**
+	 * Sets the parameter definition list.
+	 *
+	 * @param paraNode the new parameter definition list
+	 */
 	public void setParameterDefinitionList(SimpleNode paraNode) {
-		this.parameterIdentifierList.add((String)paraNode.jjtGetValue());
-		if(super.hasChildren(paraNode)) {
-			setParameterDefinitionList((SimpleNode)paraNode.jjtGetChild(0));
+		this.parameterDeclarationList.add((String) paraNode.jjtGetValue());
+		if (super.hasChildren(paraNode)) {
+			setParameterDefinitionList((SimpleNode) paraNode.jjtGetChild(0));
 		}
 		return;
 	}

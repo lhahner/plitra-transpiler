@@ -1,27 +1,13 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL var_1 DECIMAL(1);
-	DCL var_2 DECIMAL(1);
-	DCL var_3 DECIMAL(1);
-	DCL var_4 DECIMAL(1);
-	DCL var_5 WIDECHAR(2);
+	DCL var_1 COMPLEX DECIMAL(1);
 	
-	
-	proc_1: PROC(para_1, para_2, para_3) RETURNS (DECIMAL(2));
-		DCL var_4 DECIMAL(4);
-		var_1 = 2002;
-		var_2 = 2001;
-		var_5 = 'LT';
-		CALL proc_2('Hello', var_2);
-		IF var_1 > var_2 THEN;
-			CALL proc_2('Hello', var_2);
-		END;
-		RETURN;
+	proc_1: PROC(para_1, para_2);
+		CALL proc_2('Hello', 'World');
 	END proc_1;
 	
-	proc_2: PROC(para_1, para_2, para_3) RETURNS (DECIMAL(2));
-		DISPLAY('Hello World');	
-		EXIT;
-	END proc_1;
+	proc_2: PROC(para_1, para_2);
+		GO TO para_1;
+	END proc_2;
 	
 END orgbachelorpli;

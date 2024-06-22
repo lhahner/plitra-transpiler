@@ -15,6 +15,7 @@ PARSER_BEGIN(Pl1Parser)
 package org.bachelor.transpiler.pl1transpiler.parser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import org.bachelor.transpiler.pl1transpiler.symboltable.*;
 
 public class Pl1Parser{
@@ -33,6 +34,7 @@ public class Pl1Parser{
 	private ArrayList<String [] > idsAndScopes = new ArrayList<String []>();
 	private String[] tmp_idsAndScopes = new String[3];
 	ArrayList<String > paralist = new ArrayList<String >();
+	ArrayList<String > typePropreties;
 	
 	private int charLength;
 	private String number;
@@ -301,7 +303,7 @@ void package_() #PACKAGE :
   
   }
 {
-  ([condition_prefix()":"]id("PACKAGE")":"< PACKAGE >[exports()][< RESERVES >"("< PL1_WORD >")"][options()])
+  ([[< AREA >]":"]id("PACKAGE")":"< PACKAGE >[< EXPORTS >("(" parameterlist() ")")?][< RESERVES >"("< PL1_WORD >")"][options()])
   (var_declaration(1)|procedure())*
   (footer())
 }
@@ -312,22 +314,6 @@ void footer() #END :
 {
   < END >t = < PL1_WORD >
   {jjtThis.value = t.image;}
-}
-
-
-void exports() #GLOBAL :
-{}
-{
-  < EXPORTS >("(" parameterlist() ")")?
-}
-
-/**
-* @todo Implement Chapter 17 for condition prefix
-**/
-void condition_prefix() #CONDITION :
-{}
-{
-  [< AREA >]
 }
 
 void procedure() #PROC :
@@ -375,8 +361,6 @@ void do_statement() #LOOP :
   	  < DO >
 	(
 	  do_type_2()
-	| do_type_3() //Not working
-	| do_type_4()
 	)
 }
 
@@ -547,19 +531,27 @@ void release() #RELEASE:
 }
 
 void termination() #TERMINATE:
-{}
+{
+  ArrayList<String > terminationPropreties = new ArrayList<String >();
+  Token returnType = null;
+  Token returnValue = null;
+  }
 {
   (
-  return_val()
-  |< GOTO >< PL1_WORD >
-  |< STOP >
-  |< EXIT >)
-}
-
-void return_val():
-{}
-{
-  (< RETURN >[< PL1_WORD >|("("parameterlist()")"|< INTEGER >)|"'"< PL1_WORD >"'"])
+  (returnType = < RETURN >[returnValue=< PL1_WORD >|("("parameterlist()")"|< INTEGER >)|string_list()])
+  |returnType = < GOTO >returnValue=< PL1_WORD >
+  |returnType = < STOP >
+  |returnType = < EXIT >)
+  {
+    terminationPropreties.add(returnType.image);
+    if(returnValue != null) { 
+    	terminationPropreties.add(returnValue.image);
+   }
+   else {
+     terminationPropreties.add("");
+   }
+   jjtThis.value =  terminationPropreties;
+  }
 }
 
 void parameterlist() #PARA :
@@ -579,32 +571,33 @@ void parameterlist() #PARA :
 * Grammar Expression for a Variable declaration.
 **/
 void var_declaration(int scope) #VAR :
-{this.scope = scope;}
+{
+  Token hierachie = null;
+  this.scope = scope;}
 {	  ( < DCL > | < DECLARE > ) 
-	  (this.hierachie = hierachie())?
+	  (hierachie = < INTEGER >)?
+	   { if(hierachie != null) { 
+	     this.hierachie = Integer.parseInt(hierachie.image);
+	   }
+	     }
  	   id("VAR") ( type()| type() < COMMA_SEPARATOR > |
       (< COMMA_SEPARATOR > minor(this.getHierachie(), scope))*) | minor(this.getHierachie(), scope)
+     
 }
 
 /**
 * Grammar Expression for a nested Variable Declaration.
 **/
 void minor(int parentHierachie, int scope) #MINOR :
-{this.scope = scope;}
+{ Token hierachie;
+  this.scope = scope;}
 {
-	this.hierachie = hierachie() id("VAR")
+	hierachie = < INTEGER > id("VAR")
+	{this.hierachie = Integer.parseInt(hierachie.image);
+	 jjtThis.value = hierachie.image; }
 	(type() |  type() < COMMA_SEPARATOR > | ( < COMMA_SEPARATOR > minor(this.getHierachie(), scope))*) 
 }
 
-/**
-* @return hierachie of the Variable
-**/
-int hierachie() #HIERACHIE:
-{Token t; }
-{
-	t = < INTEGER >
-	{ return Integer.parseInt(t.image); }
-}
 
 /**
 * Datatype of the Variabledeclaration.
@@ -612,82 +605,13 @@ int hierachie() #HIERACHIE:
 void type() #TYPE :
 {}
 {
-	(	  codedArithmetic() | String() | Locator() | Picture() | File() | Entry()
+	(	  codedArithmetic()
+	  | String()
+	  | (< POINTER > | < OFFSET > |  < HANDLE >) < VALUE >< LOCATES >
+	  | Picture()
+	  | < FILE > < ENVIRONMENT > ( < STREAM > | < RECORD >) (< INPUT > | < OUTPUT > | < UPDATE >) (<SEQUENTIAL >|  < DIRECT >) (< BUFFERED > | < UNBUFFERED >) < KEYED >< PRINT >
+	  | < ENTRY > [< RETURNS >]
 	) 
-}
-
-/**
-* Grammar Expression for Entry.
-**/
-void Entry() #Entry :
-{}
-{
-  < ENTRY > [< RETURNS >]
-}
-
-/**
-* Grammar Expression for a File reader.
-**/
-void File() #File :
-{}
-{
-  < FILE > < ENVIRONMENT >
-  ( Stream() | Record()) (Input() | Output() | Update())
-  (Sequential() | Direct()) (Buffered() | Unbuffered()) < KEYED >< PRINT >
-}
-
-void Stream() #Stream :
-{}
-{
-  < STREAM >
-}
-
-void Record() #Record :
-{}
-{
-  < RECORD >
-}
-
-void Input() #Input :
-{}
-{
-  < INPUT >
-}
-
-void Output() #Output :
-{}
-{
-  < OUTPUT >
-}
-
-void Update() #Update :
-{}
-{
-  <UPDATE >
-}
-
-void Sequential() #Sequential :
-{}
-{
-  <SEQUENTIAL >
-}
-
-void Direct() #Direct :
-{}
-{
-  < DIRECT >
-}
-
-void Buffered() #Buffered :
-{}
-{
-  < BUFFERED >
-}
-
-void Unbuffered() #Unbuffered :
-{}
-{
-  < UNBUFFERED >
 }
 
 /**
@@ -696,21 +620,10 @@ void Unbuffered() #Unbuffered :
 String Picture() #PictureExpression :
 { String t; }
 {
-  (Pic() | Widepic()) [Real() | Complex() ] t = PictureAttribute() [< VALUE > ]
+  (( < PIC > | < PICTURE > ) | < WIDEPIC >) [< REAL > | < COMPLEX >] t = PictureAttribute() [< VALUE > ]
   { return pictureAttribiute = t; }
 }
 
-void Pic() #Picture :
-{}
-{
-  ( < PIC > | < PICTURE > )
-}
-
-void Widepic() #Widepic :
-{}
-{
-  < WIDEPIC >
-}
 
 String PictureAttribute() #PictureAttribute:
 {
@@ -773,160 +686,68 @@ String LengthPicture() #PictureLength:
   {return t.toString() + t1.toString() + t2.toString(); }
 }
 
-/**
-* Grammar Expression for a Dynamic allocated Datatype.
-**/
-void Locator() #Locator:
-{}
-{
-	(Pointer() | Offset() | Handle()) < VALUE >< LOCATES >
-}
-
-void Pointer() #Pointer:
-{}
-{
-  < POINTER >
-}
-
-void Offset() #Offset:
-{}
-{
-  < OFFSET >
-}
-
-void Handle() #Handle:
-{}
-{
-  < HANDLE >
-}
 
 /**
 * Grammar Expression for a String Expression.
 **/
 void String() #String:
-{}
+{Token length = null;}
 {
-  ( Char() | Bit() | Graphic() | Widechar()) (StringAttribute() | StringAttribute() ) [< NONVARYING >] [< VALUE >]
+  ( (< CHAR > | < CHARACTER >)
+  | < BIT >
+  |  < GRAPHIC >
+  | < WIDECHAR >) ("(" length = < INTEGER > ")") [< NONVARYING >] [< VALUE >]
+    {jjtThis.value = length; }
 }
 
-void Widechar() #Widechar:
-{}
-{
-  < WIDECHAR >
-}
-
-void Graphic() #Graphic:
-{}
-{
-   < GRAPHIC >
-}
-
-void Char() #Char:
-{}
- {
-	(< CHAR > | < CHARACTER >)
- }
-
-void Bit() #Bit:
-{}
-{
-  < BIT >
-}
 
 /**
+* @todo change typeProprties to Map.
 * Grammar Expression for a Arithmetic Datatype.
 **/
 void codedArithmetic() #Arithmetic:
-{}
 {
-  [ Real()  | Complex()  ]
-  [ Float() | Fixed()  ]
-  ( Binary() | Decimal() ) (size()) [Signed() | Unsigned() ]
-}
+  typePropreties = new ArrayList<String >();
 
-void Signed() #Signed:
-{}
+  Token typeAttribute = null;
+  Token type = null;
+  Token integerPropreties = null;
+  Token fractionalPropreties = null;
+  
+  }
 {
-  < SIGNED >
-}
-
-void Unsigned() #Unsigned:
-{}
-{
-  < UNSIGNED >
-}
-
-void Decimal() #Decimal:
-{}
-{
-   < DECIMAL > 
-}
-
-void Fixed() #Fixed:
-{}
-{
-	< FIXED >
-}
-
-void Float() #Float:
-{}
-{
-	< FLOAT >
-}
-
-
-void Binary() #Binary:
-{}
-{
-	( < BINARY > | < BIN > )	  
-}
-
-void size():
-{}
-{
-  [< PRECISION >](attributes() | attribute())
-}
-
-void StringAttribute() #Length:
-{Token t;}
-{
-	("(" t = < INTEGER > ")")
-	{this.length.add(t.toString());
-	 jjtThis.value = t.image;
+  [ < REAL >  | typeAttribute = < COMPLEX >  ]
+  {
+	if(typeAttribute != null) {
+	  typePropreties.add( typeAttribute.image);
 	}
-}
-
-void attribute() #Int:
-{ Token p;}
-{
-	("(" p = < INTEGER > ")")
-	{this.length.add(p.toString());
-	jjtThis.value = p.image;}
-}
-
-void attributes () #Double:
-{Token p;
-Token q;}
-{
-	("(" p = < INTEGER > "," q = <  INTEGER > ")")
-	{this.length.add(p + "," + q);
-	jjtThis.value = p.image + "," + q.image;
+  }
+  [ < FLOAT > | typeAttribute = < FIXED >  ]
+  {
+    if(typeAttribute != null) {
+	  typePropreties.add(typeAttribute.image);
 	}
+  }
+  ( ( type = < BINARY > | type =< BIN > )
+  | type = < DECIMAL >  )
+  {
+     if(type != null) {
+	  typePropreties.add(type.image);
+	}
+  }
+  ( [< PRECISION >]
+  (("(" integerPropreties = < INTEGER > ")") | ("(" integerPropreties = < INTEGER > "," fractionalPropreties = <  INTEGER > ")"))) [< SIGNED > | < UNSIGNED > ]
+  { if(fractionalPropreties == null) {
+		typePropreties.add(integerPropreties.image);
+  	}
+  	else {
+  		typePropreties.add(integerPropreties.image + "," + fractionalPropreties.image);  
+    }
 
+    jjtThis.value = typePropreties;
+  }
 }
 
-
-void Real() #Real:
-{}
-{  
-	< REAL >
-}
-
-void Complex() #Complex:
-{}
-{
-  < COMPLEX >
-}
   
 /**
 * Grammar Expression for a  Identifier.

@@ -95,7 +95,8 @@ public enum Template {
 	ELSE_IF("else if"),
 	WHILE("while"),
 	FOR("for"),
-	DO("do");
+	DO("do"),
+	CONTINUE("continue");
 
 	private final String symbol;
 	

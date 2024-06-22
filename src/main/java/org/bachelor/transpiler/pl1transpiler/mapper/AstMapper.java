@@ -1,8 +1,16 @@
-package org.bachelor.transpiler.pl1transpiler.mapper.MapperStrategy;
+package org.bachelor.transpiler.pl1transpiler.mapper;
 
 import java.util.HashMap;
 import java.util.Hashtable;
 
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.BodyMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.CallMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.DeclarationMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.EndMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.HeadMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.PackageMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ProgramMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.TerminateMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
@@ -13,12 +21,10 @@ public class AstMapper {
 	public AstMapper() {
 		astMapper.put(TreeSymbols.JJTPROGRAM, new ProgramMapper());
 		astMapper.put(TreeSymbols.JJTPACKAGE, new PackageMapper());
-//		astMapper.put(TreeSymbols.JJTEND, null);
+		astMapper.put(TreeSymbols.JJTEND, new EndMapper());
 //		astMapper.put(TreeSymbols.JJTGLOBAL, null);
 //		astMapper.put(TreeSymbols.JJTCONDITION, null);
-//		astMapper.put(TreeSymbols.JJTPROC, null);
-//		astMapper.put(TreeSymbols.JJTHEAD, null);
-//		astMapper.put(TreeSymbols.JJTBODY, null);
+		astMapper.put(TreeSymbols.JJTHEAD, new HeadMapper());
 //		astMapper.put(TreeSymbols.JJTBRANCH, null);
 //		astMapper.put(TreeSymbols.JJTLOOP, null);
 //		astMapper.put(TreeSymbols.JJTDO, null);
@@ -33,12 +39,12 @@ public class AstMapper {
 //		astMapper.put(TreeSymbols.JJTVALUES, null);
 //		astMapper.put(TreeSymbols.JJTRETURNS, null);
 //		astMapper.put(TreeSymbols.JJTOPTIONS, null);
-//		astMapper.put(TreeSymbols.JJTCALLS, null);
+		astMapper.put(TreeSymbols.JJTCALLS, new CallMapper());
 //		astMapper.put(TreeSymbols.JJTSTRINGLIST, null);
 //		astMapper.put(TreeSymbols.JJTFETCH, null);
 //		astMapper.put(TreeSymbols.JJTSTATEMENT, null);
 //		astMapper.put(TreeSymbols.JJTRELEASE, null);
-//		astMapper.put(TreeSymbols.JJTTERMINATE, null);
+		astMapper.put(TreeSymbols.JJTTERMINATE, new TerminateMapper());
 //		astMapper.put(TreeSymbols.JJTRETURN_VAL, null);
 //		astMapper.put(TreeSymbols.JJTPARA, null);
 		astMapper.put(TreeSymbols.JJTVAR, new DeclarationMapper());
@@ -71,7 +77,7 @@ public class AstMapper {
 //		astMapper.put(TreeSymbols.JJTGRAPHIC, null);
 //		astMapper.put(TreeSymbols.JJTCHAR, null);
 //		astMapper.put(TreeSymbols.JJTBIT, null);
-//		astMapper.put(TreeSymbols.JJTARITHMETIC, null);
+//		astMapper.put(TreeSymbols.JJTARITHMETIC, new ArithmeticMapper());
 //		astMapper.put(TreeSymbols.JJTSIGNED, null);
 //		astMapper.put(TreeSymbols.JJTUNSIGNED, null);
 //		astMapper.put(TreeSymbols.JJTDECIMAL, null);

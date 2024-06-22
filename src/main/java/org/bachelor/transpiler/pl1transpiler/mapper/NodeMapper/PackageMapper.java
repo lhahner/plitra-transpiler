@@ -1,53 +1,38 @@
 package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
-import java.util.ArrayList;
-
-import org.bachelor.transpiler.pl1transpiler.errorhandling.PackageMappingException;
-import org.bachelor.transpiler.pl1transpiler.mapper.MapperStrategy.ProgramMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
+import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
+import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
-public class PackageMapper extends ProgramMapper {
+public class PackageMapper extends Mapper implements ITranslationBehavior {
 
+	private final String type = super.javaWords.PACKAGE.getValue();
+	private String identifier = null;
 
-	public PackageMapper() {
-
+	public String getIdentifier() {
+		return identifier;
 	}
 
-	public String mapPackageNode(SimpleNode packageNode) throws PackageMappingException{
-		if(super.hasChildren(packageNode)) {
-			SimpleNode child = (SimpleNode)packageNode.jjtGetChild(0);
-			// {id, scope, hierachie, typ}
-			String[] id = (String[] )child.jjtGetValue();
-			return 
-					super.javaWords.PACKAGE.getValue()
-				+ " " + id[0] + ";";
-		}
-		else {
-			throw new PackageMappingException("PL/I Package has no identifier.");
-		}
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
 	}
-	
-	/**
-	 * @todo give variable as parameterl
-	 */
-	public void mapChildNodes(SimpleNode packageNode) {
-		if (super.hasChildren(packageNode)) {
-			for (int i = 0; i < packageNode.jjtGetNumChildren(); i++) {
 
-				SimpleNode childNode = (SimpleNode) packageNode.jjtGetChild(i);
+	public String translate(SimpleNode simpleNode) {
+		mapPackageNode(simpleNode);
+		return this.type + " " + this.identifier + ";";
+	}
 
-				switch (childNode.toString()) {
-				case "VAR":					
-					super.java_expression.add(new VarMapper().mapVarNode(childNode));
-					break;
-				case "PROC":
-					super.java_expression.add(new ProcMapper().mapProcNode(childNode));
-					break;
-				default:
-					break;
+	public void mapPackageNode(SimpleNode simpleNode) {
+		Pl1ParserTreeConstants TreeSymbols = null;
+		if (super.hasChildren(simpleNode)) {
+			for (int i = 0; i < simpleNode.jjtGetNumChildren(); i++) {
+				if (simpleNode.jjtGetChild(i).getId() == TreeSymbols.JJTID) {
+					SimpleNode child = (SimpleNode)simpleNode.jjtGetChild(i);
+					String[] idPropreties = (String[])child.jjtGetValue();
+					this.setIdentifier(idPropreties[0]);
 				}
 			}
 		}
 	}
-
 }

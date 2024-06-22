@@ -6,85 +6,47 @@ public interface Pl1ParserTreeConstants
   public int JJTPROGRAM = 0;
   public int JJTPACKAGE = 1;
   public int JJTEND = 2;
-  public int JJTGLOBAL = 3;
-  public int JJTCONDITION = 4;
-  public int JJTPROC = 5;
-  public int JJTHEAD = 6;
-  public int JJTBODY = 7;
-  public int JJTBRANCH = 8;
-  public int JJTLOOP = 9;
-  public int JJTDO = 10;
-  public int JJTDO_TYPE_3 = 11;
-  public int JJTDO_TYPE_4 = 12;
-  public int JJTSPECIFICATION = 13;
-  public int JJTBOOL = 14;
-  public int JJTOP = 15;
-  public int JJTENTRY = 16;
-  public int JJTDISPLAY = 17;
-  public int JJTASSIGN = 18;
-  public int JJTVALUES = 19;
-  public int JJTRETURNS = 20;
-  public int JJTOPTIONS = 21;
-  public int JJTCALLS = 22;
-  public int JJTSTRINGLIST = 23;
-  public int JJTFETCH = 24;
-  public int JJTSTATEMENT = 25;
-  public int JJTRELEASE = 26;
-  public int JJTTERMINATE = 27;
-  public int JJTRETURN_VAL = 28;
-  public int JJTPARA = 29;
-  public int JJTVAR = 30;
-  public int JJTMINOR = 31;
-  public int JJTHIERACHIE = 32;
-  public int JJTTYPE = 33;
-  public int JJTFILE = 34;
-  public int JJTSTREAM = 35;
-  public int JJTRECORD = 36;
-  public int JJTINPUT = 37;
-  public int JJTOUTPUT = 38;
-  public int JJTUPDATE = 39;
-  public int JJTSEQUENTIAL = 40;
-  public int JJTDIRECT = 41;
-  public int JJTBUFFERED = 42;
-  public int JJTUNBUFFERED = 43;
-  public int JJTPICTUREEXPRESSION = 44;
-  public int JJTPICTURE = 45;
-  public int JJTWIDEPIC = 46;
-  public int JJTPICTUREATTRIBUTE = 47;
-  public int JJTPICTURELETTER = 48;
-  public int JJTNUMBER = 49;
-  public int JJTPICTURELENGTH = 50;
-  public int JJTLOCATOR = 51;
-  public int JJTPOINTER = 52;
-  public int JJTOFFSET = 53;
-  public int JJTHANDLE = 54;
-  public int JJTSTRING = 55;
-  public int JJTWIDECHAR = 56;
-  public int JJTGRAPHIC = 57;
-  public int JJTCHAR = 58;
-  public int JJTBIT = 59;
-  public int JJTARITHMETIC = 60;
-  public int JJTSIGNED = 61;
-  public int JJTUNSIGNED = 62;
-  public int JJTDECIMAL = 63;
-  public int JJTFIXED = 64;
-  public int JJTFLOAT = 65;
-  public int JJTBINARY = 66;
-  public int JJTSIZE = 67;
-  public int JJTLENGTH = 68;
-  public int JJTINT = 69;
-  public int JJTDOUBLE = 70;
-  public int JJTREAL = 71;
-  public int JJTCOMPLEX = 72;
-  public int JJTID = 73;
+  public int JJTPROC = 3;
+  public int JJTHEAD = 4;
+  public int JJTBODY = 5;
+  public int JJTBRANCH = 6;
+  public int JJTLOOP = 7;
+  public int JJTDO = 8;
+  public int JJTDO_TYPE_3 = 9;
+  public int JJTDO_TYPE_4 = 10;
+  public int JJTSPECIFICATION = 11;
+  public int JJTBOOL = 12;
+  public int JJTOP = 13;
+  public int JJTENTRY = 14;
+  public int JJTDISPLAY = 15;
+  public int JJTASSIGN = 16;
+  public int JJTVALUES = 17;
+  public int JJTRETURNS = 18;
+  public int JJTOPTIONS = 19;
+  public int JJTCALLS = 20;
+  public int JJTSTRINGLIST = 21;
+  public int JJTFETCH = 22;
+  public int JJTSTATEMENT = 23;
+  public int JJTRELEASE = 24;
+  public int JJTTERMINATE = 25;
+  public int JJTPARA = 26;
+  public int JJTVAR = 27;
+  public int JJTMINOR = 28;
+  public int JJTTYPE = 29;
+  public int JJTPICTUREEXPRESSION = 30;
+  public int JJTPICTUREATTRIBUTE = 31;
+  public int JJTPICTURELETTER = 32;
+  public int JJTNUMBER = 33;
+  public int JJTPICTURELENGTH = 34;
+  public int JJTSTRING = 35;
+  public int JJTARITHMETIC = 36;
+  public int JJTID = 37;
 
 
   public String[] jjtNodeName = {
     "PROGRAM",
     "PACKAGE",
     "END",
-    "GLOBAL",
-    "CONDITION",
     "PROC",
     "HEAD",
     "BODY",
@@ -108,52 +70,18 @@ public interface Pl1ParserTreeConstants
     "STATEMENT",
     "RELEASE",
     "TERMINATE",
-    "return_val",
     "PARA",
     "VAR",
     "MINOR",
-    "HIERACHIE",
     "TYPE",
-    "File",
-    "Stream",
-    "Record",
-    "Input",
-    "Output",
-    "Update",
-    "Sequential",
-    "Direct",
-    "Buffered",
-    "Unbuffered",
     "PictureExpression",
-    "Picture",
-    "Widepic",
     "PictureAttribute",
     "PictureLetter",
     "Number",
     "PictureLength",
-    "Locator",
-    "Pointer",
-    "Offset",
-    "Handle",
     "String",
-    "Widechar",
-    "Graphic",
-    "Char",
-    "Bit",
     "Arithmetic",
-    "Signed",
-    "Unsigned",
-    "Decimal",
-    "Fixed",
-    "Float",
-    "Binary",
-    "size",
-    "Length",
-    "Int",
-    "Double",
-    "Real",
-    "Complex",
     "Id",
   };
 }
-/* JavaCC - OriginalChecksum=a0fb554ea0aa1efae7d174a442ba20d8 (do not edit this line) */
+/* JavaCC - OriginalChecksum=8656c93dd718a38f97430d57abf9a752 (do not edit this line) */

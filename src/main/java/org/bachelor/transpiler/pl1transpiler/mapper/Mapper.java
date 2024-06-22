@@ -1,4 +1,4 @@
-package org.bachelor.transpiler.pl1transpiler.mapper.MapperStrategy;
+package org.bachelor.transpiler.pl1transpiler.mapper;
 
 import org.bachelor.transpiler.pl1transpiler.parser.Node;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
@@ -20,9 +20,10 @@ public class Mapper {
 	public void iterateTree(SimpleNode startNode) {
 		if (startNode.jjtGetParent() == null) {
 			if (this.hasChildren(startNode)) {
-				var.setTranslationBevaior(AstMapper.astMapper.get(startNode.getId()));
-				var.applyTranslate((SimpleNode)startNode);
-				
+				if(AstMapper.astMapper.get(startNode.getId()) != null) {
+					var.setTranslationBevaior(AstMapper.astMapper.get(startNode.getId()));
+					var.applyTranslate((SimpleNode)startNode);
+				}
 				for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
 					iterateTree((SimpleNode) startNode.jjtGetChild(i));
 				}
@@ -31,9 +32,11 @@ public class Mapper {
 			}
 		} else {
 			for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
-				var.setTranslationBevaior(AstMapper.astMapper.get(startNode.getId()));
-				var.applyTranslate(startNode);
-				
+				if(AstMapper.astMapper.get(startNode.jjtGetChild(i).getId()) != null) {
+					var.setTranslationBevaior(AstMapper.astMapper.get(startNode.jjtGetChild(i).getId()));
+					var.applyTranslate((SimpleNode)startNode.jjtGetChild(i));
+					
+				}
 				if (this.hasChildren(startNode.jjtGetChild(i))) {
 					iterateTree((SimpleNode) startNode.jjtGetChild(i));
 				}

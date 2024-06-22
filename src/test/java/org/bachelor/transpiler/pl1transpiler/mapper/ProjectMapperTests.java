@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import org.bachelor.transpiler.pl1transpiler.mapper.MapperStrategy.ProgramMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ProgramMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
