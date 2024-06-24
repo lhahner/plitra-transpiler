@@ -46,8 +46,8 @@ public class DisplayMapper extends Mapper implements ITranslationBehavior{
 			return this.getSYSOUT()
 				     + "(" + this.getMessage() + "); \n"
 				     + this.getParameter()
-				     + " = "
-				     + this.getSYSIN() + "; \n ";
+				     + ".init("
+				     + this.getSYSIN() + "); \n ";
 		}
 		else {
 			return this.getSYSOUT()

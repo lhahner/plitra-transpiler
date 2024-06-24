@@ -92,6 +92,16 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 					break;
 				case "OPTIONS":
 					break;
+				case "RETURNS":
+					try {
+						if(super.hasChildren(childNode)) {
+							this.setType(new DeclarationMapper()
+									.mapType((SimpleNode)childNode.jjtGetChild(0)));
+						}
+					}
+					catch(TypeMappingException tme) {
+						tme.printStackTrace();
+					}
 				default:
 					return; //@todo throw Exception
 				}

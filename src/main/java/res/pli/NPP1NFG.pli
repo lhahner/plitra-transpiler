@@ -1,13 +1,20 @@
 orgbachelorpli: PACKAGE;
 	
-	main_proc: PROC;
-		CALL login;
-	END main_proc;
+	DCL var_1 WIDECHAR(15);
+	DCL var_2 BIT(1);
+	DCL var_3 GRAPHIC(4);
+	DCL var_4 CHAR(5);
 	
-	login: PROC;
-		DCL user_input CHAR(15);
-		DISPLAY('Please Input Username') REPLY(user_input);
-		RETURN user_input;
-	END login;
+	proc_1: PROC RETURNS(WIDECHAR(15));
+		RETURN var_1;
+	END proc_1;
+	
+	proc_2: PROC RETURNS(BIT(1));
+		RETURN var_2;
+	END proc_2;
+	
+	proc_3: PROC RETURNS(CHAR(5));
+		RETURN 'tibor';
+	END proc_3;
 	
 END orgbachelorpli;

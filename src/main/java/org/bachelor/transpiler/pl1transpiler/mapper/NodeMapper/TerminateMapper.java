@@ -9,15 +9,8 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 public class TerminateMapper extends Mapper implements ITranslationBehavior {
 
 	private String termination;
+	private String Object;
 	private String values;
-
-	public String getValues() {
-		return values;
-	}
-
-	public void setValues(String values) {
-		this.values = values;
-	}
 
 	public String getTermination() {
 		return termination;
@@ -27,10 +20,29 @@ public class TerminateMapper extends Mapper implements ITranslationBehavior {
 		this.termination = termination;
 	}
 
+	public String getObject() {
+		return Object;
+	}
+
+	public void setObject(String object) {
+		Object = object;
+	}
+
+	public String getValues() {
+		return values;
+	}
+
+	public void setValues(String values) {
+		this.values = values;
+	}
+
 	public String translate(SimpleNode simpleNode) {
 		this.mapTerminateNode(simpleNode);
-		return this.getTermination() + " "
-			 + this.values + ";";
+		if (this.getObject() != null) {
+			return this.getTermination() + " " + this.getObject() + "(" + this.getValues() + ");";
+		} else {
+			return this.getTermination() + " " + this.getValues() + ";";
+		}
 	}
 
 	public void mapTerminateNode(SimpleNode simpleNode) {
@@ -39,7 +51,7 @@ public class TerminateMapper extends Mapper implements ITranslationBehavior {
 		if (simpleNode.jjtGetValue() != null) {
 			ArrayList<String> returnPropreties = (ArrayList<String>) simpleNode.jjtGetValue();
 			if (super.hasChildren(simpleNode)) {
-				this.setValuesList((SimpleNode)simpleNode.jjtGetChild(0), valuesList);
+				this.setValuesList((SimpleNode) simpleNode.jjtGetChild(0), valuesList);
 				this.setValues(mapTerminationValuesList(valuesList));
 			}
 			switch (returnPropreties.get(0)) {
@@ -47,6 +59,11 @@ public class TerminateMapper extends Mapper implements ITranslationBehavior {
 				this.setTermination(super.javaWords.RETURN.getValue());
 				if (!returnPropreties.get(1).equals("")) {
 					this.setValues(returnPropreties.get(1));
+				}
+				if (this.getValues().contains("'")) {
+					String instantiator = super.javaWords.NEW.getValue() + " " + super.javaWords.CHAR_OBJECT.getValue()
+							+ super.javaWords.INIT.getValue();
+					this.setObject(instantiator);
 				}
 				return;
 			case "GO TO":

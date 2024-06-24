@@ -24,16 +24,17 @@ public enum Template {
 
 	MAIN_METHOD("public static void main(String[] args) { };"),
 	
-	PL1_CHAR_CLASS("class CHAR implements Datatype{ "
+	PL1_CHAR_CLASS("class CHAR{ "
 			+ "char[] varname; "
 			+ "public CHAR(int limit) { \n"
 			+ "varname =  new char[limit]; } \n"
 			+ "@Override public String toString() { \n"
 			+ " String string = new String(varname); \n"
 			+ "return string; } \n"
-			+ "public void init(String varname) { \n"
+			+ "public CHAR init(String varname) { \n"
 			+ "for(int i = 0; i<this.varname.length; i++) { \n"
-			+ "this.varname[i] = varname.charAt(i); }}} \n"),
+			+ "this.varname[i] = varname.charAt(i); "
+			+ "return this;}}} \n"),
 
 	PICTURE_CLASS("class PICTURE implements Datatype{\r\n"
 			+ "	Pattern pattern;\r\n"
@@ -98,7 +99,8 @@ public enum Template {
 	DO("do"),
 	CONTINUE("continue"),
 	SYSOUT("System.out.println"),
-	SYSIN("System.console().readLine()");
+	SYSIN("System.console().readLine()"),
+	INIT(".init");
 
 	private final String symbol;
 	
