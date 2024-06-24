@@ -6,16 +6,26 @@ import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class callMapper.
+ * <h1>Summary</h1>
+ * The Class CallMapper will be called the strategy of the TranlationBehavior Object
+ * changes to CallMapper. This happens whenever a CALL Node occurs in the AST.
+ * This class maps a CALL expression from PL/I.
+ * 
+ * <h2>Input Example</h2>
+ * </br>
+ * {@code 
+ * 		CALL proc_1();
+ * or
+ * 		CALL proc_2(para_1, para_2);
+ * }
  */
 public class CallMapper extends Mapper implements ITranslationBehavior{
 	
-	/** The identifier. */
+	/** identifier of the calling method*/
 	private String identifier = "";
 	
-	/** The parameter. */
+	/** The parameter of the calling method. */
 	private String parameter = "()";
 	
 	/**
@@ -54,14 +64,17 @@ public class CallMapper extends Mapper implements ITranslationBehavior{
 		this.parameter = parameter;
 	}
 	
-	/** The parameter assign list. */
+	/** List of Parameter which are assigned by a method call.
+	 *  e.g.: CALL proc_1('para_1', 'para_2'); */
 	private ArrayList<String> parameterAssignList = new ArrayList<String>();
 	
 	/**
-	 * Translate.
+	 * This Method is part of the ITranslationBehvior interface. It will be called
+	 * whenever the Behavior in class @see TranslationMapper is set to CallMapper.
+	 * Check also @see astMapper for other behavior references.
 	 *
-	 * @param simpleNode the simple node
-	 * @return the string
+	 * @param simpleNode Node in which the CALL is defined.
+	 * @return the method to be called in Java.
 	 */
 	public String translate(SimpleNode simpleNode) {
 		mapCallStatement(simpleNode);
@@ -70,9 +83,10 @@ public class CallMapper extends Mapper implements ITranslationBehavior{
 	}
 	
 	/**
-	 * Map call statement.
+	 * Maps all the child elements and values from the Parse-Tree
+	 * with the fitting Java-Macros defined in @see Template.
 	 *
-	 * @param simpleNode the simple node
+	 * @param simpleNode		Node in which the CALL is defined.
 	 */
 	public void mapCallStatement(SimpleNode simpleNode) {
 		String identifier = (String)simpleNode.jjtGetValue();
@@ -86,8 +100,11 @@ public class CallMapper extends Mapper implements ITranslationBehavior{
 	
 	/**
 	 * Sets the parameter definition list.
+	 * Which is a list that contains all the parameter of a method.
+	 * Calls itself recursively and iterates through all child nodes,
+	 * that define a parameter for the method.
 	 *
-	 * @param paraNode the new parameter definition list
+	 * @param paraNode		Parameter Node of the parse tree, should contain identifier as value.
 	 */
 	public void setParameterDefinitionList(SimpleNode paraNode) {
 		this.parameterAssignList.add((String) paraNode.jjtGetValue());
@@ -98,10 +115,14 @@ public class CallMapper extends Mapper implements ITranslationBehavior{
 	}
 	
 	/**
-	 * Map parameter assignlist.
-	 *
-	 * @param identifiers the identifiers
-	 * @return the string
+	 * Map parameter assignlist. 
+	 * This Maps the Parameter list in the format that Java requires.
+	 * e.g.: (para_1, para_2)
+	 * This method should be called after setting the setParameterDefinitionList.
+	 * Without it will return null.
+	 * 
+	 * @param identifiers		List of identifiers defined in the parameter-list.
+	 * @return a string which will be the parameter-list for the calling method.
 	 */
 	public String mapParameterAssignlist(ArrayList<String> identifiers) {
 		String parameterlist = "(";

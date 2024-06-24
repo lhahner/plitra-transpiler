@@ -23,6 +23,7 @@ public class AstMapper {
 		astMapper.put(TreeSymbols.JJTPROGRAM, new ProgramMapper());
 		astMapper.put(TreeSymbols.JJTPACKAGE, new PackageMapper());
 		astMapper.put(TreeSymbols.JJTEND, new EndMapper());
+		astMapper.put(TreeSymbols.JJTBODY, new BodyMapper());
 //		astMapper.put(TreeSymbols.JJTGLOBAL, null);
 //		astMapper.put(TreeSymbols.JJTCONDITION, null);
 		astMapper.put(TreeSymbols.JJTHEAD, new HeadMapper());

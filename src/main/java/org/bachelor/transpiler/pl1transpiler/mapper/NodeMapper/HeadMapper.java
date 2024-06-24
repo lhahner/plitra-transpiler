@@ -8,71 +8,122 @@ import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
 /**
- * The Class HeadMapper.
- * This Class Maps the Head Node with a Java equivalent method head.
- * The type of the method is not mapped here. For this @see TypeMapper.
+ * <h1>Summary</h1>
+ * Will be called in the TranlationBehavior Class.
+ * During Runtime the Behavior value changes to HeadMapper. This happens
+ * whenever a HEAD Node occurs in the AST.
+ * 
+ * This class maps a procedure head expression from PL/I to Java 
+ * 
+ * <h2>Input Example</h2>
+ * </br>
+ * {@code
+ * proc_1 PROC(para_1, para_2) RETURNS (CHAR(5));
+ * 
+ * }
+ * 
  */
 public class HeadMapper extends Mapper implements ITranslationBehavior {
 
-	/** The scope. */
+	/**  The scope of the mapped method. */
 	private final String SCOPE = super.javaWords.PUBLIC.getValue();
 
-	/** The type. */
+	/**  The type of the mapped method. */
 	private String type = super.javaWords.VOID.getValue();
 	
-	/** The identifier. */
+	/**  The identifier of the mapped method. */
 	private String identifier = "";
 	
-	/** The parameter. */
+	/**  The parameter of the mapped method. */
 	private String parameter = "()";
 	
 	/** The parameter declaration list. */
 	private ArrayList<String> parameterDeclarationList = new ArrayList<String>();
 	
+	/**
+	 * Gets the scope.
+	 *
+	 * @return the scope
+	 */
 	public String getSCOPE() {
 		return SCOPE;
 	}
 	
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public String getType() {
 		return type;
 	}
 
+	/**
+	 * Gets the identifier.
+	 *
+	 * @return the identifier
+	 */
 	public String getIdentifier() {
 		return identifier;
 	}
 
+	/**
+	 * Sets the identifier.
+	 *
+	 * @param identifier the new identifier
+	 */
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
 	}
 	
+	/**
+	 * Sets the type.
+	 *
+	 * @param type the new type
+	 */
 	public void setType(String type) {
 		this.type = type;
 	}
 
+	/**
+	 * Gets the parameter.
+	 *
+	 * @return the parameter
+	 */
 	public String getParameter() {
 		return parameter;
 	}
 
+	/**
+	 * Sets the parameter.
+	 *
+	 * @param parameter the new parameter
+	 */
 	public void setParameter(String parameter) {
 		this.parameter = parameter;
 	}
 
 	/**
-	 * Translate.
+	 * This Method is part of the ITranslationBehvior interface. It will be called
+	 * whenever the Behavior in class @see TranslationMapper is set to
+	 * HeadMapper. Check also @see astMapper for other behavior references.
 	 *
-	 * @param simpleNode the simple node
-	 * @return the string
+	 * @param simpleNode the head node
+	 * @return the Java Method head node
 	 */
 	public String translate(SimpleNode simpleNode) {
 		mapHeadNode(simpleNode);
 		return this.getSCOPE() + " "
 			+  this.getType() + " "
 			+  this.getIdentifier() + " "
-			+  this.getParameter() + "{ \n";
+			+  this.getParameter();
 	}
 
 	/**
-	 * Map head node.
+	 * This Method iterates over all child Nodes of the Head node. 
+	 * It set the identifier if found and map the parameter with mapParameterDefinition list
+	 * It defines the of the method type by the returns Node. which will lead to the call 
+	 * of the mapType method in declaration Mapper class.
 	 *
 	 * @param simpleNode the simple node
 	 * @return the string
@@ -91,6 +142,7 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 					this.parameter = mapParameterDefinitionlist(parameterDeclarationList);
 					break;
 				case "OPTIONS":
+					//TODO
 					break;
 				case "RETURNS":
 					try {
@@ -103,17 +155,19 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 						tme.printStackTrace();
 					}
 				default:
-					return; //@todo throw Exception
+					return; //TODO
 				}
 			}
 		}
 	}
 
 	/**
-	 * Map parameter definitionlist.
+	 * This method declares the parameter definition list of a method
+	 * it will always define the parameter in type Object since in PL/I
+	 * no types are defined and implicitly generated.
 	 *
-	 * @param identifiers the identifiers
-	 * @return the string
+	 * @param identifiers a list of all the parameter identifier
+	 * @return the parameter string
 	 */
 	public String mapParameterDefinitionlist(ArrayList<String> identifiers) {
 		String parameterlist = "(";
@@ -134,7 +188,8 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 
 	/**
 	 * Sets the parameter definition list.
-	 *
+	 * This has to be called before calling mapParamterDefinitionList,
+	 * since this method will recursively iterate over all parameter nodes.
 	 * @param paraNode the new parameter definition list
 	 */
 	public void setParameterDefinitionList(SimpleNode paraNode) {

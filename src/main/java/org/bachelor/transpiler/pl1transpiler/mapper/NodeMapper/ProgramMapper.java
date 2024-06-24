@@ -13,26 +13,64 @@ import org.bachelor.transpiler.pl1transpiler.scanner.InputReader;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ProgramMapper.
+ */
 public class ProgramMapper extends Mapper implements ITranslationBehavior {
+	
+	/** The scope. */
 	private final String SCOPE = super.javaWords.PUBLIC.getValue();
+	
+	/** The type. */
 	private final String TYPE = super.javaWords.CLASS.getValue();
+	
+	/** The identifier. */
 	private String identifier = null;
 	
+	/**
+	 * Gets the scope.
+	 *
+	 * @return the scope
+	 */
 	public String getSCOPE() {
 		return SCOPE;
 	}
+	
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public String getTYPE() {
 		return TYPE;
 	}
 	
+	/**
+	 * Gets the identifier.
+	 *
+	 * @return the identifier
+	 */
 	public String getIdentifier() {
 		return identifier;
 	}
+	
+	/**
+	 * Sets the identifier.
+	 *
+	 * @param identifier the new identifier
+	 */
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
 	}
 	
 	
+	/**
+	 * Translate.
+	 *
+	 * @param simpleNode the simple node
+	 * @return the string
+	 */
 	public String translate(SimpleNode simpleNode) {
 		this.mapProgramNode(simpleNode);
 		return 	  this.getSCOPE() + " " 
@@ -40,8 +78,11 @@ public class ProgramMapper extends Mapper implements ITranslationBehavior {
 				+ this.getIdentifier()
 				+ "{ \n";
 	}
+	
 	/**
-	 * @param programNode
+	 * Map program node.
+	 *
+	 * @param simpleNode the simple node
 	 */
 	public void mapProgramNode(SimpleNode simpleNode){
 		InputReader reader = new InputReader();

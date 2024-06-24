@@ -10,10 +10,18 @@ import javax.management.AttributeNotFoundException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PictureMapper.
+ */
 public class PictureMapper {
 
+	/** The pic regex. */
 	static HashMap<Character, String> picRegex = new HashMap<>();
 
+	/**
+	 * Instantiates a new picture mapper.
+	 */
 	public PictureMapper() {
 		initMap();
 	}
@@ -51,8 +59,11 @@ public class PictureMapper {
 	}
 
 	/**
+	 * Translate length expression.
+	 *
 	 * @param regex the PL/I Length Expression that should be parsed. Ex.: (4)A
 	 * @return the translated regular Expression.
+	 * @throws UnsupportedCharsetException the unsupported charset exception
 	 */
 	public String translateLengthExpression(String regex) throws UnsupportedCharsetException{
 		if(Character.isDigit(regex.charAt(regex.indexOf('(') + 1))) {
@@ -87,6 +98,8 @@ public class PictureMapper {
 	}
 
 	/**
+	 * Gets the character regex.
+	 *
 	 * @param picExpression the Character that should be translated to a regular
 	 *                      Expression.
 	 * @return the equivalent regular Expression from the HashMap.
@@ -96,8 +109,12 @@ public class PictureMapper {
 	}
 	
 	/**
-	 * @param The PL/I Picture limitation.
+	 * Gets the regex.
+	 *
+	 * @param regex the regex
 	 * @return the equivalent Regex.
+	 * @throws UnsupportedCharsetException the unsupported charset exception
+	 * @throws LexicalErrorException the lexical error exception
 	 */
 	public String getRegex(String regex) throws UnsupportedCharsetException, LexicalErrorException{
 		int decimalPointCounter = 0;
@@ -133,7 +150,7 @@ public class PictureMapper {
 	/**
 	 * This Method should translate the occured DEBTI Type,
 	 * since B is also used for BLANKs.
-	 * @param regex
+	 *
 	 * @return Just the String DB
 	 */
 	public String getDebitKey() {

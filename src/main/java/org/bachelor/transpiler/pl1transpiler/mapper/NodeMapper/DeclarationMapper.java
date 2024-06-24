@@ -9,9 +9,18 @@ import org.bachelor.transpiler.pl1transpiler.parser.Node;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class DeclarationMapper.
+ * <h1>Summary</h1>
+ * The Class DeclarationMapper will be called in the TranlationBehavior Class.
+ * During Runtime the Behavior value changes to DeclarationMapper. This happens
+ * whenever a VAR Node occurs in the AST.
+ * 
+ * <h2>Input Example</h2>
+ * This class maps a declaration expression from PL/I to Java 
+ * </br>
+ * {@code 
+ * DCL var_1 DECIMAL(1);
+ * }
  */
 public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 
@@ -19,14 +28,17 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * These variables symbolize the structure of a java declaration. Each String is
 	 * assigned to a default value, which might change during runtime.
 	 */
+
+	/** The scope of the variable, is always public if not changed. */
 	private String scope = super.javaWords.PUBLIC.getValue();
 
-	/** The type. */
+	/** The type of the variable, is always void of not changed. */
 	private String type = super.javaWords.VOID.getValue();
 
-	/** The identifier. */
+	/** The identifier of the variable */
 	private String identifier = null;
-	
+
+	/** The Object of a Variable from Non-primitive type */
 	private String Object;
 
 	/**
@@ -82,44 +94,52 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
 	}
-	
+
+	/**
+	 * gets the Object
+	 * 
+	 * @return the Object
+	 */
 	public String getObject() {
 		return Object;
 	}
 
+	/**
+	 * sets the object
+	 * 
+	 * @param the object
+	 */
 	public void setObject(String object) {
 		Object = object;
 	}
 
 	/**
-	 * Translate.
+	 * This Method is part of the ITranslationBehvior interface. It will be called
+	 * whenever the Behavior in class @see TranslationMapper is set to
+	 * DeclarationMapper. Check also @see astMapper for other behavior references.
 	 *
-	 * @param simpleNode the simple node
-	 * @return the string
+	 * @param simpleNode Node in which the VAR is defined.
+	 * @return the variable declaration in Java.
 	 */
 	public String translate(SimpleNode simpleNode) {
 		this.mapChildNodes(simpleNode);
-		if(this.getObject() != null) {
-			return this.getScope() + " " 
-				     + this.getType() + " " 
-				     + this.getIdentifier() + " = "
-				     + this.getObject() + ";";
+		if (this.getObject() != null) {
+			return this.getScope() + " " + this.getType() + " " + this.getIdentifier() + " = " + this.getObject() + ";";
 		}
-		return this.getScope() + " " 
-		     + this.getType() + " " 
-		     + this.getIdentifier() + ";";
+		return this.getScope() + " " + this.getType() + " " + this.getIdentifier() + ";";
 	}
 
 	/**
-	 * Map child nodes. This Maps all the Child-Nodes of the VAR Node. It it checks
-	 * all child-Nodes and routes them to the translation Method.
+	 * Map child nodes. This Maps all the Child-Nodes of the VAR Node. In this it
+	 * either routes the mapping to the mapType method or saves the value of the Id
+	 * Node in the identifier variable.
 	 *
-	 * @param simpleNode the simple node
+	 * @param simpleNode Node in which the VAR is defined.
 	 */
 	public void mapChildNodes(SimpleNode simpleNode) {
 		Pl1ParserTreeConstants TreeSymbols = null;
 		String identifier = "";
-		if (this.hasChildren(simpleNode)) {
+		if (super.hasChildren(simpleNode)) {
 			for (int i = 0; i < simpleNode.jjtGetNumChildren(); i++) {
 				SimpleNode childNode = (SimpleNode) simpleNode.jjtGetChild(i);
 				if (childNode.getId() == TreeSymbols.JJTTYPE) {
@@ -138,16 +158,18 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	}
 
 	/**
-	 * Maps all Datatype's of the Node-Tree. Basically this just routes them to the
-	 * mapping Methods inside this class.
+	 * Maps all Datatype's of the Node-Tree. This routes them to the mapping Methods
+	 * inside this class. e.g.: When the Child Node of TYPE is Arithmetic it routes
+	 * the mapping to mapArithmetic. This is also used by the HeadMapper Class
+	 * since, there is also a type node defined.
 	 *
-	 * @param simpleNode The Node that contains all types.
-	 * @return string Java Expression.
+	 * @param simpleNode The Node that contains all child Nodes as type.
+	 * @return The PL/I type in Java.
 	 * @throws TypeMappingException Thrown whenever there is either no translation
 	 *                              or no Child.
 	 */
 	public String mapType(SimpleNode simpleNode) throws TypeMappingException {
-		if (this.hasChildren(simpleNode)) {
+		if (super.hasChildren(simpleNode)) {
 			for (int i = 0; i < simpleNode.jjtGetNumChildren(); i++) {
 				SimpleNode childNode = (SimpleNode) simpleNode.jjtGetChild(i);
 				if (childNode.toString().equals("Arithmetic")) {
@@ -163,23 +185,27 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 				} else if (childNode.toString().equals("Entry")) {
 					return this.mapEntry();
 				} else {
-					throw new TypeMappingException("No Type for ");
+					throw new TypeMappingException("No Type for the desired input.");
 				}
 			}
 		} else {
-			throw new TypeMappingException("No Type for");
+			throw new TypeMappingException("No Type for the desired input.");
 		}
 		return null;
 	}
 
 	/**
-	 * Maps all Arithmetic Types like #Complex, #Float etc.
-	 *
+	 * Maps all Arithmetic Nodes like #Complex, #Float etc. All the properties of
+	 * Arithmetic Type Nodes are Stored as Value. Since the combination of
+	 * attributes that define a specific decimal type like complex numbers is not
+	 * possible in Java with primitive types, it returns the Non-Primitive Object
+	 * which is implemented in the PL/I Dependencies folder.
+	 * 
 	 * @param simpleNode the arithmetic node
-	 * @return the Java Expression
+	 * @return the PL/I DECIMAL type mapped in Java.
 	 */
-	public String mapArithmetic(SimpleNode simpleNode) throws TypeMappingException{
-		ArrayList<String> typeAttributes = (ArrayList<String>)simpleNode.jjtGetValue();
+	public String mapArithmetic(SimpleNode simpleNode) throws TypeMappingException {
+		ArrayList<String> typeAttributes = (ArrayList<String>) simpleNode.jjtGetValue();
 		if (typeAttributes != null) {
 			for (String typeAttribute : typeAttributes) {
 				if (typeAttribute.equals("COMPLEX")) {
@@ -193,38 +219,40 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 				}
 			}
 			throw new TypeMappingException("Arithmetic type without translateable propreteis.");
-		}
-		else {
+		} else {
 			throw new TypeMappingException("Arithmetic type without translateable propreteis.");
 		}
 	}
 
 	/**
-	 * Maps all Strings equal Node-types like #Char, #Bit, #Graphic and #Widechar
+	 * Maps all Strings equal Node-types like #Char, #Bit, #Graphic and #Widechar.
+	 * The Mapping is done in two ways. Either a Variable is declared or a Method
+	 * type is defined. When a Variable is declared it uses the CHAR Object, which
+	 * has to be instantiated. When a Method type is defined it does not need to be
+	 * instantiated. This why the Methods behavior depends on which context it is
+	 * called.
 	 *
 	 * @param simpleNode the Node that contains all Char-Nodes as children.
-	 * @return the Java Expression
+	 * @return either just CHAR or CHAR ... = new CHAR(..);
 	 */
 	public String mapString(SimpleNode simpleNode) {
 		Pl1ParserTreeConstants treeSymbols = null;
 		String length = "";
-		if(simpleNode.jjtGetValue() != null) {
-			length = (String)simpleNode.jjtGetValue();
+		if (simpleNode.jjtGetValue() != null) {
+			length = (String) simpleNode.jjtGetValue();
 		}
-		if(simpleNode.jjtGetParent().jjtGetParent().getId() == treeSymbols.JJTVAR) {
-			String instantiator = super.javaWords.NEW.getValue() + " "
-								+ super.javaWords.CHAR_OBJECT.getValue()
-								+ "(" + length + ")";
+		if (simpleNode.jjtGetParent().jjtGetParent().getId() == treeSymbols.JJTVAR) {
+			String instantiator = super.javaWords.NEW.getValue() + " " + super.javaWords.CHAR_OBJECT.getValue() + "("
+					+ length + ")";
 			this.setObject(instantiator);
 			return super.javaWords.CHAR_OBJECT.getValue();
-		}
-		else {
+		} else {
 			return super.javaWords.CHAR_OBJECT.getValue();
 		}
 	}
 
 	/**
-	 * Maps the #LOCATOR Node to a Java Expression.
+	 * @TODO Maps the #LOCATOR Node to a Java Expression.
 	 *
 	 * @return the Java Expression
 	 */
@@ -233,7 +261,7 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	}
 
 	/**
-	 * Maps the #PictureExpression Node with the @todo PictureMapper
+	 * @TODO Maps the #PictureExpression Node with the PictureMapper
 	 *
 	 * @return the Java Expression
 	 */
@@ -242,36 +270,22 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	}
 
 	/**
-	 * Map the #FILE Node to a Java Expression.
+	 * Map the #FILE Node to a Java Expression. Since there can be multiple
+	 * attributes defined in PL/I that does not play role related to the type, this
+	 * only uses the non-primitive type of FILE.
 	 *
-	 * @return the Java Expression
+	 * @return the Java non-primitive type File.
 	 */
 	public String mapFile() {
 		return super.javaWords.FILE.getValue();
 	}
 
 	/**
-	 * Maps the #ENTRY Node to a Java.
+	 * @TODO Maps the #ENTRY Node to a Java.
 	 *
 	 * @return Java Expression
 	 */
 	public String mapEntry() {
 		return null;
 	}
-
-	/**
-	 * Checks if a Node has children by checking the number of children provided by
-	 * the SimpleNode class.
-	 *
-	 * @param nodeToCheck Node that should be checked for children Nodes.
-	 * @return True if number of Children is larger than 0.
-	 */
-	public boolean hasChildren(Node nodeToCheck) {
-		if (nodeToCheck.jjtGetNumChildren() > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 }
-
