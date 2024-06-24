@@ -96,7 +96,9 @@ public enum Template {
 	WHILE("while"),
 	FOR("for"),
 	DO("do"),
-	CONTINUE("continue");
+	CONTINUE("continue"),
+	SYSOUT("System.out.println"),
+	SYSIN("System.console().readLine()");
 
 	private final String symbol;
 	

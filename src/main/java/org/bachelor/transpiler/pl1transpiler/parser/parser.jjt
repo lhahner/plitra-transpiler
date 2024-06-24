@@ -254,7 +254,7 @@ TOKEN :
 	| < WHILE : "WHILE" >
 	| < UNTIL : "UNTIL" >
 	| < DISPLAY : "DISPLAY" >
-	| < REPLAY : "REPLAY" >
+	| < REPLY : "REPLY" >
 	| < MINUSCHAR: "-" >
 	| < GT : ">" >
 	| < LT : "<" >
@@ -442,12 +442,24 @@ void entry_statement() #ENTRY :
 }
 
 void display_statement() #DISPLAY:
-{Token t = null;}
 {
-  < DISPLAY >"("((t=< STRING >|t=< PL1_WORD >)*)")"[< REPLAY >"("")"]
+ ArrayList<String > displayValues = new ArrayList<String >();
+  //Stores the String that is displayed to the console.
+  Token displayString = null;
+  //variable to Store User Input.
+  Token saveUserInput = null;
+ }
+{
+  < DISPLAY >"("(displayString=< STRING >)")"[< REPLY >"("saveUserInput=< PL1_WORD >")"]
 
   {
-    jjtThis.value = t.image;
+     if(displayString != null) {
+		displayValues.add(displayString.image.replaceAll("'", "\""));
+    }
+    if(saveUserInput != null) {
+      displayValues.add(saveUserInput.image);
+    }
+    jjtThis.value = displayValues;
   }
 }
 

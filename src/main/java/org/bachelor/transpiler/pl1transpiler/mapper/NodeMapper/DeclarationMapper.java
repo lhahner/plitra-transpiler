@@ -190,7 +190,7 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * @return the Java Expression
 	 */
 	public String mapString(SimpleNode simpleNode) {
-
+		
 		return null;
 	}
 

@@ -7,7 +7,7 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
 public class TranslationMapper {
 	private ITranslationBehavior translationBehavior;
-	ArrayList<String> javaExpression = new ArrayList<String>();
+	private ArrayList<String> javaExpression = new ArrayList<String>();
 	
 	void setTranslationBevaior(ITranslationBehavior iTranslationBehavior) {
 		// TODO Auto-generated method stub

@@ -79,8 +79,8 @@ public class CallMapper extends Mapper implements ITranslationBehavior{
 		this.setIdentifier(identifier);
 		if(super.hasChildren(simpleNode)) {
 			this.setParameterDefinitionList((SimpleNode)simpleNode.jjtGetChild(0));
+			this.setParameter(this.mapParameterAssignlist(parameterAssignList));
 		}
-		this.setParameter(this.mapParameterAssignlist(parameterAssignList));
 		return;
 	}
 	

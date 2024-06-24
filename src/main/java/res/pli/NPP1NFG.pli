@@ -1,13 +1,13 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL var_1 COMPLEX DECIMAL(1);
+	main_proc: PROC;
+		CALL login;
+	END main_proc;
 	
-	proc_1: PROC(para_1, para_2);
-		CALL proc_2('Hello', 'World');
-	END proc_1;
-	
-	proc_2: PROC(para_1, para_2);
-		GO TO para_1;
-	END proc_2;
+	login: PROC;
+		DCL user_input CHAR(15);
+		DISPLAY('Please Input Username') REPLY(user_input);
+		RETURN user_input;
+	END login;
 	
 END orgbachelorpli;

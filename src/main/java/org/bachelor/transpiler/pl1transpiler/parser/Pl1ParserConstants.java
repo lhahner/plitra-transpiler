@@ -307,7 +307,7 @@ public interface Pl1ParserConstants {
   /** RegularExpression Id. */
   int DISPLAY = 148;
   /** RegularExpression Id. */
-  int REPLAY = 149;
+  int REPLY = 149;
   /** RegularExpression Id. */
   int MINUSCHAR = 150;
   /** RegularExpression Id. */
@@ -509,7 +509,7 @@ public interface Pl1ParserConstants {
     "\"WHILE\"",
     "\"UNTIL\"",
     "\"DISPLAY\"",
-    "\"REPLAY\"",
+    "\"REPLY\"",
     "\"-\"",
     "\">\"",
     "\"<\"",
