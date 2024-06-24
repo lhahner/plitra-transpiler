@@ -5,7 +5,7 @@ At least Java 8 and JavaCC is required. Please make sure to always compile the p
 The Transpiler runs fine in Windows 11, MacOS 13.6.1 and Linux Ubuntu 22.
 
 ## How to transpile PL/I Code to Java?
-### CLI
+### CLI 
 First check the pl1transpiler/input folder. There should be your PL/I code. I do not recommend to transpile code from outside of the project structure.
 Simply navigate into the src folder of the project structure.
 Run:
