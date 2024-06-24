@@ -26,6 +26,8 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 
 	/** The identifier. */
 	private String identifier = null;
+	
+	private String Object;
 
 	/**
 	 * Gets the scope.
@@ -80,6 +82,14 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
 	}
+	
+	public String getObject() {
+		return Object;
+	}
+
+	public void setObject(String object) {
+		Object = object;
+	}
 
 	/**
 	 * Translate.
@@ -89,6 +99,12 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public String translate(SimpleNode simpleNode) {
 		this.mapChildNodes(simpleNode);
+		if(this.getObject() != null) {
+			return this.getScope() + " " 
+				     + this.getType() + " " 
+				     + this.getIdentifier() + " = "
+				     + this.getObject() + ";";
+		}
 		return this.getScope() + " " 
 		     + this.getType() + " " 
 		     + this.getIdentifier() + ";";
@@ -190,8 +206,21 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * @return the Java Expression
 	 */
 	public String mapString(SimpleNode simpleNode) {
-		
-		return null;
+		Pl1ParserTreeConstants treeSymbols = null;
+		String length = "";
+		if(simpleNode.jjtGetValue() != null) {
+			length = (String)simpleNode.jjtGetValue();
+		}
+		if(simpleNode.jjtGetParent().jjtGetParent().getId() == treeSymbols.JJTVAR) {
+			String instantiator = super.javaWords.NEW.getValue() + " "
+								+ super.javaWords.CHAR_OBJECT.getValue()
+								+ "(" + length + ")";
+			this.setObject(instantiator);
+			return super.javaWords.CHAR_OBJECT.getValue();
+		}
+		else {
+			return super.javaWords.CHAR_OBJECT.getValue();
+		}
 	}
 
 	/**
@@ -245,3 +274,4 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 		}
 	}
 }
+

@@ -621,7 +621,8 @@ void type() #TYPE :
 	  | String()
 	  | (< POINTER > | < OFFSET > |  < HANDLE >) < VALUE >< LOCATES >
 	  | Picture()
-	  | < FILE > < ENVIRONMENT > ( < STREAM > | < RECORD >) (< INPUT > | < OUTPUT > | < UPDATE >) (<SEQUENTIAL >|  < DIRECT >) (< BUFFERED > | < UNBUFFERED >) < KEYED >< PRINT >
+	  | < FILE > < ENVIRONMENT > ( < STREAM > | < RECORD >) (< INPUT > | < OUTPUT > | < UPDATE >)
+	  (<SEQUENTIAL >|  < DIRECT >) (< BUFFERED > | < UNBUFFERED >) < KEYED >< PRINT >
 	  | < ENTRY > [< RETURNS >]
 	) 
 }
@@ -709,7 +710,7 @@ void String() #String:
   | < BIT >
   |  < GRAPHIC >
   | < WIDECHAR >) ("(" length = < INTEGER > ")") [< NONVARYING >] [< VALUE >]
-    {jjtThis.value = length; }
+    {jjtThis.value = length.image; }
 }
 
 
