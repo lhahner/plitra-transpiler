@@ -100,7 +100,9 @@ public enum Template {
 	CONTINUE("continue"),
 	SYSOUT("System.out.println"),
 	SYSIN("System.console().readLine()"),
-	INIT(".init");
+	INIT(".init"),
+	NULL("null"),
+	DECIMAL("DECIMAL");
 
 	private final String symbol;
 	

@@ -138,6 +138,7 @@ public class TerminateMapper extends Mapper implements ITranslationBehavior {
 				}
 				return;
 			case "GO TO":
+				//id + (); 
 				this.setTermination(super.javaWords.CONTINUE.getValue());
 				this.setValues(returnPropreties.get(1));
 				break;
@@ -152,9 +153,7 @@ public class TerminateMapper extends Mapper implements ITranslationBehavior {
 			default:
 				return;
 			}
-
 		}
-
 	}
 
 	/**
@@ -192,6 +191,7 @@ public class TerminateMapper extends Mapper implements ITranslationBehavior {
 		if (super.hasChildren(simpleNode)) {
 			setValuesList((SimpleNode) simpleNode.jjtGetChild(0), valuesList);
 		}
+		
 		return;
 	}
 

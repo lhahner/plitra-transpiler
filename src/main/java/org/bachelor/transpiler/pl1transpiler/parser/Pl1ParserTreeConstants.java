@@ -20,7 +20,7 @@ public interface Pl1ParserTreeConstants
   public int JJTENTRY = 14;
   public int JJTDISPLAY = 15;
   public int JJTASSIGN = 16;
-  public int JJTVALUES = 17;
+  public int JJTCALC = 17;
   public int JJTRETURNS = 18;
   public int JJTOPTIONS = 19;
   public int JJTCALLS = 20;
@@ -61,7 +61,7 @@ public interface Pl1ParserTreeConstants
     "ENTRY",
     "DISPLAY",
     "ASSIGN",
-    "VALUES",
+    "CALC",
     "RETURNS",
     "OPTIONS",
     "CALLS",
@@ -84,4 +84,4 @@ public interface Pl1ParserTreeConstants
     "Id",
   };
 }
-/* JavaCC - OriginalChecksum=8656c93dd718a38f97430d57abf9a752 (do not edit this line) */
+/* JavaCC - OriginalChecksum=d07d4f623e18a14318025a10b2f2c456 (do not edit this line) */

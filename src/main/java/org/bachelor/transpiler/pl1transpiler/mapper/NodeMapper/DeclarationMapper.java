@@ -9,15 +9,14 @@ import org.bachelor.transpiler.pl1transpiler.parser.Node;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
+// TODO: Auto-generated Javadoc
 /**
- * <h1>Summary</h1>
- * The Class DeclarationMapper will be called in the TranlationBehavior Class.
- * During Runtime the Behavior value changes to DeclarationMapper. This happens
- * whenever a VAR Node occurs in the AST.
+ * <h1>Summary</h1> The Class DeclarationMapper will be called in the
+ * TranlationBehavior Class. During Runtime the Behavior value changes to
+ * DeclarationMapper. This happens whenever a VAR Node occurs in the AST.
  * 
- * <h2>Input Example</h2>
- * This class maps a declaration expression from PL/I to Java 
- * </br>
+ * <h2>Input Example</h2> This class maps a declaration expression from PL/I to
+ * Java </br>
  * {@code 
  * DCL var_1 DECIMAL(1);
  * }
@@ -35,11 +34,14 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	/** The type of the variable, is always void of not changed. */
 	private String type = super.javaWords.VOID.getValue();
 
-	/** The identifier of the variable */
+	/** The identifier of the variable. */
 	private String identifier = null;
 
-	/** The Object of a Variable from Non-primitive type */
+	/** The Object of a Variable from Non-primitive type. */
 	private String Object;
+
+	/** Only set if the variable is directly initialized after declaration. */
+	private String initialization;
 
 	/**
 	 * Gets the scope.
@@ -96,8 +98,8 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	}
 
 	/**
-	 * gets the Object
-	 * 
+	 * gets the Object.
+	 *
 	 * @return the Object
 	 */
 	public String getObject() {
@@ -105,12 +107,30 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	}
 
 	/**
-	 * sets the object
-	 * 
-	 * @param the object
+	 * sets the object.
+	 *
+	 * @param object the new object
 	 */
 	public void setObject(String object) {
 		Object = object;
+	}
+
+	/**
+	 * Gets the initialization.
+	 *
+	 * @return the initialization
+	 */
+	public String getInitialization() {
+		return initialization;
+	}
+
+	/**
+	 * Sets the initialization.
+	 *
+	 * @param initialization the new initialization
+	 */
+	public void setInitialization(String initialization) {
+		this.initialization = initialization;
 	}
 
 	/**
@@ -200,22 +220,23 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * attributes that define a specific decimal type like complex numbers is not
 	 * possible in Java with primitive types, it returns the Non-Primitive Object
 	 * which is implemented in the PL/I Dependencies folder.
-	 * 
+	 *
 	 * @param simpleNode the arithmetic node
 	 * @return the PL/I DECIMAL type mapped in Java.
+	 * @throws TypeMappingException the type mapping exception
 	 */
 	public String mapArithmetic(SimpleNode simpleNode) throws TypeMappingException {
 		ArrayList<String> typeAttributes = (ArrayList<String>) simpleNode.jjtGetValue();
 		if (typeAttributes != null) {
 			for (String typeAttribute : typeAttributes) {
 				if (typeAttribute.equals("COMPLEX")) {
-					return super.javaWords.COMPLEX.getValue();
+					return this.mapDecimal(simpleNode, super.javaWords.COMPLEX.getValue());
 				} else if (typeAttribute.equals("FIXED")) {
-					return super.javaWords.BIGDECIMAL.getValue();
+					return this.mapDecimal(simpleNode, super.javaWords.DECIMAL.getValue());
 				} else if (typeAttribute.equals("BINARY")) {
-					return super.javaWords.BINARY.getValue();
+					return this.mapDecimal(simpleNode, super.javaWords.BINARY.getValue());
 				} else if (typeAttribute.equals("DECIMAL")) {
-					return super.javaWords.DOUBLE.getValue();
+					return this.mapDecimal(simpleNode, super.javaWords.DECIMAL.getValue());
 				}
 			}
 			throw new TypeMappingException("Arithmetic type without translateable propreteis.");
@@ -242,28 +263,50 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 			length = (String) simpleNode.jjtGetValue();
 		}
 		if (simpleNode.jjtGetParent().jjtGetParent().getId() == treeSymbols.JJTVAR) {
-			String instantiator = super.javaWords.NEW.getValue() + " " + super.javaWords.CHAR_OBJECT.getValue() + "("
-					+ length + ")";
-			this.setObject(instantiator);
+			this.setObject(
+					super.javaWords.NEW.getValue() + " " + super.javaWords.CHAR_OBJECT.getValue() + "(" + length + ")");
 			return super.javaWords.CHAR_OBJECT.getValue();
 		} else {
 			return super.javaWords.CHAR_OBJECT.getValue();
 		}
 	}
-
+	
 	/**
-	 * @TODO Maps the #LOCATOR Node to a Java Expression.
+	 * 
+	 * @param simpleNode
+	 * @return
+	 */
+	public String mapDecimal(SimpleNode simpleNode, String type) {
+		Pl1ParserTreeConstants treeSymbols = null;
+		ArrayList<String> values = (ArrayList<String>) simpleNode.jjtGetValue();
+
+		for (String value : values) {
+			if (Character.isDigit(value.charAt(0))) {
+				this.setObject(super.javaWords.NEW.getValue() + " " + type + "(" + value + ")");
+				return type;
+			}
+			else {
+				//TODO throw error
+			}
+		}
+		return type;
+	}
+	
+	/**
+	 * Map locator.
 	 *
 	 * @return the Java Expression
+	 * @TODO Maps the #LOCATOR Node to a Java Expression.
 	 */
 	public String mapLocator() {
 		return super.javaWords.OBJECT.getValue();
 	}
 
 	/**
-	 * @TODO Maps the #PictureExpression Node with the PictureMapper
+	 * Map picture.
 	 *
 	 * @return the Java Expression
+	 * @TODO Maps the #PictureExpression Node with the PictureMapper
 	 */
 	public String mapPicture() {
 		return null;
@@ -281,9 +324,10 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	}
 
 	/**
-	 * @TODO Maps the #ENTRY Node to a Java.
+	 * Map entry.
 	 *
 	 * @return Java Expression
+	 * @TODO Maps the #ENTRY Node to a Java.
 	 */
 	public String mapEntry() {
 		return null;

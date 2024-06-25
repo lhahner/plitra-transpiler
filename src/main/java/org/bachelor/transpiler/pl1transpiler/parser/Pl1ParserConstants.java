@@ -311,49 +311,53 @@ public interface Pl1ParserConstants {
   /** RegularExpression Id. */
   int MINUSCHAR = 150;
   /** RegularExpression Id. */
-  int GT = 151;
+  int DIVIDE = 151;
   /** RegularExpression Id. */
-  int LT = 152;
+  int MULTIPLY = 152;
   /** RegularExpression Id. */
-  int PLUS = 153;
+  int GT = 153;
   /** RegularExpression Id. */
-  int COMPLT = 154;
+  int LT = 154;
   /** RegularExpression Id. */
-  int LTEQ = 155;
+  int PLUS = 155;
   /** RegularExpression Id. */
-  int EQ = 156;
+  int COMPLT = 156;
   /** RegularExpression Id. */
-  int COMPEQ = 157;
+  int LTEQ = 157;
   /** RegularExpression Id. */
-  int COMPGT = 158;
+  int EQ = 158;
   /** RegularExpression Id. */
-  int AND = 159;
+  int COMPEQ = 159;
   /** RegularExpression Id. */
-  int OR = 160;
+  int COMPGT = 160;
   /** RegularExpression Id. */
-  int COMMA_SEPARATOR = 161;
+  int AND = 161;
   /** RegularExpression Id. */
-  int X = 162;
+  int OR = 162;
   /** RegularExpression Id. */
-  int A = 163;
+  int COMMA_SEPARATOR = 163;
   /** RegularExpression Id. */
-  int V = 164;
+  int X = 164;
   /** RegularExpression Id. */
-  int INTEGER = 165;
+  int A = 165;
   /** RegularExpression Id. */
-  int STRING = 166;
+  int V = 166;
   /** RegularExpression Id. */
-  int PL1_WORD = 167;
+  int INTEGER = 167;
   /** RegularExpression Id. */
-  int EOL = 168;
+  int STRING = 168;
   /** RegularExpression Id. */
-  int SCOPE = 169;
+  int PL1_WORD = 169;
   /** RegularExpression Id. */
-  int PREPROC_COMMENT = 170;
+  int EOL = 170;
   /** RegularExpression Id. */
-  int SPACE_SEPARATOR = 173;
+  int SCOPE = 171;
   /** RegularExpression Id. */
-  int SPACECHAR = 174;
+  int PREPROC_COMMENT = 172;
+  /** RegularExpression Id. */
+  int SPACE_SEPARATOR = 175;
+  /** RegularExpression Id. */
+  int SPACECHAR = 176;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -511,6 +515,8 @@ public interface Pl1ParserConstants {
     "\"DISPLAY\"",
     "\"REPLY\"",
     "\"-\"",
+    "\"/\"",
+    "\"*\"",
     "\">\"",
     "\"<\"",
     "\"+\"",
@@ -521,7 +527,7 @@ public interface Pl1ParserConstants {
     "<COMPGT>",
     "\"&\"",
     "\"||\"",
-    "<COMMA_SEPARATOR>",
+    "\",\"",
     "<X>",
     "<A>",
     "<V>",
@@ -531,15 +537,15 @@ public interface Pl1ParserConstants {
     "\"\\n\"",
     "<SCOPE>",
     "<PREPROC_COMMENT>",
-    "<token of kind 171>",
+    "<token of kind 173>",
     "\";\"",
     "<SPACE_SEPARATOR>",
     "<SPACECHAR>",
     "\":\"",
     "\"(\"",
     "\")\"",
+    "\".\"",
     "\"\\\'\"",
-    "\",\"",
   };
 
 }

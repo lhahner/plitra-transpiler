@@ -35,7 +35,8 @@ public class Pl1Parser{
 	private String[] tmp_idsAndScopes = new String[3];
 	ArrayList<String > paralist = new ArrayList<String >();
 	ArrayList<String > typePropreties;
-	
+	ArrayList<String > mathExpression = new ArrayList<String >();
+
 	private int charLength;
 	private String number;
 	private String stringLength;
@@ -256,6 +257,8 @@ TOKEN :
 	| < DISPLAY : "DISPLAY" >
 	| < REPLY : "REPLY" >
 	| < MINUSCHAR: "-" >
+	| < DIVIDE : "/" >
+	| < MULTIPLY: "*" >
 	| < GT : ">" >
 	| < LT : "<" >
 	| < PLUS : "+" >
@@ -266,8 +269,8 @@ TOKEN :
 	| < COMPGT: "¬"< GT > >
 	| < AND : "&" >
 	| < OR : "||" >
-	| < COMMA_SEPARATOR : "," <SPACE_SEPARATOR> >
-	| < X : ("X"|"A"|"9"|"Z"|"V"|"*"|"B"|< LT >|< GT >|< MINUSCHAR >|< PLUS >|"E"|"K"|","|"$"|"€"|"/"|"CR"|"DB"|"S")+ >
+	| < COMMA_SEPARATOR : ",">
+	| < X : ("X"|"A"|"9"|"Z"|"V"|< MULTIPLY >|"B"|< LT >|< GT >|< MINUSCHAR >|< PLUS >|"E"|"K"|","|"$"|"€"|"/"|"CR"|"DB"|"S")+ >
 	| < A : ("A")+ >
 	| < V : ("V")+ >
 	| < INTEGER : (["0"-"9"])+ >
@@ -464,23 +467,59 @@ void display_statement() #DISPLAY:
 }
 
 void init_statement() #ASSIGN:
-{Token t;}
 {
-  t=< PL1_WORD >"="value_of_init()
+ String[] assignAttributes = new String[2];
+ Token identifier = null;
+ Token assignValue = null;
+ Token factorial = null;
+ }
+{
+  (    [identifier=< PL1_WORD >]"="(assignValue=< PL1_WORD >|assignValue=< STRING >|assignValue=< INTEGER >["."factorial=< INTEGER >]|math_expression())*
+  | < INIT >"("(assignValue=< STRING >|assignValue=< INTEGER >)")"
+  )
 
-  {jjtThis.value = t.image;}
+  {
+    if(identifier != null) {
+     	assignAttributes[0] = identifier.image;
+   	}
+    if(assignValue != null) {
+		assignAttributes[1] = assignValue.image;
+	}
+    jjtThis.value = assignAttributes;
+    if(factorial != null) {
+		assignAttributes[1] = assignAttributes[1] + "." + factorial.image;
+    }
+  }
 }
 
-/**
-* @todo Complete, only arithmetic and string are possible.
-*/
-void value_of_init() #VALUES:
-{Token t = null;}
+void math_expression() #CALC:
 {
-  
-  (t=< STRING >|t=< INTEGER >)*
-  {jjtThis.value = t.image;}
+  Token operand = null;
+  Token operator = null;
 }
+{
+  (      (operand=< INTEGER >|operand=< PL1_WORD >)*
+       {
+		if(operand != null) {
+		  mathExpression.add(operand.image);
+		}
+		}
+      (operator=< PLUS >|operator=< MINUSCHAR >|operator=< DIVIDE >|operator=< MULTIPLY >)
+      {
+        if(operator != null) {
+		  mathExpression.add(operator.image);
+		}
+	  }	
+      (math_expression() | (operand=< INTEGER >|operand=< PL1_WORD >))*
+      
+	  {
+      if(operand != null) {
+		  mathExpression.add(operand.image);
+		}
+	  }
+  )
+ }
+
 
 void returns() #RETURNS:
 {}
@@ -592,8 +631,12 @@ void var_declaration(int scope) #VAR :
 	     this.hierachie = Integer.parseInt(hierachie.image);
 	   }
 	     }
- 	   id("VAR") ( type()| type() < COMMA_SEPARATOR > |
-      (< COMMA_SEPARATOR > minor(this.getHierachie(), scope))*) | minor(this.getHierachie(), scope)
+ 	   id("VAR")
+ 	   ( type() [init_statement()]
+ 	   | type() < COMMA_SEPARATOR >
+ 	   | (< COMMA_SEPARATOR > minor(this.getHierachie(), scope))*
+ 	   )
+ 	   | minor(this.getHierachie(), scope)
      
 }
 
@@ -749,12 +792,12 @@ void codedArithmetic() #Arithmetic:
 	}
   }
   ( [< PRECISION >]
-  (("(" integerPropreties = < INTEGER > ")") | ("(" integerPropreties = < INTEGER > "," fractionalPropreties = <  INTEGER > ")"))) [< SIGNED > | < UNSIGNED > ]
+  (("(" integerPropreties = < INTEGER > ")") | ("(" integerPropreties = < INTEGER > < COMMA_SEPARATOR > fractionalPropreties = <  INTEGER > ")"))) [< SIGNED > | < UNSIGNED > ]
   { if(fractionalPropreties == null) {
 		typePropreties.add(integerPropreties.image);
   	}
   	else {
-  		typePropreties.add(integerPropreties.image + "," + fractionalPropreties.image);  
+  		typePropreties.add(integerPropreties.image + "," + fractionalPropreties.image);
     }
 
     jjtThis.value = typePropreties;

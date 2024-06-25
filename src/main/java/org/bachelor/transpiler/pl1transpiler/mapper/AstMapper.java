@@ -3,6 +3,7 @@ package org.bachelor.transpiler.pl1transpiler.mapper;
 import java.util.HashMap;
 import java.util.Hashtable;
 
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.AssignMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.BodyMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.CallMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.DeclarationMapper;
@@ -37,7 +38,7 @@ public class AstMapper {
 //		astMapper.put(TreeSymbols.JJTOP, null);
 //		astMapper.put(TreeSymbols.JJTENTRY, null);
 		astMapper.put(TreeSymbols.JJTDISPLAY, new DisplayMapper());
-//		astMapper.put(TreeSymbols.JJTASSIGN, null);
+		astMapper.put(TreeSymbols.JJTASSIGN, new AssignMapper());
 //		astMapper.put(TreeSymbols.JJTVALUES, null);
 //		astMapper.put(TreeSymbols.JJTRETURNS, null);
 //		astMapper.put(TreeSymbols.JJTOPTIONS, null);
