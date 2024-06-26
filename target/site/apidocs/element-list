@@ -1,7 +1,0 @@
-org.bachelor.transpiler.pl1transpiler.app
-org.bachelor.transpiler.pl1transpiler.checker
-org.bachelor.transpiler.pl1transpiler.errorhandling
-org.bachelor.transpiler.pl1transpiler.mapper
-org.bachelor.transpiler.pl1transpiler.parser
-org.bachelor.transpiler.pl1transpiler.scanner
-org.bachelor.transpiler.pl1transpiler.symboltable

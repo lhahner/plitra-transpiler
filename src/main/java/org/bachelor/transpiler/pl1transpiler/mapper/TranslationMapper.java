@@ -15,6 +15,7 @@ public class TranslationMapper {
 	}
 	
 	public void applyTranslate(SimpleNode simpleNode) {
+		System.out.println(this.translationBehavior.translate(simpleNode));
 		javaExpression.add(this.translationBehavior.translate(simpleNode));
 	}
 }

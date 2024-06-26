@@ -313,10 +313,15 @@ void package_() #PACKAGE :
 
 
 void footer() #END :
-{Token t;}
+{Token t = null;}
 {
-  < END >t = < PL1_WORD >
-  {jjtThis.value = t.image;}
+  (< END >t = < PL1_WORD >)
+  | < END >
+  {
+	if(t != null) { 
+    jjtThis.value = t.image;
+  }
+  }
 }
 
 void procedure() #PROC :
@@ -342,8 +347,8 @@ void proc_body() #BODY :
     |termination()
     |fetch()
     |release()
-    |if_statement()< END >
-    |do_statement()< END >
+    |if_statement()footer()
+    |do_statement()footer()
     |display_statement()
     |init_statement()
     )*
@@ -354,8 +359,15 @@ void if_statement() #BRANCH :
 {
   < IF >bool_expression()(bool_operation()bool_expression())*
   < THEN >proc_body()
-  [< ELSE >
-  	proc_body()]
+  [else_statement()]
+}
+
+void else_statement() #BRANCH:
+{
+}
+{
+	< ELSE >
+  	proc_body()
 }
 
 void do_statement() #LOOP :
@@ -409,16 +421,48 @@ void specification() :
 }
 
 void bool_expression() #BOOL :
-{}
 {
-  (("(")*< PL1_WORD >(bool_operation() (< PL1_WORD >(")")* (bool_operation() < PL1_WORD >(")")*)*))*)
+  ArrayList<String > boolean_expression = new ArrayList<String >();
+  Token operand_1 = null;
+  Token operator_1 = null;
+  
+  Token operand_2 = null;
+  Token operator_2 = null;
+  
+  Token operand_3 = null;
+  
+}
+{
+  (("(")*
+  (operand_1=< PL1_WORD >|operand_1=< INTEGER >)(operator_1=bool_operation()
+  ((operand_2=< PL1_WORD >|operand_2=< INTEGER >)(")")*(operator_2=bool_operation()
+  (operand_3=< PL1_WORD >|operand_3=< INTEGER >)(")")*)*))*)
 
   {
+   if(operand_1 != null) {
+     boolean_expression.add(operand_1.image);
+   }
+  
+   if(operator_1 != null) {
+     boolean_expression.add(operator_1.image);
+   }
+   
+   if(operand_2 != null) {
+     boolean_expression.add(operand_2.image);
+   }
+   
+   if(operator_2 != null) {
+     boolean_expression.add(operator_2.image);
+   }
+   
+   if(operand_3 != null) {
+     boolean_expression.add(operand_3.image);
+   }
    
   }
 }
 
-String bool_operation() #OP :
+Token bool_operation() #OP :
 {Token t = null;}
 {
   (    t = < MINUSCHAR >
@@ -434,7 +478,7 @@ String bool_operation() #OP :
 	| t = < OR >)*
 
 	{
-	  return t.image;
+	  return t;
 	}
 }
 
@@ -589,7 +633,7 @@ void termination() #TERMINATE:
   }
 {
   (
-  (returnType = < RETURN >[returnValue=< PL1_WORD >|("("parameterlist()")"|< INTEGER >)|string_list()])
+  (returnType = < RETURN >[returnValue=< PL1_WORD >|("("parameterlist()")"|returnValue=< INTEGER >)|string_list()])
   |returnType = < GOTO >returnValue=< PL1_WORD >
   |returnType = < STOP >
   |returnType = < EXIT >)

@@ -131,10 +131,14 @@ public class TerminateMapper extends Mapper implements ITranslationBehavior {
 				if (!returnPropreties.get(1).equals("")) {
 					this.setValues(returnPropreties.get(1));
 				}
+				//TODO this is implicit and should be done by a kind of search method which checks
 				if (this.getValues().contains("'")) {
-					String instantiator = super.javaWords.NEW.getValue() + " " + super.javaWords.CHAR_OBJECT.getValue()
-							+ super.javaWords.INIT.getValue();
-					this.setObject(instantiator);
+					this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.CHAR_OBJECT.getValue()
+					+ super.javaWords.INIT.getValue());
+				}
+				else if(Character.isDigit(this.getValues().charAt(0))) {
+					this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.DECIMAL.getValue()
+					+ super.javaWords.INIT.getValue());
 				}
 				return;
 			case "GO TO":

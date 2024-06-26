@@ -140,6 +140,7 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 				case "PARA":
 					this.setParameterDefinitionList(childNode);
 					this.parameter = mapParameterDefinitionlist(parameterDeclarationList);
+					this.parameterDeclarationList.clear();
 					break;
 				case "OPTIONS":
 					//TODO
@@ -181,7 +182,7 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 			}
 			return parameterlist + ")";
 		} else {
-			this.parameterDeclarationList.clear();
+			
 			return "(" + super.javaWords.OBJECT.getValue() + " " + identifiers.get(0) + ")";
 		}
 	}
