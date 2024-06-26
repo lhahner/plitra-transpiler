@@ -1,4 +1,5 @@
 package org.bachelor.transpiler.pl1transpiler.symboltable;
+import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,6 +73,38 @@ public enum Template {
 			+ "	public COMPLEX() {\n"
 			+ "	}\n"
 			+ "}\n"),
+	DECIMAL_CLASS("import java.math.BigDecimal;\n"
+			+ "\n"
+			+ "public class DECIMAL {\n"
+			+ "	BigDecimal content;\n"
+			+ "	\n"
+			+ "	public DECIMAL() {\n"
+			+ "		\n"
+			+ "	}\n"
+			+ "	\n"
+			+ "	public DECIMAL(int integer, int factorial) {\n"
+			+ "		String length = Integer.valueOf(factorial) == null ? integer + \"\" : integer + \".\" + factorial;\n"
+			+ "		this.content = new BigDecimal(length);\n"
+			+ "	}\n"
+			+ "	\n"
+			+ "	public DECIMAL(int integer) {\n"
+			+ "		String length = integer + \"\";\n"
+			+ "		this.content = new BigDecimal(length);\n"
+			+ "	}\n"
+			+ "	\n"
+			+ "	public DECIMAL(int integer, int factorial, int value) {\n"
+			+ "		//TODO\n"
+			+ "	}\n"
+			+ "	\n"
+			+ "	public DECIMAL init(int value) {\n"
+			+ "		this.content.valueOf((double)value);\n"
+			+ "		return this;\n"
+			+ "	}\n"
+			+ "	\n"
+			+ "	private double toNumeric() {\n"
+			+ "		return this.content.doubleValue();\n"
+			+ "	}\n"
+			+ "}"),
 	//Words
 	COMPLEX("COMPLEX"),
 	CHAR_OBJECT("CHAR"),
@@ -102,7 +135,8 @@ public enum Template {
 	SYSIN("System.console().readLine()"),
 	INIT(".init"),
 	NULL("null"),
-	DECIMAL("DECIMAL");
+	DECIMAL("DECIMAL"),
+	TONUMERIC("toNumeric");
 
 	private final String symbol;
 	

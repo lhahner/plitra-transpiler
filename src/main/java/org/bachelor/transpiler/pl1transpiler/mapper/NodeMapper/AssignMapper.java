@@ -85,7 +85,7 @@ public class AssignMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public String translate(SimpleNode simpleNode) {
 		mapAssignNode(simpleNode);
-		return this.getIdentifier() + this.getOperator() + "(" + this.getAssignment() + ")";
+		return this.getIdentifier() + this.getOperator() + "(" + this.getAssignment() + ");";
 
 	}
 

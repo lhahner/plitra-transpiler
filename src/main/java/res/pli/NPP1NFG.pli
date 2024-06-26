@@ -1,12 +1,20 @@
 orgbachelorpli: PACKAGE;
-	DCL var_1 DECIMAL(1) INIT(2);
 	
-	main_proc: PROC OPTIONS(MAIN);
-		IF (var_1 = 3) THEN
-			DISPLAY ('Is equal');
+	DCL n DECIMAL(2) INIT(20);
+	DCL m DECIMAL(2) INIT(20);
+	
+	fibonacci: PROC(f);
+		IF ((n = m) & (n >= m)) THEN
+			RETURN 1;
 		ELSE 
-			DISPLAY('Not equal');
+			IF (n = m) THEN
+				RETURN 2;
+				IF ((n = m) & (n > m) || (n < m)) THEN
+					RETURN 3;
+				END
+			ELSE 
+				RETURN 0;
+			END;
 		END
-	END main_proc;
-	
+	END fibonacci;	
 END orgbachelorpli;

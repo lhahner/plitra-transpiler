@@ -2,10 +2,12 @@ package org.bachelor.transpiler.pl1transpiler.mapper;
 
 import org.bachelor.transpiler.pl1transpiler.parser.Node;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 public class Mapper {
 	protected Template javaWords;
+	protected SymbolTable symbols = new SymbolTable();
 	TranslationMapper var = new TranslationMapper();
 	
 

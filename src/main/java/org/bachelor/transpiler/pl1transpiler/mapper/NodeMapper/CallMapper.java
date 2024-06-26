@@ -136,7 +136,7 @@ public class CallMapper extends Mapper implements ITranslationBehavior{
 			}
 			return parameterlist + ")";
 		} else {
-			this.parameterAssignList.clear();
+			
 			return "(" + identifiers.get(0) + ")";
 		}
 	}

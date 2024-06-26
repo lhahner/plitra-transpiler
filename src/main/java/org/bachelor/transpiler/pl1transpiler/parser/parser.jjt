@@ -264,6 +264,7 @@ TOKEN :
 	| < PLUS : "+" >
 	| < COMPLT : "¬"< LT > >
 	| < LTEQ : < LT >"=" >
+	| < GTEQ : < GT >"=" >
 	| < EQ : "=" >
 	| < COMPEQ: "¬=" >
 	| < COMPGT: "¬"< GT > >
@@ -357,7 +358,7 @@ void proc_body() #BODY :
 void if_statement() #BRANCH :
 {}
 {
-  < IF >bool_expression()(bool_operation()bool_expression())*
+  < IF >bool_expression()
   < THEN >proc_body()
   [else_statement()]
 }
@@ -423,40 +424,54 @@ void specification() :
 void bool_expression() #BOOL :
 {
   ArrayList<String > boolean_expression = new ArrayList<String >();
+  Token open_bracket = null;
   Token operand_1 = null;
   Token operator_1 = null;
   
   Token operand_2 = null;
+  Token closing_bracket = null;
   Token operator_2 = null;
   
   Token operand_3 = null;
-  
+  Token closing_bracket_1 = null;
+  Token operator_4 = null;
 }
 {
-  (("(")*
+ 
+  ((open_bracket="(")*
   (operand_1=< PL1_WORD >|operand_1=< INTEGER >)(operator_1=bool_operation()
-  ((operand_2=< PL1_WORD >|operand_2=< INTEGER >)(")")*(operator_2=bool_operation()
-  (operand_3=< PL1_WORD >|operand_3=< INTEGER >)(")")*)*))*)
+  ((operand_2=< PL1_WORD >|operand_2=< INTEGER >)(closing_bracket=")")*(operator_2=bool_operation()
+  (operand_3=< PL1_WORD >|operand_3=< INTEGER >)(closing_bracket_1=")")*)*))*(operator_4=bool_operation()bool_expression())*)
+  
+  
 
   {
+    if(open_bracket != null) {
+		boolean_expression.add(open_bracket.image);
+    }
    if(operand_1 != null) {
      boolean_expression.add(operand_1.image);
    }
-  
    if(operator_1 != null) {
      boolean_expression.add(operator_1.image);
    }
-   
    if(operand_2 != null) {
      boolean_expression.add(operand_2.image);
    }
-   
+   if(closing_bracket != null) {
+		boolean_expression.add(closing_bracket.image);
+    }
    if(operator_2 != null) {
      boolean_expression.add(operator_2.image);
    }
-   
    if(operand_3 != null) {
      boolean_expression.add(operand_3.image);
+   }
+   if(closing_bracket_1 != null) {
+		boolean_expression.add(closing_bracket_1.image);
+    }
+   if(operator_4 != null) {
+     boolean_expression.add(operator_4.image);
    }
    jjtThis.value = boolean_expression;
   }
@@ -471,6 +486,7 @@ Token bool_operation() #OP :
 	| t = < PLUS >
 	| t = < COMPLT >
 	| t = < LTEQ >
+	| t = < GTEQ >
 	| t = < EQ >
 	| t = < COMPEQ >
 	| t = < COMPGT >
