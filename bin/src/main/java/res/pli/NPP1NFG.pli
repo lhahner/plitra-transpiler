@@ -1,0 +1,10 @@
+orgbachelorpli: PACKAGE;
+	DCL var_1 DECIMAL(1) INIT(2);
+	
+	main_proc: PROC;
+		IF (var_1 < 3) THEN
+			DISPLAY ('Is smaller');
+		END
+	END main_proc;
+	
+END orgbachelorpli;

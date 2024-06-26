@@ -8,40 +8,12 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
 public class BranchMapper extends Mapper implements ITranslationBehavior{
 	
-	public String ifStatement;
-	public String getIfStatement() {
-		return ifStatement;
-	}
-
-	public void setIfStatement(String ifStatement) {
-		this.ifStatement = ifStatement;
-	}
-
-	public String getElseStatement() {
-		return elseStatement;
-	}
-
-	public void setElseStatement(String elseStatement) {
-		this.elseStatement = elseStatement;
-	}
-
-	public String elseStatement;
-	
 	public String translate(SimpleNode simpleNode) {
-		this.mapBranchStatement(simpleNode);
-		if(this.getElseStatement() != null) {
-			return this.getElseStatement();
-		}
-		return this.getIfStatement();
+		Pl1ParserTreeConstants treeSymbols = null;
+		return 
+				simpleNode.jjtGetParent().getId() == treeSymbols.JJTBRANCH ? 
+				"}" + super.javaWords.ELSE.getValue() 
+				: super.javaWords.IF.getValue();
 	}
 	
-	public void mapBranchStatement(SimpleNode simpleNode) {
-		Pl1ParserTreeConstants treeSymbols = null;
-		if(simpleNode.jjtGetParent().getId() == treeSymbols.JJTBRANCH) {
-			this.setElseStatement("}" + super.javaWords.ELSE.getValue());
-		}
-		else if(simpleNode.jjtGetParent().getId() == treeSymbols.JJTBODY) {
-			this.setIfStatement(super.javaWords.IF.getValue());
-		}
-	}
 }

@@ -756,6 +756,7 @@ if(operand_1 != null) {
    if(operand_3 != null) {
      boolean_expression.add(operand_3.image);
    }
+   jjtn000.value = boolean_expression;
     } catch (Throwable jjte000) {
 if (jjtc000) {
       jjtree.clearNodeScope(jjtn000);
