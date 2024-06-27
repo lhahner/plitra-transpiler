@@ -1,6 +1,7 @@
 package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
@@ -13,7 +14,7 @@ public class CalcMapper extends Mapper implements ITranslationBehavior {
 	
 	public String translate(SimpleNode simpleNode) {
 		setTerms(simpleNode);
-		return "\"" + (String)simpleNode.jjtGetValue() + "\"";
+		return "\"" + terms.stream().collect(Collectors.joining(" ")) + "\"";
 	}
 	
 	public void setTerms(SimpleNode simpleNode) {

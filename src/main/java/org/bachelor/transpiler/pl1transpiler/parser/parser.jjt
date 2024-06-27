@@ -276,7 +276,7 @@ TOKEN :
 	| < A : ("A")+ >
 	| < V : ("V")+ >
 	| < INTEGER : (["0"-"9"])+ >
-	| < STRING : "'"((["a"-"z","A"-"Z","0"-"9","_"," ","!","."])+)*"'" >
+	| < STRING : "'"((["a"-"z","A"-"Z","0"-"9","_"," ","!"])+)*"'" >
  	| < PL1_WORD: (["a"-"z","A"-"Z","0"-"9"])+ ((<MINUSCHAR> | "_" )+ (["a"-"z","0"-"9"])+ )* >
 	| < EOL: "\n" >
 	| < SCOPE : (["1"-"9"]) >
@@ -317,12 +317,11 @@ void package_() #PACKAGE :
 void footer() #END :
 {Token t = null;}
 {
-  (< END >t = < PL1_WORD >)
-  | < END >
+  (< END >[t = < PL1_WORD >])
+  
   {
-	if(t != null) { 
-    jjtThis.value = t.image;
-  }
+    jjtThis.value = t != null ? t.image : "";
+  
   }
 }
 
@@ -346,14 +345,14 @@ void proc_body() #BODY :
     var_declaration(2)
     |entry_statement()
     |call()
+    |init_statement()
     |termination()
     |fetch()
     |release()
+    |display_statement()
+    |read_statement()
     |if_statement()footer()
     |do_statement()footer()
-    |display_statement()
-    |init_statement()
-    |read_statement()
     )*
 }
 
@@ -513,29 +512,49 @@ void display_statement() #DISPLAY:
 
 void init_statement() #ASSIGN:
 {
+  //TODO change to JSON
  String[] assignAttributes = new String[2];
  Token identifier = null;
  Token assignValue = null;
  Token factorial = null;
  }
 {
-  (    [identifier=< PL1_WORD >]"="(math_expression()|assignValue=< PL1_WORD >|assignValue=< STRING >|assignValue=< INTEGER >["."factorial=< INTEGER >])*
-  | < INIT >"("(assignValue=< STRING >|assignValue=< INTEGER >)")"
-  )
-
-  {
-    if(identifier != null) {
-     	assignAttributes[0] = identifier.image;
-   	}
-    if(assignValue != null) {
-		assignAttributes[1] = assignValue.image;
-	}
-    jjtThis.value = assignAttributes;
-    if(factorial != null) {
-		assignAttributes[1] = assignAttributes[1] + "." + factorial.image;
+ 	(   	identifier=< PL1_WORD >< EQ >(math_expression()|assignValue=< PL1_WORD >|assignValue=< STRING >|assignValue=< INTEGER >["."factorial=< INTEGER >])
+    {
+      assignAttributes[0] = identifier != null ? identifier.image : "";
+      jjtThis.value = assignAttributes;
     }
+   	    |(< INIT >"("(assignValue=< STRING >|assignValue=< INTEGER >)")")
+ 	)
+	 {
+	   assignAttributes[1] = assignValue != null ? assignValue.image : "";
+	   jjtThis.value = assignAttributes;
+     }
+  {
+    assignAttributes[1] = factorial != null ? assignAttributes[1] + "." + factorial.image : assignAttributes[1];
+    jjtThis.value = assignAttributes;
   }
 }
+
+//{
+// (
+//   
+//    (
+//        identifier=< PL1_WORD >< EQ >(math_expression()|assignValue=< PL1_WORD >|assignValue=< STRING >|assignValue=< INTEGER >["."factorial=< INTEGER >])*
+// 	)|
+// 	(
+// 	  < INIT >"("(assignValue=< STRING >|assignValue=< INTEGER >)")")
+//)
+//	 {
+//	   assignAttributes[1] = assignValue != null ? assignValue.image : "";
+//	   jjtThis.value = assignAttributes;
+//     }
+//  {
+//    assignAttributes[1] = factorial != null ? assignAttributes[1] + "." + factorial.image : "";
+//    jjtThis.value = assignAttributes;
+//  }
+//}
+
 
 void math_expression() #CALC:
 {
@@ -544,10 +563,7 @@ void math_expression() #CALC:
   Token operand_2 = null;
 }
 {
-  (	  (operand_1=< INTEGER >|operand_1=< PL1_WORD >)
-      (operator_1=< PLUS >|operator_1=< MINUSCHAR >|operator_1=< DIVIDE >|operator_1=< MULTIPLY >)
-      ((math_expression())| (operand_2=< INTEGER >|operand_2=< PL1_WORD >))
-    )
+  	(operand_1=< INTEGER >|operand_1=< PL1_WORD >) (operator_1=< PLUS >|operator_1=< MINUSCHAR >|operator_1=< DIVIDE >|operator_1=< MULTIPLY >)(operand_2=< INTEGER >|operand_2=< PL1_WORD >)
 	  {
 	    //TODO Only works for one term.
 	    jjtThis.value = operand_2 != null ?
@@ -555,6 +571,11 @@ void math_expression() #CALC:
 	    			:	"";
 	  }
  }
+
+//(	  (operand_1=< INTEGER >|operand_1=< PL1_WORD >)
+//      (operator_1=< PLUS >|operator_1=< MINUSCHAR >|operator_1=< DIVIDE >|operator_1=< MULTIPLY >)
+//      ((math_expression())| (operand_2=< INTEGER >|operand_2=< PL1_WORD >))
+//    )
 
 
 void returns() #RETURNS:
@@ -641,6 +662,7 @@ void release() #RELEASE:
 
 void termination() #TERMINATE:
 {
+  //TODO change to json
   ArrayList<String > terminationPropreties = new ArrayList<String >();
   Token returnType = null;
   Token returnValue = null;
@@ -810,7 +832,9 @@ String LengthPicture() #PictureLength:
 * Grammar Expression for a String Expression.
 **/
 void String() #String:
-{Token length = null;}
+{
+  Token length = null;
+  }
 {
   ( (< CHAR > | < CHARACTER >)
   | < BIT >
@@ -826,6 +850,7 @@ void String() #String:
 **/
 void codedArithmetic() #Arithmetic:
 {
+  //TODO transfer to JSON
   typePropreties = new ArrayList<String >();
 
   Token typeAttribute = null;
@@ -872,10 +897,12 @@ void codedArithmetic() #Arithmetic:
 * Grammar Expression for a  Identifier.
 **/
 void id(String type) #Id :
-{Token t;}
+{
+Token t;}
 {
   t=<PL1_WORD>
   {
+    //TODO To JSON
     String[] tmp = new String[4];
     switch(type) {
 		case "VAR":

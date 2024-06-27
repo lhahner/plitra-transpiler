@@ -1,18 +1,21 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL test_1 DECIMAL(31);
-	DCL  n DECIMAL(30);
+	DCL n_1 DECIMAL(30);
+	DCL m_1 DECIMAL(30);
+	DCL s_1 DECIMAL(30);
 	
 	fibonacci: PROC(n);
-		IF (n = 0) THEN;
+		IF (n_1 = 0) THEN
 			RETURN 0;
-		ELSE
-			IF (n = 1) THEN;
+		ELSE 
+			IF (n_1 = 1) THEN
 				RETURN 1;
-			END;
-			n = n - 1;	
-			CALL fibonacci;
-			RETURN n;
+			ELSE
+				n_1 = n_1 - 1;
+				m_1 = n_1 - 2;
+				s_1 = n_1 - m_1;
+				CALL fibanacci(s_1);
+			END
 		END
 	END fibonacci;	
 END orgbachelorpli;
