@@ -6,19 +6,18 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 public class Mapper {
-	protected Template javaWords;
-	protected SymbolTable symbols = new SymbolTable();
+	protected static Template javaWords;
+	protected static SymbolTable symbols = new SymbolTable();
 	TranslationMapper var = new TranslationMapper();
 	
+	public Mapper() {
+	}
 
 	public Mapper(SimpleNode root) {
 		AstMapper astMapper = new AstMapper();
 		this.iterateTree(root);
 	}
 	
-	public Mapper() {
-	}
-
 	public void iterateTree(SimpleNode startNode) {
 		if (startNode.jjtGetParent() == null) {
 			if (this.hasChildren(startNode)) {

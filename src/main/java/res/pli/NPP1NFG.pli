@@ -4,8 +4,6 @@ orgbachelorpli: PACKAGE;
 	DCL m DECIMAL(2) INIT(20);
 	
 	fibonacci: PROC(f);
-		DO WHILE (n < m)
-			DISPLAY ('Sara is the best');
-		END;
+		m = n * 2 +2;
 	END fibonacci;	
 END orgbachelorpli;

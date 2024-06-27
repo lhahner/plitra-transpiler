@@ -516,7 +516,7 @@ void init_statement() #ASSIGN:
  Token factorial = null;
  }
 {
-  (    [identifier=< PL1_WORD >]"="(assignValue=< PL1_WORD >|assignValue=< STRING >|assignValue=< INTEGER >["."factorial=< INTEGER >]|math_expression())*
+  (    [identifier=< PL1_WORD >]"="(math_expression()|assignValue=< PL1_WORD >|assignValue=< STRING >|assignValue=< INTEGER >["."factorial=< INTEGER >])*
   | < INIT >"("(assignValue=< STRING >|assignValue=< INTEGER >)")"
   )
 
@@ -536,30 +536,21 @@ void init_statement() #ASSIGN:
 
 void math_expression() #CALC:
 {
-  Token operand = null;
-  Token operator = null;
+  Token operand_1 = null;
+  Token operator_1 = null;
+  Token operand_2 = null;
 }
 {
-  (      (operand=< INTEGER >|operand=< PL1_WORD >)*
-       {
-		if(operand != null) {
-		  mathExpression.add(operand.image);
-		}
-		}
-      (operator=< PLUS >|operator=< MINUSCHAR >|operator=< DIVIDE >|operator=< MULTIPLY >)
-      {
-        if(operator != null) {
-		  mathExpression.add(operator.image);
-		}
-	  }	
-      (math_expression() | (operand=< INTEGER >|operand=< PL1_WORD >))*
-      
+  (	  (operand_1=< INTEGER >|operand_1=< PL1_WORD >)
+      (operator_1=< PLUS >|operator_1=< MINUSCHAR >|operator_1=< DIVIDE >|operator_1=< MULTIPLY >)
+      ((math_expression())| (operand_2=< INTEGER >|operand_2=< PL1_WORD >))
+    )
 	  {
-      if(operand != null) {
-		  mathExpression.add(operand.image);
-		}
+	    //TODO Only works for one term.
+	    jjtThis.value = operand_2 != null ?
+	    				operand_1.image + operator_1.image + operand_2.image
+	    			:	"";
 	  }
-  )
  }
 
 

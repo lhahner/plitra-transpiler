@@ -137,7 +137,8 @@ public enum Template {
 	NULL("null"),
 	DECIMAL("DECIMAL"),
 	TONUMERIC("toNumeric"),
-	BREAK("break");
+	BREAK("break"),
+	CALC(".calc");
 
 	private final String symbol;
 	

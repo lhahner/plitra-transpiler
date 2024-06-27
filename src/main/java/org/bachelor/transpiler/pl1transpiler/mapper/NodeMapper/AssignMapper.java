@@ -95,6 +95,9 @@ public class AssignMapper extends Mapper implements ITranslationBehavior {
 	 * @param simpleNode the simple node
 	 */
 	public void mapAssignNode(SimpleNode simpleNode) {
+		if(super.hasChildren(simpleNode)) {
+			mapCalcNode(simpleNode);
+		}
 		// TODO Different Types require different assign methods.
 		String[] assignValues = this.setAssignValues(simpleNode);
 		if (assignValues != null) {
@@ -113,8 +116,8 @@ public class AssignMapper extends Mapper implements ITranslationBehavior {
 	 * @param simpleNode the simple node
 	 */
 	public void mapCalcNode(SimpleNode simpleNode) {
-		// TODO Map calculation Node.
-		return;
+			this.setOperator(super.javaWords.CALC.getValue());
+			this.setAssignment(new CalcMapper().translate((SimpleNode)simpleNode.jjtGetChild(0)));
 	}
 
 	/**

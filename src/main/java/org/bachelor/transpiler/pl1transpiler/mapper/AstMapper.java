@@ -7,6 +7,7 @@ import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.AssignMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.BodyMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.BooleanExpressionMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.BranchMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.CalcMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.CallMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.DeclarationMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.DisplayMapper;
@@ -33,6 +34,7 @@ public class AstMapper {
 		astMapper.put(TreeSymbols.JJTHEAD, new HeadMapper());
 		astMapper.put(TreeSymbols.JJTBRANCH, new BranchMapper());
 		astMapper.put(TreeSymbols.JJTLOOP, new LoopMapper());
+//		astMapper.put(TreeSymbols.JJTCALC, new CalcMapper());
 //		astMapper.put(TreeSymbols.JJTDO, null);
 //		astMapper.put(TreeSymbols.JJTDO_TYPE_3, null);
 //		astMapper.put(TreeSymbols.JJTDO_TYPE_4, null);
