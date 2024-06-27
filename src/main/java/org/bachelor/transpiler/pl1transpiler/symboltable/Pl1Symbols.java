@@ -149,7 +149,9 @@ public enum Pl1Symbols{
 			UNTIL("UNTIL", "operator"),
 			EXIT("EXIT", "operator"),
 			DISPLAY("DISPLAY", "operator"),
-			REPLY("REPLY", "operator");
+			REPLY("REPLY", "operator"),
+			READ("READ", "operator"),
+			INTO("INTO", "operator");
 	
 	 	private final String symbol;
 	    private final String category;

@@ -1,9 +1,18 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL n DECIMAL(2) INIT(20);
-	DCL m DECIMAL(2) INIT(20);
+	DCL test_1 DECIMAL(31);
+	DCL  n DECIMAL(30);
 	
-	fibonacci: PROC(f);
-		m = n * 2 +2;
+	fibonacci: PROC(n);
+		IF (n = 0) THEN;
+			RETURN 0;
+		ELSE
+			IF (n = 1) THEN;
+				RETURN 1;
+			END;
+			n = n - 1;	
+			CALL fibonacci;
+			RETURN n;
+		END
 	END fibonacci;	
 END orgbachelorpli;

@@ -16,6 +16,7 @@ import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.HeadMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.LoopMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.PackageMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ProgramMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ReadFileMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.TerminateMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
@@ -40,7 +41,7 @@ public class AstMapper {
 //		astMapper.put(TreeSymbols.JJTDO_TYPE_4, null);
 //		astMapper.put(TreeSymbols.JJTSPECIFICATION, null);
 		astMapper.put(TreeSymbols.JJTBOOL, new BooleanExpressionMapper());
-//		astMapper.put(TreeSymbols.JJTOP, null);
+		astMapper.put(TreeSymbols.JJTREAD_FILE, new ReadFileMapper());
 //		astMapper.put(TreeSymbols.JJTENTRY, null);
 		astMapper.put(TreeSymbols.JJTDISPLAY, new DisplayMapper());
 		astMapper.put(TreeSymbols.JJTASSIGN, new AssignMapper());

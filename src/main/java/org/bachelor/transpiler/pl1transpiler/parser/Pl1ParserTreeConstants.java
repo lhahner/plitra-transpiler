@@ -22,23 +22,25 @@ public interface Pl1ParserTreeConstants
   public int JJTRETURNS = 16;
   public int JJTOPTIONS = 17;
   public int JJTCALLS = 18;
-  public int JJTSTRINGLIST = 19;
-  public int JJTFETCH = 20;
-  public int JJTSTATEMENT = 21;
-  public int JJTRELEASE = 22;
-  public int JJTTERMINATE = 23;
-  public int JJTPARA = 24;
-  public int JJTVAR = 25;
-  public int JJTMINOR = 26;
-  public int JJTTYPE = 27;
-  public int JJTPICTUREEXPRESSION = 28;
-  public int JJTPICTUREATTRIBUTE = 29;
-  public int JJTPICTURELETTER = 30;
-  public int JJTNUMBER = 31;
-  public int JJTPICTURELENGTH = 32;
-  public int JJTSTRING = 33;
-  public int JJTARITHMETIC = 34;
-  public int JJTID = 35;
+  public int JJTREAD_FILE = 19;
+  public int JJTSTRINGLIST = 20;
+  public int JJTFETCH = 21;
+  public int JJTSTATEMENT = 22;
+  public int JJTRELEASE = 23;
+  public int JJTTERMINATE = 24;
+  public int JJTPARA = 25;
+  public int JJTVAR = 26;
+  public int JJTMINOR = 27;
+  public int JJTTYPE = 28;
+  public int JJTFILE = 29;
+  public int JJTPICTUREEXPRESSION = 30;
+  public int JJTPICTUREATTRIBUTE = 31;
+  public int JJTPICTURELETTER = 32;
+  public int JJTNUMBER = 33;
+  public int JJTPICTURELENGTH = 34;
+  public int JJTSTRING = 35;
+  public int JJTARITHMETIC = 36;
+  public int JJTID = 37;
 
 
   public String[] jjtNodeName = {
@@ -61,6 +63,7 @@ public interface Pl1ParserTreeConstants
     "RETURNS",
     "OPTIONS",
     "CALLS",
+    "READ_FILE",
     "STRINGLIST",
     "FETCH",
     "STATEMENT",
@@ -70,6 +73,7 @@ public interface Pl1ParserTreeConstants
     "VAR",
     "MINOR",
     "TYPE",
+    "File",
     "PictureExpression",
     "PictureAttribute",
     "PictureLetter",
@@ -80,4 +84,4 @@ public interface Pl1ParserTreeConstants
     "Id",
   };
 }
-/* JavaCC - OriginalChecksum=55e6ac3585e262bc7146055df9b2ac8f (do not edit this line) */
+/* JavaCC - OriginalChecksum=c84d4395a99297f1f67de64825875cf9 (do not edit this line) */

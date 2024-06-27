@@ -109,7 +109,7 @@ public enum Template {
 	COMPLEX("COMPLEX"),
 	CHAR_OBJECT("CHAR"),
 	OBJECT("Object"),
-	FILE("File"),
+	FILE("FILE"),
 	PUBLIC("public"),
 	PRIVATE("private"),
 	DOUBLE("double"),
@@ -138,7 +138,10 @@ public enum Template {
 	DECIMAL("DECIMAL"),
 	TONUMERIC("toNumeric"),
 	BREAK("break"),
-	CALC(".calc");
+	CALC(".calc"),
+	TRY("try"),
+	CATCH("catch"),
+	SCANNER("Scanner readFile = new Scanner");
 
 	private final String symbol;
 	

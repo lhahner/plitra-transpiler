@@ -255,6 +255,8 @@ TOKEN :
 	| < UNTIL : "UNTIL" >
 	| < DISPLAY : "DISPLAY" >
 	| < REPLY : "REPLY" >
+	| < READ : "READ" >
+	| < INTO : "INTO" >
 	| < MINUSCHAR: "-" >
 	| < DIVIDE : "/" >
 	| < MULTIPLY: "*" >
@@ -274,7 +276,7 @@ TOKEN :
 	| < A : ("A")+ >
 	| < V : ("V")+ >
 	| < INTEGER : (["0"-"9"])+ >
-	| < STRING : "'"((["a"-"z","A"-"Z","0"-"9","_"," ","!"])+)*"'" >
+	| < STRING : "'"((["a"-"z","A"-"Z","0"-"9","_"," ","!","."])+)*"'" >
  	| < PL1_WORD: (["a"-"z","A"-"Z","0"-"9"])+ ((<MINUSCHAR> | "_" )+ (["a"-"z","0"-"9"])+ )* >
 	| < EOL: "\n" >
 	| < SCOPE : (["1"-"9"]) >
@@ -351,6 +353,7 @@ void proc_body() #BODY :
     |do_statement()footer()
     |display_statement()
     |init_statement()
+    |read_statement()
     )*
 }
 
@@ -588,6 +591,28 @@ void call() #CALLS:
 	}
 }
 
+//TODO not fully implemented
+void read_statement() #READ_FILE :
+{
+ // ArrayList<String > asignees = new ArrayList<String >();
+  Token fileId;
+  Token assignId;
+  }
+{
+  < READ >< FILE >"("fileId=< PL1_WORD >")"< INTO > "("< PL1_WORD >")"
+
+{
+//  if(fileId != null)
+//  {
+//    asignees.add(fileId.image);
+//  }
+//  if(assignId != null) {
+//	asignees.add(assignId.image);
+//  }
+  jjtThis.value = fileId.image;
+}
+}
+
 void string_list() #STRINGLIST:
 {Token t = null;}
 {
@@ -697,10 +722,15 @@ void type() #TYPE :
 	  | String()
 	  | (< POINTER > | < OFFSET > |  < HANDLE >) < VALUE >< LOCATES >
 	  | Picture()
-	  | < FILE > < ENVIRONMENT > ( < STREAM > | < RECORD >) (< INPUT > | < OUTPUT > | < UPDATE >)
-	  (<SEQUENTIAL >|  < DIRECT >) (< BUFFERED > | < UNBUFFERED >) < KEYED >< PRINT >
+	  | File()
 	  | < ENTRY > [< RETURNS >]
 	) 
+}
+
+void File() #File :
+{}
+{
+  < FILE > < ENVIRONMENT > [( < STREAM > | < RECORD >) (< INPUT > | < OUTPUT > | < UPDATE >)(<SEQUENTIAL >|  < DIRECT >) (< BUFFERED > | < UNBUFFERED >) < KEYED >< PRINT > ]
 }
 
 /**
