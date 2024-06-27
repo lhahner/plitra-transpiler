@@ -25,18 +25,27 @@ public class BooleanExpressionMapper extends Mapper implements ITranslationBehav
 
 	public String translate(SimpleNode simpleNode) {
 		Pl1ParserTreeConstants treeSymbols = null;
+
 		ArrayList<String> expressionList = new ArrayList<String>();
 		setExpressionList(simpleNode, expressionList);
 		mapBooleanExpression(expressionList);
-		//TODO Really bad.
-		if(simpleNode.jjtGetParent().getId() == treeSymbols.JJTBOOL) {
+		
+		// TODO Fix quick and dirty here.
+		if (simpleNode.jjtGetParent().getId() == treeSymbols.JJTBOOL) {
 			return "";
+		}
+		/**@see Class BodyMapper */
+		if (simpleNode.jjtGetParent().getId() == treeSymbols.JJTUNTIL) {
+			return "{\n"
+				+	super.javaWords.IF.getValue()
+				+  this.getExpression()
+				+  "{" + super.javaWords.BREAK.getValue() + ";" + " }";
 		}
 		return this.getExpression();
 	}
 
 	public void mapBooleanExpression(ArrayList<String> expressionList) {
-		
+
 		String expression = expressionList.stream().collect(Collectors.joining(" "));
 		if (expression.contains("¬")) {
 			expression = expression.replaceAll("¬", "!");
@@ -65,7 +74,7 @@ public class BooleanExpressionMapper extends Mapper implements ITranslationBehav
 		Pl1ParserTreeConstants treeSymbols = null;
 		ArrayList<String> expression = (ArrayList<String>) paraNode.jjtGetValue();
 		// iterater over ArrayList to parse types
-		for (int i = 0; i < expression.size() ; i++) {
+		for (int i = 0; i < expression.size(); i++) {
 			if (super.symbols.getBySymbol(expression.get(i)) != null) {
 				expressionList.add(expression.get(i).concat("." + super.javaWords.TONUMERIC.getValue() + "()"));
 				continue;

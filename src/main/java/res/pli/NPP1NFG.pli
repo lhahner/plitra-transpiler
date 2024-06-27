@@ -4,17 +4,8 @@ orgbachelorpli: PACKAGE;
 	DCL m DECIMAL(2) INIT(20);
 	
 	fibonacci: PROC(f);
-		IF ((n = m) & (n >= m)) THEN
-			RETURN 1;
-		ELSE 
-			IF (n = m) THEN
-				RETURN 2;
-				IF ((n = m) & (n > m) || (n < m)) THEN
-					RETURN 3;
-				END
-			ELSE 
-				RETURN 0;
-			END;
-		END
+		DO WHILE (n < m)
+			DISPLAY ('Sara is the best');
+		END;
 	END fibonacci;	
 END orgbachelorpli;

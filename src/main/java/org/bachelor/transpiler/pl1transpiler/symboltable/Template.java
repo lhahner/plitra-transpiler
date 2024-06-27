@@ -136,7 +136,8 @@ public enum Template {
 	INIT(".init"),
 	NULL("null"),
 	DECIMAL("DECIMAL"),
-	TONUMERIC("toNumeric");
+	TONUMERIC("toNumeric"),
+	BREAK("break");
 
 	private final String symbol;
 	

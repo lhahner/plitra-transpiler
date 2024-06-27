@@ -40,8 +40,7 @@ public class Pl1Parser{
 	private int charLength;
 	private String number;
 	private String stringLength;
-	private String pictureAttribiute;
-
+	private String pictureAttribiute;;
 	
 
 	public Pl1Parser() {
@@ -376,34 +375,17 @@ void do_statement() #LOOP :
 {
   	  < DO >
 	(
-	  do_type_2()
+	   (< WHILE > bool_expression() [until_statement()]proc_body())
+ 	 | (until_statement() [< WHILE > bool_expression()]proc_body())
 	)
 }
 
-void do_type_2() #DO :
+void until_statement() #UNTIL :
 {}
 {
-   (< WHILE > bool_expression() [< UNTIL > bool_expression()]proc_body())
- | (< UNTIL >  bool_expression() [< WHILE > bool_expression()]proc_body())
- 	
-}
-
-/**
-* @todo Check again might be wrong
-*/
-void do_type_3() :
-{}
-{
-  (    (<PL1_WORD > "=" specification())
-  | < WHILE > bool_expression() [< UNTIL > bool_expression()]
-  | < UNTIL >  bool_expression() [< WHILE > bool_expression()]
-    )
-}
-
-void do_type_4() :
-{}
-{
-  (< LOOP >)
+  < UNTIL > bool_expression()
+  {
+  }
 }
 
 /**

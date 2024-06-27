@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
+import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
 /**
@@ -52,10 +53,24 @@ public class BodyMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public String translate(SimpleNode simpleNode) {
 		if (super.hasChildren(simpleNode)) {
+			if(this.isUntilSibiling(simpleNode)) {
+				return "";
+			}
 			this.setBody("{");
 			return this.getBody();
 		} else {
 			return this.getBody();
 		}
+	}
+	
+	public boolean isUntilSibiling(SimpleNode simpleNode) {
+		Pl1ParserTreeConstants treeSymbols = null;
+		SimpleNode parent = (SimpleNode)simpleNode.jjtGetParent();
+		for(int i = 0; i<parent.jjtGetNumChildren(); i++) {
+			if(parent.jjtGetChild(i).getId() == treeSymbols.JJTUNTIL) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

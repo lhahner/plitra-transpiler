@@ -11,36 +11,34 @@ public interface Pl1ParserTreeConstants
   public int JJTBODY = 5;
   public int JJTBRANCH = 6;
   public int JJTLOOP = 7;
-  public int JJTDO = 8;
-  public int JJTDO_TYPE_3 = 9;
-  public int JJTDO_TYPE_4 = 10;
-  public int JJTSPECIFICATION = 11;
-  public int JJTBOOL = 12;
-  public int JJTOP = 13;
-  public int JJTENTRY = 14;
-  public int JJTDISPLAY = 15;
-  public int JJTASSIGN = 16;
-  public int JJTCALC = 17;
-  public int JJTRETURNS = 18;
-  public int JJTOPTIONS = 19;
-  public int JJTCALLS = 20;
-  public int JJTSTRINGLIST = 21;
-  public int JJTFETCH = 22;
-  public int JJTSTATEMENT = 23;
-  public int JJTRELEASE = 24;
-  public int JJTTERMINATE = 25;
-  public int JJTPARA = 26;
-  public int JJTVAR = 27;
-  public int JJTMINOR = 28;
-  public int JJTTYPE = 29;
-  public int JJTPICTUREEXPRESSION = 30;
-  public int JJTPICTUREATTRIBUTE = 31;
-  public int JJTPICTURELETTER = 32;
-  public int JJTNUMBER = 33;
-  public int JJTPICTURELENGTH = 34;
-  public int JJTSTRING = 35;
-  public int JJTARITHMETIC = 36;
-  public int JJTID = 37;
+  public int JJTUNTIL = 8;
+  public int JJTSPECIFICATION = 9;
+  public int JJTBOOL = 10;
+  public int JJTOP = 11;
+  public int JJTENTRY = 12;
+  public int JJTDISPLAY = 13;
+  public int JJTASSIGN = 14;
+  public int JJTCALC = 15;
+  public int JJTRETURNS = 16;
+  public int JJTOPTIONS = 17;
+  public int JJTCALLS = 18;
+  public int JJTSTRINGLIST = 19;
+  public int JJTFETCH = 20;
+  public int JJTSTATEMENT = 21;
+  public int JJTRELEASE = 22;
+  public int JJTTERMINATE = 23;
+  public int JJTPARA = 24;
+  public int JJTVAR = 25;
+  public int JJTMINOR = 26;
+  public int JJTTYPE = 27;
+  public int JJTPICTUREEXPRESSION = 28;
+  public int JJTPICTUREATTRIBUTE = 29;
+  public int JJTPICTURELETTER = 30;
+  public int JJTNUMBER = 31;
+  public int JJTPICTURELENGTH = 32;
+  public int JJTSTRING = 33;
+  public int JJTARITHMETIC = 34;
+  public int JJTID = 35;
 
 
   public String[] jjtNodeName = {
@@ -52,9 +50,7 @@ public interface Pl1ParserTreeConstants
     "BODY",
     "BRANCH",
     "LOOP",
-    "DO",
-    "do_type_3",
-    "do_type_4",
+    "UNTIL",
     "specification",
     "BOOL",
     "OP",
@@ -84,4 +80,4 @@ public interface Pl1ParserTreeConstants
     "Id",
   };
 }
-/* JavaCC - OriginalChecksum=d07d4f623e18a14318025a10b2f2c456 (do not edit this line) */
+/* JavaCC - OriginalChecksum=55e6ac3585e262bc7146055df9b2ac8f (do not edit this line) */

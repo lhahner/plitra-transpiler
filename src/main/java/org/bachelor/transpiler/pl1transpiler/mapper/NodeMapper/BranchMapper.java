@@ -15,5 +15,4 @@ public class BranchMapper extends Mapper implements ITranslationBehavior{
 				"}" + super.javaWords.ELSE.getValue() 
 				: super.javaWords.IF.getValue();
 	}
-	
 }
