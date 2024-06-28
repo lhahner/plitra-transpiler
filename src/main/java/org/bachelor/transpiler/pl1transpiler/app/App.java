@@ -39,7 +39,6 @@ import org.bachelor.transpiler.pl1transpiler.checker.TypeChecker;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IdentifierReferenceException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncompatibleTypeException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException;
-import org.bachelor.transpiler.pl1transpiler.mapper.MainMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ProgramMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.*;
