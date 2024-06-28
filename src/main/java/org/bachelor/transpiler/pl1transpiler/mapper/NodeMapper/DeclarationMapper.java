@@ -2,6 +2,7 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
 import java.util.ArrayList;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.TypeMappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
@@ -154,21 +155,26 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * either routes the mapping to the mapType method or saves the value of the Id
 	 * Node in the identifier variable.
 	 *
-	 * @param simpleNode Node in which the VAR is defined.
+	 * @param varNode Node in which the VAR is defined.
 	 */
-	public void mapChildNodes(SimpleNode simpleNode) {
-		Pl1ParserTreeConstants TreeSymbols = null;
-		String identifier = "";
-		if (super.hasChildren(simpleNode)) {
-			for (int i = 0; i < simpleNode.jjtGetNumChildren(); i++) {
-				SimpleNode childNode = (SimpleNode) simpleNode.jjtGetChild(i);
-				if (childNode.getId() == TreeSymbols.JJTTYPE) {
+	public void mapChildNodes(SimpleNode varNode) {
+		String identifier;
+
+		if (super.hasChildren(varNode)) {
+
+			for (int i = 0; i < varNode.jjtGetNumChildren(); i++) {
+
+				SimpleNode childNode = (SimpleNode) varNode.jjtGetChild(i);
+
+				if (childNode.getId() == super.treeSymbols.JJTTYPE) {
 					try {
-						this.setType(this.mapType(childNode));
+						this.mapType(childNode);
 					} catch (TypeMappingException tme) {
 						tme.printStackTrace();
 					}
-				} else if (childNode.getId() == TreeSymbols.JJTID) {
+				}
+
+				else if (childNode.getId() == super.treeSymbols.JJTID) {
 					String[] tmp = (String[]) childNode.jjtGetValue();
 					identifier = tmp[0];
 					this.setIdentifier(identifier);
@@ -183,35 +189,37 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * the mapping to mapArithmetic. This is also used by the HeadMapper Class
 	 * since, there is also a type node defined.
 	 *
-	 * @param simpleNode The Node that contains all child Nodes as type.
+	 * @param typeNode The Node that contains all child Nodes as type.
 	 * @return The PL/I type in Java.
 	 * @throws TypeMappingException Thrown whenever there is either no translation
 	 *                              or no Child.
 	 */
-	public String mapType(SimpleNode simpleNode) throws TypeMappingException {
-		if (super.hasChildren(simpleNode)) {
-			for (int i = 0; i < simpleNode.jjtGetNumChildren(); i++) {
-				SimpleNode childNode = (SimpleNode) simpleNode.jjtGetChild(i);
-				if (childNode.toString().equals("Arithmetic")) {
-					return this.mapArithmetic(childNode);
-				} else if (childNode.toString().equals("String")) {
-					return this.mapString(childNode);
-				} else if (childNode.toString().equals("Locator")) {
-					return this.mapLocator();
-				} else if (childNode.toString().equals("PictureExpression")) {
-					return this.mapPicture();
-				} else if (childNode.toString().equals("File")) {
-					return this.mapFile();
-				} else if (childNode.toString().equals("Entry")) {
-					return this.mapEntry();
-				} else {
-					throw new TypeMappingException("No Type for the desired input.");
-				}
+	public void mapType(SimpleNode typeNode) throws TypeMappingException {
+
+		if (super.hasChildren(typeNode)) {
+
+			/** Can only be one since a variable has only one type. */
+			SimpleNode firstChildOfTypeNode = (SimpleNode) typeNode.jjtGetChild(0);
+
+			if (firstChildOfTypeNode.getId() == super.treeSymbols.JJTARITHMETIC) {
+				this.mapArithmetic(firstChildOfTypeNode);
+
+			} else if (firstChildOfTypeNode.getId() == super.treeSymbols.JJTSTRING) {
+				this.mapString(firstChildOfTypeNode);
+
+			} else if (firstChildOfTypeNode.getId() == super.treeSymbols.JJTPICTUREEXPRESSION) {
+				this.mapPicture((String) firstChildOfTypeNode.jjtGetValue());
+
+			} else if (firstChildOfTypeNode.getId() == super.treeSymbols.JJTFILE) {
+				this.mapFile();
+
+			} else {
+				throw new TypeMappingException("No Type like this implemented", typeNode);
 			}
+
 		} else {
-			throw new TypeMappingException("No Type for the desired input.");
+			throw new TypeMappingException("No Type definied for ", typeNode);
 		}
-		return null;
 	}
 
 	/**
@@ -221,27 +229,41 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * possible in Java with primitive types, it returns the Non-Primitive Object
 	 * which is implemented in the PL/I Dependencies folder.
 	 *
-	 * @param simpleNode the arithmetic node
+	 * @param arithmeticNode the arithmetic node
 	 * @return the PL/I DECIMAL type mapped in Java.
 	 * @throws TypeMappingException the type mapping exception
 	 */
-	public String mapArithmetic(SimpleNode simpleNode) throws TypeMappingException {
-		ArrayList<String> typeAttributes = (ArrayList<String>) simpleNode.jjtGetValue();
-		if (typeAttributes != null) {
-			for (String typeAttribute : typeAttributes) {
-				if (typeAttribute.equals("COMPLEX")) {
-					return this.mapDecimal(simpleNode, super.javaWords.COMPLEX.getValue());
-				} else if (typeAttribute.equals("FIXED")) {
-					return this.mapDecimal(simpleNode, super.javaWords.DECIMAL.getValue());
-				} else if (typeAttribute.equals("BINARY")) {
-					return this.mapDecimal(simpleNode, super.javaWords.BINARY.getValue());
-				} else if (typeAttribute.equals("DECIMAL")) {
-					return this.mapDecimal(simpleNode, super.javaWords.DECIMAL.getValue());
+	public void mapArithmetic(SimpleNode arithmeticNode) throws TypeMappingException {
+		ArrayList<String> arithmeticAttributes = (ArrayList<String>) arithmeticNode.jjtGetValue();
+		if (arithmeticAttributes != null) {
+
+			for (String arithmeticAttribute : arithmeticAttributes) {
+
+				if (arithmeticAttribute.equals("COMPLEX")) {
+
+					this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.COMPLEX.getValue() + "("
+							+ getLength(arithmeticNode) + ")");
+
+					this.setType(super.javaWords.COMPLEX.getValue());
+
+				} else if (arithmeticAttribute.equals("BINARY")) {
+
+					this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.BINARY.getValue() + "("
+							+ getLength(arithmeticNode) + ")");
+
+					this.setType(super.javaWords.BINARY.getValue());
+
+				} else {
+					this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.DECIMAL.getValue() + "("
+							+ getLength(arithmeticNode) + ")");
+
+					this.setType(super.javaWords.DECIMAL.getValue());
 				}
+
 			}
-			throw new TypeMappingException("Arithmetic type without translateable propreteis.");
+
 		} else {
-			throw new TypeMappingException("Arithmetic type without translateable propreteis.");
+			throw new TypeMappingException("Type has no Values on Node", arithmeticNode);
 		}
 	}
 
@@ -257,49 +279,13 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * @return either just CHAR or CHAR ... = new CHAR(..);
 	 */
 	public String mapString(SimpleNode simpleNode) {
-		Pl1ParserTreeConstants treeSymbols = null;
-		String length = "";
-		if (simpleNode.jjtGetValue() != null) {
-			length = (String) simpleNode.jjtGetValue();
-		}
 		if (simpleNode.jjtGetParent().jjtGetParent().getId() == treeSymbols.JJTVAR) {
-			this.setObject(
-					super.javaWords.NEW.getValue() + " " + super.javaWords.CHAR_OBJECT.getValue() + "(" + length + ")");
+			this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.CHAR_OBJECT.getValue() + "("
+					+ (String) simpleNode.jjtGetValue() + ")");
 			return super.javaWords.CHAR_OBJECT.getValue();
 		} else {
 			return super.javaWords.CHAR_OBJECT.getValue();
 		}
-	}
-	
-	/**
-	 * 
-	 * @param simpleNode
-	 * @return
-	 */
-	public String mapDecimal(SimpleNode simpleNode, String type) {
-		Pl1ParserTreeConstants treeSymbols = null;
-		ArrayList<String> values = (ArrayList<String>) simpleNode.jjtGetValue();
-
-		for (String value : values) {
-			if (Character.isDigit(value.charAt(0))) {
-				this.setObject(super.javaWords.NEW.getValue() + " " + type + "(" + value + ")");
-				return type;
-			}
-			else {
-				//TODO throw error
-			}
-		}
-		return type;
-	}
-	
-	/**
-	 * Map locator.
-	 *
-	 * @return the Java Expression
-	 * @TODO Maps the #LOCATOR Node to a Java Expression.
-	 */
-	public String mapLocator() {
-		return super.javaWords.OBJECT.getValue();
 	}
 
 	/**
@@ -308,8 +294,15 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * @return the Java Expression
 	 * @TODO Maps the #PictureExpression Node with the PictureMapper
 	 */
-	public String mapPicture() {
-		return null;
+	public String mapPicture(String picRegex) {
+		try {
+			this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.PICTURE.getValue() + "("
+					+ new PictureMapper().getRegex(picRegex) + ")");
+
+		} catch (LexicalErrorException lee) {
+			lee.printStackTrace();
+		}
+		return super.javaWords.PICTURE.getValue();
 	}
 
 	/**
@@ -324,12 +317,18 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	}
 
 	/**
-	 * Map entry.
-	 *
-	 * @return Java Expression
-	 * @TODO Maps the #ENTRY Node to a Java.
+	 * 
+	 * @param simpleNode
+	 * @return
 	 */
-	public String mapEntry() {
-		return null;
+	public String getLength(SimpleNode simpleNode) {
+		ArrayList<String> values = (ArrayList<String>) simpleNode.jjtGetValue();
+
+		for (String value : values) {
+			if (Character.isDigit(value.charAt(0))) {
+				return value;
+			}
+		}
+		return "";
 	}
 }

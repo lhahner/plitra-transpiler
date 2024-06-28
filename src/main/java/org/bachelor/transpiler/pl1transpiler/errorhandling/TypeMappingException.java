@@ -1,5 +1,7 @@
 package org.bachelor.transpiler.pl1transpiler.errorhandling;
 
+import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+
 public class TypeMappingException extends Exception{
 	/**
 	 * Constructs an TypeMappingException with null
@@ -35,5 +37,14 @@ public class TypeMappingException extends Exception{
 	 */
 	public TypeMappingException(Throwable cause) {
 		super(cause);
+	}
+	
+	/**
+	 * 
+	 * @param message you want to print in CLI
+	 * @param node the exception should be thrown
+	 */
+	public TypeMappingException(String message, SimpleNode node) {
+		super(message + node.toString() + ":" + node.getId());
 	}
 }

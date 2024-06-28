@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import javax.management.AttributeNotFoundException;
 
-import org.bachelor.transpiler.pl1transpiler.mapper.MainMapper;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;

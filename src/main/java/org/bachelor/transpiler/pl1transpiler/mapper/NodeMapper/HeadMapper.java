@@ -148,8 +148,8 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 				case "RETURNS":
 					try {
 						if(super.hasChildren(childNode)) {
-							this.setType(new DeclarationMapper()
-									.mapType((SimpleNode)childNode.jjtGetChild(0)));
+							new DeclarationMapper()
+									.mapType((SimpleNode)childNode.jjtGetChild(0));
 						}
 					}
 					catch(TypeMappingException tme) {

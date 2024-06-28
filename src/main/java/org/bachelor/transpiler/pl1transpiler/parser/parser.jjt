@@ -762,7 +762,9 @@ String Picture() #PictureExpression :
 { String t; }
 {
   (( < PIC > | < PICTURE > ) | < WIDEPIC >) [< REAL > | < COMPLEX >] t = PictureAttribute() [< VALUE > ]
-  { return pictureAttribiute = t; }
+  {
+	jjtThis.value = t;
+    return pictureAttribiute = t; }
 }
 
 

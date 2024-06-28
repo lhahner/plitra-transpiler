@@ -75,7 +75,7 @@ public class BooleanExpressionMapper extends Mapper implements ITranslationBehav
 		ArrayList<String> expression = (ArrayList<String>) paraNode.jjtGetValue();
 		// iterater over ArrayList to parse types
 		for (int i = 0; i < expression.size(); i++) {
-			if (super.symbols.getBySymbol(expression.get(i)) != null) {
+			if (symbols.getBySymbol(expression.get(i)) != null) {
 				expressionList.add(expression.get(i).concat("." + super.javaWords.TONUMERIC.getValue() + "()"));
 				continue;
 			}

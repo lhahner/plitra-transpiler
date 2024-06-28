@@ -4,12 +4,12 @@ orgbachelorpli: PACKAGE;
 	DCL m_1 DECIMAL(30);
 	DCL s_1 DECIMAL(30);
 	
-	fibonacci: PROC(n);
+	fibonacci: PROC(n) RETURNS (CHAR(20));
 		IF (n_1 = 0) THEN
 			RETURN 0;
 		ELSE 
 			IF (n_1 = 1) THEN
-				RETURN 1;
+				RETURN;
 			ELSE
 				n_1 = n_1 - 1;
 				m_1 = n_1 - 2;
