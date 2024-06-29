@@ -1,4 +1,5 @@
 # Pl1-code-transpiler v0.0.1
+This project is currently under development.
 ## Installation
 ### Requirements
 At least Java 8 and JavaCC is required. Please make sure to always compile the project in Java 8. If you don't the program will not work.
