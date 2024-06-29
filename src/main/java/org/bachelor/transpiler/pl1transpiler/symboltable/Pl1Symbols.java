@@ -3,175 +3,489 @@ package org.bachelor.transpiler.pl1transpiler.symboltable;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList; 
 
+/**
+ * This Enum contains als PL/I Terminalsymbols used.
+ * Whenever there are new expressions added, this needs to be update
+ * since the parser lexer and parser will also rely on the
+ * provided symbols.
+ */
 public enum Pl1Symbols{
 	
-		 	DCL("DCL", "operator"),
-		    DECLARE("DECLARE", "operator"),
-		    BINARY("BINARY", "Arithmetic"),
-		    PROC("PROC", "type"),
-		    PROCEDURE("PROCEDURE", "type"),
-		    END("END", "type"),
-		    BIN("BIN", "type"),
-		    FIXED("FIXED", "Arithmetic"),
-		    FLOAT("FLOAT", "Arithmetic"),
-		    CHARACTER("CHARACTER", "String"),
-		    CHAR("CHAR", "String"),
-		    VARYING("VARYING", "type"),
-		    VAR("VAR", "type"),
-		    PIC("PIC", "type"),
-		    PICTURE("PICTURE", "type"),
-		    INIT("INIT", "operator"),
-		    PTR("PTR", "type"),
-		    DECIMAL("DECIMAL", "Arithmetic"),
-		    DEC("DEC", "Arithmetic"),
-		    REAL("REAL", "Arithmetic"),
-		    COMPLEX("COMPLEX", "Arithmetic"),
-		    UNSIGNED("UNSIGNED", "Arithmetic"),
-		    SIGNED("SIGNED", "Arithmetic"),
-		    AREA("AREA", "type"),
-		    DIMENSION("DIMENSION", "type"),
-		    ENTRY("ENTRY", "type"),
-		    FILE("FILE", "type"),
-		    FORMAT("FORMAT", "type"),
-		    GRAPHIC("GRAPHIC", "type"),
-		    HANDLE("HANDLE", "type"),
-		    LABEL("LABEL", "type"),
-		    LOCATES("LOCATES", "type"),
-		    NONVARYING("NONVARYING", "type"),
-		    OFFSET("OFFSET", "type"),
-		    ORDINAL("ORDINAL", "type"),
-		    POINTER("POINTER", "type"),
-		    PRECISION("PRECISION", "Arithmetic"),
-		    RETURNS("RETURNS", "type"),
-		    ASSEMBLER("ASSEMBLER", "option"),
-		    COBOL("COBOL", "option"),
-		    FORTRAN("FORTRAN", "option"),
-		    MAIN("MAIN", "option"),
-		    NOEXECOPS("NOEXECOPS", "option"),
-		    NOCHARGRAPHIC("NONCHARGRAPHIC", "option"),
-		    CHARGRAPHIC("CHARGRAPHIC", "option"),
-		    NOCMPAT("NOCMPAT", "option"),
-		    CMPAT("CMPAT", "option"),
-		    DESCRIPTOR("DESCRIPTOR", "option"),
-		    NODESCRIPTOR("NODESCRIPTOR", "option"),
-		    FORMALIEN("FORMALIEN", "option"),
-		    LINKAGE("LINKAGE", "option"),
-		    NOINLINE("NOINLINE", "option"),
-		    INLINE("INLINE", "option"),
-		    ORDER("ORDER", "option"),
-		    REORDER("REORDER", "option"),
-		    IRREDUCIBLE("IRREDUCIBLE", "option"),
-		    REDUCABLE("REDUCABLE", "option"),
-		    REETRANT("REETRANT", "option"),
-		    RETCODE("RETCODE", "option"),
-		    WINMAIN("WINMAIN", "option"),
-		    STRUCTURE("STRUCUTRE", "type"),
-		    TASK("TASK", "type"),
-		    TYPE("TYPE", "type"),
-		    UNION("UNION", "type"),
-		    VARYING4("VARYING4", "type"),
-		    VARYINGZ("VARYINGZ", "type"),
-		    WIDECHAR("WIDECHAR", "String"),
-		    WIDEPIC("WIDEPIC", "type"),
-		    ABNORMAL("ABNORMAL", "type"),
-		    ALIGNED("ALIGNED", "type"),
-		    ASSIGNABLE("ASSIGNABLE", "type"),
-		    AUTOMATIC("AUTOMATIC", "type"),
-		    BASED("BASED", "type"),
-		    BIGENDIAN("BIGENDIAN", "type"),
-		    BUFFERED("BUFFERED", "type"),
-		    BUILTIN("BUILTIN", "type"),
-		    BYADDR("BYADDR", "type"),
-		    BYVALUE("BYVALUE", "type"),
-		    CONDITION("CONDITION", "type"),
-		    CONNECTED("CONNECTED", "type"),
-		    CONTROLLED("CONTROLLED", "type"),
-		    DEFINED("DEFINED", "type"),
-		    DIMACROSS("DIMACROSS", "type"),
-		    DIRECT("DIRECT", "type"),
-		    ENVIRONMENT("ENVIRONMENT", "type"),
-		    EXCLUSIVE("EXCLUSIVE", "type"),
-		    EXTERNAL("EXTERNAL", "type"),
-		    GENERIC("GENERIC", "type"),
-		    HEXADEC("HEXADEC", "type"),
-		    IEEE("IEEE", "type"),
-		    INDFOR("INDFOR", "type"),
-		    INITIAL("INITIAL", "type"),
-		    INONLY("INONLY", "type"),
-		    INOUT("INOUT", "type"),
-		    INPUT("INPUT", "type"),
-		    INTERMAL("INTERMAL", "type"),
-		    KEYED("KEYED", "type"),
-		    LIKE("LIKE", "type"),
-		    LIST("LIST", "type"),
-		    LITTLEENDIAN("LITTLEENDIAN", "type"),
-		    NONASSIGNABLE("NONASSIGNABLE", "type"),
-		    NONCONNECTED("NONCONNECTED", "type"),
-		    NORMAL("NORMAL", "type"),
-		    OPTIONAL("OPTIONAL", "type"),
-		    OPTIONS("OPTIONS", "type"),
-		    OUTONLY("OUTONLY", "type"),
-		    OUTPUT("OUTPUT", "type"),
-		    PARAMETER("PARAMETER", "type"),
-		    POSITION("POSITION", "type"),
-		    PRINT("PRINT", "type"),
-		    RECORD("RECORD", "type"),
-		    SEQUENTIAL("SEQUENTIAL", "type"),
-		    STATIC("STATIC", "type"),
-		    STREAM("STREAM", "type"),
-		    UNALIGNED("UNALIGNED", "type"),
-		    UNBUFFERED("UNBUFFERED", "type"),
-		    UPDATE("UPDATE", "type"),
-		    VALUE("VALUE", "Arithmetic"),
-		    VARIABLE("VARIABLE", "type"),
-		    XMLATTR("XMLATTR", "type"),
-		    RECURSIVE("RECURSIVE", "type"),
-		    XMLOMIT("XMLOMIT", "type"),
+		 	/** The dcl. */
+	 		DCL("DCL", "operator"),
+		    
+    		/** The declare. */
+    		DECLARE("DECLARE", "operator"),
+		    
+    		/** The binary. */
+    		BINARY("BINARY", "Arithmetic"),
+		    
+    		/** The proc. */
+    		PROC("PROC", "type"),
+		    
+    		/** The procedure. */
+    		PROCEDURE("PROCEDURE", "type"),
+		    
+    		/** The end. */
+    		END("END", "type"),
+		    
+    		/** The bin. */
+    		BIN("BIN", "type"),
+		    
+    		/** The fixed. */
+    		FIXED("FIXED", "Arithmetic"),
+		    
+    		/** The float. */
+    		FLOAT("FLOAT", "Arithmetic"),
+		    
+    		/** The character. */
+    		CHARACTER("CHARACTER", "String"),
+		    
+    		/** The char. */
+    		CHAR("CHAR", "String"),
+		    
+    		/** The varying. */
+    		VARYING("VARYING", "type"),
+		    
+    		/** The var. */
+    		VAR("VAR", "type"),
+		    
+    		/** The pic. */
+    		PIC("PIC", "type"),
+		    
+    		/** The picture. */
+    		PICTURE("PICTURE", "type"),
+		    
+    		/** The init. */
+    		INIT("INIT", "operator"),
+		    
+    		/** The ptr. */
+    		PTR("PTR", "type"),
+		    
+    		/** The decimal. */
+    		DECIMAL("DECIMAL", "Arithmetic"),
+		    
+    		/** The dec. */
+    		DEC("DEC", "Arithmetic"),
+		    
+    		/** The real. */
+    		REAL("REAL", "Arithmetic"),
+		    
+    		/** The complex. */
+    		COMPLEX("COMPLEX", "Arithmetic"),
+		    
+    		/** The unsigned. */
+    		UNSIGNED("UNSIGNED", "Arithmetic"),
+		    
+    		/** The signed. */
+    		SIGNED("SIGNED", "Arithmetic"),
+		    
+    		/** The area. */
+    		AREA("AREA", "type"),
+		    
+    		/** The dimension. */
+    		DIMENSION("DIMENSION", "type"),
+		    
+    		/** The entry. */
+    		ENTRY("ENTRY", "type"),
+		    
+    		/** The file. */
+    		FILE("FILE", "type"),
+		    
+    		/** The format. */
+    		FORMAT("FORMAT", "type"),
+		    
+    		/** The graphic. */
+    		GRAPHIC("GRAPHIC", "type"),
+		    
+    		/** The handle. */
+    		HANDLE("HANDLE", "type"),
+		    
+    		/** The label. */
+    		LABEL("LABEL", "type"),
+		    
+    		/** The locates. */
+    		LOCATES("LOCATES", "type"),
+		    
+    		/** The nonvarying. */
+    		NONVARYING("NONVARYING", "type"),
+		    
+    		/** The offset. */
+    		OFFSET("OFFSET", "type"),
+		    
+    		/** The ordinal. */
+    		ORDINAL("ORDINAL", "type"),
+		    
+    		/** The pointer. */
+    		POINTER("POINTER", "type"),
+		    
+    		/** The precision. */
+    		PRECISION("PRECISION", "Arithmetic"),
+		    
+    		/** The returns. */
+    		RETURNS("RETURNS", "type"),
+		    
+    		/** The assembler. */
+    		ASSEMBLER("ASSEMBLER", "option"),
+		    
+    		/** The cobol. */
+    		COBOL("COBOL", "option"),
+		    
+    		/** The fortran. */
+    		FORTRAN("FORTRAN", "option"),
+		    
+    		/** The main. */
+    		MAIN("MAIN", "option"),
+		    
+    		/** The noexecops. */
+    		NOEXECOPS("NOEXECOPS", "option"),
+		    
+    		/** The nochargraphic. */
+    		NOCHARGRAPHIC("NONCHARGRAPHIC", "option"),
+		    
+    		/** The chargraphic. */
+    		CHARGRAPHIC("CHARGRAPHIC", "option"),
+		    
+    		/** The nocmpat. */
+    		NOCMPAT("NOCMPAT", "option"),
+		    
+    		/** The cmpat. */
+    		CMPAT("CMPAT", "option"),
+		    
+    		/** The descriptor. */
+    		DESCRIPTOR("DESCRIPTOR", "option"),
+		    
+    		/** The nodescriptor. */
+    		NODESCRIPTOR("NODESCRIPTOR", "option"),
+		    
+    		/** The formalien. */
+    		FORMALIEN("FORMALIEN", "option"),
+		    
+    		/** The linkage. */
+    		LINKAGE("LINKAGE", "option"),
+		    
+    		/** The noinline. */
+    		NOINLINE("NOINLINE", "option"),
+		    
+    		/** The inline. */
+    		INLINE("INLINE", "option"),
+		    
+    		/** The order. */
+    		ORDER("ORDER", "option"),
+		    
+    		/** The reorder. */
+    		REORDER("REORDER", "option"),
+		    
+    		/** The irreducible. */
+    		IRREDUCIBLE("IRREDUCIBLE", "option"),
+		    
+    		/** The reducable. */
+    		REDUCABLE("REDUCABLE", "option"),
+		    
+    		/** The reetrant. */
+    		REETRANT("REETRANT", "option"),
+		    
+    		/** The retcode. */
+    		RETCODE("RETCODE", "option"),
+		    
+    		/** The winmain. */
+    		WINMAIN("WINMAIN", "option"),
+		    
+    		/** The structure. */
+    		STRUCTURE("STRUCUTRE", "type"),
+		    
+    		/** The task. */
+    		TASK("TASK", "type"),
+		    
+    		/** The type. */
+    		TYPE("TYPE", "type"),
+		    
+    		/** The union. */
+    		UNION("UNION", "type"),
+		    
+    		/** The varying4. */
+    		VARYING4("VARYING4", "type"),
+		    
+    		/** The varyingz. */
+    		VARYINGZ("VARYINGZ", "type"),
+		    
+    		/** The widechar. */
+    		WIDECHAR("WIDECHAR", "String"),
+		    
+    		/** The widepic. */
+    		WIDEPIC("WIDEPIC", "type"),
+		    
+    		/** The abnormal. */
+    		ABNORMAL("ABNORMAL", "type"),
+		    
+    		/** The aligned. */
+    		ALIGNED("ALIGNED", "type"),
+		    
+    		/** The assignable. */
+    		ASSIGNABLE("ASSIGNABLE", "type"),
+		    
+    		/** The automatic. */
+    		AUTOMATIC("AUTOMATIC", "type"),
+		    
+    		/** The based. */
+    		BASED("BASED", "type"),
+		    
+    		/** The bigendian. */
+    		BIGENDIAN("BIGENDIAN", "type"),
+		    
+    		/** The buffered. */
+    		BUFFERED("BUFFERED", "type"),
+		    
+    		/** The builtin. */
+    		BUILTIN("BUILTIN", "type"),
+		    
+    		/** The byaddr. */
+    		BYADDR("BYADDR", "type"),
+		    
+    		/** The byvalue. */
+    		BYVALUE("BYVALUE", "type"),
+		    
+    		/** The condition. */
+    		CONDITION("CONDITION", "type"),
+		    
+    		/** The connected. */
+    		CONNECTED("CONNECTED", "type"),
+		    
+    		/** The controlled. */
+    		CONTROLLED("CONTROLLED", "type"),
+		    
+    		/** The defined. */
+    		DEFINED("DEFINED", "type"),
+		    
+    		/** The dimacross. */
+    		DIMACROSS("DIMACROSS", "type"),
+		    
+    		/** The direct. */
+    		DIRECT("DIRECT", "type"),
+		    
+    		/** The environment. */
+    		ENVIRONMENT("ENVIRONMENT", "type"),
+		    
+    		/** The exclusive. */
+    		EXCLUSIVE("EXCLUSIVE", "type"),
+		    
+    		/** The external. */
+    		EXTERNAL("EXTERNAL", "type"),
+		    
+    		/** The generic. */
+    		GENERIC("GENERIC", "type"),
+		    
+    		/** The hexadec. */
+    		HEXADEC("HEXADEC", "type"),
+		    
+    		/** The ieee. */
+    		IEEE("IEEE", "type"),
+		    
+    		/** The indfor. */
+    		INDFOR("INDFOR", "type"),
+		    
+    		/** The initial. */
+    		INITIAL("INITIAL", "type"),
+		    
+    		/** The inonly. */
+    		INONLY("INONLY", "type"),
+		    
+    		/** The inout. */
+    		INOUT("INOUT", "type"),
+		    
+    		/** The input. */
+    		INPUT("INPUT", "type"),
+		    
+    		/** The intermal. */
+    		INTERMAL("INTERMAL", "type"),
+		    
+    		/** The keyed. */
+    		KEYED("KEYED", "type"),
+		    
+    		/** The like. */
+    		LIKE("LIKE", "type"),
+		    
+    		/** The list. */
+    		LIST("LIST", "type"),
+		    
+    		/** The littleendian. */
+    		LITTLEENDIAN("LITTLEENDIAN", "type"),
+		    
+    		/** The nonassignable. */
+    		NONASSIGNABLE("NONASSIGNABLE", "type"),
+		    
+    		/** The nonconnected. */
+    		NONCONNECTED("NONCONNECTED", "type"),
+		    
+    		/** The normal. */
+    		NORMAL("NORMAL", "type"),
+		    
+    		/** The optional. */
+    		OPTIONAL("OPTIONAL", "type"),
+		    
+    		/** The options. */
+    		OPTIONS("OPTIONS", "type"),
+		    
+    		/** The outonly. */
+    		OUTONLY("OUTONLY", "type"),
+		    
+    		/** The output. */
+    		OUTPUT("OUTPUT", "type"),
+		    
+    		/** The parameter. */
+    		PARAMETER("PARAMETER", "type"),
+		    
+    		/** The position. */
+    		POSITION("POSITION", "type"),
+		    
+    		/** The print. */
+    		PRINT("PRINT", "type"),
+		    
+    		/** The record. */
+    		RECORD("RECORD", "type"),
+		    
+    		/** The sequential. */
+    		SEQUENTIAL("SEQUENTIAL", "type"),
+		    
+    		/** The static. */
+    		STATIC("STATIC", "type"),
+		    
+    		/** The stream. */
+    		STREAM("STREAM", "type"),
+		    
+    		/** The unaligned. */
+    		UNALIGNED("UNALIGNED", "type"),
+		    
+    		/** The unbuffered. */
+    		UNBUFFERED("UNBUFFERED", "type"),
+		    
+    		/** The update. */
+    		UPDATE("UPDATE", "type"),
+		    
+    		/** The value. */
+    		VALUE("VALUE", "Arithmetic"),
+		    
+    		/** The variable. */
+    		VARIABLE("VARIABLE", "type"),
+		    
+    		/** The xmlattr. */
+    		XMLATTR("XMLATTR", "type"),
+		    
+    		/** The recursive. */
+    		RECURSIVE("RECURSIVE", "type"),
+		    
+    		/** The xmlomit. */
+    		XMLOMIT("XMLOMIT", "type"),
+			
+			/** The call. */
 			CALL("CALL", "invoke"),
+			
+			/** The return. */
 			RETURN("RETURN", "operator"),
+			
+			/** The goto. */
 			GOTO("GO TO", "invoke"),
+			
+			/** The stop. */
 			STOP("STOP", "operator"),
+			
+			/** The reserves. */
 			RESERVES("RESERVES", "operator"),
+			
+			/** The package. */
 			PACKAGE("PACKAGE", "type"),
+			
+			/** The exports. */
 			EXPORTS("EXPORTS", "operator"),
+			
+			/** The begin. */
 			BEGIN("BEGIN", "operator"),
+			
+			/** The if. */
 			IF("IF", "operator"),
+			
+			/** The then. */
 			THEN("THEN", "operator"),
+			
+			/** The else. */
 			ELSE("ELSE", "operator"),
+			
+			/** The to. */
 			TO("TO", "operator"),
+			
+			/** The by. */
 			BY("BY", "operator"),
+			
+			/** The repeat. */
 			REPEAT("REPEAT", "operator"),
+			
+			/** The upthru. */
 			UPTHRU("UPTHRU", "operator"),
+			
+			/** The downthru. */
 			DOWNTHRU("DOWNTHRU", "operator"),
+			
+			/** The do. */
 			DO("DO", "operator"),
+			
+			/** The loop. */
 			LOOP("LOOP", "operator"),
+			
+			/** The while. */
 			WHILE("WHILE", "operator"),
+			
+			/** The until. */
 			UNTIL("UNTIL", "operator"),
+			
+			/** The exit. */
 			EXIT("EXIT", "operator"),
+			
+			/** The display. */
 			DISPLAY("DISPLAY", "operator"),
+			
+			/** The reply. */
 			REPLY("REPLY", "operator"),
+			
+			/** The read. */
 			READ("READ", "operator"),
+			
+			/** The into. */
 			INTO("INTO", "operator");
 	
+	 	/** The symbol. */
 	 	private final String symbol;
-	    private final String category;
+	    
+    	/** The category. */
+    	private final String category;
 
-	    Pl1Symbols(String symbol, String category) {
+	    /**
+    	 * Instantiates a new pl 1 symbols.
+    	 *
+    	 * @param symbol the symbol
+    	 * @param category the category
+    	 */
+    	Pl1Symbols(String symbol, String category) {
 	        this.symbol = symbol;
 	        this.category = category;
 	    }
 
 	    /**
-	     * @return A Symbol if it's set by the Construcutor.
-	     */
+    	 * Gets the symbol.
+    	 *
+    	 * @return A Symbol if it's set by the Construcutor.
+    	 */
 	    public String getSymbol() {
 	        return symbol;
 	    }
 	    
 	    /**
-	     * @param symbol that should be found in the Enmus.
-	     * @return the Enum that should be found.
-	     */
+    	 * This Method is used to search for specific 
+    	 * symobl in the Enum. Mainly used by the SymbolTable.
+    	 *
+    	 * @param symbol symbol that should be found in the Enmus.
+    	 * @return the Enum that should be found.
+    	 * @throws UnsupportedCharsetException the unsupported charset exception
+    	 */
 	    public static Pl1Symbols findBySymbol(String symbol) throws UnsupportedCharsetException{
 	    	for (Pl1Symbols s : Pl1Symbols.values()) {
 	            if (s.getSymbol().equalsIgnoreCase(symbol)) {
