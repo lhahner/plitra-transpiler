@@ -18,7 +18,7 @@ public class Pl1Parser/*@bgen(jjtree)*/implements Pl1ParserTreeConstants, Pl1Par
         private String value;
         private String letter;
         private ArrayList<String> length = new ArrayList<String>();
-        private SymbolTable symbols = new SymbolTable();
+        private SymbolTable symbols = SymbolTable.getInstance();
         private ArrayList<String [] > idsAndScopes = new ArrayList<String []>();
         private String[] tmp_idsAndScopes = new String[3];
         ArrayList<String > paralist = new ArrayList<String >();

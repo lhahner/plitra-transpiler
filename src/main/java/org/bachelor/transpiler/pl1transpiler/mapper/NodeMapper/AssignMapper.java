@@ -99,7 +99,7 @@ public class AssignMapper extends Mapper implements ITranslationBehavior {
 		if (super.hasChildren(simpleNode)) {
 			mapCalcNode(simpleNode);
 			if (assignValues != null) {
-				if (new SymbolTable().getBySymbol(assignValues[0]) != null) {
+				if (SymbolTable.getInstance().getBySymbol(assignValues[0]) != null) {
 					this.setIdentifier(assignValues[0]);
 				}
 			}
@@ -108,7 +108,7 @@ public class AssignMapper extends Mapper implements ITranslationBehavior {
 		// TODO Different Types require different assign methods.
 
 		if (assignValues != null) {
-			if (new SymbolTable().getBySymbol(assignValues[0]) != null) {
+			if (SymbolTable.getInstance().getBySymbol(assignValues[0]) != null) {
 				this.setIdentifier(assignValues[0]);
 			}
 			// TODO Really bad... can be "" and sets assignment

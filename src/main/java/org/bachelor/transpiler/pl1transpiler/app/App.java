@@ -86,7 +86,7 @@ public class App {
 	 * 						 					part of the boilerplate code of the auto generated parser.
 	 */
 	public static void main(String[] args) throws IncorrectInputFileException, IOException, ParseException {
-		symboltable = new SymbolTable();
+		symboltable = SymbolTable.getInstance();
 		inputReader = new InputReader();
 		String inputFile = inputReader.getInputFilePath(CONFIG);
 		typechecker = new TypeChecker();

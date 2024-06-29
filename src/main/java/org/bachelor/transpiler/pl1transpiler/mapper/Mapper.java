@@ -16,7 +16,7 @@ public class Mapper {
 	protected static Template javaWords;
 	
 	/** PL/I Symboltable */
-	protected static SymbolTable symbols = new SymbolTable();
+	protected static SymbolTable symbols = SymbolTable.getInstance();
 	
 	/** The var. */
 	TranslationMapper var = new TranslationMapper();

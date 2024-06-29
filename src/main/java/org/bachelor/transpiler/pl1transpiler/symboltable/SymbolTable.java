@@ -7,9 +7,17 @@ import com.sun.jdi.request.*;
 
 public class SymbolTable {
 
-	static Hashtable<Integer, String[]> hashtable = new Hashtable<>();
+	private static Hashtable<Integer, String[]> hashtable = new Hashtable<>();
+	private static SymbolTable symbols = null;
 
-	public SymbolTable() {
+	public static SymbolTable getInstance() {
+		if (symbols == null) {
+			symbols = new SymbolTable();
+		}
+		return symbols;
+	}
+
+	private SymbolTable() {
 		try {
 			Pl1Symbols pl1Symbols;
 			for (Pl1Symbols s : Pl1Symbols.values()) {
@@ -22,27 +30,26 @@ public class SymbolTable {
 			System.out.println("Error in Symboltable" + e);
 		}
 	}
-	
-	private static void initWords(String[] words) throws DuplicateRequestException  {
+
+	private static void initWords(String[] words) throws DuplicateRequestException {
 		if (getBySymbol(words[0]) != null) {
 			return;
 		}
 		int id = hashtable.size() + 1;
 		hashtable.put(id, words);
 	}
-	
+
 	/**
 	 * @param symbol Array of String which should be inserted in the Symboltable
 	 * @throws Exception Error
 	 */
 	public static String[] insertId(String[] symbol) throws DuplicateRequestException {
-			if (getBySymbol(symbol[0]) != null 
-				&& getSymbolScope(symbol[0]) == Integer.parseInt(symbol[2])) {
-				return null;
-			}
-			int id = hashtable.size() + 1;
-			hashtable.put(id, symbol);
-			return hashtable.get(id);
+		if (getBySymbol(symbol[0]) != null && getSymbolScope(symbol[0]) == Integer.parseInt(symbol[2])) {
+			return null;
+		}
+		int id = hashtable.size() + 1;
+		hashtable.put(id, symbol);
+		return hashtable.get(id);
 	}
 
 	/**
@@ -70,30 +77,29 @@ public class SymbolTable {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @todo Testing
 	 * @param Type of the symbol
 	 * @return Type of Identifier
 	 */
-	public static ArrayList<String []> getByType(String type) {
-		ArrayList<String []> tmp = new ArrayList<String []>();
-		
+	public static ArrayList<String[]> getByType(String type) {
+		ArrayList<String[]> tmp = new ArrayList<String[]>();
+
 		for (int i = 1; i <= hashtable.size(); i++) {
-			if (getById(i)[getById(i).length-1].equals(type)) {
+			if (getById(i)[getById(i).length - 1].equals(type)) {
 				tmp.add(getById(i));
 			} else {
 				continue;
 			}
 		}
-		if(tmp.size() != 0) {
+		if (tmp.size() != 0) {
 			return tmp;
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
-	
+
 	public static int getSymbolScope(String symbol) {
 		for (int i = 1; i <= hashtable.size(); i++) {
 			if (getById(i)[0].equals(symbol)) {

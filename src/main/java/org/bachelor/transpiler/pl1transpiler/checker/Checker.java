@@ -67,7 +67,7 @@ public class Checker {
 	 * Initiates the Symbol-table Module. 
 	 * It is used to check certain Identifier during runtime.
 	 */
-	SymbolTable symbols = new SymbolTable();
+	SymbolTable symbols = SymbolTable.getInstance();
 	
 	/**
 	 * @param startNode			When calling this Method outside of itself, this 

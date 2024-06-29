@@ -122,7 +122,7 @@ public class DisplayMapper extends Mapper implements ITranslationBehavior {
 
 		ArrayList<String> values = (ArrayList<String>) simpleNode.jjtGetValue();
 		for (String value : values) {
-			if (new SymbolTable().getBySymbol(value) != null) {
+			if (SymbolTable.getInstance().getBySymbol(value) != null) {
 				this.setParameter(value);
 			} else {
 				this.setMessage(value);

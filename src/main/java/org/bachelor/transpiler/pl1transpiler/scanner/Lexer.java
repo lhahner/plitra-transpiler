@@ -16,7 +16,8 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
  */
 public class Lexer {
 
-	public static SymbolTable st = new SymbolTable();
+	public static SymbolTable st = SymbolTable.getInstance();
+	
 	/**
 	 * 0 -> Start 1 -> Letter 2 -> Number ... 99 -> Error
 	 */

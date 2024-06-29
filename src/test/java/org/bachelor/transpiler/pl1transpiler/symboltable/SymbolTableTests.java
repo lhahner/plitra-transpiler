@@ -16,9 +16,8 @@ public class SymbolTableTests {
 	SymbolTable symbol_table;
 	@BeforeEach
 	void init(){
-		symbol_table = new SymbolTable();
+		symbol_table = SymbolTable.getInstance();
 	}
-	
 	@Test
 	@DisplayName("insertId")
 	void insertId_checkIfIsAlreadyInserted() {
