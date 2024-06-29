@@ -4,6 +4,7 @@ import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 /**
  * <h1>Summary</h1> Will be called in the TranlationBehavior Class. During
@@ -22,7 +23,7 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 public class PackageMapper extends Mapper implements ITranslationBehavior {
 
 	/** The type of the package */
-	private final String type = super.javaWords.PACKAGE.getValue();
+	private final String type = Template.PACKAGE.getInstance();
 
 	/** The identifier of the package */
 	private String identifier = null;

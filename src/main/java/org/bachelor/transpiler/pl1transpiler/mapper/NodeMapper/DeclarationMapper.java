@@ -9,6 +9,7 @@ import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Node;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -30,10 +31,10 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 */
 
 	/** The scope of the variable, is always public if not changed. */
-	private String scope = super.javaWords.PUBLIC.getValue();
+	private String scope = Template.PUBLIC.getInstance();
 
 	/** The type of the variable, is always void of not changed. */
-	private String type = super.javaWords.VOID.getValue();
+	private String type = Template.VOID.getInstance();
 
 	/** The identifier of the variable. */
 	private String identifier = null;
@@ -241,23 +242,23 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 
 				if (arithmeticAttribute.equals("COMPLEX")) {
 
-					this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.COMPLEX.getValue() + "("
+					this.setObject(Template.NEW.getInstance() + " " + Template.COMPLEX.getInstance() + "("
 							+ getLength(arithmeticNode) + ")");
 
-					this.setType(super.javaWords.COMPLEX.getValue());
+					this.setType(Template.COMPLEX.getInstance());
 
 				} else if (arithmeticAttribute.equals("BINARY")) {
 
-					this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.BINARY.getValue() + "("
+					this.setObject(Template.NEW.getInstance() + " " + Template.BINARY.getInstance() + "("
 							+ getLength(arithmeticNode) + ")");
 
-					this.setType(super.javaWords.BINARY.getValue());
+					this.setType(Template.BINARY.getInstance());
 
 				} else {
-					this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.DECIMAL.getValue() + "("
+					this.setObject(Template.NEW.getInstance() + " " + Template.DECIMAL.getInstance() + "("
 							+ getLength(arithmeticNode) + ")");
 
-					this.setType(super.javaWords.DECIMAL.getValue());
+					this.setType(Template.DECIMAL.getInstance());
 				}
 
 			}
@@ -280,11 +281,11 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public String mapString(SimpleNode simpleNode) {
 		if (simpleNode.jjtGetParent().jjtGetParent().getId() == treeSymbols.JJTVAR) {
-			this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.CHAR_OBJECT.getValue() + "("
+			this.setObject(Template.NEW.getInstance() + " " + Template.CHAR_OBJECT.getInstance() + "("
 					+ (String) simpleNode.jjtGetValue() + ")");
-			return super.javaWords.CHAR_OBJECT.getValue();
+			return Template.CHAR_OBJECT.getInstance();
 		} else {
-			return super.javaWords.CHAR_OBJECT.getValue();
+			return Template.CHAR_OBJECT.getInstance();
 		}
 	}
 
@@ -296,13 +297,13 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public String mapPicture(String picRegex) {
 		try {
-			this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.PICTURE.getValue() + "("
+			this.setObject(Template.NEW.getInstance() + " " + Template.PICTURE.getInstance() + "("
 					+ new PictureMapper().getRegex(picRegex) + ")");
 
 		} catch (LexicalErrorException lee) {
 			lee.printStackTrace();
 		}
-		return super.javaWords.PICTURE.getValue();
+		return Template.PICTURE.getInstance();
 	}
 
 	/**
@@ -313,7 +314,7 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * @return the Java non-primitive type File.
 	 */
 	public String mapFile() {
-		return super.javaWords.FILE.getValue();
+		return Template.FILE.getInstance();
 	}
 
 	/**

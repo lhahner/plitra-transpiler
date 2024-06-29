@@ -7,8 +7,8 @@ import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
+import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AssignMapper.
  */
@@ -18,7 +18,7 @@ public class AssignMapper extends Mapper implements ITranslationBehavior {
 	private String identifier;
 
 	/** The operator. */
-	private String operator = super.javaWords.INIT.getValue();
+	private String operator = Template.INIT.getInstance();
 
 	/** The assignment. */
 	private String assignment;
@@ -124,7 +124,7 @@ public class AssignMapper extends Mapper implements ITranslationBehavior {
 	 * @param simpleNode the simple node
 	 */
 	public void mapCalcNode(SimpleNode simpleNode) {
-		this.setOperator(super.javaWords.CALC.getValue());
+		this.setOperator(Template.CALC.getInstance());
 		this.setAssignment(new CalcMapper().translate((SimpleNode) simpleNode.jjtGetChild(0)));
 	}
 

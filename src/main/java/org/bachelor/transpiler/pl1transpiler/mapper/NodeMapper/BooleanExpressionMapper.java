@@ -10,6 +10,7 @@ import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 public class BooleanExpressionMapper extends Mapper implements ITranslationBehavior {
 
@@ -37,9 +38,9 @@ public class BooleanExpressionMapper extends Mapper implements ITranslationBehav
 		/**@see Class BodyMapper */
 		if (simpleNode.jjtGetParent().getId() == treeSymbols.JJTUNTIL) {
 			return "{\n"
-				+	super.javaWords.IF.getValue()
+				+	Template.IF.getInstance()
 				+  this.getExpression()
-				+  "{" + super.javaWords.BREAK.getValue() + ";" + " }";
+				+  "{" + Template.BREAK.getInstance() + ";" + " }";
 		}
 		return this.getExpression();
 	}
@@ -47,8 +48,8 @@ public class BooleanExpressionMapper extends Mapper implements ITranslationBehav
 	public void mapBooleanExpression(ArrayList<String> expressionList) {
 
 		String expression = expressionList.stream().collect(Collectors.joining(" "));
-		if (expression.contains("¬")) {
-			expression = expression.replaceAll("¬", "!");
+		if (expression.contains("ï¿½")) {
+			expression = expression.replaceAll("ï¿½", "!");
 		}
 		if (expression.contains("&")) {
 			expression = expression.replaceAll("&", "&&");
@@ -76,7 +77,7 @@ public class BooleanExpressionMapper extends Mapper implements ITranslationBehav
 		// iterater over ArrayList to parse types
 		for (int i = 0; i < expression.size(); i++) {
 			if (symbols.getBySymbol(expression.get(i)) != null) {
-				expressionList.add(expression.get(i).concat("." + super.javaWords.TONUMERIC.getValue() + "()"));
+				expressionList.add(expression.get(i).concat("." + Template.TONUMERIC.getInstance() + "()"));
 				continue;
 			}
 			expressionList.add(expression.get(i));

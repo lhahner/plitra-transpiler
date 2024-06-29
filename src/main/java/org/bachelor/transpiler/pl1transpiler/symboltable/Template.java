@@ -15,7 +15,6 @@ import org.bachelor.transpiler.pl1transpiler.scanner.*;
 public enum Template {
 	
 	/** The package. */
-	//Static Code
 	PACKAGE("package "),
 	
 	/** The picture imports. */
@@ -246,7 +245,7 @@ public enum Template {
 	 *
 	 * @param symbol the symbol
 	 */
-	Template(String symbol) {
+	private Template(String symbol) {
         this.symbol = symbol;
     }
 
@@ -256,7 +255,7 @@ public enum Template {
 	 *
 	 * @return the value of the Enum.
 	 */
-    public String getValue() {
+    public String getInstance() {
         return symbol + " ";
     }
 }

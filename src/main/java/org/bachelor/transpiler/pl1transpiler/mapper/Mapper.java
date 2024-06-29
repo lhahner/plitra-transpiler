@@ -12,8 +12,6 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
  */
 public class Mapper {
 	
-	/** All . */
-	protected static Template javaWords;
 	
 	/** PL/I Symboltable */
 	protected static SymbolTable symbols = SymbolTable.getInstance();

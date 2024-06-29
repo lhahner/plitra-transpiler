@@ -6,6 +6,7 @@ import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
+import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 /**
  * <h1>Summary</h1>
@@ -23,13 +24,13 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 public class DisplayMapper extends Mapper implements ITranslationBehavior {
 
 	/** The sysout variable contains a CLI Output print method. */
-	private final String SYSOUT = super.javaWords.SYSOUT.getValue();
+	private final String SYSOUT = Template.SYSOUT.getInstance();
 
 	/** The message variable contains the String message which should be displayed in console. */
 	private String message;
 
 	/** The sysin variable contains a CLI Input reader method. */
-	private final String SYSIN = super.javaWords.SYSIN.getValue();
+	private final String SYSIN = Template.SYSIN.getInstance();
 
 	/** The parameter in which the SYSIN method should save the input from user. */
 	private String parameter;

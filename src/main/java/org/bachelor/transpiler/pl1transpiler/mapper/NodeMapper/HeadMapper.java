@@ -6,6 +6,7 @@ import org.bachelor.transpiler.pl1transpiler.errorhandling.TypeMappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 /**
  * <h1>Summary</h1>
@@ -26,10 +27,10 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 public class HeadMapper extends Mapper implements ITranslationBehavior {
 
 	/**  The scope of the mapped method. */
-	private final String SCOPE = super.javaWords.PUBLIC.getValue();
+	private final String SCOPE = Template.PUBLIC.getInstance();
 
 	/**  The type of the mapped method. */
-	private String type = super.javaWords.VOID.getValue();
+	private String type = Template.VOID.getInstance();
 	
 	/**  The identifier of the mapped method. */
 	private String identifier = "";
@@ -175,15 +176,15 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 		if (identifiers.size() > 1) {
 			for (String identifier : identifiers) {
 				if (identifier.equals(identifiers.get(identifiers.size() - 1))) {
-					parameterlist = parameterlist + super.javaWords.OBJECT.getValue() + " " + identifier;
+					parameterlist = parameterlist + Template.OBJECT.getInstance() + " " + identifier;
 					return parameterlist + ")";
 				}
-				parameterlist = parameterlist + super.javaWords.OBJECT.getValue() + " " + identifier + ",";
+				parameterlist = parameterlist + Template.OBJECT.getInstance() + " " + identifier + ",";
 			}
 			return parameterlist + ")";
 		} else {
 			
-			return "(" + super.javaWords.OBJECT.getValue() + " " + identifiers.get(0) + ")";
+			return "(" + Template.OBJECT.getInstance() + " " + identifiers.get(0) + ")";
 		}
 	}
 

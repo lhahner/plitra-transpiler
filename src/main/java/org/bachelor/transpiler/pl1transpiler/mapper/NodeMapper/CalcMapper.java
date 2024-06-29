@@ -9,7 +9,6 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
 public class CalcMapper extends Mapper implements ITranslationBehavior {
 	
-	private String mathExpression;
 	private ArrayList<String> terms = new ArrayList<String>();
 	
 	public String translate(SimpleNode simpleNode) {

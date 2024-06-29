@@ -20,10 +20,10 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 public class ProgramMapper extends Mapper implements ITranslationBehavior {
 	
 	/** The scope. */
-	private final String SCOPE = super.javaWords.PUBLIC.getValue();
+	private final String SCOPE = Template.PUBLIC.getInstance();
 	
 	/** The type. */
-	private final String TYPE = super.javaWords.CLASS.getValue();
+	private final String TYPE = Template.CLASS.getInstance();
 	
 	/** The identifier. */
 	private String identifier = null;

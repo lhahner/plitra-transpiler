@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 /**
  * <h1>Summary</h1> 
@@ -127,31 +128,31 @@ public class TerminateMapper extends Mapper implements ITranslationBehavior {
 			}
 			switch (returnPropreties.get(0)) {
 			case "RETURN":
-				this.setTermination(super.javaWords.RETURN.getValue());
+				this.setTermination(Template.RETURN.getInstance());
 				if (!returnPropreties.get(1).equals("")) {
 					this.setValues(returnPropreties.get(1));
 				}
 				//TODO this is implicit and should be done by a kind of search method which checks
 				if (this.getValues().contains("'")) {
-					this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.CHAR_OBJECT.getValue()
-					+ super.javaWords.INIT.getValue());
+					this.setObject(Template.NEW.getInstance() + " " + Template.CHAR_OBJECT.getInstance()
+					+ Template.INIT.getInstance());
 				}
 				else if(Character.isDigit(this.getValues().charAt(0))) {
-					this.setObject(super.javaWords.NEW.getValue() + " " + super.javaWords.DECIMAL.getValue()
-					+ super.javaWords.INIT.getValue());
+					this.setObject(Template.NEW.getInstance() + " " + Template.DECIMAL.getInstance()
+					+ Template.INIT.getInstance());
 				}
 				return;
 			case "GO TO":
 				//id + (); 
-				this.setTermination(super.javaWords.CONTINUE.getValue());
+				this.setTermination(Template.CONTINUE.getInstance());
 				this.setValues(returnPropreties.get(1));
 				break;
 			case "STOP":
-				this.setTermination(super.javaWords.RETURN.getValue());
+				this.setTermination(Template.RETURN.getInstance());
 				this.setValues("");
 				return;
 			case "EXIT":
-				this.setTermination(super.javaWords.RETURN.getValue());
+				this.setTermination(Template.RETURN.getInstance());
 				this.setValues("");
 				return;
 			default:

@@ -3,6 +3,7 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 public class ReadFileMapper extends Mapper implements ITranslationBehavior {
 	
@@ -20,7 +21,7 @@ public class ReadFileMapper extends Mapper implements ITranslationBehavior {
 		this.setFileIdentifier((String)simpleNode.jjtGetValue());
 		
 		return simpleNode.jjtGetValue() != null ? 
-				super.javaWords.SCANNER.getValue() + "(" + this.getFileIdentifier() + ")"
+				Template.SCANNER.getInstance() + "(" + this.getFileIdentifier() + ")"
 			  : ""	;
 	}
 }

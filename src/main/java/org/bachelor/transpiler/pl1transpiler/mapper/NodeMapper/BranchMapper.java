@@ -5,6 +5,7 @@ import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 public class BranchMapper extends Mapper implements ITranslationBehavior{
 	
@@ -12,7 +13,7 @@ public class BranchMapper extends Mapper implements ITranslationBehavior{
 		Pl1ParserTreeConstants treeSymbols = null;
 		return 
 				simpleNode.jjtGetParent().getId() == treeSymbols.JJTBRANCH ? 
-				"}" + super.javaWords.ELSE.getValue() 
-				: super.javaWords.IF.getValue();
+				"}" + Template.ELSE.getInstance() 
+				: Template.IF.getInstance();
 	}
 }
