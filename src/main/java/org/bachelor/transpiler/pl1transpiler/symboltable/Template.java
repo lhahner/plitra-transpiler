@@ -255,7 +255,7 @@ public enum Template {
 	 *
 	 * @return the value of the Enum.
 	 */
-    public String getInstance() {
+    public String getValue() {
         return symbol + " ";
     }
 }

@@ -11,6 +11,6 @@ public class LoopMapper extends Mapper implements ITranslationBehavior {
 	
 	
 	public String translate(SimpleNode simpleNode) {
-		return Template.WHILE.getInstance();
+		return Template.WHILE.getValue();
 	}
 }

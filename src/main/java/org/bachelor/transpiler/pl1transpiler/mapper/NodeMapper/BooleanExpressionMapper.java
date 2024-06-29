@@ -38,9 +38,9 @@ public class BooleanExpressionMapper extends Mapper implements ITranslationBehav
 		/**@see Class BodyMapper */
 		if (simpleNode.jjtGetParent().getId() == treeSymbols.JJTUNTIL) {
 			return "{\n"
-				+	Template.IF.getInstance()
+				+	Template.IF.getValue()
 				+  this.getExpression()
-				+  "{" + Template.BREAK.getInstance() + ";" + " }";
+				+  "{" + Template.BREAK.getValue() + ";" + " }";
 		}
 		return this.getExpression();
 	}
@@ -77,7 +77,7 @@ public class BooleanExpressionMapper extends Mapper implements ITranslationBehav
 		// iterater over ArrayList to parse types
 		for (int i = 0; i < expression.size(); i++) {
 			if (symbols.getBySymbol(expression.get(i)) != null) {
-				expressionList.add(expression.get(i).concat("." + Template.TONUMERIC.getInstance() + "()"));
+				expressionList.add(expression.get(i).concat("." + Template.TONUMERIC.getValue() + "()"));
 				continue;
 			}
 			expressionList.add(expression.get(i));

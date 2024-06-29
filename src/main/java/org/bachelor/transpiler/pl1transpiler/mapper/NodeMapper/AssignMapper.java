@@ -18,7 +18,7 @@ public class AssignMapper extends Mapper implements ITranslationBehavior {
 	private String identifier;
 
 	/** The operator. */
-	private String operator = Template.INIT.getInstance();
+	private String operator = Template.INIT.getValue();
 
 	/** The assignment. */
 	private String assignment;
@@ -124,7 +124,7 @@ public class AssignMapper extends Mapper implements ITranslationBehavior {
 	 * @param simpleNode the simple node
 	 */
 	public void mapCalcNode(SimpleNode simpleNode) {
-		this.setOperator(Template.CALC.getInstance());
+		this.setOperator(Template.CALC.getValue());
 		this.setAssignment(new CalcMapper().translate((SimpleNode) simpleNode.jjtGetChild(0)));
 	}
 

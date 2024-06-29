@@ -24,13 +24,13 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 public class DisplayMapper extends Mapper implements ITranslationBehavior {
 
 	/** The sysout variable contains a CLI Output print method. */
-	private final String SYSOUT = Template.SYSOUT.getInstance();
+	private final String SYSOUT = Template.SYSOUT.getValue();
 
 	/** The message variable contains the String message which should be displayed in console. */
 	private String message;
 
 	/** The sysin variable contains a CLI Input reader method. */
-	private final String SYSIN = Template.SYSIN.getInstance();
+	private final String SYSIN = Template.SYSIN.getValue();
 
 	/** The parameter in which the SYSIN method should save the input from user. */
 	private String parameter;

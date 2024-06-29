@@ -21,7 +21,7 @@ public class ReadFileMapper extends Mapper implements ITranslationBehavior {
 		this.setFileIdentifier((String)simpleNode.jjtGetValue());
 		
 		return simpleNode.jjtGetValue() != null ? 
-				Template.SCANNER.getInstance() + "(" + this.getFileIdentifier() + ")"
+				Template.SCANNER.getValue() + "(" + this.getFileIdentifier() + ")"
 			  : ""	;
 	}
 }

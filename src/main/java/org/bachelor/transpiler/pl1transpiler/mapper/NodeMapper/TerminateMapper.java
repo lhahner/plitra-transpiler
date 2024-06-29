@@ -128,31 +128,31 @@ public class TerminateMapper extends Mapper implements ITranslationBehavior {
 			}
 			switch (returnPropreties.get(0)) {
 			case "RETURN":
-				this.setTermination(Template.RETURN.getInstance());
+				this.setTermination(Template.RETURN.getValue());
 				if (!returnPropreties.get(1).equals("")) {
 					this.setValues(returnPropreties.get(1));
 				}
 				//TODO this is implicit and should be done by a kind of search method which checks
 				if (this.getValues().contains("'")) {
-					this.setObject(Template.NEW.getInstance() + " " + Template.CHAR_OBJECT.getInstance()
-					+ Template.INIT.getInstance());
+					this.setObject(Template.NEW.getValue() + " " + Template.CHAR_OBJECT.getValue()
+					+ Template.INIT.getValue());
 				}
 				else if(Character.isDigit(this.getValues().charAt(0))) {
-					this.setObject(Template.NEW.getInstance() + " " + Template.DECIMAL.getInstance()
-					+ Template.INIT.getInstance());
+					this.setObject(Template.NEW.getValue() + " " + Template.DECIMAL.getValue()
+					+ Template.INIT.getValue());
 				}
 				return;
 			case "GO TO":
 				//id + (); 
-				this.setTermination(Template.CONTINUE.getInstance());
+				this.setTermination(Template.CONTINUE.getValue());
 				this.setValues(returnPropreties.get(1));
 				break;
 			case "STOP":
-				this.setTermination(Template.RETURN.getInstance());
+				this.setTermination(Template.RETURN.getValue());
 				this.setValues("");
 				return;
 			case "EXIT":
-				this.setTermination(Template.RETURN.getInstance());
+				this.setTermination(Template.RETURN.getValue());
 				this.setValues("");
 				return;
 			default:

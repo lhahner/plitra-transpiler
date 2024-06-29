@@ -13,7 +13,7 @@ public class BranchMapper extends Mapper implements ITranslationBehavior{
 		Pl1ParserTreeConstants treeSymbols = null;
 		return 
 				simpleNode.jjtGetParent().getId() == treeSymbols.JJTBRANCH ? 
-				"}" + Template.ELSE.getInstance() 
-				: Template.IF.getInstance();
+				"}" + Template.ELSE.getValue() 
+				: Template.IF.getValue();
 	}
 }

@@ -27,10 +27,10 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 public class HeadMapper extends Mapper implements ITranslationBehavior {
 
 	/**  The scope of the mapped method. */
-	private final String SCOPE = Template.PUBLIC.getInstance();
+	private final String SCOPE = Template.PUBLIC.getValue();
 
 	/**  The type of the mapped method. */
-	private String type = Template.VOID.getInstance();
+	private String type = Template.VOID.getValue();
 	
 	/**  The identifier of the mapped method. */
 	private String identifier = "";
@@ -176,15 +176,15 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 		if (identifiers.size() > 1) {
 			for (String identifier : identifiers) {
 				if (identifier.equals(identifiers.get(identifiers.size() - 1))) {
-					parameterlist = parameterlist + Template.OBJECT.getInstance() + " " + identifier;
+					parameterlist = parameterlist + Template.OBJECT.getValue() + " " + identifier;
 					return parameterlist + ")";
 				}
-				parameterlist = parameterlist + Template.OBJECT.getInstance() + " " + identifier + ",";
+				parameterlist = parameterlist + Template.OBJECT.getValue() + " " + identifier + ",";
 			}
 			return parameterlist + ")";
 		} else {
 			
-			return "(" + Template.OBJECT.getInstance() + " " + identifiers.get(0) + ")";
+			return "(" + Template.OBJECT.getValue() + " " + identifiers.get(0) + ")";
 		}
 	}
 

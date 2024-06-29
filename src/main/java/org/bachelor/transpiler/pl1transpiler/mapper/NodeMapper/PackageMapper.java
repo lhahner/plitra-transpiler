@@ -23,7 +23,7 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 public class PackageMapper extends Mapper implements ITranslationBehavior {
 
 	/** The type of the package */
-	private final String type = Template.PACKAGE.getInstance();
+	private final String type = Template.PACKAGE.getValue();
 
 	/** The identifier of the package */
 	private String identifier = null;

@@ -31,10 +31,10 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 */
 
 	/** The scope of the variable, is always public if not changed. */
-	private String scope = Template.PUBLIC.getInstance();
+	private String scope = Template.PUBLIC.getValue();
 
 	/** The type of the variable, is always void of not changed. */
-	private String type = Template.VOID.getInstance();
+	private String type = Template.VOID.getValue();
 
 	/** The identifier of the variable. */
 	private String identifier = null;
@@ -242,23 +242,23 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 
 				if (arithmeticAttribute.equals("COMPLEX")) {
 
-					this.setObject(Template.NEW.getInstance() + " " + Template.COMPLEX.getInstance() + "("
+					this.setObject(Template.NEW.getValue() + " " + Template.COMPLEX.getValue() + "("
 							+ getLength(arithmeticNode) + ")");
 
-					this.setType(Template.COMPLEX.getInstance());
+					this.setType(Template.COMPLEX.getValue());
 
 				} else if (arithmeticAttribute.equals("BINARY")) {
 
-					this.setObject(Template.NEW.getInstance() + " " + Template.BINARY.getInstance() + "("
+					this.setObject(Template.NEW.getValue() + " " + Template.BINARY.getValue() + "("
 							+ getLength(arithmeticNode) + ")");
 
-					this.setType(Template.BINARY.getInstance());
+					this.setType(Template.BINARY.getValue());
 
 				} else {
-					this.setObject(Template.NEW.getInstance() + " " + Template.DECIMAL.getInstance() + "("
+					this.setObject(Template.NEW.getValue() + " " + Template.DECIMAL.getValue() + "("
 							+ getLength(arithmeticNode) + ")");
 
-					this.setType(Template.DECIMAL.getInstance());
+					this.setType(Template.DECIMAL.getValue());
 				}
 
 			}
@@ -281,11 +281,11 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public String mapString(SimpleNode simpleNode) {
 		if (simpleNode.jjtGetParent().jjtGetParent().getId() == treeSymbols.JJTVAR) {
-			this.setObject(Template.NEW.getInstance() + " " + Template.CHAR_OBJECT.getInstance() + "("
+			this.setObject(Template.NEW.getValue() + " " + Template.CHAR_OBJECT.getValue() + "("
 					+ (String) simpleNode.jjtGetValue() + ")");
-			return Template.CHAR_OBJECT.getInstance();
+			return Template.CHAR_OBJECT.getValue();
 		} else {
-			return Template.CHAR_OBJECT.getInstance();
+			return Template.CHAR_OBJECT.getValue();
 		}
 	}
 
@@ -297,13 +297,13 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public String mapPicture(String picRegex) {
 		try {
-			this.setObject(Template.NEW.getInstance() + " " + Template.PICTURE.getInstance() + "("
+			this.setObject(Template.NEW.getValue() + " " + Template.PICTURE.getValue() + "("
 					+ new PictureMapper().getRegex(picRegex) + ")");
 
 		} catch (LexicalErrorException lee) {
 			lee.printStackTrace();
 		}
-		return Template.PICTURE.getInstance();
+		return Template.PICTURE.getValue();
 	}
 
 	/**
@@ -314,7 +314,7 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * @return the Java non-primitive type File.
 	 */
 	public String mapFile() {
-		return Template.FILE.getInstance();
+		return Template.FILE.getValue();
 	}
 
 	/**
