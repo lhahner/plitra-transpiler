@@ -30,7 +30,7 @@ public class Pl1Parser{
 	private String value;
 	private String letter;
 	private ArrayList<String> length = new ArrayList<String>();
-	private SymbolTable symbols = new SymbolTable();
+	private SymbolTable symbols = SymbolTable.getInstance();
 	private ArrayList<String [] > idsAndScopes = new ArrayList<String []>();
 	private String[] tmp_idsAndScopes = new String[3];
 	ArrayList<String > paralist = new ArrayList<String >();
@@ -263,16 +263,16 @@ TOKEN :
 	| < GT : ">" >
 	| < LT : "<" >
 	| < PLUS : "+" >
-	| < COMPLT : "¬"< LT > >
+	| < COMPLT : "ï¿½"< LT > >
 	| < LTEQ : < LT >"=" >
 	| < GTEQ : < GT >"=" >
 	| < EQ : "=" >
-	| < COMPEQ: "¬=" >
-	| < COMPGT: "¬"< GT > >
+	| < COMPEQ: "ï¿½=" >
+	| < COMPGT: "ï¿½"< GT > >
 	| < AND : "&" >
 	| < OR : "||" >
 	| < COMMA_SEPARATOR : ",">
-	| < X : ("X"|"A"|"9"|"Z"|"V"|< MULTIPLY >|"B"|< LT >|< GT >|< MINUSCHAR >|< PLUS >|"E"|"K"|","|"$"|"€"|"/"|"CR"|"DB"|"S")+ >
+	| < X : ("X"|"A"|"9"|"Z"|"V"|< MULTIPLY >|"B"|< LT >|< GT >|< MINUSCHAR >|< PLUS >|"E"|"K"|","|"$"|"ï¿½"|"/"|"CR"|"DB"|"S")+ >
 	| < A : ("A")+ >
 	| < V : ("V")+ >
 	| < INTEGER : (["0"-"9"])+ >
@@ -497,7 +497,7 @@ void display_statement() #DISPLAY:
   Token saveUserInput = null;
  }
 {
-  < DISPLAY >"("(displayString=< STRING >)")"[< REPLY >"("saveUserInput=< PL1_WORD >")"]
+  < DISPLAY >"("(displayString=< STRING >|displayString=< PL1_WORD >)")"[< REPLY >"("saveUserInput=< PL1_WORD >")"]
 
   {
      if(displayString != null) {

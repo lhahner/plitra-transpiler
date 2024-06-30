@@ -532,7 +532,7 @@ public interface Pl1ParserConstants {
     "<LTEQ>",
     "<GTEQ>",
     "\"=\"",
-    "\"\\u00ac=\"",
+    "\"\\ufffd=\"",
     "<COMPGT>",
     "\"&\"",
     "\"||\"",

@@ -1,21 +1,7 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL n_1 DECIMAL(30);
-	DCL m_1 DECIMAL(30);
-	DCL s_1 DECIMAL(30);
+	main_proc: PROC;
+		Display(z_1);
+	END main_proc;
 	
-	fibonacci: PROC(n) RETURNS (CHAR(20));
-		IF (n_1 = 0) THEN
-			RETURN 0;
-		ELSE 
-			IF (n_1 = 1) THEN
-				RETURN;
-			ELSE
-				n_1 = n_1 - 1;
-				m_1 = n_1 - 2;
-				s_1 = n_1 - m_1;
-				CALL fibanacci(s_1);
-			END
-		END
-	END fibonacci;	
 END orgbachelorpli;
