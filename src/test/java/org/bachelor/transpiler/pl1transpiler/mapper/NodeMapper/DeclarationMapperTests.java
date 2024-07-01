@@ -3,6 +3,8 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
+
 import org.bachelor.transpiler.pl1transpiler.errorhandling.TypeMappingException;
 import org.bachelor.transpiler.pl1transpiler.parser.Node;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
@@ -13,14 +15,27 @@ import org.junit.jupiter.api.Test;
 
 public class DeclarationMapperTests {
 
+
 	DeclarationMapper declarationMapper;
-	Pl1ParserTreeConstants treeSymbols = null;
+
 	SimpleNode varNode;
+	SimpleNode typeNode;
+	
+	SimpleNode stringNode;
+	SimpleNode arithmeticNode;
+	SimpleNode pictureNode;
+	SimpleNode fileNode;
 
 	@BeforeEach
 	void init() {
 		declarationMapper = new DeclarationMapper();
-		varNode = new SimpleNode(treeSymbols.JJTVAR);
+		varNode = new SimpleNode(Pl1ParserTreeConstants.JJTVAR);
+		
+		//add Children
+		typeNode = new SimpleNode(Pl1ParserTreeConstants.JJTTYPE);
+		varNode.jjtAddChild(typeNode, 0);
+		typeNode.jjtSetParent(varNode);
+	
 	}
 
 	/**
@@ -29,15 +44,15 @@ public class DeclarationMapperTests {
 	@Test
 	@DisplayName("Identifier Mapping")
 	void mapChildNodes_checkIdentifierMapping() {
-		String testIdentifier = "test_1";
+		String[] testIdentifier = {"test_1", "0", "0", "id"};
 
-		SimpleNode IdNode = new SimpleNode(treeSymbols.JJTID);
+		SimpleNode IdNode = new SimpleNode(Pl1ParserTreeConstants.JJTID);
 		IdNode.jjtSetValue(testIdentifier);
 
 		varNode.jjtAddChild(IdNode, 0);
 
 		declarationMapper.mapChildNodes(varNode);
-		assertEquals(testIdentifier, declarationMapper.getIdentifier());
+		assertEquals(testIdentifier[0], declarationMapper.getIdentifier());
 	}
 
 	/**
@@ -45,78 +60,82 @@ public class DeclarationMapperTests {
 	 */
 	@Test
 	@DisplayName("Testing String Type Mapping with checking Object and Type")
-	void mapChildNodes_checkTypeMappingWithObject() {
+	void mapChildNodes_String() {
 		String testType = "CHAR";
-		String testObject = "new CHAR";
+		String testObject = "new CHAR(5)";
 
-		SimpleNode typeNode = new SimpleNode(treeSymbols.JJTTYPE);
-		varNode.jjtAddChild(typeNode, 0);
-
-		typeNode.jjtAddChild(new SimpleNode(treeSymbols.JJTSTRING), 0);
+		stringNode = new SimpleNode(Pl1ParserTreeConstants.JJTSTRING);
+		stringNode.jjtSetValue("5");
+		typeNode.jjtAddChild(stringNode, 0);
+		stringNode.jjtSetParent(typeNode);
 
 		declarationMapper.mapChildNodes(varNode);
 		assertEquals(testType, declarationMapper.getType());
-		assertEquals(testObject, declarationMapper.getType());
+		assertEquals(testObject, declarationMapper.getObject());
 
 	}
-
+	
 	/**
 	 * More a integration test for mapType method.
 	 */
+	@Test
+	@DisplayName("Testing String Type Mapping with checking Object and Type")
+	void mapChildNodes_Arithmetic() {
+		String testType = "DECIMAL";
+		String testObject = "new DECIMAL(5)";
+			
+		arithmeticNode = new SimpleNode(Pl1ParserTreeConstants.JJTARITHMETIC);
+		ArrayList<String> values = new ArrayList<String>();
+		values.add("5");
+		arithmeticNode.jjtSetValue(values);
+		typeNode.jjtAddChild(arithmeticNode, 0);
+		arithmeticNode.jjtSetParent(typeNode);
+
+		declarationMapper.mapChildNodes(varNode);
+		assertEquals(testType, declarationMapper.getType());
+		assertEquals(testObject, declarationMapper.getObject());
+
+	}
+	
+	/**
+	 * More a integration test for mapType method.
+	 */
+	@Test
+	@DisplayName("Testing String Type Mapping with checking Object and Type")
+	void mapChildNodes_Picture() {
+		String testType = "PICTURE";
+		String testObject = "new PICTURE(\"[A-Za-z]\")";
+		
+		pictureNode = new SimpleNode(Pl1ParserTreeConstants.JJTPICTUREEXPRESSION);
+		pictureNode.jjtSetValue("X");
+		typeNode.jjtAddChild(pictureNode, 0);
+		pictureNode.jjtSetParent(typeNode);
+
+		declarationMapper.mapChildNodes(varNode);
+		assertEquals(testType, declarationMapper.getType());
+		assertEquals(testObject, declarationMapper.getObject());
+
+	}
+
 	@Test
 	@DisplayName("Testing File Type Mapping with checking Object and Type")
 	void mapChildNodes_checkTypeMappingWithoutObject() {
 
 		String testTypeWithoutInit = "FILE";
-
-		SimpleNode typeNode = new SimpleNode(treeSymbols.JJTTYPE);
-		varNode.jjtAddChild(typeNode, 0);
-
-		typeNode.jjtAddChild(new SimpleNode(treeSymbols.JJTFILE), 0);
+		
+		fileNode = new SimpleNode(Pl1ParserTreeConstants.JJTFILE);
+		typeNode.jjtAddChild(fileNode, 0);
+		fileNode.jjtSetParent(typeNode);
 
 		declarationMapper.mapChildNodes(varNode);
 		assertEquals(testTypeWithoutInit, declarationMapper.getType());
-		assertEquals(null, declarationMapper.getType());
+		assertEquals(null, declarationMapper.getObject());
 	}
 
 	/**
-	 * More a integration test for mapType method.
+	 * -------------------------------------------------------------------------
+	 * MapType Test
 	 */
-	@Test
-	@DisplayName("Positive testing Type Mapping")
-	void mapType_checkTypeMapping_positve() {
-		SimpleNode[] allTypes = { new SimpleNode(treeSymbols.JJTARITHMETIC), new SimpleNode(treeSymbols.JJTSTRING),
-				new SimpleNode(treeSymbols.JJTPICTUREEXPRESSION), new SimpleNode(treeSymbols.JJTFILE) };
-
-		String[] shouldBe = { "DECIMAL", "CHAR", "PICTURE", "FILE" };
-
-		for (int i = 0; i < allTypes.length; i++) {
-			try {
-				declarationMapper.mapType(allTypes[i]);
-				assertEquals(declarationMapper.getType(), allTypes[i]);
-			} catch (TypeMappingException tme) {
-				tme.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 * More a integration test for mapType method.
-	 */
-	@Test
-	@DisplayName("Negative testing Type Mapping")
-	void mapType_checkTypeMapping_negative() {
-		SimpleNode notKnownType = new SimpleNode(treeSymbols.JJTBOOL);
-
-		assertThrows(TypeMappingException.class, () -> {
-			declarationMapper.mapType(notKnownType);
-		});
-	}
-
-	@Test
-	@DisplayName("Positive testing Arithmetic")
-	void mapArithmetic_areAllTypesMapped() {
-
-	}
+	
 
 }

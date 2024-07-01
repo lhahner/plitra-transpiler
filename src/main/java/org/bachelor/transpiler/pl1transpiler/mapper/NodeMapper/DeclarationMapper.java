@@ -212,7 +212,7 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 				this.mapPicture((String) firstChildOfTypeNode.jjtGetValue());
 
 			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTFILE) {
-				this.mapFile();
+				this.setType(Template.FILE.getValue());
 
 			} else {
 				throw new TypeMappingException("No Type like this implemented", typeNode);
@@ -279,13 +279,13 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * @param simpleNode the Node that contains all Char-Nodes as children.
 	 * @return either just CHAR or CHAR ... = new CHAR(..);
 	 */
-	public String mapString(SimpleNode simpleNode) {
+	public void mapString(SimpleNode simpleNode) {
 		if (simpleNode.jjtGetParent().jjtGetParent().getId() == Pl1ParserTreeConstants.JJTVAR) {
 			this.setObject(Template.NEW.getValue() + " " + Template.CHAR_OBJECT.getValue() + "("
 					+ (String) simpleNode.jjtGetValue() + ")");
-			return Template.CHAR_OBJECT.getValue();
+			this.setType(Template.CHAR_OBJECT.getValue());
 		} else {
-			return Template.CHAR_OBJECT.getValue();
+			this.setType(Template.CHAR_OBJECT.getValue());
 		}
 	}
 
@@ -295,15 +295,15 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * @return the Java Expression
 	 * @TODO Maps the #PictureExpression Node with the PictureMapper
 	 */
-	public String mapPicture(String picRegex) {
+	public void mapPicture(String picRegex) {
 		try {
 			this.setObject(Template.NEW.getValue() + " " + Template.PICTURE.getValue() + "("
-					+ new PictureMapper().getRegex(picRegex) + ")");
+					+ "\"" + new PictureMapper().getRegex(picRegex) + "\"" + ")");
 
 		} catch (LexicalErrorException lee) {
 			lee.printStackTrace();
 		}
-		return Template.PICTURE.getValue();
+		this.setType(Template.PICTURE.getValue());
 	}
 
 	/**
@@ -313,9 +313,6 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 *
 	 * @return the Java non-primitive type File.
 	 */
-	public String mapFile() {
-		return Template.FILE.getValue();
-	}
 
 	/**
 	 * 

@@ -256,6 +256,6 @@ public enum Template {
 	 * @return the value of the Enum.
 	 */
     public String getValue() {
-        return symbol + " ";
+        return symbol;
     }
 }
