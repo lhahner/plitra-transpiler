@@ -167,7 +167,7 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 
 				SimpleNode childNode = (SimpleNode) varNode.jjtGetChild(i);
 
-				if (childNode.getId() == super.treeSymbols.JJTTYPE) {
+				if (childNode.getId() == Pl1ParserTreeConstants.JJTTYPE) {
 					try {
 						this.mapType(childNode);
 					} catch (TypeMappingException tme) {
@@ -175,7 +175,7 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 					}
 				}
 
-				else if (childNode.getId() == super.treeSymbols.JJTID) {
+				else if (childNode.getId() == Pl1ParserTreeConstants.JJTID) {
 					String[] tmp = (String[]) childNode.jjtGetValue();
 					identifier = tmp[0];
 					this.setIdentifier(identifier);
@@ -202,16 +202,16 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 			/** Can only be one since a variable has only one type. */
 			SimpleNode firstChildOfTypeNode = (SimpleNode) typeNode.jjtGetChild(0);
 
-			if (firstChildOfTypeNode.getId() == super.treeSymbols.JJTARITHMETIC) {
+			if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTARITHMETIC) {
 				this.mapArithmetic(firstChildOfTypeNode);
 
-			} else if (firstChildOfTypeNode.getId() == super.treeSymbols.JJTSTRING) {
+			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTSTRING) {
 				this.mapString(firstChildOfTypeNode);
 
-			} else if (firstChildOfTypeNode.getId() == super.treeSymbols.JJTPICTUREEXPRESSION) {
+			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTPICTUREEXPRESSION) {
 				this.mapPicture((String) firstChildOfTypeNode.jjtGetValue());
 
-			} else if (firstChildOfTypeNode.getId() == super.treeSymbols.JJTFILE) {
+			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTFILE) {
 				this.mapFile();
 
 			} else {
@@ -280,7 +280,7 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 * @return either just CHAR or CHAR ... = new CHAR(..);
 	 */
 	public String mapString(SimpleNode simpleNode) {
-		if (simpleNode.jjtGetParent().jjtGetParent().getId() == treeSymbols.JJTVAR) {
+		if (simpleNode.jjtGetParent().jjtGetParent().getId() == Pl1ParserTreeConstants.JJTVAR) {
 			this.setObject(Template.NEW.getValue() + " " + Template.CHAR_OBJECT.getValue() + "("
 					+ (String) simpleNode.jjtGetValue() + ")");
 			return Template.CHAR_OBJECT.getValue();
