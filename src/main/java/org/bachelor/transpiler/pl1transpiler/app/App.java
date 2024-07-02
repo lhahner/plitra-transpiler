@@ -32,10 +32,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.bachelor.transpiler.pl1transpiler.checker.Checker;
-import org.bachelor.transpiler.pl1transpiler.checker.HierachieChecker;
-import org.bachelor.transpiler.pl1transpiler.checker.ReferenceChecker;
-import org.bachelor.transpiler.pl1transpiler.checker.TypeChecker;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IdentifierReferenceException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncompatibleTypeException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException;
@@ -68,7 +64,7 @@ public class App {
 	static SymbolTable symboltable;
 	
 	/** Loads the TypeChecker Class, which is the entry for the Checker module. */
-	static TypeChecker typechecker;
+	
 	
     static Mapper mapper;
 	/**
@@ -89,7 +85,6 @@ public class App {
 		symboltable = SymbolTable.getInstance();
 		inputReader = new InputReader();
 		String inputFile = inputReader.getInputFilePath(CONFIG);
-		typechecker = new TypeChecker();
 		
 		
 		if (inputFile.toString().contains(".pli")) {
