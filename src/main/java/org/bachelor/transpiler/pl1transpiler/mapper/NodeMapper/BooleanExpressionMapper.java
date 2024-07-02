@@ -10,9 +10,10 @@ import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
+import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
-public class BooleanExpressionMapper extends Mapper implements ITranslationBehavior {
+public class BooleanExpressionMapper implements ITranslationBehavior {
 
 	private String expression;
 
@@ -76,7 +77,7 @@ public class BooleanExpressionMapper extends Mapper implements ITranslationBehav
 		ArrayList<String> expression = (ArrayList<String>) paraNode.jjtGetValue();
 		// iterater over ArrayList to parse types
 		for (int i = 0; i < expression.size(); i++) {
-			if (symbols.getBySymbol(expression.get(i)) != null) {
+			if (SymbolTable.getInstance().getBySymbol(expression.get(i)) != null) {
 				expressionList.add(expression.get(i).concat("." + Template.TONUMERIC.getValue() + "()"));
 				continue;
 			}

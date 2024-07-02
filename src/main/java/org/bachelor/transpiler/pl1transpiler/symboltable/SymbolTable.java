@@ -155,7 +155,7 @@ public class SymbolTable {
 	 */
 	public static int getSymbolScope(String symbol) {
 		for (int i = 1; i <= hashtable.size(); i++) {
-			if (hashtable.get(i)[0].equals(symbol)) {
+			if (hashtable.get(i)[0].equals(symbol) && hashtable.get(i)[2] != null) {
 				return Integer.parseInt(hashtable.get(i)[2]);
 			} else {
 				continue;

@@ -21,7 +21,7 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
  * DISPLAY ('Hello World') REPLY (var_1);
  * }
  */
-public class DisplayMapper extends Mapper implements ITranslationBehavior {
+public class DisplayMapper implements ITranslationBehavior {
 
 	/** The sysout variable contains a CLI Output print method. */
 	private final String SYSOUT = Template.SYSOUT.getValue();

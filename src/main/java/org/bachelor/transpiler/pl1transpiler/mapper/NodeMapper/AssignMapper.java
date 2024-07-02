@@ -12,7 +12,7 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 /**
  * The Class AssignMapper.
  */
-public class AssignMapper extends Mapper implements ITranslationBehavior {
+public class AssignMapper implements ITranslationBehavior {
 
 	/** The identifier. */
 	private String identifier;
@@ -96,7 +96,7 @@ public class AssignMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public void mapAssignNode(SimpleNode simpleNode) {
 		String[] assignValues = this.setAssignValues(simpleNode);
-		if (super.hasChildren(simpleNode)) {
+		if (new Mapper().hasChildren(simpleNode)) {
 			mapCalcNode(simpleNode);
 			if (assignValues != null) {
 				if (SymbolTable.getInstance().getBySymbol(assignValues[0]) != null) {

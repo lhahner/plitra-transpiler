@@ -13,14 +13,9 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 public class Mapper {
 	
 	
-	/** PL/I Symboltable */
-	protected static SymbolTable symbols = SymbolTable.getInstance();
 	
 	/** The var. */
 	TranslationMapper var = new TranslationMapper();
-	
-	/** Parse Node constants */
-	protected static Pl1ParserTreeConstants  treeSymbols = null;
 	
 	/**
 	 * Instantiates a new mapper.

@@ -7,7 +7,7 @@ import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
-public class CalcMapper extends Mapper implements ITranslationBehavior {
+public class CalcMapper implements ITranslationBehavior {
 	
 	private ArrayList<String> terms = new ArrayList<String>();
 	
@@ -18,7 +18,7 @@ public class CalcMapper extends Mapper implements ITranslationBehavior {
 	
 	public void setTerms(SimpleNode simpleNode) {
 		this.terms.add((String) simpleNode.jjtGetValue());
-		if (super.hasChildren(simpleNode)) {
+		if (new Mapper().hasChildren(simpleNode)) {
 			setTerms((SimpleNode) simpleNode.jjtGetChild(0));
 		}
 		return;

@@ -12,7 +12,7 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
  * 
  * This class is for Program-Structure purpose only and will not translate any expression.
  */
-public class EndMapper extends Mapper implements ITranslationBehavior{
+public class EndMapper implements ITranslationBehavior{
 	
 	/** The Constant CLOSINGBRACKET. */
 	private final static String CLOSINGBRACKET = "\n }";
@@ -35,7 +35,7 @@ public class EndMapper extends Mapper implements ITranslationBehavior{
 	 * @return the string cotaining the closing bracket.
 	 */
 	public String translate(SimpleNode simpleNode){
-		if(super.hasChildren(simpleNode)) {
+		if(new Mapper().hasChildren(simpleNode)) {
 			return null;
 		}
 		return this.getClosingBracket();

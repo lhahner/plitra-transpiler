@@ -28,7 +28,7 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
  * GOTO;
  * }
  */
-public class TerminateMapper extends Mapper implements ITranslationBehavior {
+public class TerminateMapper implements ITranslationBehavior {
 
 	/** The termination type like return or continue or break */
 	private String termination;
@@ -122,7 +122,7 @@ public class TerminateMapper extends Mapper implements ITranslationBehavior {
 
 		if (simpleNode.jjtGetValue() != null) {
 			ArrayList<String> returnPropreties = (ArrayList<String>) simpleNode.jjtGetValue();
-			if (super.hasChildren(simpleNode)) {
+			if (new Mapper().hasChildren(simpleNode)) {
 				this.setValuesList((SimpleNode) simpleNode.jjtGetChild(0), valuesList);
 				this.setValues(mapTerminationValuesList(valuesList));
 			}
@@ -193,7 +193,7 @@ public class TerminateMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public void setValuesList(SimpleNode simpleNode, ArrayList<String> valuesList) {
 		valuesList.add((String) simpleNode.jjtGetValue());
-		if (super.hasChildren(simpleNode)) {
+		if (new Mapper().hasChildren(simpleNode)) {
 			setValuesList((SimpleNode) simpleNode.jjtGetChild(0), valuesList);
 		}
 		

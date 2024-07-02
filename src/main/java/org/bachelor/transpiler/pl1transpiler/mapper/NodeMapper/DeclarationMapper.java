@@ -23,7 +23,7 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
  * DCL var_1 DECIMAL(1);
  * }
  */
-public class DeclarationMapper extends Mapper implements ITranslationBehavior {
+public class DeclarationMapper implements ITranslationBehavior {
 
 	/**
 	 * These variables symbolize the structure of a java declaration. Each String is
@@ -161,7 +161,7 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	public void mapChildNodes(SimpleNode varNode) {
 		String identifier;
 
-		if (super.hasChildren(varNode)) {
+		if (new Mapper().hasChildren(varNode)) {
 
 			for (int i = 0; i < varNode.jjtGetNumChildren(); i++) {
 
@@ -197,7 +197,7 @@ public class DeclarationMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public void mapType(SimpleNode typeNode) throws TypeMappingException {
 
-		if (super.hasChildren(typeNode)) {
+		if (new Mapper().hasChildren(typeNode)) {
 
 			/** Can only be one since a variable has only one type. */
 			SimpleNode firstChildOfTypeNode = (SimpleNode) typeNode.jjtGetChild(0);

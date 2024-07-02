@@ -24,7 +24,7 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
  * }
  * 
  */
-public class HeadMapper extends Mapper implements ITranslationBehavior {
+public class HeadMapper implements ITranslationBehavior {
 
 	/**  The scope of the mapped method. */
 	private final String SCOPE = Template.PUBLIC.getValue();
@@ -130,7 +130,7 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 	 * @return the string
 	 */
 	public void mapHeadNode(SimpleNode simpleNode) {
-		if (super.hasChildren(simpleNode)) {
+		if (new Mapper().hasChildren(simpleNode)) {
 			for (int i = 0; i < simpleNode.jjtGetNumChildren(); i++) {
 				SimpleNode childNode = (SimpleNode) simpleNode.jjtGetChild(i);
 				switch (childNode.toString()) {
@@ -148,7 +148,7 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 					break;
 				case "RETURNS":
 					try {
-						if(super.hasChildren(childNode)) {
+						if(new Mapper().hasChildren(childNode)) {
 							new DeclarationMapper()
 									.mapType((SimpleNode)childNode.jjtGetChild(0));
 						}
@@ -196,7 +196,7 @@ public class HeadMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public void setParameterDefinitionList(SimpleNode paraNode) {
 		this.parameterDeclarationList.add((String) paraNode.jjtGetValue());
-		if (super.hasChildren(paraNode)) {
+		if (new Mapper().hasChildren(paraNode)) {
 			setParameterDefinitionList((SimpleNode) paraNode.jjtGetChild(0));
 		}
 		return;

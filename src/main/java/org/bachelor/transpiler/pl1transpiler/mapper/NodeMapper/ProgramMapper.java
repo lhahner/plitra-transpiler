@@ -17,7 +17,7 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 /**
  * The Class ProgramMapper.
  */
-public class ProgramMapper extends Mapper implements ITranslationBehavior {
+public class ProgramMapper implements ITranslationBehavior {
 	
 	/** The scope. */
 	private final String SCOPE = Template.PUBLIC.getValue();

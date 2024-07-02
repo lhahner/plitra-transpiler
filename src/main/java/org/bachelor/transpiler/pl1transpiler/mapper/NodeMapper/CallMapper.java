@@ -20,7 +20,7 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
  * 		CALL proc_2(para_1, para_2);
  * }
  */
-public class CallMapper extends Mapper implements ITranslationBehavior{
+public class CallMapper implements ITranslationBehavior{
 	
 	/** identifier of the calling method*/
 	private String identifier = "";
@@ -91,7 +91,7 @@ public class CallMapper extends Mapper implements ITranslationBehavior{
 	public void mapCallStatement(SimpleNode simpleNode) {
 		String identifier = (String)simpleNode.jjtGetValue();
 		this.setIdentifier(identifier);
-		if(super.hasChildren(simpleNode)) {
+		if(new Mapper().hasChildren(simpleNode)) {
 			this.setParameterDefinitionList((SimpleNode)simpleNode.jjtGetChild(0));
 			this.setParameter(this.mapParameterAssignlist(parameterAssignList));
 		}
@@ -108,7 +108,7 @@ public class CallMapper extends Mapper implements ITranslationBehavior{
 	 */
 	public void setParameterDefinitionList(SimpleNode paraNode) {
 		this.parameterAssignList.add((String) paraNode.jjtGetValue());
-		if (super.hasChildren(paraNode)) {
+		if (new Mapper().hasChildren(paraNode)) {
 			setParameterDefinitionList((SimpleNode) paraNode.jjtGetChild(0));
 		}
 		return;

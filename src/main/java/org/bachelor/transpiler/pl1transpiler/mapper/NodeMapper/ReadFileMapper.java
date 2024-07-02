@@ -5,7 +5,7 @@ import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
-public class ReadFileMapper extends Mapper implements ITranslationBehavior {
+public class ReadFileMapper implements ITranslationBehavior {
 	
 	public String fileIdentifier;
 	

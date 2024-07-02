@@ -17,7 +17,7 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
  * This class is for Program-Structure purpose only and will not
  * translate any expression.
  */
-public class BodyMapper extends Mapper implements ITranslationBehavior {
+public class BodyMapper implements ITranslationBehavior {
 
 	/**
 	 * Defines the outline, is default value '{}' when there is no content in
@@ -52,7 +52,7 @@ public class BodyMapper extends Mapper implements ITranslationBehavior {
 	 * @return equivalent Java Program structure.
 	 */
 	public String translate(SimpleNode simpleNode) {
-		if (super.hasChildren(simpleNode)) {
+		if (new Mapper().hasChildren(simpleNode)) {
 			if(this.isUntilSibiling(simpleNode)) {
 				return "";
 			}

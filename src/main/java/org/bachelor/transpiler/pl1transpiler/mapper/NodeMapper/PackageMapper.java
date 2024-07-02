@@ -20,7 +20,7 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
  * }
  * 
  */
-public class PackageMapper extends Mapper implements ITranslationBehavior {
+public class PackageMapper implements ITranslationBehavior {
 
 	/** The type of the package */
 	private final String type = Template.PACKAGE.getValue();
@@ -69,7 +69,7 @@ public class PackageMapper extends Mapper implements ITranslationBehavior {
 	 */
 	public void mapPackageNode(SimpleNode simpleNode) {
 		Pl1ParserTreeConstants TreeSymbols = null;
-		if (super.hasChildren(simpleNode)) {
+		if (new Mapper().hasChildren(simpleNode)) {
 			for (int i = 0; i < simpleNode.jjtGetNumChildren(); i++) {
 				if (simpleNode.jjtGetChild(i).getId() == TreeSymbols.JJTID) {
 					SimpleNode child = (SimpleNode) simpleNode.jjtGetChild(i);

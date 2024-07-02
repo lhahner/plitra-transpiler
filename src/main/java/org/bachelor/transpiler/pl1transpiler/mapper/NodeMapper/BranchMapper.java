@@ -7,7 +7,7 @@ import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
-public class BranchMapper extends Mapper implements ITranslationBehavior{
+public class BranchMapper implements ITranslationBehavior{
 	
 	public String translate(SimpleNode simpleNode) {
 		Pl1ParserTreeConstants treeSymbols = null;
