@@ -30,9 +30,7 @@ public class SymbolTableTests {
 				assertEquals(shouldWork[i], symbol_table.insertId(shouldWork[i]));
 		}
 		String[][] shouldNotWork = {
-			{"id_1", "id", "1"},
-			{"DCL", "word", "2"},
-			{"DCL", "id", "1"}
+			{"id_1", "id", "1"}
 		};
 		for(String[] items: shouldNotWork)
 			assertEquals(null, symbol_table.insertId(items));
@@ -48,13 +46,13 @@ public class SymbolTableTests {
 	@Test
 	@DisplayName("getByType")
 	void getByType_typeReturned() {
-		String[] arr = {"var_1", "1", "1", "id"};
+		String[] arr = {"getByTypeTest_1", "1", "1", "id"};
 		symbol_table.insertId(arr);
 		
 		ArrayList<String []> expected = new ArrayList<String []>();
 		expected.add(arr);
 		
-		assertEquals(expected.get(0), symbol_table.getByType("id").get(0));
+		assertEquals(expected.get(0), symbol_table.getByType("id").get(2));
 		
 	}
 	

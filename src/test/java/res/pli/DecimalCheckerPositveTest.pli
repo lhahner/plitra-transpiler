@@ -1,0 +1,9 @@
+typeCheckerPackage: PACKAGE;
+	
+	DCL decChecker_1 DECIMAL(1);
+	
+	decCheckerproc_1: PROC;
+		decChecker_1 = 1;
+	END decCheckerproc_1;
+
+END typeCheckerPackage;

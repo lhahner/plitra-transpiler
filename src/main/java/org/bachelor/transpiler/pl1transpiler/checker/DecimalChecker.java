@@ -1,5 +1,6 @@
 package org.bachelor.transpiler.pl1transpiler.checker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bachelor.transpiler.pl1transpiler.mapper.AstMapper;
@@ -18,7 +19,19 @@ public class DecimalChecker implements ITypeExpression {
 	private final static int TYPE = Pl1ParserTreeConstants.JJTARITHMETIC;
 
 	/** The identifier of the declared variable. */
-	private List<String> identifier;
+	private List<String> identifier = new ArrayList<String>();
+
+	public List<String> getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(List<String> identifier) {
+		this.identifier = identifier;
+	}
+
+	public static int getType() {
+		return TYPE;
+	}
 
 	/**
 	 * Iterate tree.
@@ -26,9 +39,9 @@ public class DecimalChecker implements ITypeExpression {
 	 * @param startNode the Node to start checking for type errors.
 	 * @throws NullPointerException the null pointer exception
 	 */
-	public void iterateTree(SimpleNode startNode) throws NullPointerException {
+	public void iterateTree(SimpleNode startNode) throws NullPointerException, NumberFormatException {
 		if (startNode.jjtGetParent() == null) {
-			this.checkDecimal(startNode);
+			this.checkDecimal((SimpleNode)startNode);
 			
 			if (this.hasChildren(startNode)) {
 				for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
@@ -40,7 +53,7 @@ public class DecimalChecker implements ITypeExpression {
 		} else {
 			
 			for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
-				this.checkDecimal(startNode);
+				this.checkDecimal((SimpleNode)startNode.jjtGetChild(i));
 				
 				if (this.hasChildren(startNode.jjtGetChild(i))) {
 					iterateTree((SimpleNode) startNode.jjtGetChild(i));
@@ -68,6 +81,7 @@ public class DecimalChecker implements ITypeExpression {
 				}
 			}
 		}
+		
 	}
 
 	/**
@@ -113,14 +127,7 @@ public class DecimalChecker implements ITypeExpression {
 	 *
 	 * @return the type
 	 */
-	public void getType(String assignment) {
-		try {
+	public void getType(String assignment) throws NumberFormatException{
 			Double.parseDouble(assignment);
-			
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			
-		}
-
 	}
 }
