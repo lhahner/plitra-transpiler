@@ -1,1 +1,2 @@
 PATH=./src/main/java/res/pli/NPP1NFG.pli;
+TARGET=./target/transpiled-sources;
