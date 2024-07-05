@@ -6,9 +6,10 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Mapper.
+ * The Class Mapper is the Client for the Mapper Module.
+ * It will call the fitting Object of the Node in the
+ * prasetree.
  */
 public class Mapper {
 	
@@ -24,12 +25,13 @@ public class Mapper {
 	}
 
 	/**
-	 * Instantiates a new mapper.
+	 * Instantiates a new Mapper
+	 * and invokes the iterateTree method
+	 * to iterate through the Parsetree.
 	 *
 	 * @param root the root
 	 */
 	public Mapper(SimpleNode root) {
-		AstMapper astMapper = new AstMapper();
 		this.iterateTree(root);
 	}
 	
@@ -39,6 +41,7 @@ public class Mapper {
 	 * For the specific Node in the AstMapper class it calls a class specific to the node.
 	 *
 	 * @param startNode The Node to begin iterating
+	 * @throws NullPointerException the null pointer exception
 	 */
 	public void iterateTree(SimpleNode startNode) throws NullPointerException{
 		if (startNode.jjtGetParent() == null) {

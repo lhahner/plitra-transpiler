@@ -44,50 +44,67 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 
 /**
  * The Class App is used to define all objects for the classes in each module.
- * Here the Administrator can update, delete and insert new or old modules of the project.
- * If a module is not called here, it might be deprecated or only used by specified modules.
- * More Information about the Structure of Modules here:
- * {@link https://github.com/lhahner/model-pl1-code-transpiler}
+ * Here the Administrator can update, delete and insert new or old modules of
+ * the project. If a module is not called here, it might be deprecated or only
+ * used by specified modules. More Information about the Structure of Modules
+ * here: {@link https://github.com/lhahner/model-pl1-code-transpiler}
+ * 
  * @author Lennart Hahner
  */
 public class App {
-	
+
 	/** Contains the Path to the Configuration File. */
 	static final File CONFIG = new File("./src/main/java/res/config/config.propreties");
-	
+
 	/** Loads the InputReader Class, which is the entry for the scanner module. */
 	static InputReader inputReader;
-	
-	/**  Loads the Pl1Parser Class, which is the entry for the parser module. */
+
+	/** Loads the Pl1Parser Class, which is the entry for the parser module. */
 	static Pl1Parser pl1Parser;
-	
-	/** Loads the SymbolTable Class, which is the entry for the Symbol-table module. */
+
+	/**
+	 * Loads the SymbolTable Class, which is the entry for the Symbol-table module.
+	 */
 	static SymbolTable symboltable;
-	
+
 	/** Loads the TypeChecker Class, which is the entry for the Checker module. */
 	static Checker checker;
-	
-    static Mapper mapper;
+
+	/**
+	 * Loads the Mapper Class, which is the Client Class for the Mapper Module. The
+	 * Mapper module will generate Java-Code from the Parsetree.
+	 */
+	static Mapper mapper;
+
 	/**
 	 * The main method.
+	 * This method should be used to load all the modules used.
+	 * Any module not included like the SymbolTable module
+	 * has a the dependencies inside other modules.
 	 *
-	 * @param args								Used whenever the Program is compiled and build by the Command-line, null if not processed
+	 * @param args Used whenever the Program is compiled and build by the
+	 *             Command-line, null if not processed
 	 * 
-	 * @throws IncorrectInputFileException		This Exception is thrown whenever the File given as Input is not a PL/I file.
-	 * 									  		It is checked, by checking the appendix of ".pli". No other File-type is allowed.
+	 * @throws IncorrectInputFileException This Exception is thrown whenever the
+	 *                                     File given as Input is not a PL/I file.
+	 *                                     It is checked, by checking the appendix
+	 *                                     of ".pli". No other File-type is allowed.
 	 * 
-	 * @throws IOException						Signals that an I/O exception has occurred. Is thrown whenever there is no File found. For
-	 * 					  						the path specified in the configuration-file.
+	 * @throws IOException                 Signals that an I/O exception has
+	 *                                     occurred. Is thrown whenever there is no
+	 *                                     File found. For the path specified in the
+	 *                                     configuration-file.
 	 * 
-	 * @throws ParseException					Signals whenever there is an syntactical error of the PL/I-Input Code. This Class is
-	 * 						 					part of the boilerplate code of the auto generated parser.
+	 * @throws ParseException              Signals whenever there is an syntactical
+	 *                                     error of the PL/I-Input Code. This Class
+	 *                                     is part of the boilerplate code of the
+	 *                                     auto generated parser.
 	 */
 	public static void main(String[] args) throws IncorrectInputFileException, IOException, ParseException {
 		symboltable = SymbolTable.getInstance();
 		inputReader = new InputReader();
 		String inputFile = inputReader.getInputFilePath(CONFIG);
-		
-		
+
 		if (inputFile.toString().contains(".pli")) {
 
 			try {
@@ -96,22 +113,18 @@ public class App {
 				symboltable.printAll();
 				root.dump(" ");
 				checker = new Checker(root);
-//				try {
-//					typechecker.checkIdType(root);
-//				} 
-//				catch(IncompatibleTypeException IRE) {
-//					IRE.printStackTrace();
-//				}
-			    mapper = new Mapper(root);
+				mapper = new Mapper(root);
+
 				// load Java Parser and give Pl1parser
-				//MainMapper jP = new MainMapper(pl1Parser);
+				// MainMapper jP = new MainMapper(pl1Parser);
 				// create expression with Parsetree
-				//jP.createExpression(root);
-				//System.out.println(jP.concatExpression());
-				//final File javaFile = new File("./transpiled-sources/" + inputReader.getProgramname() + ".java");
-				//FileWriter writeFile = new FileWriter(javaFile);
-				//writeFile.write(jP.concatExpression());
-				//writeFile.close();
+				// jP.createExpression(root);
+				// System.out.println(jP.concatExpression());
+				// final File javaFile = new File("./transpiled-sources/" +
+				// inputReader.getProgramname() + ".java");
+				// FileWriter writeFile = new FileWriter(javaFile);
+				// writeFile.write(jP.concatExpression());
+				// writeFile.close();
 
 			} catch (IOException e) {
 				throw new IOException(e);

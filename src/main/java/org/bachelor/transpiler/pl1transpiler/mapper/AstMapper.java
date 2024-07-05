@@ -21,10 +21,23 @@ import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.TerminateMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
+/**
+ * The Class AstMapper contains all Parsetree Identifation Numbers,
+ * and the used Mapping Class. The used Mapping class will translate
+ * the Node into a Java Expression which should represent the PL/I 
+ * input code.
+ */
 public class AstMapper {
+	
+	/** The HashMap which contains all the Id's and Mapping Objects */
 	static HashMap<Integer, ITranslationBehavior> astMapper = new HashMap<Integer, ITranslationBehavior>();
+	
+	/** The Tree symbols. */
 	Pl1ParserTreeConstants TreeSymbols;
 
+	/**
+	 * Instantiates a new AstMapper.
+	 */
 	public AstMapper() {
 		astMapper.put(TreeSymbols.JJTPROGRAM, new ProgramMapper());
 		astMapper.put(TreeSymbols.JJTPACKAGE, new PackageMapper());
