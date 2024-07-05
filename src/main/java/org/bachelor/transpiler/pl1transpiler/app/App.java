@@ -32,6 +32,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.bachelor.transpiler.pl1transpiler.checker.Checker;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IdentifierReferenceException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncompatibleTypeException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException;
@@ -64,7 +65,7 @@ public class App {
 	static SymbolTable symboltable;
 	
 	/** Loads the TypeChecker Class, which is the entry for the Checker module. */
-	
+	static Checker checker;
 	
     static Mapper mapper;
 	/**
@@ -94,6 +95,7 @@ public class App {
 				SimpleNode root = pl1Parser.program();
 				symboltable.printAll();
 				root.dump(" ");
+				checker = new Checker(root);
 //				try {
 //					typechecker.checkIdType(root);
 //				} 

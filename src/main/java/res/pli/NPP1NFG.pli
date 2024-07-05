@@ -1,9 +1,11 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL var_1 DECIMAL(2):
+	DCL var_1 DECIMAL(2);
+	DCL var_2 DECIMAL(2);
 	
 	main_proc: PROC;
 		var_1 = 2;
+		var_2 = 'Hello';
 	END main_proc;
 	
 END orgbachelorpli;

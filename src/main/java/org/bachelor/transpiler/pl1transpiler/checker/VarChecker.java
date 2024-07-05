@@ -7,17 +7,16 @@ import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 
 public class VarChecker implements ITypeExpression {
 	
-	//Not sure about this...
-	public static final int STORAGETYPE = Pl1ParserTreeConstants.JJTVAR;
+	private String identifier;
 	
 	private List<ITypeExpression> typeExpressions;
 	
 	public VarChecker() {
 		this.typeExpressions = new ArrayList<>();
-	}
+	} 
 	
-	public void getType(String assignment) {
-		//Gets all Types
+	public void getType() {
+		typeExpressions.forEach(ITypeExpression::getType);
 	}
 	
 	public void addTypeExpression(ITypeExpression typeExpression) {
