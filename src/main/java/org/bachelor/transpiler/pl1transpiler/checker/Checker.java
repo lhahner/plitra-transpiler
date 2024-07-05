@@ -11,6 +11,7 @@ public class Checker {
 
 	/** The identifier of the declared variable. */
 	private List<String> decimalIdentifiers = new ArrayList<String>();
+	private List<String> stringIdentifiers = new ArrayList<String>();
 	private VarChecker varChecker = new VarChecker();
 	
 	public Checker() {
@@ -29,6 +30,7 @@ public class Checker {
 	public void iterateTree(SimpleNode startNode) throws NullPointerException, NumberFormatException {
 		if (startNode.jjtGetParent() == null) {
 			this.checkDecimalDeclaration((SimpleNode)startNode);
+			this.checkStringDeclaration((SimpleNode)startNode);
 			
 			if (this.hasChildren(startNode)) {
 				for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
@@ -41,6 +43,7 @@ public class Checker {
 			
 			for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
 				this.checkDecimalDeclaration((SimpleNode)startNode.jjtGetChild(i));
+				this.checkStringDeclaration((SimpleNode)startNode.jjtGetChild(i));
 				
 				if (this.hasChildren(startNode.jjtGetChild(i))) {
 					iterateTree((SimpleNode) startNode.jjtGetChild(i));
@@ -78,6 +81,40 @@ public class Checker {
 				if(assignValues[0].equals(identifier)) {
 					ITypeExpression decimal = new DecimalChecker(assignValues[1]);
 					varChecker.addTypeExpression(decimal);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * This method will check for a declared string variable and will set
+	 *
+	 * @param simpleNode the simple node
+	 */
+	public void checkStringDeclaration(SimpleNode simpleNode) {
+		if (simpleNode.getId() == Pl1ParserTreeConstants.JJTSTRING 
+				&& simpleNode.jjtGetParent().jjtGetParent().getId() ==  Pl1ParserTreeConstants.JJTVAR) {
+			
+			SimpleNode varNode = (SimpleNode) simpleNode.jjtGetParent().jjtGetParent();
+
+			for (int i = 0; i < varNode.jjtGetNumChildren(); i++) {
+
+				if (varNode.jjtGetChild(i).getId() == Pl1ParserTreeConstants.JJTID) {
+
+					SimpleNode idNode = (SimpleNode) varNode.jjtGetChild(i);
+					String[] idArray = (String[]) idNode.jjtGetValue();
+					stringIdentifiers.add(idArray[0]);
+				}
+			}
+			
+		} else if(simpleNode.getId() == Pl1ParserTreeConstants.JJTASSIGN) {
+			
+			String[] assignValues = (String [])simpleNode.jjtGetValue();
+			
+			for(String identifier : this.stringIdentifiers) {
+				if(assignValues[0].equals(identifier)) {
+					ITypeExpression string = new StringChecker(assignValues[1]);
+					varChecker.addTypeExpression(string);
 				}
 			}
 		}

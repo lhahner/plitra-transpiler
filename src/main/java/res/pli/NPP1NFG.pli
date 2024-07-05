@@ -1,7 +1,7 @@
 orgbachelorpli: PACKAGE;
 	
 	DCL var_1 DECIMAL(2);
-	DCL var_2 DECIMAL(2);
+	DCL var_2 CHAR(2);
 	
 	main_proc: PROC;
 		var_1 = 2;
