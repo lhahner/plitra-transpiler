@@ -1,9 +1,9 @@
 DecimalCheckerNegativeTests: PACKAGE;
 
-	DCL var_1 DECIMAL(10);
+	DCL DecimalTest_1 DECIMAL(10);
 	
 		proc_1: PROC;
-			var_1 = 'Hello World';
+			DecimalTest_1 = 'Hello World';
 		END proc_1;
 
 END DecimalCheckerNegativeTests;
