@@ -13,7 +13,7 @@ public class CalcMapper implements ITranslationBehavior {
 	
 	public String translate(SimpleNode simpleNode) {
 		setTerms(simpleNode);
-		return "\"" + terms.stream().collect(Collectors.joining(" ")) + "\"";
+		return terms.stream().collect(Collectors.joining(" "));
 	}
 	
 	public void setTerms(SimpleNode simpleNode) {

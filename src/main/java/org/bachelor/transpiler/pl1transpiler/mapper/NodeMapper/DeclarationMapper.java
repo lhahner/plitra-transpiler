@@ -30,6 +30,8 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 * assigned to a default value, which might change during runtime.
 	 */
 
+	private String annotation;
+
 	/** The scope of the variable, is always public if not changed. */
 	private String scope = Template.PUBLIC.getValue();
 
@@ -135,6 +137,14 @@ public class DeclarationMapper implements ITranslationBehavior {
 		this.initialization = initialization;
 	}
 
+	public String getAnnotation() {
+		return annotation;
+	}
+
+	public void setAnnotation(String annotation) {
+		this.annotation = annotation;
+	}
+
 	/**
 	 * This Method is part of the ITranslationBehvior interface. It will be called
 	 * whenever the Behavior in class @see TranslationMapper is set to
@@ -147,6 +157,9 @@ public class DeclarationMapper implements ITranslationBehavior {
 		this.mapChildNodes(simpleNode);
 		if (this.getObject() != null) {
 			return this.getScope() + " " + this.getType() + " " + this.getIdentifier() + " = " + this.getObject() + ";";
+		} else if (this.getAnnotation() != null) {
+			return this.getAnnotation() + "\n" + this.getScope() + " " + this.getType() + " " + this.getIdentifier()
+					+ ";";
 		}
 		return this.getScope() + " " + this.getType() + " " + this.getIdentifier() + ";";
 	}
@@ -195,7 +208,7 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 * @throws TypeMappingException Thrown whenever there is either no translation
 	 *                              or no Child.
 	 */
-	public void mapType(SimpleNode typeNode) throws TypeMappingException {
+	public String mapType(SimpleNode typeNode) throws TypeMappingException {
 
 		if (new Mapper().hasChildren(typeNode)) {
 
@@ -204,16 +217,16 @@ public class DeclarationMapper implements ITranslationBehavior {
 
 			if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTARITHMETIC) {
 				this.mapArithmetic(firstChildOfTypeNode);
-
+				return this.getAnnotation() + " "+ this.getType();
 			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTSTRING) {
 				this.mapString(firstChildOfTypeNode);
-
+				return this.getType();
 			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTPICTUREEXPRESSION) {
 				this.mapPicture((String) firstChildOfTypeNode.jjtGetValue());
-
+				return this.getType();
 			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTFILE) {
 				this.setType(Template.FILE.getValue());
-
+				return this.getType();
 			} else {
 				throw new TypeMappingException("No Type like this implemented", typeNode);
 			}
@@ -246,19 +259,22 @@ public class DeclarationMapper implements ITranslationBehavior {
 							+ getLength(arithmeticNode) + ")");
 
 					this.setType(Template.COMPLEX.getValue());
-
+					return;
 				} else if (arithmeticAttribute.equals("BINARY")) {
 
 					this.setObject(Template.NEW.getValue() + " " + Template.BINARY.getValue() + "("
 							+ getLength(arithmeticNode) + ")");
 
 					this.setType(Template.BINARY.getValue());
-
+					return;
 				} else {
-					this.setObject(Template.NEW.getValue() + " " + Template.DECIMAL.getValue() + "("
-							+ getLength(arithmeticNode) + ")");
+//					this.setObject(Template.NEW.getValue() + " " + Template.DECIMAL.getValue() + "("
+//							+ getLength(arithmeticNode) + ")");
 
-					this.setType(Template.DECIMAL.getValue());
+					this.setAnnotation(Template.DECIMAL_ANNOTATION.getValue() + "(" + getLength(arithmeticNode) + ")");
+
+					this.setType(Template.DOUBLE.getValue());
+					return;
 				}
 
 			}
@@ -297,8 +313,8 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 */
 	public void mapPicture(String picRegex) {
 		try {
-			this.setObject(Template.NEW.getValue() + " " + Template.PICTURE.getValue() + "("
-					+ "\"" + new PictureMapper().getRegex(picRegex) + "\"" + ")");
+			this.setObject(Template.NEW.getValue() + " " + Template.PICTURE.getValue() + "(" + "\""
+					+ new PictureMapper().getRegex(picRegex) + "\"" + ")");
 
 		} catch (LexicalErrorException lee) {
 			lee.printStackTrace();

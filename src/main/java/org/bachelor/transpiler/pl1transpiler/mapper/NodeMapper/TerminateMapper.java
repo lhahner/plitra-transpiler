@@ -138,8 +138,7 @@ public class TerminateMapper implements ITranslationBehavior {
 					+ Template.INIT.getValue());
 				}
 				else if(Character.isDigit(this.getValues().charAt(0))) {
-					this.setObject(Template.NEW.getValue() + " " + Template.DECIMAL.getValue()
-					+ Template.INIT.getValue());
+					//..
 				}
 				return;
 			case "GO TO":
