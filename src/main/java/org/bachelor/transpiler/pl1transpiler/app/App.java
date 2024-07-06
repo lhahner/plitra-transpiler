@@ -112,7 +112,7 @@ public class App {
 				SimpleNode root = pl1Parser.program();
 				symboltable.printAll();
 				root.dump(" ");
-				checker = new Checker(root);
+				
 				mapper = new Mapper(root);
 
 				// load Java Parser and give Pl1parser

@@ -1,10 +1,9 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL var_1 DECIMAL(10);
+	DCL var_1 CHAR(20);
 	
-	proc_1: PROC RETURNS(DECIMAL(2));
-		DCL var_2 DECIMAL(2);
-		RETURN var_1;
+	proc_1: PROC;
+		READ FILE(file_1) INTO (var_1); 
 	END proc_1;
 	
 END orgbachelorpli;

@@ -32,6 +32,7 @@ public class Mapper {
 	 * @param root the root
 	 */
 	public Mapper(SimpleNode root) {
+		AstMapper astMapper = new AstMapper();
 		this.iterateTree(root);
 	}
 	
