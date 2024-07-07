@@ -1,9 +1,10 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL var_1 CHAR(20);
+	DCL var_1 CHAR(10);
+	DCL file_1 FILE ENVIRONMENT STREAM INPUT SEQUENTIAL BUFFERED KEYED PRINT;
 	
 	proc_1: PROC;
-		READ FILE(file_1) INTO (var_1); 
+		READ FILE(file_1); 
 	END proc_1;
 	
 END orgbachelorpli;

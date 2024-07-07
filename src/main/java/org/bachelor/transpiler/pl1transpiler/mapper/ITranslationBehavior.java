@@ -1,5 +1,6 @@
 package org.bachelor.transpiler.pl1transpiler.mapper;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 
@@ -14,5 +15,5 @@ public interface ITranslationBehavior {
 	 * @param simpleNode the simple node which should be translated
 	 * @return the string which is the java representation
 	 */
-	String translate(SimpleNode simpleNode);
+	String translate(SimpleNode simpleNode) throws MappingException;
 }

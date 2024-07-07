@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.bachelor.transpiler.pl1transpiler.errorhandling.PackageMappingException;
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
@@ -71,12 +71,15 @@ public class ProgramMapper implements ITranslationBehavior {
 	 * @param simpleNode the simple node
 	 * @return the string
 	 */
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException{
 		this.mapProgramNode(simpleNode);
-		return 	  this.getSCOPE() + " " 
-				+ this.getTYPE() + " "
-				+ this.getIdentifier()
-				+ "{ \n";
+		if (this.getIdentifier() != null)
+			return 	  this.getSCOPE() + " " 
+					+ this.getTYPE() + " "
+					+ this.getIdentifier()
+					+ "{ \n";
+		else 
+			throw new MappingException("Identifier not definied for Program" + simpleNode.toString() + " in " + this.getClass().toString());
 	}
 	
 	/**

@@ -33,8 +33,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.bachelor.transpiler.pl1transpiler.checker.Checker;
-import org.bachelor.transpiler.pl1transpiler.errorhandling.IdentifierReferenceException;
-import org.bachelor.transpiler.pl1transpiler.errorhandling.IncompatibleTypeException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.IncorrectInputFileException;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ProgramMapper;
@@ -126,11 +124,11 @@ public class App {
 				// writeFile.write(jP.concatExpression());
 				// writeFile.close();
 
-			} catch (IOException e) {
-				throw new IOException(e);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		} else {
-			throw new IncorrectInputFileException();
+			throw new IncorrectInputFileException("Please provide a File which is from type .pli.");
 		}
 
 	}

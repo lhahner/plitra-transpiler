@@ -3,9 +3,9 @@ package org.bachelor.transpiler.pl1transpiler.mapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TranslationMapper.
  */
@@ -23,7 +23,6 @@ public class TranslationMapper {
 	 * @param iTranslationBehavior the new translation bevaior
 	 */
 	void setTranslationBevaior(ITranslationBehavior iTranslationBehavior) {
-		// TODO Auto-generated method stub
 		this.translationBehavior = iTranslationBehavior;
 	}
 	
@@ -32,7 +31,7 @@ public class TranslationMapper {
 	 *
 	 * @param simpleNode the simple node
 	 */
-	public void applyTranslate(SimpleNode simpleNode) {
+	public void applyTranslate(SimpleNode simpleNode) throws MappingException{
 		System.out.println(this.translationBehavior.translate(simpleNode));
 		javaExpression.add(this.translationBehavior.translate(simpleNode));
 	}

@@ -61,7 +61,11 @@ public class DecimalChecker implements ITypeExpression {
 	 * @throws NumberFormatException if the assignment is not allowed
 	 */
 	public void getType() throws NumberFormatException {
-		Double.parseDouble(assignment);
+		try {
+			Double.parseDouble(assignment);
+		} catch(NumberFormatException nfe) {
+			throw new NumberFormatException("Assignement: " + assignment + " Not allowed for this Type.");
+		}
 	}
 }
 

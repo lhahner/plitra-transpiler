@@ -27,19 +27,12 @@ public class Pl1Parser{
 	//Defines the scope	
 	private int scope = 0;
 	
-	private String value;
-	private String letter;
 	private ArrayList<String> length = new ArrayList<String>();
 	private SymbolTable symbols = SymbolTable.getInstance();
-	private ArrayList<String [] > idsAndScopes = new ArrayList<String []>();
-	private String[] tmp_idsAndScopes = new String[3];
 	ArrayList<String > paralist = new ArrayList<String >();
 	ArrayList<String > typePropreties;
 	ArrayList<String > mathExpression = new ArrayList<String >();
-
-	private int charLength;
-	private String number;
-	private String stringLength;
+	
 	private String pictureAttribiute;;
 	
 
@@ -620,7 +613,7 @@ void read_statement() #READ_FILE :
   Token assignId;
   }
 {
-  < READ >< FILE >"("fileId=< PL1_WORD >")"< INTO > "("< PL1_WORD >")"
+  < READ >< FILE >"("fileId=< PL1_WORD >")"[< INTO > "("< PL1_WORD >")"]
 
 {
 //  if(fileId != null)

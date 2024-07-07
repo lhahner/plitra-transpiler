@@ -2,6 +2,7 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
 import java.util.ArrayList;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
@@ -51,7 +52,7 @@ public class BodyMapper implements ITranslationBehavior {
 	 * @param simpleNode Node in which the BODY is defined.
 	 * @return equivalent Java Program structure.
 	 */
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException{
 		if (new Mapper().hasChildren(simpleNode)) {
 			if(this.isUntilSibiling(simpleNode)) {
 				return "";

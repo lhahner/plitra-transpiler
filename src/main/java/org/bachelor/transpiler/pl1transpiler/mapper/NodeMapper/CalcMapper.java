@@ -3,6 +3,7 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
@@ -11,9 +12,12 @@ public class CalcMapper implements ITranslationBehavior {
 	
 	private ArrayList<String> terms = new ArrayList<String>();
 	
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException{
 		setTerms(simpleNode);
-		return terms.stream().collect(Collectors.joining(" "));
+		if(terms != null)
+			return terms.stream().collect(Collectors.joining(" "));
+		else 
+			throw new MappingException("Arithemtic Expression not definied for" + simpleNode.toString() + " in " + this.getClass().toString());
 	}
 	
 	public void setTerms(SimpleNode simpleNode) {

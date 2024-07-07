@@ -12,10 +12,10 @@ import java.util.Scanner;
  * The Class InputReader.
  */
 public class InputReader {
-	
+
 	/** Contains the Program-Name which is specified by the Filename. */
 	public static String program = "";
-	
+
 	/**
 	 * Gets the input file.
 	 *
@@ -23,17 +23,12 @@ public class InputReader {
 	 * @return the input file
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public FileInputStream getInputFile(String inputFile) throws IOException{
-	 try {
+	public FileInputStream getInputFile(String inputFile) throws IOException {
 		final File pl1File = new File(inputFile);
 		FileInputStream inputStream = new FileInputStream(pl1File);
 		return inputStream;
-	 }
-	 catch(IOException ioe) {
-		throw new IOException(ioe);
 	}
- }
-	
+
 	/**
 	 * Reads the configuration file from the location inside the project.
 	 *
@@ -43,7 +38,7 @@ public class InputReader {
 		File config = new File("/res/config/config");
 		return config;
 	}
-	
+
 	/**
 	 * Gets the input file path.
 	 *
@@ -52,27 +47,26 @@ public class InputReader {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public String getInputFilePath(File config) throws IOException {
-	    String inputFilePath = "";
-		
+		String inputFilePath = "";
+
 		FileInputStream config_fis = new FileInputStream(config);
 		Scanner config_sc = new Scanner(config_fis);
-		while(config_sc.hasNext()) {
+		while (config_sc.hasNext()) {
 			String line = config_sc.next();
-			if(line.substring(0, 4).equals("PATH")) {
+			if (line.substring(0, 4).equals("PATH")) {
 				inputFilePath = line.substring(5, line.indexOf(';'));
 				config_sc.close();
 				printProgramname(inputFilePath);
 				return inputFilePath;
-			}
-			else {
+			} else {
 				config_sc.close();
-				throw new IOException("PATH not definied");
+				throw new IOException("PATH not definied in Config file");
 			}
 		}
 		config_sc.close();
 		return inputFilePath;
 	}
-	
+
 	/**
 	 * Gets the programname.
 	 *
@@ -81,13 +75,13 @@ public class InputReader {
 	public String getProgramname() {
 		return this.program;
 	}
-	
+
 	/**
 	 * Prints the programname.
 	 *
 	 * @param path the path
 	 */
 	public void printProgramname(String path) {
-		this.program = path.substring(path.lastIndexOf('/')+1, path.indexOf(".pli"));
+		this.program = path.substring(path.lastIndexOf('/') + 1, path.indexOf(".pli"));
 	}
 }

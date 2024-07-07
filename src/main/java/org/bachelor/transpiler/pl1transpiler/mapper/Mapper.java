@@ -1,5 +1,6 @@
 package org.bachelor.transpiler.pl1transpiler.mapper;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.parser.Node;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
@@ -16,7 +17,7 @@ public class Mapper {
 	
 	
 	/** The var. */
-	TranslationMapper var = new TranslationMapper();
+	private TranslationMapper var = new TranslationMapper();
 	
 	/**
 	 * Instantiates a new mapper.
@@ -31,7 +32,7 @@ public class Mapper {
 	 *
 	 * @param root the root
 	 */
-	public Mapper(SimpleNode root) {
+	public Mapper(SimpleNode root) throws MappingException{
 		AstMapper astMapper = new AstMapper();
 		this.iterateTree(root);
 	}
@@ -44,7 +45,10 @@ public class Mapper {
 	 * @param startNode The Node to begin iterating
 	 * @throws NullPointerException the null pointer exception
 	 */
-	public void iterateTree(SimpleNode startNode) throws NullPointerException{
+	public void iterateTree(SimpleNode startNode) throws NullPointerException, MappingException{
+		if(startNode == null) {
+			throw new NullPointerException("Syntaxtree is empty, aborting...");
+		}
 		if (startNode.jjtGetParent() == null) {
 			if (this.hasChildren(startNode)) {
 				if(AstMapper.astMapper.get(startNode.getId()) != null) {

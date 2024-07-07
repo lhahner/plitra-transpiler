@@ -2,6 +2,7 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
 import java.util.ArrayList;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
@@ -97,13 +98,16 @@ public class DisplayMapper implements ITranslationBehavior {
 	 * @param simpleNode Node in which the DISPLAY is define
 	 * @return the print statement in Java.
 	 */
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException{
 		this.mapDisplayNode(simpleNode);
 		if (this.getParameter() != null) {
 			return this.getSYSOUT() + "(" + this.getMessage() + "); \n" + this.getParameter() + ".init("
 					+ this.getSYSIN() + "); \n ";
 		} else {
-			return this.getSYSOUT() + "(" + this.getMessage() + ");";
+			if(this.getMessage() != null)
+				return this.getSYSOUT() + "(" + this.getMessage() + ");";
+			else 
+				throw new MappingException("Message not definied for Display-Statement" + simpleNode.toString() + " in " + this.getClass().toString());
 		}
 
 	}

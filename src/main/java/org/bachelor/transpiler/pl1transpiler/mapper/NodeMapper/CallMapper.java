@@ -2,6 +2,7 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
 import java.util.ArrayList;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
@@ -76,10 +77,14 @@ public class CallMapper implements ITranslationBehavior{
 	 * @param simpleNode Node in which the CALL is defined.
 	 * @return the method to be called in Java.
 	 */
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException{
 		mapCallStatement(simpleNode);
-		return this.getIdentifier() + " "
-			 + this.getParameter() + ";";
+		
+		if(this.getIdentifier() != null)
+			return this.getIdentifier() + " "
+			 	 + this.getParameter() + ";";
+		else 
+			throw new MappingException("Identifier not definied for Call-Statement" + simpleNode.toString() + " in " + this.getClass().toString());
 	}
 	
 	/**

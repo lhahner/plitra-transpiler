@@ -86,7 +86,7 @@ public enum Template {
 	OBJECT("Object"),
 
 	/** The file. */
-	FILE("FILE"),
+	FILE("File"),
 
 	/** The public. */
 	PUBLIC("public"),

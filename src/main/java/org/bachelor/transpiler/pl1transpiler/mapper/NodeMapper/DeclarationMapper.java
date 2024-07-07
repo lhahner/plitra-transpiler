@@ -3,6 +3,7 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 import java.util.ArrayList;
 
 import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.TypeMappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
@@ -153,15 +154,31 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 * @param simpleNode Node in which the VAR is defined.
 	 * @return the variable declaration in Java.
 	 */
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException {
 		this.mapChildNodes(simpleNode);
 		if (this.getObject() != null) {
-			return this.getScope() + " " + this.getType() + " " + this.getIdentifier() + " = " + this.getObject() + ";";
+			if (this.getIdentifier() != null) {
+				return this.getScope() + " " + this.getType() + " " + this.getIdentifier() + " = " + this.getObject()
+						+ ";";
+			} else {
+				throw new MappingException("Identifier not definied for Declaration" + simpleNode.toString() + " in "
+						+ this.getClass().toString());
+			}
 		} else if (this.getAnnotation() != null) {
-			return this.getAnnotation() + "\n" + this.getScope() + " " + this.getType() + " " + this.getIdentifier()
-					+ ";";
+			if (this.getIdentifier() != null) {
+				return this.getAnnotation() + "\n" + this.getScope() + " " + this.getType() + " " + this.getIdentifier()
+						+ ";";
+			} else {
+				throw new MappingException("Identifier not definied for Declaration" + simpleNode.toString() + " in "
+						+ this.getClass().toString());
+			}
 		}
-		return this.getScope() + " " + this.getType() + " " + this.getIdentifier() + ";";
+		if (this.getIdentifier() != null) {
+			return this.getScope() + " " + this.getType() + " " + this.getIdentifier() + ";";
+		} else {
+			throw new MappingException("Identifier not definied for Declaration" + simpleNode.toString() + " in "
+					+ this.getClass().toString());
+		}
 	}
 
 	/**
@@ -217,7 +234,7 @@ public class DeclarationMapper implements ITranslationBehavior {
 
 			if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTARITHMETIC) {
 				this.mapArithmetic(firstChildOfTypeNode);
-				return this.getAnnotation() + " "+ this.getType();
+				return this.getAnnotation() + " " + this.getType();
 			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTSTRING) {
 				this.mapString(firstChildOfTypeNode);
 				return this.getType();
@@ -225,6 +242,7 @@ public class DeclarationMapper implements ITranslationBehavior {
 				this.mapPicture((String) firstChildOfTypeNode.jjtGetValue());
 				return this.getType();
 			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTFILE) {
+				this.setObject(Template.NEW.getValue() + " " + Template.FILE.getValue() + "(\"\")");
 				this.setType(Template.FILE.getValue());
 				return this.getType();
 			} else {

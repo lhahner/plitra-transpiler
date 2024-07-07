@@ -2,6 +2,7 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
 import java.util.ArrayList;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
@@ -83,8 +84,14 @@ public class AssignMapper implements ITranslationBehavior {
 	 * @param simpleNode the simple node
 	 * @return the string
 	 */
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException{
 		mapAssignNode(simpleNode);
+		if(this.getIdentifier() == null) {
+			throw new MappingException("Identifier not definied for" + simpleNode.toString() + " in " + this.getClass().toString());
+		}
+		if(this.getAssignment() == null) {
+			throw new MappingException("Assignment not definied for Assignment" + simpleNode.toString() + " in " + this.getClass().toString());
+		}
 		return this.getIdentifier() + this.getOperator() + this.getAssignment() + ";";
 
 	}
@@ -94,7 +101,7 @@ public class AssignMapper implements ITranslationBehavior {
 	 *
 	 * @param simpleNode the simple node
 	 */
-	public void mapAssignNode(SimpleNode simpleNode) {
+	public void mapAssignNode(SimpleNode simpleNode) throws MappingException{
 		String[] assignValues = this.setAssignValues(simpleNode);
 		if (new Mapper().hasChildren(simpleNode)) {
 			mapCalcNode(simpleNode);
@@ -123,7 +130,7 @@ public class AssignMapper implements ITranslationBehavior {
 	 *
 	 * @param simpleNode the simple node
 	 */
-	public void mapCalcNode(SimpleNode simpleNode) {
+	public void mapCalcNode(SimpleNode simpleNode) throws MappingException{
 		this.setAssignment(new CalcMapper().translate((SimpleNode) simpleNode.jjtGetChild(0)));
 	}
 

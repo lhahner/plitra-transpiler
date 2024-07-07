@@ -1,5 +1,6 @@
 package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
@@ -58,9 +59,12 @@ public class PackageMapper implements ITranslationBehavior {
 	 * @param simpleNode the package node
 	 * @return the Java package for package node
 	 */
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException{
 		mapPackageNode(simpleNode);
-		return this.getType() + " " + this.getIdentifier() + ";";
+		if(this.getIdentifier() != null)
+			return this.getType() + " " + this.getIdentifier() + ";";
+		else
+			throw new MappingException("Identifier not definied for Declaration" + simpleNode.toString() + " in " + this.getClass().toString());
 	}
 
 	/**

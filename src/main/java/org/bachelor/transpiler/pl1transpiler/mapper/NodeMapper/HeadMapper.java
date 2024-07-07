@@ -2,6 +2,7 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
 import java.util.ArrayList;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.TypeMappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
@@ -110,9 +111,12 @@ public class HeadMapper implements ITranslationBehavior {
 	 * @param simpleNode the head node
 	 * @return the Java Method head node
 	 */
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException{
 		mapHeadNode(simpleNode);
-		return this.getSCOPE() + " " + this.getType() + " " + this.getIdentifier() + " " + this.getParameter();
+		if(this.getIdentifier() != null)
+			return this.getSCOPE() + " " + this.getType() + " " + this.getIdentifier() + " " + this.getParameter();
+		else
+			throw new MappingException("Identifier not definied for Declaration" + simpleNode.toString() + " in " + this.getClass().toString());
 	}
 
 	/**

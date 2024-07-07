@@ -2,6 +2,7 @@ package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
 import java.util.ArrayList;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
@@ -101,12 +102,15 @@ public class TerminateMapper implements ITranslationBehavior {
 	 * @param simpleNode the terminates node
 	 * @return the Java terminate expression like return, continue or break
 	 */
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException{
 		this.mapTerminateNode(simpleNode);
 		if (this.getObject() != null) {
 			return this.getTermination() + " " + this.getObject() + "(" + this.getValues() + ");";
 		} else {
-			return this.getTermination() + " " + this.getValues() + ";";
+			if(this.getTermination() != null && this.getValues()!= null)
+				return this.getTermination() + " " + this.getValues() + ";";
+			else 
+				throw new MappingException("Value and Termination type not definied for Termination for " + simpleNode.toString() + " in " + this.getClass().toString());
 		}
 	}
 

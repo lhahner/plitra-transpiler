@@ -1,5 +1,6 @@
 package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserConstants;
@@ -9,7 +10,7 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 public class BranchMapper implements ITranslationBehavior{
 	
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException{
 		Pl1ParserTreeConstants treeSymbols = null;
 		return 
 				simpleNode.jjtGetParent().getId() == treeSymbols.JJTBRANCH ? 

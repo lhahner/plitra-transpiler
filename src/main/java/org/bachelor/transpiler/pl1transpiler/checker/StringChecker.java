@@ -56,7 +56,7 @@ public class StringChecker implements ITypeExpression {
 	 */
 	public void getType() throws IllegalArgumentException{
 		if(!(assignment.charAt(0) == '\'')) {
-			throw new IllegalArgumentException("Assignment for String Type not allowed.");
+			throw new IllegalArgumentException("Assignment " + assignment + "for Alphanumeric-type not allowed.");
 		}
 	}
 }	

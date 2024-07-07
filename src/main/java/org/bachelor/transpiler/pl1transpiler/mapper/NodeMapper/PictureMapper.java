@@ -48,7 +48,7 @@ public class PictureMapper {
 		picRegex.put('D', "D");
 		picRegex.put('M', "M");
 		picRegex.put('K', "K");
-		picRegex.put('€', "\\€");
+		picRegex.put('ï¿½', "\\ï¿½");
 		picRegex.put('S', "[\\+\\- ]");
 		picRegex.put('+', "\\+");
 		picRegex.put('-', "\\-");

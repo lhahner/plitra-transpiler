@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.swing.plaf.synth.Region;
 
+import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
 import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
@@ -25,7 +26,7 @@ public class BooleanExpressionMapper implements ITranslationBehavior {
 		this.expression = expression;
 	}
 
-	public String translate(SimpleNode simpleNode) {
+	public String translate(SimpleNode simpleNode) throws MappingException {
 		Pl1ParserTreeConstants treeSymbols = null;
 
 		ArrayList<String> expressionList = new ArrayList<String>();
@@ -43,7 +44,11 @@ public class BooleanExpressionMapper implements ITranslationBehavior {
 				+  this.getExpression()
 				+  "{" + Template.BREAK.getValue() + ";" + " }";
 		}
-		return this.getExpression();
+		
+		if(this.getExpression() != null)
+			return this.getExpression();
+		else 
+			throw new MappingException("Boolean Expression not definied for" + simpleNode.toString() + " in " + this.getClass().toString());
 	}
 
 	public void mapBooleanExpression(ArrayList<String> expressionList) {
