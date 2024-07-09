@@ -250,6 +250,8 @@ TOKEN :
 	| < REPLY : "REPLY" >
 	| < READ : "READ" >
 	| < INTO : "INTO" >
+	| < FROM : "FROM" >
+	| < WRITE : "WRITE" >
 	| < MINUSCHAR: "-" >
 	| < DIVIDE : "/" >
 	| < MULTIPLY: "*" >
@@ -344,6 +346,7 @@ void proc_body() #BODY :
     |release()
     |display_statement()
     |read_statement()
+    |write_statement()
     |if_statement()footer()
     |do_statement()footer()
     )*
@@ -613,7 +616,7 @@ void read_statement() #READ_FILE :
   Token assignId;
   }
 {
-  < READ >< FILE >"("fileId=< PL1_WORD >")"[< INTO > "("< PL1_WORD >")"]
+  < READ >< FILE >"("fileId=< PL1_WORD >")"[< INTO > "("assignId=< PL1_WORD >")"]
 
 {
 //  if(fileId != null)
@@ -623,6 +626,27 @@ void read_statement() #READ_FILE :
 //  if(assignId != null) {
 //	asignees.add(assignId.image);
 //  }
+  jjtThis.value = fileId.image;
+}
+}
+
+//TODO not fully implemented
+void write_statement() #WRITE_FILE :
+{
+ // ArrayList<String > asignees = new ArrayList<String >();
+  Token fileId;
+  Token assignId = null;
+  }
+{
+  < WRITE >< FILE >"("fileId=< PL1_WORD >")"[< FROM > "("assignId=< PL1_WORD >")"]
+
+{
+
+  if(assignId != null) {
+    String[] values = {fileId.image, assignId.image};
+	jjtThis.value = values;
+	return;
+  }
   jjtThis.value = fileId.image;
 }
 }
@@ -745,7 +769,7 @@ void type() #TYPE :
 void File() #File :
 {}
 {
-  < FILE > < ENVIRONMENT > [( < STREAM > | < RECORD >) (< INPUT > | < OUTPUT > | < UPDATE >)(<SEQUENTIAL >|  < DIRECT >) (< BUFFERED > | < UNBUFFERED >) < KEYED >< PRINT > ]
+  < FILE > [< ENVIRONMENT > ( < STREAM > | < RECORD >) (< INPUT > | < OUTPUT > | < UPDATE >)(<SEQUENTIAL >|  < DIRECT >) (< BUFFERED > | < UNBUFFERED >) < KEYED >< PRINT > ]
 }
 
 /**

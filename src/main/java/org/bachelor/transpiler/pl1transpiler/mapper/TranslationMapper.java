@@ -14,9 +14,6 @@ public class TranslationMapper {
 	/** The translation behavior. */
 	private ITranslationBehavior translationBehavior;
 	
-	/** The java expression. */
-	private ArrayList<String> javaExpression = new ArrayList<String>();
-	
 	/**
 	 * Sets the translation bevaior.
 	 *
@@ -31,9 +28,9 @@ public class TranslationMapper {
 	 *
 	 * @param simpleNode the simple node
 	 */
-	public void applyTranslate(SimpleNode simpleNode) throws MappingException{
+	public String applyTranslate(SimpleNode simpleNode) throws MappingException{
 		System.out.println(this.translationBehavior.translate(simpleNode));
-		javaExpression.add(this.translationBehavior.translate(simpleNode));
+		return this.translationBehavior.translate(simpleNode);
 	}
 }
 

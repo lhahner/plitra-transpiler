@@ -449,6 +449,12 @@ public enum Pl1Symbols{
 			/** The read. */
 			READ("READ", "operator"),
 			
+			/** The read. */
+			WRITE("WRITE", "operator"),
+			
+			/** The read. */
+			FROM("FROM", "operator"),
+			
 			/** The into. */
 			INTO("INTO", "operator");
 	

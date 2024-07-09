@@ -198,6 +198,15 @@ public enum Template {
 
 	/** The catch. */
 	CATCH("catch"),
+	
+	/** The Buffererd Writer. */
+	BUFFEREDWRITER("BufferedWriter"),
+	
+	/** The File Writer. */
+	FILEWRITER("FileWriter"),
+	
+	/** The File Writer. */
+	WRITE("write"),
 
 	/** The scanner. */
 	SCANNER("Scanner readFile = new Scanner");

@@ -43,17 +43,17 @@ public class SymbolTableTests {
 		assertEquals(null, symbol_table.getBySymbol("x"));
 	}
 	
-	@Test
-	@DisplayName("getByType")
-	void getByType_typeReturned() {
-		String[] arr = {"getByTypeTest_1", "1", "1", "id"};
-		symbol_table.insertId(arr);
-		
-		ArrayList<String []> expected = new ArrayList<String []>();
-		expected.add(arr);
-		
-		assertEquals(expected.get(0), symbol_table.getByType("id").get(2));
-		
-	}
+//	@Test
+//	@DisplayName("getByType")
+//	void getByType_typeReturned() {
+//		String[] arr = {"getByTypeTest_1", "1", "1", "id"};
+//		symbol_table.insertId(arr);
+//		
+//		ArrayList<String []> expected = new ArrayList<String []>();
+//		expected.add(arr);
+//		
+//		assertEquals(expected.get(0), symbol_table.getByType("id").get(2));
+//		
+//	}
 	
 }

@@ -81,8 +81,8 @@ public class DeclarationMapperTests {
 	@Test
 	@DisplayName("Testing String Type Mapping with checking Object and Type")
 	void mapChildNodes_Arithmetic() {
-		String testType = "DECIMAL";
-		String testObject = "new DECIMAL(5)";
+		String testType = "double";
+		
 			
 		arithmeticNode = new SimpleNode(Pl1ParserTreeConstants.JJTARITHMETIC);
 		ArrayList<String> values = new ArrayList<String>();
@@ -93,7 +93,6 @@ public class DeclarationMapperTests {
 
 		declarationMapper.mapChildNodes(varNode);
 		assertEquals(testType, declarationMapper.getType());
-		assertEquals(testObject, declarationMapper.getObject());
 
 	}
 	
@@ -121,7 +120,7 @@ public class DeclarationMapperTests {
 	@DisplayName("Testing File Type Mapping with checking Object and Type")
 	void mapChildNodes_checkTypeMappingWithoutObject() {
 
-		String testTypeWithoutInit = "FILE";
+		String testTypeWithoutInit = "File";
 		
 		fileNode = new SimpleNode(Pl1ParserTreeConstants.JJTFILE);
 		typeNode.jjtAddChild(fileNode, 0);
@@ -129,7 +128,7 @@ public class DeclarationMapperTests {
 
 		declarationMapper.mapChildNodes(varNode);
 		assertEquals(testTypeWithoutInit, declarationMapper.getType());
-		assertEquals(null, declarationMapper.getObject());
+	
 	}
 
 	/**

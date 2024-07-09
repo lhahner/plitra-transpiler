@@ -1,5 +1,7 @@
 package org.bachelor.transpiler.pl1transpiler.mapper;
 
+import java.util.ArrayList;
+
 import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.parser.Node;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
@@ -15,6 +17,8 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 public class Mapper {
 	
 	
+	/** The java expression. */
+	public static ArrayList<String> javaExpression = new ArrayList<String>();
 	
 	/** The var. */
 	private TranslationMapper var = new TranslationMapper();
@@ -33,6 +37,7 @@ public class Mapper {
 	 * @param root the root
 	 */
 	public Mapper(SimpleNode root) throws MappingException{
+		this.javaExpression.clear();
 		AstMapper astMapper = new AstMapper();
 		this.iterateTree(root);
 	}
@@ -53,7 +58,7 @@ public class Mapper {
 			if (this.hasChildren(startNode)) {
 				if(AstMapper.astMapper.get(startNode.getId()) != null) {
 					var.setTranslationBevaior(AstMapper.astMapper.get(startNode.getId()));
-					var.applyTranslate((SimpleNode)startNode);
+					javaExpression.add(var.applyTranslate((SimpleNode)startNode));
 				}
 				for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
 					iterateTree((SimpleNode) startNode.jjtGetChild(i));
@@ -65,7 +70,7 @@ public class Mapper {
 			for (int i = 0; i < startNode.jjtGetNumChildren(); i++) {
 				if(AstMapper.astMapper.get(startNode.jjtGetChild(i).getId()) != null) {
 					var.setTranslationBevaior(AstMapper.astMapper.get(startNode.jjtGetChild(i).getId()));
-					var.applyTranslate((SimpleNode)startNode.jjtGetChild(i));
+					javaExpression.add(var.applyTranslate((SimpleNode)startNode.jjtGetChild(i)));
 					
 				}
 				if (this.hasChildren(startNode.jjtGetChild(i))) {

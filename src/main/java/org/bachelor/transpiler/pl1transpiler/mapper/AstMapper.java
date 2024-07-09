@@ -18,6 +18,7 @@ import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.PackageMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ProgramMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.ReadFileMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.TerminateMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.WriteMapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
@@ -43,6 +44,7 @@ public class AstMapper {
 //		astMapper.put(Pl1ParserTreeConstants.JJTGLOBAL, null);
 //		astMapper.put(Pl1ParserTreeConstants.JJTCONDITION, null);
 		astMapper.put(Pl1ParserTreeConstants.JJTHEAD, new HeadMapper());
+		astMapper.put(Pl1ParserTreeConstants.JJTWRITE_FILE, new WriteMapper());
 		astMapper.put(Pl1ParserTreeConstants.JJTBRANCH, new BranchMapper());
 		astMapper.put(Pl1ParserTreeConstants.JJTLOOP, new LoopMapper());
 //		astMapper.put(Pl1ParserTreeConstants.JJTCALC, new CalcMapper());

@@ -1,10 +1,10 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL var_1 CHAR(10);
-	DCL file_1 FILE ENVIRONMENT STREAM INPUT SEQUENTIAL BUFFERED KEYED PRINT;
+	DCL file_1 FILE;
+	DCL str_1 CHAR(20) INIT('Hello World');
 	
 	proc_1: PROC;
-		READ FILE(file_1); 
+		WRITE FILE(file_1) FROM (str_1);
 	END proc_1;
 	
 END orgbachelorpli;
