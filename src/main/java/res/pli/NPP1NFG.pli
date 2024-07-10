@@ -1,10 +1,9 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL file_1 FILE;
-	DCL str_1 CHAR(20) INIT('Hello World');
+	DCL var_1 REAL DECIMAL(5);
 	
-	proc_1: PROC;
-		WRITE FILE(file_1) FROM (str_1);
+	proc_1: PROC RETURNS();
+		
 	END proc_1;
 	
 END orgbachelorpli;

@@ -267,11 +267,9 @@ TOKEN :
 	| < AND : "&" >
 	| < OR : "||" >
 	| < COMMA_SEPARATOR : ",">
-	| < X : ("X"|"A"|"9"|"Z"|"V"|< MULTIPLY >|"B"|< LT >|< GT >|< MINUSCHAR >|< PLUS >|"E"|"K"|","|"$"|"�"|"/"|"CR"|"DB"|"S")+ >
-	| < A : ("A")+ >
-	| < V : ("V")+ >
+	| < PICSTRING : ((["9"])+) >
 	| < INTEGER : (["0"-"9"])+ >
-	| < STRING : "'"((["a"-"z","A"-"Z","0"-"9","_"," ","!"])+)*"'" >
+	| < STRING : "'"((["a"-"z","A"-"Z","0"-"9","_"," ","!","(",")"])+)*"'" >
  	| < PL1_WORD: (["a"-"z","A"-"Z","0"-"9"])+ ((<MINUSCHAR> | "_" )+ (["a"-"z","0"-"9"])+ )* >
 	| < EOL: "\n" >
 	| < SCOPE : (["1"-"9"]) >
@@ -776,75 +774,21 @@ void File() #File :
 * Grammar Expression for a Picture Expression.
 **/
 String Picture() #PictureExpression :
-{ String t; }
+{ Token t; }
 {
-  (( < PIC > | < PICTURE > ) | < WIDEPIC >) [< REAL > | < COMPLEX >] t = PictureAttribute() [< VALUE > ]
+  ( < PIC >  | < PICTURE > )t = < STRING >
   {
-	jjtThis.value = t;
-    return pictureAttribiute = t; }
+	jjtThis.value = t.image;
+    return pictureAttribiute = t.image; }
 }
 
 
-String PictureAttribute() #PictureAttribute:
-{
- String t1 = "";
- String t11 = "";
- 
- String t2 = "";
- String t22 = "";
- String t222 = "";
- String t2222 = "";
- 
- String t3 = "";
- String t33 = "";
- String t333 = "";
 
- String t4 = "";
-
- String t5 = "";
- String t55 = "";
- }
-{
-  "'" (
-	t1 = LengthPicture() (t11 = LetterPicture() | t11 = NumberPicture() ) |
-	t2 = LetterPicture() ( t22 = NumberPicture() ( t222 = NumberPicture())*)? t2222 = LetterPicture()
-	|	t3 = NumberPicture() t33 = LetterPicture() t333 = NumberPicture() |
-	t4 = LetterPicture() |
-	(t5 = NumberPicture() ( t55 = NumberPicture())*)?
-     )"'"
-     { if(t1 != "") return t1 + t11;
-     	if(t2 != "") return t2 + t22 + t222 + t2222;
-     	if(t3 != "") return t3 + t33 + t333;
-     	if(t4 != "") return t4;
-     	if(t5 != "") return t5 + t55;
-     	 }
-}
 
 //| < PIC_REGEX : ("("["0"-"9"]")")?((["0"-"9","X"])+ |(["0"-"9","A"])+ |(["X","0"-"9"])+ )((["A"-"Z","0"-"9"])*) >
 
-String LetterPicture() #PictureLetter :
-{Token t;}
-{
-  ( t = < X > | t = < A > | t = < V >)
-  {return t.toString();}
-}
-
-String NumberPicture() #Number :
-{Token t;}
-{
-  t = < INTEGER >
-  {return t.toString();}
-}
 
 
-String LengthPicture() #PictureLength:
-{Token t;
- Token t1;
- Token t2;} 
-{
-  t = "(" t1 = < INTEGER > t2 = ")"
-  {return t.toString() + t1.toString() + t2.toString(); }
-}
 
 
 /**

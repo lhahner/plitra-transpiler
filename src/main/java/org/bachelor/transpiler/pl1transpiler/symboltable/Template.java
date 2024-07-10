@@ -208,6 +208,9 @@ public enum Template {
 	/** The File Writer. */
 	WRITE("write"),
 
+	/** The File Writer. */
+	CHAR_ANNOTATION("@Char"),
+
 	/** The scanner. */
 	SCANNER("Scanner readFile = new Scanner");
 

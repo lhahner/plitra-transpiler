@@ -35,13 +35,9 @@ public interface Pl1ParserTreeConstants
   public int JJTTYPE = 29;
   public int JJTFILE = 30;
   public int JJTPICTUREEXPRESSION = 31;
-  public int JJTPICTUREATTRIBUTE = 32;
-  public int JJTPICTURELETTER = 33;
-  public int JJTNUMBER = 34;
-  public int JJTPICTURELENGTH = 35;
-  public int JJTSTRING = 36;
-  public int JJTARITHMETIC = 37;
-  public int JJTID = 38;
+  public int JJTSTRING = 32;
+  public int JJTARITHMETIC = 33;
+  public int JJTID = 34;
 
 
   public String[] jjtNodeName = {
@@ -77,13 +73,9 @@ public interface Pl1ParserTreeConstants
     "TYPE",
     "File",
     "PictureExpression",
-    "PictureAttribute",
-    "PictureLetter",
-    "Number",
-    "PictureLength",
     "String",
     "Arithmetic",
     "Id",
   };
 }
-/* JavaCC - OriginalChecksum=238609d2ac34525fcbe41d4cb0e0e2e4 (do not edit this line) */
+/* JavaCC - OriginalChecksum=abd465af1c5949a7dc4e8f8af46e33ab (do not edit this line) */

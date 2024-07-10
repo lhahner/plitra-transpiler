@@ -1,5 +1,6 @@
 package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
 
 import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
@@ -26,15 +27,8 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
  */
 public class DeclarationMapper implements ITranslationBehavior {
 
-	/**
-	 * These variables symbolize the structure of a java declaration. Each String is
-	 * assigned to a default value, which might change during runtime.
-	 */
-
-	private String annotation;
-
 	/** The scope of the variable, is always public if not changed. */
-	private String scope = Template.PUBLIC.getValue();
+	private String modifier = Template.PUBLIC.getValue();
 
 	/** The type of the variable, is always void of not changed. */
 	private String type = Template.VOID.getValue();
@@ -42,19 +36,16 @@ public class DeclarationMapper implements ITranslationBehavior {
 	/** The identifier of the variable. */
 	private String identifier = null;
 
-	/** The Object of a Variable from Non-primitive type. */
-	private String Object;
-
 	/** Only set if the variable is directly initialized after declaration. */
-	private String initialization;
+	private String initialization = null;
 
 	/**
 	 * Gets the scope.
 	 *
 	 * @return the scope
 	 */
-	public String getScope() {
-		return scope;
+	public String getModifier() {
+		return modifier;
 	}
 
 	/**
@@ -62,8 +53,8 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 *
 	 * @param scope the new scope
 	 */
-	public void setScope(String scope) {
-		this.scope = scope;
+	public void setModifier(String modifier) {
+		this.modifier = modifier;
 	}
 
 	/**
@@ -81,6 +72,7 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 * @param type the new type
 	 */
 	public void setType(String type) {
+
 		this.type = type;
 	}
 
@@ -99,25 +91,8 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 * @param identifier the new identifier
 	 */
 	public void setIdentifier(String identifier) {
+
 		this.identifier = identifier;
-	}
-
-	/**
-	 * gets the Object.
-	 *
-	 * @return the Object
-	 */
-	public String getObject() {
-		return Object;
-	}
-
-	/**
-	 * sets the object.
-	 *
-	 * @param object the new object
-	 */
-	public void setObject(String object) {
-		Object = object;
 	}
 
 	/**
@@ -135,15 +110,8 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 * @param initialization the new initialization
 	 */
 	public void setInitialization(String initialization) {
+
 		this.initialization = initialization;
-	}
-
-	public String getAnnotation() {
-		return annotation;
-	}
-
-	public void setAnnotation(String annotation) {
-		this.annotation = annotation;
 	}
 
 	/**
@@ -155,30 +123,8 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 * @return the variable declaration in Java.
 	 */
 	public String translate(SimpleNode simpleNode) throws MappingException {
-		this.mapChildNodes(simpleNode);
-		if (this.getObject() != null) {
-			if (this.getIdentifier() != null) {
-				return this.getScope() + " " + this.getType() + " " + this.getIdentifier() + " = " + this.getObject()
-						+ ";";
-			} else {
-				throw new MappingException("Identifier not definied for Declaration" + simpleNode.toString() + " in "
-						+ this.getClass().toString());
-			}
-		} else if (this.getAnnotation() != null) {
-			if (this.getIdentifier() != null) {
-				return this.getAnnotation() + "\n" + this.getScope() + " " + this.getType() + " " + this.getIdentifier()
-						+ ";";
-			} else {
-				throw new MappingException("Identifier not definied for Declaration" + simpleNode.toString() + " in "
-						+ this.getClass().toString());
-			}
-		}
-		if (this.getIdentifier() != null) {
-			return this.getScope() + " " + this.getType() + " " + this.getIdentifier() + ";";
-		} else {
-			throw new MappingException("Identifier not definied for Declaration" + simpleNode.toString() + " in "
-					+ this.getClass().toString());
-		}
+		String construktor = this.mapChildNodes(simpleNode);
+		return this.getModifier() + " " + this.getType() + " " + this.getIdentifier() + construktor;
 	}
 
 	/**
@@ -188,9 +134,9 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 *
 	 * @param varNode Node in which the VAR is defined.
 	 */
-	public void mapChildNodes(SimpleNode varNode) {
+	public String mapChildNodes(SimpleNode varNode) throws MappingException {
 		String identifier;
-
+//DCL var_1 DECIMAL(4); -> VAR
 		if (new Mapper().hasChildren(varNode)) {
 
 			for (int i = 0; i < varNode.jjtGetNumChildren(); i++) {
@@ -199,19 +145,25 @@ public class DeclarationMapper implements ITranslationBehavior {
 
 				if (childNode.getId() == Pl1ParserTreeConstants.JJTTYPE) {
 					try {
-						this.mapType(childNode);
-					} catch (TypeMappingException tme) {
+						return this.mapType(childNode);
+
+					} catch (Exception tme) {
 						tme.printStackTrace();
 					}
 				}
 
 				else if (childNode.getId() == Pl1ParserTreeConstants.JJTID) {
+
 					String[] tmp = (String[]) childNode.jjtGetValue();
 					identifier = tmp[0];
 					this.setIdentifier(identifier);
+
+				} else {
+					throw new MappingException();
 				}
 			}
 		}
+		return "";
 	}
 
 	/**
@@ -222,10 +174,13 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 *
 	 * @param typeNode The Node that contains all child Nodes as type.
 	 * @return The PL/I type in Java.
-	 * @throws TypeMappingException Thrown whenever there is either no translation
-	 *                              or no Child.
+	 * @throws TypeMappingException        Thrown whenever there is either no
+	 *                                     translation or no Child.
+	 * @throws LexicalErrorException
+	 * @throws UnsupportedCharsetException
 	 */
-	public String mapType(SimpleNode typeNode) throws TypeMappingException {
+	public String mapType(SimpleNode typeNode)
+			throws TypeMappingException, UnsupportedCharsetException, LexicalErrorException {
 
 		if (new Mapper().hasChildren(typeNode)) {
 
@@ -233,18 +188,28 @@ public class DeclarationMapper implements ITranslationBehavior {
 			SimpleNode firstChildOfTypeNode = (SimpleNode) typeNode.jjtGetChild(0);
 
 			if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTARITHMETIC) {
-				this.mapArithmetic(firstChildOfTypeNode);
-				return this.getAnnotation() + " " + this.getType();
+
+				return this.mapArithmetic(firstChildOfTypeNode);
+
 			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTSTRING) {
-				this.mapString(firstChildOfTypeNode);
-				return this.getType();
+
+				this.setType(Template.CHAR_ANNOTATION.getValue() + "(" + (String) firstChildOfTypeNode.jjtGetValue()
+						+ ") " + Template.STRING.getValue());
+				return ";";
+
 			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTPICTUREEXPRESSION) {
-				this.mapPicture((String) firstChildOfTypeNode.jjtGetValue());
-				return this.getType();
+				
+				String picRegex = (String) firstChildOfTypeNode.jjtGetValue();
+				this.setType(Template.PICTURE.getValue());
+				return " = " + Template.NEW.getValue() + " " + Template.PICTURE.getValue() + "(" + "\""
+						+ new PictureMapper().getRegex((picRegex.replaceAll("'", ""))) + "\"" + ");";
+
 			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTFILE) {
-				this.setObject(Template.NEW.getValue() + " " + Template.FILE.getValue() + "(\"\")");
+
 				this.setType(Template.FILE.getValue());
-				return this.getType();
+
+				return " = " + Template.NEW.getValue() + " " + this.getType() + "();";
+
 			} else {
 				throw new TypeMappingException("No Type like this implemented", typeNode);
 			}
@@ -265,7 +230,7 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 * @return the PL/I DECIMAL type mapped in Java.
 	 * @throws TypeMappingException the type mapping exception
 	 */
-	public void mapArithmetic(SimpleNode arithmeticNode) throws TypeMappingException {
+	public String mapArithmetic(SimpleNode arithmeticNode) throws TypeMappingException {
 		ArrayList<String> arithmeticAttributes = (ArrayList<String>) arithmeticNode.jjtGetValue();
 		if (arithmeticAttributes != null) {
 
@@ -273,80 +238,28 @@ public class DeclarationMapper implements ITranslationBehavior {
 
 				if (arithmeticAttribute.equals("COMPLEX")) {
 
-					this.setObject(Template.NEW.getValue() + " " + Template.COMPLEX.getValue() + "("
-							+ getLength(arithmeticNode) + ")");
-
 					this.setType(Template.COMPLEX.getValue());
-					return;
+					return " = " + Template.NEW.getValue() + " " + Template.COMPLEX.getValue() + "("
+							+ getLength(arithmeticNode) + ");";
+
 				} else if (arithmeticAttribute.equals("BINARY")) {
 
-					this.setObject(Template.NEW.getValue() + " " + Template.BINARY.getValue() + "("
-							+ getLength(arithmeticNode) + ")");
-
 					this.setType(Template.BINARY.getValue());
-					return;
+					return " = " + Template.NEW.getValue() + " " + Template.BINARY.getValue() + "("
+							+ getLength(arithmeticNode) + ");";
+
 				} else {
-//					this.setObject(Template.NEW.getValue() + " " + Template.DECIMAL.getValue() + "("
-//							+ getLength(arithmeticNode) + ")");
-
-					this.setAnnotation(Template.DECIMAL_ANNOTATION.getValue() + "(" + getLength(arithmeticNode) + ")");
-
-					this.setType(Template.DOUBLE.getValue());
-					return;
+					this.setType(Template.DECIMAL_ANNOTATION.getValue() + "(" + getLength(arithmeticNode) + ") "
+							+ Template.DOUBLE.getValue());
 				}
 
 			}
+			return ";";
 
 		} else {
 			throw new TypeMappingException("Type has no Values on Node", arithmeticNode);
 		}
 	}
-
-	/**
-	 * Maps all Strings equal Node-types like #Char, #Bit, #Graphic and #Widechar.
-	 * The Mapping is done in two ways. Either a Variable is declared or a Method
-	 * type is defined. When a Variable is declared it uses the CHAR Object, which
-	 * has to be instantiated. When a Method type is defined it does not need to be
-	 * instantiated. This why the Methods behavior depends on which context it is
-	 * called.
-	 *
-	 * @param simpleNode the Node that contains all Char-Nodes as children.
-	 * @return either just CHAR or CHAR ... = new CHAR(..);
-	 */
-	public void mapString(SimpleNode simpleNode) {
-		if (simpleNode.jjtGetParent().jjtGetParent().getId() == Pl1ParserTreeConstants.JJTVAR) {
-			this.setObject(Template.NEW.getValue() + " " + Template.CHAR_OBJECT.getValue() + "("
-					+ (String) simpleNode.jjtGetValue() + ")");
-			this.setType(Template.CHAR_OBJECT.getValue());
-		} else {
-			this.setType(Template.CHAR_OBJECT.getValue());
-		}
-	}
-
-	/**
-	 * Map picture.
-	 *
-	 * @return the Java Expression
-	 * @TODO Maps the #PictureExpression Node with the PictureMapper
-	 */
-	public void mapPicture(String picRegex) {
-		try {
-			this.setObject(Template.NEW.getValue() + " " + Template.PICTURE.getValue() + "(" + "\""
-					+ new PictureMapper().getRegex(picRegex) + "\"" + ")");
-
-		} catch (LexicalErrorException lee) {
-			lee.printStackTrace();
-		}
-		this.setType(Template.PICTURE.getValue());
-	}
-
-	/**
-	 * Map the #FILE Node to a Java Expression. Since there can be multiple
-	 * attributes defined in PL/I that does not play role related to the type, this
-	 * only uses the non-primitive type of FILE.
-	 *
-	 * @return the Java non-primitive type File.
-	 */
 
 	/**
 	 * 
@@ -358,9 +271,11 @@ public class DeclarationMapper implements ITranslationBehavior {
 
 		for (String value : values) {
 			if (Character.isDigit(value.charAt(0))) {
+
 				return value;
 			}
 		}
 		return "";
 	}
+
 }
