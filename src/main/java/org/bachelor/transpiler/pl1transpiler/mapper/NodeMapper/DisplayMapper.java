@@ -101,8 +101,8 @@ public class DisplayMapper implements ITranslationBehavior {
 	public String translate(SimpleNode simpleNode) throws MappingException{
 		this.mapDisplayNode(simpleNode);
 		if (this.getParameter() != null) {
-			return this.getSYSOUT() + "(" + this.getMessage() + "); \n" + this.getParameter() + ".init("
-					+ this.getSYSIN() + "); \n ";
+			return this.getSYSOUT() + "(" + this.getMessage() + "); \n" + this.getParameter() + "= "
+					+ this.getSYSIN() + "; \n ";
 		} else {
 			if(this.getMessage() != null)
 				return this.getSYSOUT() + "(" + this.getMessage() + ");";
@@ -123,14 +123,17 @@ public class DisplayMapper implements ITranslationBehavior {
 	 *
 	 * @param simpleNode the DISPLAY Node which contains values about message and the reply value.
 	 */
-	private void mapDisplayNode(SimpleNode simpleNode) {
+	public void mapDisplayNode(SimpleNode simpleNode) throws MappingException {
 
 		ArrayList<String> values = (ArrayList<String>) simpleNode.jjtGetValue();
 		for (String value : values) {
 			if (SymbolTable.getInstance().getBySymbol(value) != null) {
 				this.setParameter(value);
-			} else {
+			} else if (value.charAt(0) == '\"'){
 				this.setMessage(value);
+			}
+			else {
+				throw new MappingException("No Message or Parameter definied for Display Statement");
 			}
 		}
 	}

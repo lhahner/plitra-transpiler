@@ -62,7 +62,7 @@ public class CallMapper implements ITranslationBehavior{
 	 * @param parameter the new parameter
 	 */
 	public void setParameter(String parameter) {
-		this.parameter = parameter;
+		this.parameter = parameter.contains("\'") ? parameter.replaceAll("'", "\"") : parameter;
 	}
 	
 	/** List of Parameter which are assigned by a method call.

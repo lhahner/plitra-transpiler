@@ -54,8 +54,8 @@ public class BooleanExpressionMapper implements ITranslationBehavior {
 	public void mapBooleanExpression(ArrayList<String> expressionList) {
 
 		String expression = expressionList.stream().collect(Collectors.joining(" "));
-		if (expression.contains("ï¿½")) {
-			expression = expression.replaceAll("ï¿½", "!");
+		if (expression.contains("¬")) {
+			expression = expression.replaceAll("¬", "!");
 		}
 		if (expression.contains("&")) {
 			expression = expression.replaceAll("&", "&&");
