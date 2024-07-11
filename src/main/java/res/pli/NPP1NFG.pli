@@ -1,10 +1,9 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL var_1 CHAR(5);
-	DCL file_1 FILE;
-	
 	proc_1: PROC;
-		WRITE FILE (file_1) FROM (var_1);
+		DO WHILE(x < y);
+			DISPLAY('Hello World');
+		END;
 	END proc_1;
 	
 END orgbachelorpli;

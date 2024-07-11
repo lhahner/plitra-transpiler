@@ -346,7 +346,7 @@ void proc_body() #BODY :
     |read_statement()
     |write_statement()
     |if_statement()footer()
-    |do_statement()footer()
+    |do_statement()
     )*
 }
 
@@ -374,6 +374,7 @@ void do_statement() #LOOP :
 	   (< WHILE > bool_expression() [until_statement()]proc_body())
  	 | (until_statement() [< WHILE > bool_expression()]proc_body())
 	)
+	footer()
 }
 
 void until_statement() #UNTIL :

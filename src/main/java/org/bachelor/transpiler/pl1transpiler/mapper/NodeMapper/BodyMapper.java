@@ -24,7 +24,7 @@ public class BodyMapper implements ITranslationBehavior {
 	 * Defines the outline, is default value '{}' when there is no content in
 	 * PL/I-procedure body.
 	 */
-	private String body = "{}";
+	private String body = "{";
 
 	/**
 	 * Basic getter for String body.

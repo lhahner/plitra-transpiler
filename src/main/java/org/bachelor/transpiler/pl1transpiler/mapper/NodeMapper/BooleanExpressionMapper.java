@@ -39,10 +39,9 @@ public class BooleanExpressionMapper implements ITranslationBehavior {
 		}
 		/**@see Class BodyMapper */
 		if (simpleNode.jjtGetParent().getId() == treeSymbols.JJTUNTIL) {
-			return "{\n"
-				+	Template.IF.getValue()
-				+  this.getExpression()
-				+  "{" + Template.BREAK.getValue() + ";" + " }";
+			new EndMapper().setClosingExpression("} " + Template.WHILE.getValue() + "(" + this.getExpression() + ");");
+			return "{" +  Template.DO.getValue() + "{";
+				
 		}
 		
 		if(this.getExpression() != null)
