@@ -1,9 +1,10 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL var_1 REAL DECIMAL(5);
+	DCL var_1 CHAR(5);
+	DCL file_1 FILE;
 	
-	proc_1: PROC RETURNS();
-		
+	proc_1: PROC;
+		WRITE FILE (file_1) FROM (var_1);
 	END proc_1;
 	
 END orgbachelorpli;

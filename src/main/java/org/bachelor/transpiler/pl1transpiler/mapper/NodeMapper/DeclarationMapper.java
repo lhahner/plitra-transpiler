@@ -13,7 +13,6 @@ import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
-// TODO: Auto-generated Javadoc
 /**
  * <h1>Summary</h1> The Class DeclarationMapper will be called in the
  * TranlationBehavior Class. During Runtime the Behavior value changes to
@@ -136,7 +135,7 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 */
 	public String mapChildNodes(SimpleNode varNode) throws MappingException {
 		String identifier;
-//DCL var_1 DECIMAL(4); -> VAR
+		//DCL var_1 DECIMAL(4); -> VAR
 		if (new Mapper().hasChildren(varNode)) {
 
 			for (int i = 0; i < varNode.jjtGetNumChildren(); i++) {
