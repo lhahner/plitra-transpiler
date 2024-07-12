@@ -1,9 +1,13 @@
 orgbachelorpli: PACKAGE;
 	
-	proc_1: PROC;
-		DO WHILE(x < y);
-			DISPLAY('Hello World');
+	DCL var_1 DECIMAL(4) INIT(2);
+	DCL var_2 DECIMAL(4) INIT(3);
+	
+	branchproc: PROC;	
+		DO 
+			WHILE(var_1 < var_2) UNTIL(var_1 = var_2);
+				DISPLAY('smaller');
 		END;
-	END proc_1;
+	END branchproc;
 	
 END orgbachelorpli;

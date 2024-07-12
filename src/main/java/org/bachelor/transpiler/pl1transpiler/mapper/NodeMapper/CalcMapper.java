@@ -12,6 +12,14 @@ public class CalcMapper implements ITranslationBehavior {
 	
 	private ArrayList<String> terms = new ArrayList<String>();
 	
+	public ArrayList<String> getTerms() {
+		return terms;
+	}
+
+	public void setTerms(ArrayList<String> terms) {
+		this.terms = terms;
+	}
+
 	public String translate(SimpleNode simpleNode) throws MappingException{
 		setTerms(simpleNode);
 		if(terms != null)

@@ -16,7 +16,7 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 public class AssignMapper implements ITranslationBehavior {
 
 	/** The identifier. */
-	private String identifier;
+	private String identifier = "";
 
 	/** The operator. */
 	private String operator = Template.ASSIGN.getValue();
@@ -84,24 +84,27 @@ public class AssignMapper implements ITranslationBehavior {
 	 * @param simpleNode the simple node
 	 * @return the string
 	 */
-	public String translate(SimpleNode simpleNode) throws MappingException{
+	public String translate(SimpleNode simpleNode) throws MappingException {
 		mapAssignNode(simpleNode);
-		if(this.getIdentifier() == null) {
-			throw new MappingException("Identifier not definied for" + simpleNode.toString() + " in " + this.getClass().toString());
-		}
-		if(this.getAssignment() == null) {
-			throw new MappingException("Assignment not definied for Assignment" + simpleNode.toString() + " in " + this.getClass().toString());
+		
+		if (this.getAssignment() == null) {
+			throw new MappingException("Assignment not definied for Assignment" + simpleNode.toString() + " in "
+					+ this.getClass().toString());
 		}
 		return this.getIdentifier() + this.getOperator() + this.getAssignment() + ";";
 
 	}
 
 	/**
-	 * Map assign node.
+	 * Mapping of the ASSIGN Node. The translation is depending 
+	 * on the context it is found in. Sometimes the Assigned
+	 * Variable is not needed to be mentioned, sometimes it is.
+	 * Thats why a context validation is needed to make sure it
+	 * is mapped in the correct context.
 	 *
-	 * @param simpleNode the simple node
+	 * @param simpleNode ASSIGN-Node
 	 */
-	public void mapAssignNode(SimpleNode simpleNode) throws MappingException{
+	public void mapAssignNode(SimpleNode simpleNode) throws MappingException {
 		String[] assignValues = this.setAssignValues(simpleNode);
 		if (new Mapper().hasChildren(simpleNode)) {
 			mapCalcNode(simpleNode);
@@ -112,8 +115,6 @@ public class AssignMapper implements ITranslationBehavior {
 			}
 			return;
 		}
-		// TODO Different Types require different assign methods.
-
 		if (assignValues != null) {
 			if (SymbolTable.getInstance().getBySymbol(assignValues[0]) != null) {
 				this.setIdentifier(assignValues[0]);
@@ -130,7 +131,7 @@ public class AssignMapper implements ITranslationBehavior {
 	 *
 	 * @param simpleNode the simple node
 	 */
-	public void mapCalcNode(SimpleNode simpleNode) throws MappingException{
+	public void mapCalcNode(SimpleNode simpleNode) throws MappingException {
 		this.setAssignment(new CalcMapper().translate((SimpleNode) simpleNode.jjtGetChild(0)));
 	}
 
@@ -148,22 +149,6 @@ public class AssignMapper implements ITranslationBehavior {
 		Pl1ParserTreeConstants treeSymbols = null;
 		String[] assignValues = new String[2];
 		assignValues = (String[]) simpleNode.jjtGetValue();
-		// Case when Variable is directly initialized after declaration
-		if (simpleNode.jjtGetParent().getId() == treeSymbols.JJTVAR && assignValues[0] == null) {
-			SimpleNode parent = (SimpleNode) simpleNode.jjtGetParent();
-			for (int i = 0; i < parent.jjtGetNumChildren(); i++) {
-				if (parent.jjtGetChild(i).getId() == treeSymbols.JJTID) {
-					SimpleNode sibling = (SimpleNode) parent.jjtGetChild(i);
-					String[] nodeValues = (String[]) sibling.jjtGetValue();
-					assignValues[0] = nodeValues[0];
-				} else {
-					// TODO throw error.
-				}
-			}
-			return assignValues;
-		} else {
-			return assignValues;
-		}
+		return assignValues;
 	}
-
 }

@@ -42,4 +42,35 @@ public class CallMapperTests {
 
 		}
 	}
+	
+	@Test
+	@DisplayName("Test Call Statement")
+	void mapCallStatement_withoutParameter() {
+		String identifier = "proc_2";
+		String parameter = "(\"test_1\",1)";
+		String charExpression = 
+				    "testcall1_package: PACKAGE;" 
+					+ "proc_4: PROC;"
+				    + "	CALL proc_2;" 
+				    + "END proc_4;" 
+					+ "END testcall1_package;";
+
+		try {
+
+			InputStream stream = new ByteArrayInputStream(charExpression.getBytes(StandardCharsets.UTF_8));
+			Pl1Parser pl1parser = new Pl1Parser(stream);
+			SimpleNode program = pl1parser.program();
+			SimpleNode varNode = (SimpleNode) program.jjtGetChild(0).jjtGetChild(1).jjtGetChild(1).jjtGetChild(0);
+
+			CallMapper cm = new CallMapper();
+			cm.mapCallStatement(varNode);
+			assertEquals(identifier, cm.getIdentifier());
+			assertEquals(parameter, cm.getParameter());
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+	}
 }

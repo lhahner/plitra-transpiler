@@ -18,13 +18,13 @@ public class HeadMapperTests {
 	void mapHeadNode_Identifier() {
 		HeadMapper headm = new HeadMapper();
 		
-		String identifier = "proc_1";
-		String paraList = "(Object para_1,Object para_2)";
-		String type  = "@Char(5) String";
+		String identifier = "A10_Revenue";
+		String paraList = "(Object rev_1)";
+		String type  = "@Char(5) double";
 		
 		String javaExpression = "public void proc_1()";
 		String decimalExpression = "testproc_1_package: PACKAGE;" 
-								 + "	proc_1: PROC(para_1, para_2) RETURNS(CHAR(5));"
+								 + "	A10_Revenue: PROC(rev_1) RETURNS(DECIMAL(5)) OPTIONS(INLINE);"
 								 + "	END proc_1;" 
 								 + "END testproc_1_package;";
 

@@ -53,6 +53,29 @@ public class DeclarationMapperTests {
 		assertEquals(identifier, declarationMapper.getIdentifier());
 		assertEquals(javaExpression, declarationMapper.getType());
 	}
+	
+	@Test
+	@DisplayName("Negative Test")
+	void mapChildNodes_NegativeTest() {
+		DeclarationMapper declarationMapper = new DeclarationMapper();
+		String decimalExpression = "test_1_package: PACKAGE;" 
+								 + "	DCL var_3 CHAR(5)" 
+								 + "END test_1_package;";
+
+		try {
+
+			InputStream stream = new ByteArrayInputStream(decimalExpression.getBytes(StandardCharsets.UTF_8));
+			Pl1Parser pl1parser = new Pl1Parser(stream);
+			SimpleNode program = pl1parser.program();
+			SimpleNode varNode = (SimpleNode) program.jjtGetChild(0).jjtGetChild(1);
+			
+			assertThrows(TypeMappingException.class, () -> {
+				declarationMapper.mapArithmetic((SimpleNode)varNode.jjtGetChild(1).jjtGetChild(0));
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Base test for basic functionality.
@@ -164,6 +187,5 @@ public class DeclarationMapperTests {
 
 		}
 	}
-
 
 }

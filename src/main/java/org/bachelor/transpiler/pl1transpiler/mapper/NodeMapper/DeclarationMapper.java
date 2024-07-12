@@ -123,7 +123,12 @@ public class DeclarationMapper implements ITranslationBehavior {
 	 */
 	public String translate(SimpleNode simpleNode) throws MappingException {
 		String construktor = this.mapChildNodes(simpleNode);
-		return this.getModifier() + " " + this.getType() + " " + this.getIdentifier() + construktor;
+		for(int i = 0; i<simpleNode.jjtGetNumChildren(); i++) {
+			if(simpleNode.jjtGetChild(i).getId() == Pl1ParserTreeConstants.JJTASSIGN) {
+				return this.getModifier() + " " + this.getType() + " " + this.getIdentifier() + construktor;
+			}
+		}
+		return this.getModifier() + " " + this.getType() + " " + this.getIdentifier() + construktor + ";";
 	}
 
 	/**
@@ -194,7 +199,7 @@ public class DeclarationMapper implements ITranslationBehavior {
 
 				this.setType(Template.CHAR_ANNOTATION.getValue() + "(" + (String) firstChildOfTypeNode.jjtGetValue()
 						+ ") " + Template.STRING.getValue());
-				return ";";
+				return "";
 
 			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTPICTUREEXPRESSION) {
 				
@@ -253,7 +258,7 @@ public class DeclarationMapper implements ITranslationBehavior {
 				}
 
 			}
-			return ";";
+			return "";
 
 		} else {
 			throw new TypeMappingException("Type has no Values on Node", arithmeticNode);

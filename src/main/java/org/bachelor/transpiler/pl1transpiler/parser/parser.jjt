@@ -353,7 +353,7 @@ void proc_body() #BODY :
 void if_statement() #BRANCH :
 {}
 {
-  < IF >bool_expression()
+  < IF >(bool_expression()|math_expression())
   < THEN >proc_body()
   [else_statement()]
 }
@@ -371,7 +371,7 @@ void do_statement() #LOOP :
 {
   	  < DO >
 	(
-	   (< WHILE > bool_expression() [until_statement()]proc_body())
+	   (< WHILE > (bool_expression()|math_expression()) [until_statement()]proc_body())
  	 | (until_statement() [< WHILE > bool_expression()]proc_body())
 	)
 	footer()

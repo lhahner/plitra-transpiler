@@ -9,9 +9,8 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 /**
- * <h1>Summary</h1> 
- * Will be called in the TerminateMapper Class. During
- * Runtime the Behavior value changes to TerminateMapper. This happens whenever a
+ * <h1>Summary</h1> Will be called in the TerminateMapper Class. During Runtime
+ * the Behavior value changes to TerminateMapper. This happens whenever a
  * TERMINATES Node occurs in the AST.
  * 
  * This class maps a terminate expression from PL/I to Java
@@ -19,13 +18,9 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
  * <h2>Input Example</h2> </br>
  * {@code
  * RETURN 'x';
- * }
- * or 
- * {@code
+ * } or {@code
  * EXIT;
- * }
- * or
- * {@code
+ * } or {@code
  * GOTO;
  * }
  */
@@ -33,12 +28,9 @@ public class TerminateMapper implements ITranslationBehavior {
 
 	/** The termination type like return or continue or break */
 	private String termination;
-	
-	/** The Object, only used when a String like 'String' is returned */
-	private String Object;
-	
+
 	/** The identifier that are returned */
-	private String identifier;
+	private String value;
 
 	/**
 	 * Gets the termination.
@@ -59,30 +51,12 @@ public class TerminateMapper implements ITranslationBehavior {
 	}
 
 	/**
-	 * Gets the object.
-	 *
-	 * @return the object
-	 */
-	public String getObject() {
-		return Object;
-	}
-
-	/**
-	 * Sets the object.
-	 *
-	 * @param object the new object
-	 */
-	public void setObject(String object) {
-		Object = object;
-	}
-
-	/**
 	 * Gets the values.
 	 *
 	 * @return the values
 	 */
-	public String getValues() {
-		return identifier;
+	public String getValue() {
+		return value;
 	}
 
 	/**
@@ -90,8 +64,8 @@ public class TerminateMapper implements ITranslationBehavior {
 	 *
 	 * @param values the new values
 	 */
-	public void setValues(String values) {
-		this.identifier = values;
+	public void setValue(String values) {
+		this.value = values;
 	}
 
 	/**
@@ -102,22 +76,20 @@ public class TerminateMapper implements ITranslationBehavior {
 	 * @param simpleNode the terminates node
 	 * @return the Java terminate expression like return, continue or break
 	 */
-	public String translate(SimpleNode simpleNode) throws MappingException{
+	public String translate(SimpleNode simpleNode) throws MappingException {
 		this.mapTerminateNode(simpleNode);
-		if (this.getObject() != null) {
-			return this.getTermination() + " " + this.getObject() + "(" + this.getValues() + ");";
-		} else {
-			if(this.getTermination() != null && this.getValues()!= null)
-				return this.getTermination() + " " + this.getValues() + ";";
-			else 
-				throw new MappingException("Value and Termination type not definied for Termination for " + simpleNode.toString() + " in " + this.getClass().toString());
-		}
+
+		if (this.getTermination() != null && this.getValue() != null)
+			return this.getTermination() + " " + this.getValue() + ";";
+		else
+			throw new MappingException("Value and Termination type not definied for Termination for "
+					+ simpleNode.toString() + " in " + this.getClass().toString());
 	}
 
 	/**
-	 * This maps the different type of terminate statements from PL/I to Java.
-	 * It checks the termination properties defined in the value variable of
-	 * the TERMINATES node to map the correct Java expression.
+	 * This maps the different type of terminate statements from PL/I to Java. It
+	 * checks the termination properties defined in the value variable of the
+	 * TERMINATES node to map the correct Java expression.
 	 *
 	 * @param simpleNode the terminates node.
 	 */
@@ -128,35 +100,33 @@ public class TerminateMapper implements ITranslationBehavior {
 			ArrayList<String> returnPropreties = (ArrayList<String>) simpleNode.jjtGetValue();
 			if (new Mapper().hasChildren(simpleNode)) {
 				this.setValuesList((SimpleNode) simpleNode.jjtGetChild(0), valuesList);
-				this.setValues(mapTerminationValuesList(valuesList));
+				this.setValue(mapTerminationValuesList(valuesList));
 			}
 			switch (returnPropreties.get(0)) {
 			case "RETURN":
 				this.setTermination(Template.RETURN.getValue());
+
 				if (!returnPropreties.get(1).equals("")) {
-					this.setValues(returnPropreties.get(1));
+					if (new HeadMapper().getIdentifier().equals(returnPropreties.get(1))) {
+						this.setValue("(" + new HeadMapper().getType() + ")" + returnPropreties.get(1));
+						return;
+					}
+					this.setValue(returnPropreties.get(1));
 				}
-				//TODO this is implicit and should be done by a kind of search method which checks
-				if (this.getValues().contains("'")) {
-					this.setObject(Template.NEW.getValue() + " " + Template.CHAR_OBJECT.getValue()
-					+ Template.INIT.getValue());
-				}
-				else if(Character.isDigit(this.getValues().charAt(0))) {
-					//..
-				}
+
 				return;
 			case "GO TO":
-				//id + (); 
+				// to be discussed
 				this.setTermination(Template.CONTINUE.getValue());
-				this.setValues(returnPropreties.get(1));
+				this.setValue(returnPropreties.get(1));
 				break;
 			case "STOP":
 				this.setTermination(Template.RETURN.getValue());
-				this.setValues("");
+				this.setValue("");
 				return;
 			case "EXIT":
 				this.setTermination(Template.RETURN.getValue());
-				this.setValues("");
+				this.setValue("");
 				return;
 			default:
 				return;
@@ -187,19 +157,19 @@ public class TerminateMapper implements ITranslationBehavior {
 	}
 
 	/**
-	 * Sets the return value list.
-	 * This has to be called before calling mapTerminationValuesList,
-	 * since this method will recursively iterate over all parameter nodes.
+	 * Sets the return value list. This has to be called before calling
+	 * mapTerminationValuesList, since this method will recursively iterate over all
+	 * parameter nodes.
 	 *
 	 * @param simpleNode the PARA Node
-	 * @param valuesList A list with all the values from the PL/I return statement 
+	 * @param valuesList A list with all the values from the PL/I return statement
 	 */
 	public void setValuesList(SimpleNode simpleNode, ArrayList<String> valuesList) {
 		valuesList.add((String) simpleNode.jjtGetValue());
 		if (new Mapper().hasChildren(simpleNode)) {
 			setValuesList((SimpleNode) simpleNode.jjtGetChild(0), valuesList);
 		}
-		
+
 		return;
 	}
 
