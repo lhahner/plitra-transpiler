@@ -1,7 +1,7 @@
 orgbachelorpli: PACKAGE;
 	
 	branchproc: PROC;	
-		IF (MOD(M,2) = 0) THEN;
+		IF (0 = MOD(M,2)) THEN;
 	        IF(M=2) THEN;
 	          RETURN 0;
 	        ELSE

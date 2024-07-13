@@ -7,6 +7,7 @@ import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.AssignMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.BodyMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.BooleanExpressionMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.BranchMapper;
+import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.BuiltInMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.CalcMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.CallMapper;
 import org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper.DeclarationMapper;
@@ -54,7 +55,6 @@ public class AstMapper {
 //		astMapper.put(Pl1ParserTreeConstants.JJTSPECIFICATION, null);
 		astMapper.put(Pl1ParserTreeConstants.JJTBOOL, new BooleanExpressionMapper());
 		astMapper.put(Pl1ParserTreeConstants.JJTREAD_FILE, new ReadFileMapper());
-//		astMapper.put(Pl1ParserTreeConstants.JJTENTRY, null);
 		astMapper.put(Pl1ParserTreeConstants.JJTDISPLAY, new DisplayMapper());
 		astMapper.put(Pl1ParserTreeConstants.JJTASSIGN, new AssignMapper());
 //		astMapper.put(Pl1ParserTreeConstants.JJTVALUES, null);

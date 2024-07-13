@@ -210,6 +210,9 @@ public enum Template {
 
 	/** The File Writer. */
 	CHAR_ANNOTATION("@Char"),
+	
+	/** The Modulo Operator. */
+	MODULO("%"),
 
 	/** The scanner. */
 	SCANNER("Scanner readFile = new Scanner");

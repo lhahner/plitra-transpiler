@@ -32,29 +32,31 @@ public class BooleanExpressionMapper implements ITranslationBehavior {
 		ArrayList<String> expressionList = new ArrayList<String>();
 		setExpressionList(simpleNode, expressionList);
 		mapBooleanExpression(expressionList);
-		
+
 		// TODO Fix quick and dirty here.
 		if (simpleNode.jjtGetParent().getId() == treeSymbols.JJTBOOL) {
 			return "";
 		}
-		/**@see Class BodyMapper */
+		/** @see Class BodyMapper */
 		if (simpleNode.jjtGetParent().getId() == treeSymbols.JJTUNTIL) {
-			new EndMapper().setClosingExpression("} " + Template.WHILE.getValue() + "(! " + this.getExpression() + ");");
-			return "{" +  Template.DO.getValue() + "{";
-				
+			new EndMapper()
+					.setClosingExpression("} " + Template.WHILE.getValue() + "(! " + this.getExpression() + ");");
+			return "{" + Template.DO.getValue() + "{";
+
 		}
-		
-		if(this.getExpression() != null)
+
+		if (this.getExpression() != null)
 			return this.getExpression();
-		else 
-			throw new MappingException("Boolean expression not definied for" + simpleNode.toString() + " in " + this.getClass().toString());
+		else
+			throw new MappingException("Boolean expression not definied for" + simpleNode.toString() + " in "
+					+ this.getClass().toString());
 	}
 
 	public void mapBooleanExpression(ArrayList<String> expressionList) {
 
 		String expression = expressionList.stream().collect(Collectors.joining(" "));
-		if (expression.contains("¬")) {
-			expression = expression.replaceAll("¬", "!");
+		if (expression.contains("ï¿½")) {
+			expression = expression.replaceAll("ï¿½", "!");
 		}
 		if (expression.contains("&")) {
 			expression = expression.replaceAll("&", "&&");
@@ -62,11 +64,8 @@ public class BooleanExpressionMapper implements ITranslationBehavior {
 		if (Pattern.matches(".* = .*", expression)) {
 			expression = expression.replaceAll(" = ", " == ");
 		}
+
 		this.setExpression(expression);
-	}
-
-	public void mapIndentifier() {
-
 	}
 
 	/**
@@ -75,17 +74,31 @@ public class BooleanExpressionMapper implements ITranslationBehavior {
 	 * all parameter nodes.
 	 * 
 	 * @param paraNode the new parameter definition list
+	 * @throws MappingException
 	 */
-	public void setExpressionList(SimpleNode paraNode, ArrayList<String> expressionList) {
+	public void setExpressionList(SimpleNode paraNode, ArrayList<String> expressionList) throws MappingException {
 		Pl1ParserTreeConstants treeSymbols = null;
 		ArrayList<String> expression = (ArrayList<String>) paraNode.jjtGetValue();
 		// iterater over ArrayList to parse types
 		for (int i = 0; i < expression.size(); i++) {
-			if (SymbolTable.getInstance().getBySymbol(expression.get(i)) != null) {
+			if (SymbolTable.getInstance().getBySymbol(expression.get(i)) != null && !expression.get(i).equals("MOD")) {
+
 				expressionList.add(expression.get(i));
 				continue;
+				
+			} else if (expression.get(i).equals("MOD")) {
+
+				BuiltInMapper bm = new BuiltInMapper();
+				for (int j = 0; j < paraNode.jjtGetNumChildren(); j++) {
+					
+					if (paraNode.jjtGetChild(j).getId() == treeSymbols.JJTBUILTIN)
+						
+						expressionList.add(bm.translate((SimpleNode) paraNode.jjtGetChild(j)));
+				}
+
+			} else {
+				expressionList.add(expression.get(i));
 			}
-			expressionList.add(expression.get(i));
 		}
 		setExpression(expressionList.stream().collect(Collectors.joining(" ")));
 		// Iterate over childs
@@ -94,6 +107,7 @@ public class BooleanExpressionMapper implements ITranslationBehavior {
 				setExpressionList((SimpleNode) paraNode.jjtGetChild(i), expressionList);
 			}
 		}
+
 		return;
 	}
 }
