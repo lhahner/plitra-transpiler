@@ -455,6 +455,9 @@ public enum Pl1Symbols{
 			/** The read. */
 			FROM("FROM", "operator"),
 			
+			/** The read. */
+			MOD("MOD", "operator"),
+			
 			/** The into. */
 			INTO("INTO", "operator");
 	

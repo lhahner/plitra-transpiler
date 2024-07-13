@@ -1,13 +1,13 @@
 orgbachelorpli: PACKAGE;
 	
-	DCL var_1 DECIMAL(4) INIT(2);
-	DCL var_2 DECIMAL(4) INIT(3);
-	
 	branchproc: PROC;	
-		DO 
-			WHILE(var_1 < var_2) UNTIL(var_1 = var_2);
-				DISPLAY('smaller');
-		END;
+		IF (MOD(M,2) = 0) THEN;
+	        IF(M=2) THEN;
+	          RETURN 0;
+	        ELSE
+	          RETURN 1;
+	        END;
+	    END;
 	END branchproc;
 	
 END orgbachelorpli;

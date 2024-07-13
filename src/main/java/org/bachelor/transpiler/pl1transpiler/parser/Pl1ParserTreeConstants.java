@@ -10,34 +10,35 @@ public interface Pl1ParserTreeConstants
   public int JJTHEAD = 4;
   public int JJTBODY = 5;
   public int JJTBRANCH = 6;
-  public int JJTLOOP = 7;
-  public int JJTUNTIL = 8;
-  public int JJTSPECIFICATION = 9;
-  public int JJTBOOL = 10;
-  public int JJTOP = 11;
-  public int JJTENTRY = 12;
-  public int JJTDISPLAY = 13;
-  public int JJTASSIGN = 14;
-  public int JJTCALC = 15;
-  public int JJTRETURNS = 16;
-  public int JJTOPTIONS = 17;
-  public int JJTCALLS = 18;
-  public int JJTREAD_FILE = 19;
-  public int JJTWRITE_FILE = 20;
-  public int JJTSTRINGLIST = 21;
-  public int JJTFETCH = 22;
-  public int JJTSTATEMENT = 23;
-  public int JJTRELEASE = 24;
-  public int JJTTERMINATE = 25;
-  public int JJTPARA = 26;
-  public int JJTVAR = 27;
-  public int JJTMINOR = 28;
-  public int JJTTYPE = 29;
-  public int JJTFILE = 30;
-  public int JJTPICTUREEXPRESSION = 31;
-  public int JJTSTRING = 32;
-  public int JJTARITHMETIC = 33;
-  public int JJTID = 34;
+  public int JJTBUILTIN = 7;
+  public int JJTLOOP = 8;
+  public int JJTUNTIL = 9;
+  public int JJTSPECIFICATION = 10;
+  public int JJTBOOL = 11;
+  public int JJTOP = 12;
+  public int JJTENTRY = 13;
+  public int JJTDISPLAY = 14;
+  public int JJTASSIGN = 15;
+  public int JJTCALC = 16;
+  public int JJTRETURNS = 17;
+  public int JJTOPTIONS = 18;
+  public int JJTCALLS = 19;
+  public int JJTREAD_FILE = 20;
+  public int JJTWRITE_FILE = 21;
+  public int JJTSTRINGLIST = 22;
+  public int JJTFETCH = 23;
+  public int JJTSTATEMENT = 24;
+  public int JJTRELEASE = 25;
+  public int JJTTERMINATE = 26;
+  public int JJTPARA = 27;
+  public int JJTVAR = 28;
+  public int JJTMINOR = 29;
+  public int JJTTYPE = 30;
+  public int JJTFILE = 31;
+  public int JJTPICTUREEXPRESSION = 32;
+  public int JJTSTRING = 33;
+  public int JJTARITHMETIC = 34;
+  public int JJTID = 35;
 
 
   public String[] jjtNodeName = {
@@ -48,6 +49,7 @@ public interface Pl1ParserTreeConstants
     "HEAD",
     "BODY",
     "BRANCH",
+    "BUILTIN",
     "LOOP",
     "UNTIL",
     "specification",
@@ -78,4 +80,4 @@ public interface Pl1ParserTreeConstants
     "Id",
   };
 }
-/* JavaCC - OriginalChecksum=abd465af1c5949a7dc4e8f8af46e33ab (do not edit this line) */
+/* JavaCC - OriginalChecksum=797251c5eed2ce00fad7f997b4ce11ef (do not edit this line) */
