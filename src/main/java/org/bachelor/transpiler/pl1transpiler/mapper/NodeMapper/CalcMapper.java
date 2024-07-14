@@ -30,9 +30,7 @@ public class CalcMapper implements ITranslationBehavior {
 	
 	public void setTerms(SimpleNode simpleNode) {
 		this.terms.add((String) simpleNode.jjtGetValue());
-		if (new Mapper().hasChildren(simpleNode)) {
-			setTerms((SimpleNode) simpleNode.jjtGetChild(0));
-		}
+		
 		return;
 	}
 }

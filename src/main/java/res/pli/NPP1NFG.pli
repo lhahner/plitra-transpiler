@@ -1,13 +1,10 @@
-orgbachelorpli: PACKAGE;
+PACKBA: PACKAGE;
+	DCL Z DECIMAL(5);
+	DCL MESSAGE CHAR(5);
 	
-	branchproc: PROC;	
-		IF (0 = MOD(M,2)) THEN;
-	        IF(M=2) THEN;
-	          RETURN 0;
-	        ELSE
-	          RETURN 1;
-	        END;
-	    END;
-	END branchproc;
-	
-END orgbachelorpli;
+	PROCBA: PROC(M) RETURNS(DECIMAL(1));
+		
+			Z = Z + 4 * 2;
+
+	END PROCBA;
+END PACKBA;

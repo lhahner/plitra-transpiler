@@ -304,7 +304,7 @@ void package_() #PACKAGE :
 {
   ([[< AREA >]":"]id("PACKAGE")":"< PACKAGE >[< EXPORTS >("(" parameterlist() ")")?][< RESERVES >"("< PL1_WORD >")"][options()])
   (var_declaration(1)|procedure())*
-  (footer())
+  footer()
 }
 
 
@@ -312,6 +312,17 @@ void footer() #END :
 {Token t = null;}
 {
   (< END >[t = < PL1_WORD >])
+  
+  {
+    jjtThis.value = t != null ? t.image : "";
+  
+  }
+}
+
+void branchfooter() #END :
+{Token t = null;}
+{
+  < END >
   
   {
     jjtThis.value = t != null ? t.image : "";
@@ -346,7 +357,7 @@ void proc_body() #BODY :
     |display_statement()
     |read_statement()
     |write_statement()
-    |if_statement()footer()
+    |if_statement()branchfooter()
     |do_statement()
     )*
 }
@@ -386,7 +397,7 @@ void do_statement() #LOOP :
 	   (< WHILE > (bool_expression()|math_expression()) [until_statement()]proc_body())
  	 | (until_statement() [< WHILE > bool_expression()]proc_body())
 	)
-	footer()
+	branchfooter()
 }
 
 void until_statement() #UNTIL :
@@ -438,10 +449,6 @@ void bool_expression() #BOOL :
   (operand_3=< PL1_WORD >|operand_3=< INTEGER >|operand_1=builtin())
   (closing_bracket_1=")")*)*))*
   (operator_4=bool_operation()bool_expression())*)
-
-  
-  
-  
 
   {
     if(open_bracket != null) {
@@ -574,21 +581,49 @@ void init_statement() #ASSIGN:
 
 void math_expression() #CALC:
 {
+  ArrayList<String > math_expression = new ArrayList<String >();
   Token operand_1 = null;
   Token operator_1 = null;
   Token operand_2 = null;
+  Token operator_2 = null;
+  Token operand_3 = null;
+  Token operator_4 = null;
 }
 {
-  	  ((operand_1=< INTEGER >|operand_1=< PL1_WORD >)
-  	  [operator_1=< PLUS >operator_1=< MINUSCHAR >operator_1=< DIVIDE >operator_1=< MULTIPLY >]
-  	  (operand_2=< INTEGER >|operand_2=< PL1_WORD >))
-	  {
-	    //TODO Only works for one term.
-	    jjtThis.value = operand_2 != null ?
-	    				operand_1.image + operator_1.image + operand_2.image
-	    			:	"";
-	  }
- }
+  (("(")*
+  (operand_1=< PL1_WORD >|operand_1=< INTEGER >|operand_1=builtin())
+  (operator_1=bool_operation()
+  ((operand_2=< PL1_WORD >|operand_2=< INTEGER >|operand_1=builtin())
+  (")")*
+  (operator_2=bool_operation()
+  (operand_3=< PL1_WORD >|operand_3=< INTEGER >|operand_1=builtin())
+  (")")*)*))*
+  (operator_4=bool_operation()bool_expression())*)
+  
+  {
+   if(operand_1 != null) {
+     math_expression.add(operand_1.image);
+   }
+   if(operator_1 != null) {
+     math_expression.add(operator_1.image);
+   }
+   if(operand_2 != null) {
+     math_expression.add(operand_2.image);
+   }
+   if(operator_2 != null) {
+     math_expression.add(operator_2.image);
+   }
+   if(operand_3 != null) {
+     math_expression.add(operand_3.image);
+   }
+   if(operator_4 != null) {
+     math_expression.add(operator_4.image);
+   }
+   //TODO fix quick and diry
+   jjtThis.value = String.join("", math_expression);
+  }
+}
+
 
 //(	  (operand_1=< INTEGER >|operand_1=< PL1_WORD >)
 //      (operator_1=< PLUS >|operator_1=< MINUSCHAR >|operator_1=< DIVIDE >|operator_1=< MULTIPLY >)
