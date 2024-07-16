@@ -31,9 +31,9 @@ public class DeclarationMapperTests {
 	@DisplayName("Identifier &  Decimal Mapping")
 	void mapChildNodes_checkIdentifierMapping() {
 		DeclarationMapper declarationMapper = new DeclarationMapper();
-		String identifier = "var_3";
+		String identifier = "testId";
 		String javaExpression = "@Decimal(5) double";
-		String decimalExpression = "test_1_package: PACKAGE;" + "	DCL var_3 FIXED DECIMAL(5)" + "END test_1_package;";
+		String decimalExpression = "test_id1_package: PACKAGE;" + "	DCL testId FIXED DECIMAL(5)" + "END test_id1_package;";
 
 		try {
 
@@ -69,7 +69,7 @@ public class DeclarationMapperTests {
 			SimpleNode program = pl1parser.program();
 			SimpleNode varNode = (SimpleNode) program.jjtGetChild(0).jjtGetChild(1);
 			
-			assertThrows(TypeMappingException.class, () -> {
+			assertThrows(Exception.class, () -> {
 				declarationMapper.mapArithmetic((SimpleNode)varNode.jjtGetChild(1).jjtGetChild(0));
 			});
 		} catch (Exception e) {

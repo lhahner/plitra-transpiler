@@ -47,7 +47,7 @@ public class CallMapperTests {
 	@DisplayName("Test Call Statement")
 	void mapCallStatement_withoutParameter() {
 		String identifier = "proc_2";
-		String parameter = "(\"test_1\",1)";
+		String parameter = "()";
 		String charExpression = 
 				    "testcall1_package: PACKAGE;" 
 					+ "proc_4: PROC;"

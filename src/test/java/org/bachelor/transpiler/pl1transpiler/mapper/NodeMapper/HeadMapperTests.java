@@ -20,7 +20,7 @@ public class HeadMapperTests {
 		
 		String identifier = "A10_Revenue";
 		String paraList = "(Object rev_1)";
-		String type  = "@Char(5) double";
+		String type  = "@Decimal(5) double";
 		
 		String javaExpression = "public void proc_1()";
 		String decimalExpression = "testproc_1_package: PACKAGE;" 

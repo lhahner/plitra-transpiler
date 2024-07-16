@@ -54,7 +54,7 @@ public class BooleanExpressionMapperTests {
 	void setExpressionList_secondTest() {
 		
 		BooleanExpressionMapper bm = new BooleanExpressionMapper();
-		String javaExpression = "(var_1 < var_2)";
+		String javaExpression = "( var_1 < var_2 )";
 		String booleanExpression = 
 								"booleanTest1Package: PACKAGE;"
 							  + "booleanTest1Proc: PROC;"

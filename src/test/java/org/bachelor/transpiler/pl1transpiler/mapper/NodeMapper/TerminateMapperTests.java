@@ -34,7 +34,7 @@ public class TerminateMapperTests {
 			InputStream stream = new ByteArrayInputStream(booleanExpression.getBytes(StandardCharsets.UTF_8));
 			Pl1Parser pl1parser = new Pl1Parser(stream);
 			SimpleNode program = pl1parser.program();
-			SimpleNode terminationNode = (SimpleNode) program.jjtGetChild(0).jjtGetChild(1).jjtGetChild(0);
+			SimpleNode terminationNode = (SimpleNode) program.jjtGetChild(0).jjtGetChild(1).jjtGetChild(0).jjtGetChild(0);
 			
 			tm.mapTerminateNode(terminationNode);
 			assertEquals(termination, tm.getTermination());
@@ -67,7 +67,7 @@ public class TerminateMapperTests {
 			InputStream stream = new ByteArrayInputStream(booleanExpression.getBytes(StandardCharsets.UTF_8));
 			Pl1Parser pl1parser = new Pl1Parser(stream);
 			SimpleNode program = pl1parser.program();
-			SimpleNode terminationNode = (SimpleNode) program.jjtGetChild(0).jjtGetChild(1).jjtGetChild(0);
+			SimpleNode terminationNode = (SimpleNode) program.jjtGetChild(0).jjtGetChild(1).jjtGetChild(0).jjtGetChild(0);
 			
 			tm.mapTerminateNode(terminationNode);
 			assertEquals(termination, tm.getTermination());
