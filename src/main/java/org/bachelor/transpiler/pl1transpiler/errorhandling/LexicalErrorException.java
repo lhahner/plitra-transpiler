@@ -1,6 +1,22 @@
 package org.bachelor.transpiler.pl1transpiler.errorhandling;
 
+/**
+ * A LexcialErrorException can be used for any lexical
+ * Error. A valid lexical error is either identified
+ * by the lexical analysation or by any other similar 
+ * process. For Example the Mapping of the Picture
+ * Pattern Expression is utilizing this Exception.
+ * 
+ * 
+ * @author lennart.hahner
+ */
+
 public class LexicalErrorException extends Exception{
+
+
+	/** serialzableID */
+	private static final long serialVersionUID = -2004514597360506773L;
+
 	/**
 	 * Constructs an LexicalErrorException with null
 	 * as its error detail message

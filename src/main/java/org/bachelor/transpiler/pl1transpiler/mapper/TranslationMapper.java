@@ -7,7 +7,14 @@ import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
 /**
- * The Class TranslationMapper.
+ * This class is the context-class
+ * of the strategy Design-Pattern. 
+ * It is used to set the strategy in a certain context.
+ * The context is specified by the caller.
+ * After the behavior has changed @see #applyTranslate(SimpleNode)
+ * needs to be called to execute a certain translation (behavior).
+ * 
+ * @author Lennart Hahner
  */
 public class TranslationMapper {
 	
@@ -24,9 +31,11 @@ public class TranslationMapper {
 	}
 	
 	/**
-	 * Apply translate.
+	 * Applies the specified Strategy by @see {@link #translationBehavior}.
+	 * This execution will also print the Java-String resulting from 
+	 * the translation method.
 	 *
-	 * @param simpleNode the simple node
+	 * @param simpleNode the node which the strategy should be applied on.
 	 */
 	public String applyTranslate(SimpleNode simpleNode) throws MappingException{
 		System.out.println(this.translationBehavior.translate(simpleNode));

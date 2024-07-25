@@ -6,12 +6,25 @@ import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
 /**
- * <h1>Summary</h1>
- * The Class EndMapper will be called in the TranlationBehavior Class.
- * During Runtime the Behavior value changes to EndMapper. This happens
- * whenever a END Node occurs in the AST.
+ * This class is used to translate an BooleaExpression Node in
+ * the syntaxtree provided by the parser.
+ * It will be instantiated by the Context-class @see {@link #TranslationMapper} 
+ * and called whenever the @see {@link #Mapper}-class finds a Assign Node.
  * 
- * This class is for Program-Structure purpose only and will not translate any expression.
+ * <h4>Example: </h4><br>
+ * <h5>PL/I-Code</h5><br>
+ * <code>
+ * END; <br>
+ * </code>
+ * <br>
+ * <h5>Java-Representation</h5><br>
+ * 
+ * <code>
+ * } <br>
+ * </code>
+ * <br>
+ * 
+ * @author Lennart Hahner
  */
 public class EndMapper implements ITranslationBehavior{
 	
@@ -44,7 +57,7 @@ public class EndMapper implements ITranslationBehavior{
 			return null;
 		}
 		else if(!this.isUntilSibiling(simpleNode)) {
-			this.setClosingExpression("}");
+			this.setClosingExpression("} \n");
 		}
 		return this.getClosingExpression();
 	}

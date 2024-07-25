@@ -27,7 +27,7 @@ public class WriteMapperTests {
 	void mapWriteNode_expectedJavaExpression_withoutIdToWriteTo() {
 		try {
 			writeStatment.jjtSetValue(filename);
-			assertEquals("BufferedWriter writer = new BufferedWriter(new FileWriter(" + filename + "));",
+			assertEquals("BufferedWriter writer = new BufferedWriter(new FileWriter(" + filename + ")); \n",
 					writeMapper.translate(writeStatment));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -42,7 +42,7 @@ public class WriteMapperTests {
 			writeStatment.jjtSetValue(values);
 
 			assertEquals("BufferedWriter writer = new BufferedWriter(new FileWriter(" + filename
-					+ ")); \n writer.write(" + charSequence + ");", writeMapper.translate(writeStatment));
+					+ ")); \n writer.write(" + charSequence + "); \n", writeMapper.translate(writeStatment));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

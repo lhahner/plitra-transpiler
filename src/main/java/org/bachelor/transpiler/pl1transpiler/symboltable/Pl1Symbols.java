@@ -4,10 +4,13 @@ import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList; 
 
 /**
- * This Enum contains als PL/I Terminalsymbols used.
+ * This Enum contains alk PL/I Terminalsymbols used.
  * Whenever there are new expressions added, this needs to be update
  * since the parser lexer and parser will also rely on the
  * provided symbols.
+ * 
+ * @author Lennart Hahner
+ * @version 1.0
  */
 public enum Pl1Symbols{
 	
@@ -468,10 +471,18 @@ public enum Pl1Symbols{
     	private final String category;
 
 	    /**
-    	 * Instantiates a new pl 1 symbols.
+    	 * Instantiates a new PL/I. 
+    	 * Used to add for example an identifier
+    	 * during runtime. Symbols can be <b>category</b>:
+    	 * 
+    	 * <ul>
+    	 * 	<li> operator
+    	 *  <li> identifier
+    	 *  <li> type
+    	 * </ul>
     	 *
-    	 * @param symbol the symbol
-    	 * @param category the category
+    	 * @param symbol which should be added
+    	 * @param category what kind of symbol.
     	 */
     	Pl1Symbols(String symbol, String category) {
 	        this.symbol = symbol;

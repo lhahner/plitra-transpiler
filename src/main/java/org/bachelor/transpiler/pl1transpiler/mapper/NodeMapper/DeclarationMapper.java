@@ -14,15 +14,26 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 /**
- * <h1>Summary</h1> The Class DeclarationMapper will be called in the
- * TranlationBehavior Class. During Runtime the Behavior value changes to
- * DeclarationMapper. This happens whenever a VAR Node occurs in the AST.
+ * This class is used to translate an BooleaExpression Node in
+ * the syntaxtree provided by the parser.
+ * It will be instantiated by the Context-class @see {@link #TranslationMapper} 
+ * and called whenever the @see {@link #Mapper}-class finds a Assign Node.
  * 
- * <h2>Input Example</h2> This class maps a declaration expression from PL/I to
- * Java </br>
- * {@code 
- * DCL var_1 DECIMAL(1);
- * }
+ * <h4>Example: </h4><br>
+ * <h5>PL/I-Code</h5><br>
+ * <code>
+ * DCL var_1 DECIMAL; <br>
+ * </code>
+ * <br>
+ * <h5>Java-Representation</h5><br>
+ * 
+ * <code>
+ * @Decimal(4) <br>
+ * public double var_1;
+ * </code>
+ * <br>
+ * 
+ * @author Lennart Hahner
  */
 public class DeclarationMapper implements ITranslationBehavior {
 
@@ -128,7 +139,7 @@ public class DeclarationMapper implements ITranslationBehavior {
 				return this.getModifier() + " " + this.getType() + " " + this.getIdentifier() + construktor;
 			}
 		}
-		return this.getModifier() + " " + this.getType() + " " + this.getIdentifier() + construktor + ";";
+		return this.getModifier() + " " + this.getType() + " " + this.getIdentifier() + construktor + "; \n";
 	}
 
 	/**
@@ -206,13 +217,13 @@ public class DeclarationMapper implements ITranslationBehavior {
 				String picRegex = (String) firstChildOfTypeNode.jjtGetValue();
 				this.setType(Template.PICTURE.getValue());
 				return " = " + Template.NEW.getValue() + " " + Template.PICTURE.getValue() + "(" + "\""
-						+ new PictureMapper().getRegex((picRegex.replaceAll("'", ""))) + "\"" + ");";
+						+ new PictureMapper().getRegex((picRegex.replaceAll("'", ""))) + "\"" + "); \n";
 
 			} else if (firstChildOfTypeNode.getId() == Pl1ParserTreeConstants.JJTFILE) {
 
 				this.setType(Template.FILE.getValue());
 
-				return " = " + Template.NEW.getValue() + " " + this.getType() + "();";
+				return " = " + Template.NEW.getValue() + " " + this.getType() + "(); \n";
 
 			} else {
 				throw new TypeMappingException("No Type like this implemented", typeNode);
@@ -244,13 +255,13 @@ public class DeclarationMapper implements ITranslationBehavior {
 
 					this.setType(Template.COMPLEX.getValue());
 					return " = " + Template.NEW.getValue() + " " + Template.COMPLEX.getValue() + "("
-							+ getLength(arithmeticNode) + ");";
+							+ getLength(arithmeticNode) + "); \n";
 
 				} else if (arithmeticAttribute.equals("BINARY")) {
 
 					this.setType(Template.BINARY.getValue());
 					return " = " + Template.NEW.getValue() + " " + Template.BINARY.getValue() + "("
-							+ getLength(arithmeticNode) + ");";
+							+ getLength(arithmeticNode) + "); \n";
 
 				} else {
 					this.setType(Template.DECIMAL_ANNOTATION.getValue() + "(" + getLength(arithmeticNode) + ") "

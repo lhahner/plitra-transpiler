@@ -113,17 +113,6 @@ public class App {
 				
 				mapper = new Mapper(root);
 
-				// load Java Parser and give Pl1parser
-				// MainMapper jP = new MainMapper(pl1Parser);
-				// create expression with Parsetree
-				// jP.createExpression(root);
-				// System.out.println(jP.concatExpression());
-				// final File javaFile = new File("./transpiled-sources/" +
-				// inputReader.getProgramname() + ".java");
-				// FileWriter writeFile = new FileWriter(javaFile);
-				// writeFile.write(jP.concatExpression());
-				// writeFile.close();
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

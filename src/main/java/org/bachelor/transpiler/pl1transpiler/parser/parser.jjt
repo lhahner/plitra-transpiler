@@ -579,7 +579,7 @@ void init_statement() #ASSIGN:
 //}
 
 
-void math_expression() #CALC:
+String math_expression() #CALC:
 {
   ArrayList<String > math_expression = new ArrayList<String >();
   Token operand_1 = null;
@@ -621,6 +621,7 @@ void math_expression() #CALC:
    }
    //TODO fix quick and diry
    jjtThis.value = String.join("", math_expression);
+   return String.join("", math_expression);
   }
 }
 
@@ -741,6 +742,7 @@ void termination() #TERMINATE:
   ArrayList<String > terminationPropreties = new ArrayList<String >();
   Token returnType = null;
   Token returnValue = null;
+
   }
 {
   (
@@ -753,6 +755,7 @@ void termination() #TERMINATE:
     if(returnValue != null) { 
     	terminationPropreties.add(returnValue.image);
    }
+   
    else {
      terminationPropreties.add("");
    }

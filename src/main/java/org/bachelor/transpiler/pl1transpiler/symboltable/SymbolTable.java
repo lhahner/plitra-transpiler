@@ -6,11 +6,35 @@ import java.util.Enumeration;
 import com.sun.jdi.request.*;
 
 /**
- * The Symboltable class is used by many modules
- * over the project. It utilizes the Pl1Symbols enum 
- * and inserts all the data into a hashtable.
+ * The Symboltable class utilizes the {@link #Pl1Symbols} enum 
+ * and inserts all the data from the {@link #Pl1Symbols} enum into a {@link Hashtable}.
  * Afterwards Identifier from methods, packages and variables
- * are added during runitme.
+ * are added during runitme. This Table consists of 
+ * fields which are containing String-Arrays of a required format.
+ * Since this table is first assigend with the PL/I-Symbols
+ * during runtime, every PL/I-Symbol <b>has</b> to have the format:
+ * 
+ * <br>
+ * <h4>PL/I-Word</h4>
+ * <code>{"$pli-symbol", "word"}</code>
+ * 
+ * <br>
+ * 
+ * for any value that is added after the first assigment of
+ * the PL/I Symbols the format should be:
+ * 
+ * <br>
+ * <h4>Identifier</h4>
+ * <code>{"$identifier", "$modifier-value", "$hierachie-level", "$context"}</code>
+ * <br>
+ * 
+ * <h4><code>$context</code> Value</h4>
+ * The <b>$context</b> can be either one of: <br>
+ * <ul>
+ * 	<li>id</li>
+ *  <li>proc</li>
+ *  <li>pack</li>
+ * </ul>
  * 
  * @author Lennart Hahner
  */

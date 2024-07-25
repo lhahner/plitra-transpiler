@@ -9,20 +9,25 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 /**
- * <h1>Summary</h1> Will be called in the TerminateMapper Class. During Runtime
- * the Behavior value changes to TerminateMapper. This happens whenever a
- * TERMINATES Node occurs in the AST.
+ * This class is used to translate an BooleaExpression Node in
+ * the syntaxtree provided by the parser.
+ * It will be instantiated by the Context-class @see {@link #TranslationMapper} 
+ * and called whenever the @see {@link #Mapper}-class finds a Assign Node.
  * 
- * This class maps a terminate expression from PL/I to Java
+ * <h4>Example: </h4><br>
+ * <h5>PL/I-Code</h5><br>
+ * <code>
+ * RETURN 1 <br>
+ * </code>
+ * <br>
+ * <h5>Java-Representation</h5><br>
  * 
- * <h2>Input Example</h2> </br>
- * {@code
- * RETURN 'x';
- * } or {@code
- * EXIT;
- * } or {@code
- * GOTO;
- * }
+ * <code>
+ * retrun 1; <br>
+ * </code>
+ * <br>
+ * 
+ * @author Lennart Hahner
  */
 public class TerminateMapper implements ITranslationBehavior {
 
@@ -79,11 +84,16 @@ public class TerminateMapper implements ITranslationBehavior {
 	public String translate(SimpleNode simpleNode) throws MappingException {
 		this.mapTerminateNode(simpleNode);
 
-		if (this.getTermination() != null && this.getValue() != null)
-			return this.getTermination() + " " + this.getValue() + ";";
-		else
+		if (this.getTermination() != null && this.getValue() != null) {
+			return this.getTermination() + " " + this.getValue() + "; \n";
+		
+		} else if(this.getTermination() != null && this.getValue() == null) {
+			return this.getTermination() + " ; \n";
+		
+		} else {
 			throw new MappingException("Value and Termination type not definied for Termination for "
 					+ simpleNode.toString() + " in " + this.getClass().toString());
+		}
 	}
 
 	/**

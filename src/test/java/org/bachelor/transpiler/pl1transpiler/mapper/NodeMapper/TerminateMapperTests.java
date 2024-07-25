@@ -79,4 +79,68 @@ public class TerminateMapperTests {
 
 		}
 	}
+	
+	@Test
+	@DisplayName("Tests Mapping of Boolean Expression")
+	void mapTerminateNode_nonParameter() {
+		
+		TerminateMapper tm = new TerminateMapper();
+		String termination = "return; \n";
+		String value = "terminatetestpara;";
+		String booleanExpression = 
+								"terminationTest3Package: PACKAGE;"
+							  + "terminationTest3: PROC;"
+							  + "	RETURN;"
+							  + "END terminationTest3Proc;"
+							  + "END terminationTest3Package;";
+		
+		try {
+
+			InputStream stream = new ByteArrayInputStream(booleanExpression.getBytes(StandardCharsets.UTF_8));
+			Pl1Parser pl1parser = new Pl1Parser(stream);
+			SimpleNode program = pl1parser.program();
+			SimpleNode terminationNode = (SimpleNode) program.jjtGetChild(0).jjtGetChild(1).jjtGetChild(0).jjtGetChild(0);
+			
+			tm.mapTerminateNode(terminationNode);
+			assertEquals(termination, tm.getTermination());
+			assertEquals(value, tm.getValue());
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+	}
+	
+	@Test
+	@DisplayName("Tests Mapping of Boolean Expression")
+	void mapTerminateNode_calculation() {
+		
+		TerminateMapper tm = new TerminateMapper();
+		String termination = "return 2+2; \n";
+		String value = "terminatetestpara;";
+		String booleanExpression = 
+								"terminationTest3Package: PACKAGE;"
+							  + "terminationTest3: PROC;"
+							  + "	RETURN 2+2;"
+							  + "END terminationTest3Proc;"
+							  + "END terminationTest3Package;";
+		
+		try {
+
+			InputStream stream = new ByteArrayInputStream(booleanExpression.getBytes(StandardCharsets.UTF_8));
+			Pl1Parser pl1parser = new Pl1Parser(stream);
+			SimpleNode program = pl1parser.program();
+			SimpleNode terminationNode = (SimpleNode) program.jjtGetChild(0).jjtGetChild(1).jjtGetChild(0).jjtGetChild(1);
+			
+			tm.mapTerminateNode(terminationNode);
+			assertEquals(termination, tm.getTermination());
+			assertEquals(value, tm.getValue());
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+	}
 }

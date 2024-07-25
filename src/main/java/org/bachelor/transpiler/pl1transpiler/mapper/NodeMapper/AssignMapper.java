@@ -1,6 +1,5 @@
 package org.bachelor.transpiler.pl1transpiler.mapper.NodeMapper;
 
-import java.util.ArrayList;
 
 import org.bachelor.transpiler.pl1transpiler.errorhandling.MappingException;
 import org.bachelor.transpiler.pl1transpiler.mapper.ITranslationBehavior;
@@ -11,14 +10,39 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 /**
- * The Class AssignMapper.
+ * This class is used to translate an Assign Node in
+ * the syntaxtree provided by the parser.
+ * It will be instantiated by the Context-class @see {@link #TranslationMapper} 
+ * and called whenever the @see {@link #Mapper}-class finds a Assign Node.
+ * The Assignment is depenig from the context of the PL/I Assignment and/or
+ * from the Java-Context. For example the operator will change from
+ * an initalization method, which was used by Datatype-Classes like the
+ * Picture-Class or the Char-Class. 
+ * 
+ * <h4>Example: </h4><br>
+ * <h5>PL/I-Code</h5><br>
+ * <code>
+ * DCL var_1 DECIMAL(6) INIT(4); <br>
+ * DCL var_2 PICTURE '9V99' INIT('9.99'); <br>
+ * </code>
+ * <br>
+ * <h5>Java-Representation</h5><br>
+ * 
+ * <code>
+ * @DECIMAL(6)
+ * public double var_1 = 4; <br>
+ * public PICUTRE = var_2 new PICTURE("[0-9]\\.[0-9][0-9]"); <br>
+ * var_2.init("9.99"); <br>
+ * </code>
+ * <br>
+ * @author Lennart Hahner
  */
 public class AssignMapper implements ITranslationBehavior {
 
-	/** The identifier. */
+	/** Identifier stored in the syntaxtree */
 	private String identifier = "";
 
-	/** The operator. */
+	/** Depends on the translation used in Java */
 	private String operator = Template.ASSIGN.getValue();
 
 	/** The assignment. */
@@ -79,10 +103,10 @@ public class AssignMapper implements ITranslationBehavior {
 	}
 
 	/**
-	 * Translate.
+	 * Behavior this Strategy should implement
 	 *
-	 * @param simpleNode the simple node
-	 * @return the string
+	 * @param simpleNode the AssginNode from syntaxtree
+	 * @return the Java-representation
 	 */
 	public String translate(SimpleNode simpleNode) throws MappingException {
 		mapAssignNode(simpleNode);
@@ -127,7 +151,10 @@ public class AssignMapper implements ITranslationBehavior {
 	}
 
 	/**
-	 * Map calc node.
+	 * This will call the @see {@link #CalcMapper}
+	 * as a result this class sets the
+	 * assignment to the provided mathimatical equation
+	 * from the PL/I-Code
 	 *
 	 * @param simpleNode the simple node
 	 */

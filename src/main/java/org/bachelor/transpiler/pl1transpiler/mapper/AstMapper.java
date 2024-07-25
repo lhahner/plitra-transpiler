@@ -24,19 +24,22 @@ import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
 /**
- * The Class AstMapper contains all Parsetree Identifation Numbers,
- * and the used Mapping Class. The used Mapping class will translate
- * the Node into a Java Expression which should represent the PL/I 
- * input code.
+ * This class is used to store all strategy-classes
+ * for the Strategy design-pattern. All classes
+ * assigned to @see {@link #astMapper} should implement
+ * the @see {@link #ITranslationBehavior} interface.
+ * This class gives also an impression how many
+ * of the PL/I-Expressions the Transpiler can
+ * handle are implemented.
+ * 
+ * @author Lennart Hahner
  */
 public class AstMapper {
 	
 	/** The HashMap which contains all the Id's and Mapping Objects */
 	static HashMap<Integer, ITranslationBehavior> astMapper = new HashMap<Integer, ITranslationBehavior>();
 	
-	/**
-	 * Instantiates a new AstMapper.
-	 */
+	/** Instantiates a new AstMapper. */
 	public AstMapper() {
 		astMapper.put(Pl1ParserTreeConstants.JJTPROGRAM, new ProgramMapper());
 		astMapper.put(Pl1ParserTreeConstants.JJTPACKAGE, new PackageMapper());

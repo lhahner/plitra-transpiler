@@ -2,7 +2,19 @@ package org.bachelor.transpiler.pl1transpiler.errorhandling;
 
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
+/**
+ * This Exception should only be thrown by the
+ * TypChecker. Whenever the TypeChecker identifies
+ * an assignment failure this should be thrown.
+ * 
+ * 
+ * @author lennart.hahner
+ */
 public class TypeMappingException extends Exception{
+	
+	/** serialversionID */
+	private static final long serialVersionUID = 710935005021027735L;
+
 	/**
 	 * Constructs an TypeMappingException with null
 	 * as its error detail message

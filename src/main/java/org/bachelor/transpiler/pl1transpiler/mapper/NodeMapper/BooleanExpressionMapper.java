@@ -14,18 +14,60 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
+/**
+ * This class is used to translate an BooleaExpression Node in
+ * the syntaxtree provided by the parser.
+ * It will be instantiated by the Context-class @see {@link #TranslationMapper} 
+ * and called whenever the @see {@link #Mapper}-class finds a Assign Node.
+ * The Expression is mapped from the PL/I to the Java-Representation.
+ * First every counter part is set into a list and afterwards this list
+ * will be concatinated
+ * 
+ * <h4>Example: </h4><br>
+ * <h5>PL/I-Code</h5><br>
+ * <code>
+ * (var_1 > 1 & var_1 < 2) <br>
+ * </code>
+ * <br>
+ * <h5>Java-Representation</h5><br>
+ * 
+ * <code>
+ * (var_1 > 1 && var_1 < 2) <br>
+ * </code>
+ * <br>
+ * 
+ * @author Lennart Hahner
+ */
 public class BooleanExpressionMapper implements ITranslationBehavior {
 
+	/** contains the Booleans Java-Expression of the PL/I-Expression */
 	private String expression;
 
+	/**
+	 * Gets the expression.
+	 *
+	 * @return the expression
+	 */
 	public String getExpression() {
 		return expression;
 	}
 
+	/**
+	 * Sets the expression.
+	 *
+	 * @param expression the new expression
+	 */
 	public void setExpression(String expression) {
 		this.expression = expression;
 	}
 
+	/**
+	 * Behavior this Strategy should implement
+	 *
+	 * @param simpleNode the simple node
+	 * @return the string
+	 * @throws MappingException the mapping exception
+	 */
 	public String translate(SimpleNode simpleNode) throws MappingException {
 		Pl1ParserTreeConstants treeSymbols = null;
 
@@ -40,8 +82,8 @@ public class BooleanExpressionMapper implements ITranslationBehavior {
 		/** @see Class BodyMapper */
 		if (simpleNode.jjtGetParent().getId() == treeSymbols.JJTUNTIL) {
 			new EndMapper()
-					.setClosingExpression("} " + Template.WHILE.getValue() + "(! " + this.getExpression() + ");");
-			return "{" + Template.DO.getValue() + "{";
+					.setClosingExpression("} \n" + Template.WHILE.getValue() + "(! " + this.getExpression() + ");");
+			return "{ \n" + Template.DO.getValue() + "{ \n";
 
 		}
 
@@ -52,11 +94,18 @@ public class BooleanExpressionMapper implements ITranslationBehavior {
 					+ this.getClass().toString());
 	}
 
+	/**
+	 * Map boolean expression from the PL/I Booleanoperators, 
+	 * like the negation operator or the and-operator 
+	 * to the Java-representation.
+	 *
+	 * @param expressionList the expression list
+	 */
 	public void mapBooleanExpression(ArrayList<String> expressionList) {
 
 		String expression = expressionList.stream().collect(Collectors.joining(" "));
-		if (expression.contains("ï¿½")) {
-			expression = expression.replaceAll("ï¿½", "!");
+		if (expression.contains("¬")) {
+			expression = expression.replaceAll("¬", "!");
 		}
 		if (expression.contains("&")) {
 			expression = expression.replaceAll("&", "&&");
@@ -72,9 +121,10 @@ public class BooleanExpressionMapper implements ITranslationBehavior {
 	 * Sets the parameter definition list. This has to be called before calling
 	 * mapParamterDefinitionList, since this method will recursively iterate over
 	 * all parameter nodes.
-	 * 
+	 *
 	 * @param paraNode the new parameter definition list
-	 * @throws MappingException
+	 * @param expressionList the expression list
+	 * @throws MappingException the mapping exception
 	 */
 	public void setExpressionList(SimpleNode paraNode, ArrayList<String> expressionList) throws MappingException {
 		Pl1ParserTreeConstants treeSymbols = null;

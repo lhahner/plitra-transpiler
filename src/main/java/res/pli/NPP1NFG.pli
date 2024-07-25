@@ -1,10 +1,7 @@
-PACKBA: PACKAGE;
-	DCL Z DECIMAL(5);
-	DCL MESSAGE CHAR(5);
-	
-	PROCBA: PROC(M) RETURNS(DECIMAL(1));
-		
-			Z = Z + 4 * 2;
-
-	END PROCBA;
-END PACKBA;
+orge1: PACKAGE;
+	DECLARE var_1 DECIMAL(5) INIT(4);
+    
+    proc_1: PROCEDURE;
+    	RETURN 2+2;
+    END proc_1;
+END orge1;

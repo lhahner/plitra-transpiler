@@ -10,18 +10,26 @@ import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 /**
- * <h1>Summary</h1> Will be called in the TranlationBehavior Class. During
- * Runtime the Behavior value changes to HeadMapper. This happens whenever a
- * HEAD Node occurs in the AST.
+ * This class is used to translate an BooleaExpression Node in
+ * the syntaxtree provided by the parser.
+ * It will be instantiated by the Context-class @see {@link #TranslationMapper} 
+ * and called whenever the @see {@link #Mapper}-class finds a Assign Node.
  * 
- * This class maps a procedure head expression from PL/I to Java
+ * <h4>Example: </h4><br>
+ * <h5>PL/I-Code</h5><br>
+ * <code>
+ *  proc_1: PROC RETURNS(DECIMAL(4)) OPTIONS(INLINE);<br>
+ * </code>
+ * <br>
+ * <h5>Java-Representation</h5><br>
  * 
- * <h2>Input Example</h2> </br>
- * {@code
- * proc_1 PROC(para_1, para_2) RETURNS (CHAR(5));
+ * <code>
+ * @Decimal(4)
+ * public double proc_1(){ <br>
+ * </code>
+ * <br>
  * 
- * }
- * 
+ * @author Lennart Hahner
  */
 public class HeadMapper implements ITranslationBehavior {
 

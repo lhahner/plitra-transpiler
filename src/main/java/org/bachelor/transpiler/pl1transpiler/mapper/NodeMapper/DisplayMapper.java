@@ -10,17 +10,25 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 /**
- * <h1>Summary</h1>
- * The Class DisplayMapper will be called in the TranlationBehavior Class.
- * During Runtime the Behavior value changes to DisplayMapper. This happens
- * whenever a DISPLAY Node occurs in the AST.
+ * This class is used to translate an BooleaExpression Node in
+ * the syntaxtree provided by the parser.
+ * It will be instantiated by the Context-class @see {@link #TranslationMapper} 
+ * and called whenever the @see {@link #Mapper}-class finds a Assign Node.
  * 
- * <h2>Input Example</h2>
- * This class maps a display expression from PL/I to Java
- * </br>
- * {@code 
- * DISPLAY ('Hello World') REPLY (var_1);
- * }
+ * <h4>Example: </h4><br>
+ * <h5>PL/I-Code</h5><br>
+ * <code>
+ * DISPLAY 'Hello World' <br>
+ * </code>
+ * <br>
+ * <h5>Java-Representation</h5><br>
+ * 
+ * <code>
+ * System.out.println("Hello World"); <br>
+ * </code>
+ * <br>
+ * 
+ * @author Lennart Hahner
  */
 public class DisplayMapper implements ITranslationBehavior {
 
@@ -105,7 +113,7 @@ public class DisplayMapper implements ITranslationBehavior {
 					+ this.getSYSIN() + "; \n ";
 		} else {
 			if(this.getMessage() != null)
-				return this.getSYSOUT() + "(" + this.getMessage() + ");";
+				return this.getSYSOUT() + "(" + this.getMessage() + "); \n";
 			else 
 				throw new MappingException("Message not definied for Display-Statement" + simpleNode.toString() + " in " + this.getClass().toString());
 		}

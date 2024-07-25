@@ -9,7 +9,13 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
- * The Class InputReader.
+ * The Class InputReader is used
+ * to read the path from the configuration file
+ * and afterwards read the content of the PL/I File
+ * which the configuration file is linking to.
+ * 
+ * @author  Lennart Hahner
+ * @version 1.0
  */
 public class InputReader {
 
@@ -17,7 +23,11 @@ public class InputReader {
 	public static String program = "";
 
 	/**
-	 * Gets the input file.
+	 * Gets the input file in which
+	 * the PL/I-Code is writte. Since
+	 * PL/I Files are not usually used on any Unix-like
+	 * or other Non-Mainframe System, it is required
+	 * to specify the file with .pli
 	 *
 	 * @param inputFile the input file
 	 * @return the input file
@@ -41,8 +51,10 @@ public class InputReader {
 
 	/**
 	 * Gets the input file path.
+	 * which is specified in the res.config.config.propreties
+	 * File in this project structure.
 	 *
-	 * @param config the config
+	 * @param config The File Object which should be have the of the config
 	 * @return the input file path
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
@@ -68,9 +80,10 @@ public class InputReader {
 	}
 
 	/**
-	 * Gets the programname.
+	 * Gets the programname which is 
+	 * identfied by the Filename.
 	 *
-	 * @return the programname
+	 * @return the string of the filename
 	 */
 	public String getProgramname() {
 		return this.program;

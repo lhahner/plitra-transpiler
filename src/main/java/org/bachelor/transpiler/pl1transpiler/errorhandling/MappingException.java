@@ -1,6 +1,18 @@
 package org.bachelor.transpiler.pl1transpiler.errorhandling;
 
+/**
+ * The MappingException should be thrown 
+ * whenever the Mapping is not possible
+ * or the input PL/I Data is somehow wrong 
+ * or not usable.
+ * 
+ * @author lennart.hahner
+ */
 public class MappingException extends Exception{
+	
+	/** serialiableID */
+	private static final long serialVersionUID = -3318241684147138827L;
+
 	/**
 	 * Constructs an LexicalErrorException with null
 	 * as its error detail message

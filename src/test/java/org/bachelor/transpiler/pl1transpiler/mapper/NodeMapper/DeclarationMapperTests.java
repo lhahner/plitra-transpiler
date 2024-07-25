@@ -108,7 +108,7 @@ public class DeclarationMapperTests {
 	@DisplayName("Picture Type Mapping")
 	void mapTye_Picture() {
 		String javaExpressionType = "PICTURE";
-		String javaExpressionObject = " = new PICTURE(\"[0-9][\\.\\*][0-9][0-9][A-Za-z ]\");";
+		String javaExpressionObject = " = new PICTURE(\"[0-9][\\.\\*][0-9][0-9][A-Za-z ]\"); \n";
 		String charExpression = 
 				"test_3_package: PACKAGE;" 
 				+ "	DCL Delims PIC '9V99A';" 
@@ -136,7 +136,7 @@ public class DeclarationMapperTests {
 	@DisplayName("File Type Mapping")
 	void mapTye_File() {
 		String javaExpressionType = "File";
-		String javaExpressionObject = " = new File();";
+		String javaExpressionObject = " = new File(); \n";
 		String charExpression = 
 				"test_4_package: PACKAGE;" 
 				+ "	dcl Payroll file;" 
@@ -164,7 +164,7 @@ public class DeclarationMapperTests {
 	@DisplayName("Complex Type Mapping")
 	void mapTye_Complex() {
 		String javaExpressionType = "COMPLEX";
-		String javaExpressionObject = " = new COMPLEX(5);";
+		String javaExpressionObject = " = new COMPLEX(5); \n";
 		String charExpression = 
 				"test_5_package: PACKAGE;" 
 				+ "	DCL var_5 COMPLEX DECIMAL(5);" 

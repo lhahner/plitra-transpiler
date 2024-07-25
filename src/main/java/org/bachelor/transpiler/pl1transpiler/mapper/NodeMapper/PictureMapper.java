@@ -10,9 +10,26 @@ import javax.management.AttributeNotFoundException;
 import org.bachelor.transpiler.pl1transpiler.errorhandling.LexicalErrorException;
 
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class PictureMapper.
+ * This class is used to translate an BooleaExpression Node in
+ * the syntaxtree provided by the parser.
+ * It will be instantiated by the Context-class @see {@link #TranslationMapper} 
+ * and called whenever the @see {@link #Mapper}-class finds a Assign Node.
+ * 
+ * <h4>Example: </h4><br>
+ * <h5>PL/I-Code</h5><br>
+ * <code>
+ * '9V99' <br>
+ * </code>
+ * <br>
+ * <h5>Java-Representation</h5><br>
+ * 
+ * <code>
+ * [0-9].[0-9][0-9] <br>
+ * </code>
+ * <br>
+ * 
+ * @author Lennart Hahner
  */
 public class PictureMapper {
 
@@ -30,15 +47,15 @@ public class PictureMapper {
 	 * initalizes the picRegex Hashmap.
 	 */
 	public static void initMap() {
-		picRegex.put('X', "[A-Za-z]");
-		picRegex.put('A', "[A-Za-z ]");
+		picRegex.put('X', "[A-Za-z]"); 
+		picRegex.put('A', "[A-Za-z ]"); //@$
 		picRegex.put('9', "[0-9]");
 		picRegex.put('(', "{");
 		picRegex.put(')', "}");
-		picRegex.put('V', "[\\.\\*]");
+		picRegex.put('V', "\\.\\?");
 		picRegex.put('.', "[\\.\\*]");
 		picRegex.put('Z', "[0-9 ]");
-		picRegex.put('*', "[0-9\\*]");
+		picRegex.put('*', "[0-9\\*]"); //Optional
 		picRegex.put('$', "\\$");
 		picRegex.put('B', " ");
 		picRegex.put(',', "[\\,\\*]");

@@ -8,18 +8,25 @@ import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
 /**
- * <h1>Summary</h1>
- * The Class CallMapper will be called the strategy of the TranlationBehavior Object
- * changes to CallMapper. This happens whenever a CALL Node occurs in the AST.
- * This class maps a CALL expression from PL/I.
+ * This class is used to translate an BooleaExpression Node in
+ * the syntaxtree provided by the parser.
+ * It will be instantiated by the Context-class @see {@link #TranslationMapper} 
+ * and called whenever the @see {@link #Mapper}-class finds a Assign Node.
  * 
- * <h2>Input Example</h2>
- * </br>
- * {@code 
- * 		CALL proc_1();
- * or
- * 		CALL proc_2(para_1, para_2);
- * }
+ * <h4>Example: </h4><br>
+ * <h5>PL/I-Code</h5><br>
+ * <code>
+ * CALL proc_1; <br>
+ * </code>
+ * <br>
+ * <h5>Java-Representation</h5><br>
+ * 
+ * <code>
+ * proc_1(); <br>
+ * </code>
+ * <br>
+ * 
+ * @author Lennart Hahner
  */
 public class CallMapper implements ITranslationBehavior{
 	
@@ -82,7 +89,7 @@ public class CallMapper implements ITranslationBehavior{
 		
 		if(this.getIdentifier() != null)
 			return this.getIdentifier() + " "
-			 	 + this.getParameter() + ";";
+			 	 + this.getParameter() + "; \n";
 		else 
 			throw new MappingException("Identifier not definied for Call-Statement" + simpleNode.toString() + " in " + this.getClass().toString());
 	}

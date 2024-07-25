@@ -11,15 +11,23 @@ import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
 /**
- * The Class checker is the Client for the Checker Module. This Class should be
- * instantiated with the root Node of the Parsetree.
+ * When instantiating this class the Developer is able
+ * to use the TypeChecker of this module. 
+ * This is used to check for semantical Errors. 
+ * It uses the Syntaxtree from the parser
+ * to check for any kinds of errors
+ * which the parser is not able to identify.
+ * For example errors like:
+ * 
+ * <code>DCL var_1 CHAR(5) INIT(2)</code>
+ * <code>DCL var_1 DECIMAL(5); var_1 = 20;</code>
+ * 
+ * @author Lennart Hahner
+ * @version 1.0
  */
 public class Checker {
 
-	/**
-	 * The identifier of the declared variable will contain only identifiers from
-	 * type decimal
-	 */
+	/** The identifier of the declared variable will contain only identifiers from type decimal */
 	private List<String> decimalIdentifiers = new ArrayList<String>();
 
 	/** The string identifiers will contain only identifiers from type string. */
@@ -28,15 +36,13 @@ public class Checker {
 	/** The Composite Class VarChecker */
 	private VarChecker varChecker = new VarChecker();
 
-	/**
-	 * Instantiates a new checker. Should only be used by the Test Class.
-	 */
+	/** Instantiates a new checker. Should only be used by the Test Class. */
 	public Checker() {
 	}
 
 	/**
-	 * Instantiates a new checker. It will start iterating over the Parsetree and
-	 * afters iterate over all the different TypeExpression Checkers defined in the
+	 * Instantiates a new checker. It will start iterating over the Syntaxtree and
+	 * afterwards iterate over all the different TypeExpression Checkers defined in the
 	 * list of the Composite.
 	 *
 	 * @param root the root Node of the Parse tree
@@ -47,12 +53,13 @@ public class Checker {
 	}
 
 	/**
-	 * This Method implements the Depth-In-First Search Algorithm recursively.
-	 * Mainly this is utilized by iterating over the whole parse-tree one by one.
+	 * This Method implements the Depth-First Search Algorithm recursively.
+	 * Mainly this is utilized by iterating over the whole Syntaxtree one by one.
 	 * For the specific Node in the AstMapper class it calls a class specific to the
 	 * node.
 	 *
 	 * @param startNode The Node to begin iterating
+	 * @return if leaf of tree was found
 	 */
 	public void iterateTree(SimpleNode startNode) {
 		if (startNode.jjtGetParent() == null) {

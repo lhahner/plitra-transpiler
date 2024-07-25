@@ -13,9 +13,21 @@ import org.bachelor.transpiler.pl1transpiler.scanner.InputReader;
 import org.bachelor.transpiler.pl1transpiler.symboltable.SymbolTable;
 import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ProgramMapper.
+ * This class is used to translate an BooleaExpression Node in
+ * the syntaxtree provided by the parser.
+ * It will be instantiated by the Context-class @see {@link #TranslationMapper} 
+ * and called whenever the @see {@link #Mapper}-class finds a Assign Node.
+ * The Filename will be the class of the Program. For exmaple filename file_1
+ * 
+ * <h5>Java-Representation</h5><br>
+ * 
+ * <code>
+ * <br>
+ * public class file_1 { </code>
+ * <br>
+ * 
+ * @author Lennart Hahner
  */
 public class ProgramMapper implements ITranslationBehavior {
 	
@@ -83,7 +95,7 @@ public class ProgramMapper implements ITranslationBehavior {
 	}
 	
 	/**
-	 * Map program node.
+	 * Maps the program Node of the syntaxtree.
 	 *
 	 * @param simpleNode the simple node
 	 */

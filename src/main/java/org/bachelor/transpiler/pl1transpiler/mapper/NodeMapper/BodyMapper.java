@@ -8,22 +8,34 @@ import org.bachelor.transpiler.pl1transpiler.mapper.Mapper;
 import org.bachelor.transpiler.pl1transpiler.parser.Pl1ParserTreeConstants;
 import org.bachelor.transpiler.pl1transpiler.parser.SimpleNode;
 
+
 /**
- * <h1>Summary</h1>
- * The Class BodyMapper will be called the strategy of the TranlationBehavior
- * Object changes to BodyMapper. This happens whenever a Body Node occurs in the
- * AST. The BodyMapper only defines the structure of the Body, the mapping of
- * the Child Nodes is done separately in the class. @see astMapper.
+ * This class is used to translate an Body Node in
+ * the syntaxtree provided by the parser.
+ * It will be instantiated by the Context-class @see {@link #TranslationMapper} 
+ * and called whenever the @see {@link #Mapper}-class finds a Assign Node.
+ * The Body will most of the time be mapped as an opening bracket.
+ * But if the context of body node is related to an UNTIL-Lopp,
+ * it will map two brackets, because of the used do-while expression.
+ * For more information check @see {@link #LoopMapper}
  * 
- * This class is for Program-Structure purpose only and will not
- * translate any expression.
+ * <h4>Example: </h4><br>
+ * <h5>PL/I-Code</h5><br>
+ * <code>
+ * proc_1: PROC; ... END proc_1; <br>
+ * </code>
+ * <br>
+ * <h5>Java-Representation</h5><br>
+ * 
+ * <code>
+ * { ... }
+ * </code>
+ * <br>
+ * @author Lennart Hahner
  */
 public class BodyMapper implements ITranslationBehavior {
 
-	/**
-	 * Defines the outline, is default value '{}' when there is no content in
-	 * PL/I-procedure body.
-	 */
+	/** Defines the outline, is default value '{' when there is no content in PL/I-procedure body. */
 	private String body = "{";
 
 	/**
@@ -57,13 +69,22 @@ public class BodyMapper implements ITranslationBehavior {
 			if(this.isUntilSibiling(simpleNode)) {
 				return "";
 			}
-			this.setBody("{");
+			this.setBody("{ \n");
 			return this.getBody();
 		} else {
 			return this.getBody();
 		}
 	}
 	
+	/**
+	 * This methode specifies the context when the body-node occures.
+	 * If the Body-Node occurs within a Until-Node, then
+	 * the mapping is slightly different then in a normal context,
+	 * because of the extra bracket needed for the do-while loop.
+	 * 
+	 * @param simpleNode The Body Node
+	 * @return True if the Until is a Sibling of the Body Node.
+	 */
 	public boolean isUntilSibiling(SimpleNode simpleNode) {
 		Pl1ParserTreeConstants treeSymbols = null;
 		SimpleNode parent = (SimpleNode)simpleNode.jjtGetParent();

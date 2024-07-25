@@ -11,21 +11,24 @@ import org.bachelor.transpiler.pl1transpiler.symboltable.Template;
 
 /**
  * The Class Mapper is the Client for the Mapper Module.
- * It will call the fitting Object of the Node in the
- * prasetree.
+ * This means if a mapping to Java of the syntaxtree is required
+ * the module or class should implement this class.
+ * Use the root node of a syntaxtree to translate a whole syntaxtree
+ * or use just one counterpart to translate that.
+ * 
+ * @author Lennart Hahner
+ * 
  */
 public class Mapper {
 	
 	
-	/** The java expression. */
+	/** This contains the Java represantation of PL/I */
 	public static ArrayList<String> javaExpression = new ArrayList<String>();
 	
-	/** The var. */
+	/** This Object can set the currently used strategy */
 	private TranslationMapper var = new TranslationMapper();
 	
-	/**
-	 * Instantiates a new mapper.
-	 */
+	/** Default constructor only used for testing. */
 	public Mapper() {
 	}
 
@@ -43,9 +46,10 @@ public class Mapper {
 	}
 	
 	/**
-	 * This Method implements the Depth-In-First Search Algorhitmus recursively. 
-	 * Mainly this is utilized by iterating over the whole parse-tree one by one.
-	 * For the specific Node in the AstMapper class it calls a class specific to the node.
+	 * This method implements the Depth-First search-algorhitm recursively. 
+	 * Mainly this is utilized by iterating over the whole syntaxtree one by one.
+	 * For the specific Node in the @see {@link #AstMapper} class it calls a class specific to the node.
+	 * The whole mapping process is done here.
 	 *
 	 * @param startNode The Node to begin iterating
 	 * @throws NullPointerException the null pointer exception

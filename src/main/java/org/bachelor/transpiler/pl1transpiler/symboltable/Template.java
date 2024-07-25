@@ -9,11 +9,14 @@ import java.util.regex.Pattern;
 
 import org.bachelor.transpiler.pl1transpiler.scanner.*;
 
-// TODO: Auto-generated Javadoc
 /**
- * This Enum contains all the Java macros which should later are mapped to the
+ * This Enum contains all the Java-Codesnippets which later are mapped to the
  * Java target source code. This may contains custom written Java Code or just
  * plain Java symbols which are available by this.
+ * 
+ * 
+ * @author Lennart Hahner
+ * 
  */
 public enum Template {
 
